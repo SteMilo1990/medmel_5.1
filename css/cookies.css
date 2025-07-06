@@ -1,0 +1,75 @@
+.cookiebar-confirm {
+  border: 1px solid white !important;
+  padding: 10px !important;
+}
+
+.cookiebar {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1100;
+    background-color: #435a70;
+    padding: 24px 22px 0 32px;
+    font-family: "Titillium Web",Geneva,Tahoma,sans-serif;
+    font-weight: 300;
+    color: white;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+.cookiebar {
+    display: flex;
+    padding: 32px 48px;
+}
+  .cookiebar .cookiebar-buttons {
+    margin-top: 0;
+    width: 40%;
+}
+}
+.cookiebar .cookiebar-btn, .cookie-message {
+  color: #fff;
+}
+.cookiebar .cookiebar-btn{
+    background: 0 0;
+    border: none;
+    padding: 0;
+    letter-spacing: .1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: .875rem;
+    display: inline-block;
+    line-height: 1em;
+}
+
+
+element.style {
+}
+@media (min-width: 768px)
+.cookiebar .cookiebar-buttons {
+    margin-top: 0;
+    width: 40%;
+}
+.cookiebar .cookiebar-buttons {
+    text-align: right;
+  
+.cookiebar .cookiebar-btn:not(.cookiebar-confirm) {
+    color: #e6ecf2;
+}
+  
+@media (min-width: 992px){
+  .cookiebar {
+      max-width: 832px;
+      left: 50%;
+      right: auto;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      border-radius: 4px 4px 0 0;
+  }
+}
+
+
+.cookiebar-confirm {
+  border: 1px solid #fff !important;
+}

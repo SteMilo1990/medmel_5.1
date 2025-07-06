@@ -1,0 +1,108 @@
+#searchTooltip {
+  position: absolute;
+  width:500px;
+  border: 3px solid lightgray;
+  border-radius: 6px;
+  background-color: #fff;
+  /* background-color: #435a70;
+  color: #fff; */
+  padding: 15px;
+  font-family: "Roboto";
+  z-index: 1;
+  opacity: 90%;
+  top:180px;
+  right: 100px;
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Standard syntax */
+}
+@media only screen and (max-width: 600px) {
+  #searchTooltip {
+    position: absolute;
+    width:98vw;
+    border: 3px solid lightgray;
+    border-radius: 6px;
+    background-color: #fff;
+    /* background-color: #435a70;
+    color: #fff; */
+    padding: 15px;
+    font-family: "Roboto";
+    z-index: 1;
+    opacity: 95%;
+    top:180px;
+    right: 1vw;
+  }
+}
+
+#searchTooltip a {
+  color: inherit;
+  text-decoration: underline;
+}
+.ttBtn {
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-right:10px;
+  padding-left:10px;
+  background-color: #e7e7e7;
+}
+
+
+.pointingUp .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;  /* At the top of the tooltip */
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent lightgray transparent;
+}
+.pointingLeft .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100.5%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent lightgray transparent transparent;
+}
+.pointingDown .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 104%;
+  right: 50%; /* To the left of the tooltip */
+  border-width: 5px;
+  border-style: solid;
+  border-color: lightgray transparent transparent transparent;
+}
+
+.tour-highlight {
+  border: 2px solid red !important;
+}
+
+#infoIcon {
+  width: 35px;
+  height: 35px;
+}
+
+#searchInfoInput {
+  display:flex;
+  padding: 10px;
+  float: right;
+  font-size:14px;
+  margin-right: 3%;
+}
+#searchInfoLabel {
+  text-align:right;
+  padding-top: 7px;
+  padding-right: 3px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.arrow {
+  background-color: transparent;
+  border: none;
+}
+
+

@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="css/overlayPage.css"/>
+<div id="overlayView" class="containerOverlay col-md-8 fadeInOverlay row">
+
+    <div class="col-md-4 logoPanel">
+        <div class="logo">
+            <img src="img/logo/m2.png" class="logoImg"/>
+        </div>
+    </div>
+    <div id="containerInput" class="col-md-8 containerInput ">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function updateContent(){
+        var containerInput = document.getElementById("containerInput");
+        $(containerInput).load(overlayPage);
+    }
+    window.onload = updateContent();
+
+</script>

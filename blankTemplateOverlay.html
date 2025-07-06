@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="css/overlayPage.css"/>
+
+<div id="overlayView" class="containerOverlay fadeInOverlay row">
+
+    <div id="containerInput" class="col-md-12 containerInputBlank ">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function updateContent(){
+        var containerInput = document.getElementById("containerInput");
+        $(containerInput).load(overlayPage);
+    }
+    window.onload = updateContent();
+
+</script>

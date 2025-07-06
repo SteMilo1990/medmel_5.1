@@ -1,0 +1,184 @@
+<div id="menuBar" onload="createBarStructure()">
+<center>
+    <div class="menuStyleNoteGroup2">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+
+        <div class="separator " id="btnHeader" style=" margin-left:5px; margin-right:5px;margin-top:5px">Custos position</div>
+        <div>
+          <input type="number" value="null" style="width:60px;margin-top:5px" min="-10" max="20" id="custos_y" onchange="changeCustos()" step='1' placeholder="0"/>
+        <div>
+
+        <button class="" onclick=resetCustos() style="height:30px; margin-top: 10px; border-radius: 5px 5px; " >
+            Delete custos
+        </button>
+        <button class="" onclick=guessCustosPosition() style="height:30px; margin-top: 10px; border-radius: 5px 5px; " >
+              Predict position of custos
+          </button>
+    </div>
+</center>
+</div>
+<style>
+  #menuBar {
+    position: absolute;
+  }
+
+    .menuStyleNoteGroup2{
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:170px;
+        width: 250px;
+        position: absolute;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    #btnHeader {
+      cursor:move;
+    }
+    .buttonNote{
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover{
+        background-color: #f3f3f3;
+    }
+</style>
+<script>
+  try{let groupLine = 0;}catch{groupLine = 0;}
+
+  function setupButtonsCustos(line){
+      groupLine = line;
+      if (custos[groupLine] != undefined) {
+        document.getElementById("custos_y").value = custos[groupLine];
+      }
+    }
+
+  function resetCustos(){
+      custos[groupLine] = null;
+      document.getElementById("custos_y").value = null;
+      updateStaves();
+  }
+
+  function changeCustos() {
+      custosY = parseInt(document.getElementById("custos_y").value);
+      custos[groupLine] = custosY;
+      updateStaves();
+  }
+
+
+// dragElement
+dragBarMenu(document.getElementById("menuBar"));
+
+function dragBarMenu(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  document.getElementById("btnHeader").onmousedown = dragMouseDown;
+
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function guessCustosPosition() {
+    let r = confirm("This will substitute all existing custos. Continue?");
+    if (r == true){
+  // if there is no bar structure in the database, it needs to be created
+      let music_input = document.getElementById("music_input").value;
+      let notes = music_input.replace(/F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |C1 |C2 |C3 |C4 |C5 |C6 |C7 |C8 |C9 |G1 |G2 |G3 |G4 |G5 |G6 |G7 |G8 |G9 |b} /g, '');
+      notes = notes.replace(/F1|F2|F3|F4|F5|F6|F7|F8|F9|C1|C2|C3|C4|C5|C6|C7|C8|C9|G1|G2|G3|G4|G5|G6|G7|G8|G9|b}|/g, '');
+      notes = notes.replace(/1 |2 |3 |4 |5 |6 |7 |8 |9 |1|2|3|4|5|6|7|8|9/g, '');
+      notes = notes.replace(/  +/g, ' ');
+      notes = notes.replace(/ \'/g, "\'");
+      let lines = notes.split("\n");
+      custos = [];
+      let k = 0;
+
+      for (let i=0; i < lines.length-1; i=i+1){
+        let c = null;
+
+        let n = lines[i+1][0];
+        if (n == "A"){c = 10}
+        else if (n == "B" || n == "H"){c = 9}
+        else if (n == "C"){c = 8}
+        else if (n == "D"){c = 7}
+        else if (n == "E"){c = 6}
+        else if (n == "F"){c = 5}
+        else if (n == "G"){c = 4}
+        else if (n == "a"){c = 3}
+        else if (n == "b" || n == "h"){c = 2}
+        else if (n == "c"){c = 1}
+        else if (n == "d"){c = 0}
+        else if (n == "e"){c = -1}
+        else if (n == "f"){c = -2}
+        // establish
+        let linesFull = music_input.split("\n");
+        for (let j = linesFull[i].length; j > 0; j=j-1){
+
+          if (linesFull[i][j] == "1" || linesFull[i][j] == "2" || linesFull[i][j] == "3"
+            || linesFull[i][j] == "4" || linesFull[i][j] == "5"){
+
+            if (linesFull[i][j-1] == "C"){
+              if (linesFull[i][j] == "1"){ k = 0}
+              else if (linesFull[i][j] == "2"){ k = 2}
+              else if (linesFull[i][j] == "3"){ k = 4}
+              else if (linesFull[i][j] == "4"){ k = 6}
+              break;
+
+            }else if (linesFull[i][j-1] == "F"){
+              if (linesFull[i][j] == "1"){ k = -4}
+              else if (linesFull[i][j] == "2"){ k = -2}
+              else if (linesFull[i][j] == "3"){ k = 0}
+              else if (linesFull[i][j] == "4"){ k = 2}
+              else if (linesFull[i][j] == "5"){ k = 4}
+              break;
+            }
+          }
+        }
+        let res = k + c;
+        if (c !== null){
+          custos[i] = res;
+        }else{
+          custos[i] = null;
+        }
+
+
+      }
+    }
+      containerNoteMenuRemove();
+      updateStaves();
+  }
+
+</script>

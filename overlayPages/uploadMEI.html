@@ -1,0 +1,800 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div>
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div id="titleSettings">
+        <div class="separator">Import MEI</div>
+        <div class="">Paste a valid MEI Neume encoded melody</div>
+    </div>
+
+    <form>
+    <textarea id="MEI_input" style="width:100%; height:375px;"></textarea>
+    <input type="button" value="Import file" onclick="importMEI()">
+    </form>
+    <p id="demo"></p>
+</div>
+
+<style>
+@media only screen and (min-width: 769px) {
+  .containerOverlay {
+      margin: auto;
+      height: 500px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+  .logoPanel {
+      background-color: #f3f0eb !important;
+      height: 100%;
+      margin: 0px;
+      border-top-left-radius: 20px 20px;
+      border-bottom-left-radius: 20px 20px;
+      border-right: 1px solid #2d3c43;
+  }
+  @-webkit-keyframes expand{
+      0%{top:-50%;}
+      100%{top:50%;}
+  }
+}
+@media only screen and (max-width: 769px){
+        .closeButton{
+            display: none;
+            float:right;
+        }
+}
+
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#titleSettings{
+    padding-left:15px;
+    padding-right:15px;
+    margin-top: 10px;
+    text-align: center;
+}
+#controlSettings{
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:15px;
+
+}
+</style>
+<script>var globalKeyRef;
+
+function importMEI() {
+    var x = document.getElementById("MEI_input").value;
+    
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(x, "text/xml");
+    
+    let initialStyle = document.getElementById('shapeSelection').value;
+    document.getElementById('shapeSelection').value = 1;
+    
+    MEInotes2medmel(xmlDoc, initialStyle);
+    MEItext2medmel(xmlDoc);
+    MEImetatdata2medmel(xmlDoc);
+    MEImetatdata2medmel(xmlDoc);
+    // Necessary to be able to import both from modern and medieval notation.
+    updateStaves(false);
+    hideOverlay();
+}
+
+// METADATA
+function MEImetatdata2medmel(xmlDoc) {
+    try {
+        var title = xmlDoc.getElementsByTagName('title')[0].childNodes[0];
+        if (title != undefined) {
+            title = title.nodeValue;
+            document.getElementById("title_input").value = title;
+        }
+    }
+    catch (e) {
+    }
+    
+    try {
+        var identifier = xmlDoc.getElementsByTagName('identifier')[0].childNodes[0];
+        if (identifier != undefined) {
+            identifier = identifier.nodeValue;
+            document.getElementById("id_input").value = identifier;
+        }
+    }
+    catch (e) {
+    }
+    try {
+        var language = xmlDoc.getElementsByTagName('language')[0].childNodes[0];
+        if (language != undefined) {
+            language = language.nodeValue;
+            document.getElementById("language").value = language;
+        }
+    }
+    catch (e) {
+    }
+    
+    try {
+        var author = xmlDoc.getElementsByTagName('composer')[0].getElementsByTagName('persName')[0];
+        if (author != undefined) {
+            author = author.innerHTML;
+            document.getElementById("author_input").value = author;
+        }
+    }
+    catch(e) {
+    }
+    try {
+        var source = xmlDoc.getElementsByTagName('source')[0];
+        if (source != undefined) {
+            source = source.getAttribute('target').replace("#", "");
+            document.getElementById("ms_input").value = source;
+        }
+    }
+    catch(e) {
+    }
+    try {
+        var locus = xmlDoc.getElementsByTagName('locus')[0].childNodes[0];
+        if (locus != undefined) {
+            locus = locus.nodeValue;
+            document.getElementById("f_input").value = locus;
+        }
+    }
+    catch(e) {
+    }
+    
+    try {
+        // melodicStructure = xmlDoc.getElementsByTagName('annot')[@label='melodicStructure'];
+        var annot = xmlDoc.getElementsByTagName('annot');
+        for (let i = 0; i < annot.length; i++) {
+            
+            let label = annot[i].getAttribute("label");
+            let type = annot[i].getAttribute("type");
+            if (label == "musicalStructure" && type == "manual") {
+                showSettings();
+                document.getElementById("checkAutomaticMelodicStructure").checked = false;
+                statusAutomaticMelodicStructure();
+                document.getElementById("manualMelodicStructure").value = annot[i].childNodes[0].nodeValue;
+                updateManualMelodicStructure();
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+
+// TEXT
+function MEItext2medmel(xmlDoc) {
+    var myText = "";
+    
+    var layer = xmlDoc.getElementsByTagName('layer');
+    try {
+        var nOfElementsInLayer = layer[0].childNodes.length;
+    }
+    catch(e) {
+        alert("Error: the document is not well formed");
+    }
+    var element = layer[0].childNodes;
+    var countElements = 0;
+    
+    for (countElements = 0; countElements < nOfElementsInLayer; countElements++) {
+        // reset value of syl, in order to avoid duplicates in empty syls
+        var syl = "";
+        var thisElement = element[countElements];
+        
+        if (thisElement.nodeName == 'syllable') {
+            // Check if there is a <syl> within <syllable>
+            if (thisElement.getElementsByTagName('syl')[0] != undefined) {
+                // Get the first (and only) <syl> within the <syllable>
+                var sylNode = thisElement.getElementsByTagName('syl')[0];
+                // Check the nested structure
+                if (sylNode.childNodes[1]) {
+                    // Get text value
+                    syl = sylNode.childNodes[1].childNodes[0].nodeValue;
+                } else if (sylNode.childNodes[0]) {
+                    syl = sylNode.childNodes[0].nodeValue;
+                }
+                if (syl != undefined) {
+                    if (syl.slice(-1) == " ") {
+                        syl = syl.trimRight();
+                    }
+                    syl = syl.replace(/ /, "£");
+                    myText = myText + syl;
+                    
+                    
+                    let precedingChar = myText.slice(-1);
+                    if (precedingChar == "_" || precedingChar == "-" || precedingChar == /\n/) {
+                        // do nothing
+                    } else {
+                        let wordpos = sylNode.getAttribute("wordpos");
+                        if (wordpos == "i" || wordpos == "m") {
+                            myText += "-"
+                        } else if (wordpos == "t" || wordpos == "s") {
+                            myText += " ";
+                        } else {
+                            myText += " ";
+                        }
+                    }
+                }
+            }
+            // end if syllable
+            // If not a syllable, but a metrical line break, reproduce the line break in the text
+        } else if (thisElement.nodeName == 'sb' && thisElement.getAttribute("type") == "metricalLineBreak") {
+            myText = myText.trim();
+            myText = myText + "\n";
+        }
+    }
+    //elements
+    myText = myText.trimRight();
+    myText = myText.replace(/_/gi, "-");
+    myText = myText.replace(/£/gi, "_");
+    
+    document.getElementById("text_input").innerHTML = myText;
+    document.getElementById("text_input").value = myText;
+}
+
+
+var arrayOfStemStorage =[];
+var arrayOfConnectingLinesStorage =[];
+var arrayOfLinesInLineStorage =[];
+var arrayOfCustosStorage =[];
+var arrayOfGroupShapeStorageString = "";
+var arrayOfGroupShapeStorage =[[]];
+var arrayOfBarStorage =[[]];
+var notes = "";
+var nOfStaves = "";
+var metricalLineCount = 0;
+var oldLine = 0;
+var syllablesInOldLine = 0;
+var firstElement = true;
+
+// MUSIC
+function MEInotes2medmel(xmlDoc, initialStyle) {
+    united_clivis = 2;
+    // Set neuter shape for clivis. If it's oblique, it needs to be specified.
+    notes = "";
+    nOfStaves = xmlDoc.getElementsByTagName('staff').length;
+    metricalLineCount = 0;
+    oldLine = 0;
+    syllablesInOldLine = 0
+    arrayOfStemStorage =[];
+    arrayOfStemStorage.push([]);
+    arrayOfConnectingLinesStorage =[]
+    arrayOfConnectingLinesStorage.push([]);
+    arrayOfSingleNoteShapeStorage =[];
+    arrayOfSingleNoteShapeStorage.push([]);
+    arrayOfLinesInLineStorage =[];
+    firstElement = true;
+    b_flat_active = false;
+    
+    let counter = 0
+    
+    // Compose array of number of lines pon each staff
+    // This info is contained by <staffDef> elements
+    // It follows the order in which the staffDef are disposed and not their @n
+    try {
+        var staffDefs = xmlDoc.getElementsByTagName('staffDef');
+        for (let staffDef of staffDefs) {
+            let nOflinesInLine = staffDef.getAttribute('lines');
+            nOflinesInLine = parseInt(nOflinesInLine);
+            arrayOfLinesInLineStorage.push(nOflinesInLine);
+        }
+    }
+    catch(e) {
+    }
+    
+    // LOOP IN MELODY
+    for (let staffNo = 0; staffNo < nOfStaves; staffNo++) {
+        
+        let scoreDef = xmlDoc.getElementsByTagName('scoreDef')[0];
+        if (scoreDef != undefined) {
+            let scoreDefN = scoreDef.getAttribute("n");
+        }
+        if (scoreDef.getAttribute('key.sig') == "f") {
+            notes = notes + "b} ";
+            b_flat_active = true;
+        } else if (scoreDef.getAttribute('key.sig') == "n") {
+            notes = notes + "h} ";
+        }
+        let staffDef = xmlDoc.getElementsByTagName('staffDef')[staffNo];
+        if (staffDef != undefined) {
+            if (staffDef.getAttribute('key.sig') == "f") {
+                notes = notes + "b} ";
+            } else if (staffDef.getAttribute('key.sig') == "n") {
+                notes = notes + "h} ";
+            }
+        }
+        
+        let layer = xmlDoc.getElementsByTagName('layer');
+        let nOfSyllablesInStaff = layer[staffNo].childElementCount;
+        
+        for (countSyllable = 0; countSyllable < nOfSyllablesInStaff; countSyllable++) {
+            let bracket_type_external = false;
+            let closingExternalBracketsNeeded = false;
+            
+            let syllableNode = layer[staffNo].children[countSyllable];
+            
+            // OPENING BRACKETS
+            if (syllableNode.nodeName == "corr") {
+                brackts_open_external = true;
+                // da dichiarare fuori
+                bracket_type_external = syllableNode.getAttribute('type');
+                if (bracket_type_external == "suppliedExternalClosingTag") {
+                    closingExternalBracketsNeeded = false;
+                    notes = notes + "[";
+                } else if (bracket_type_external == "suppliedExternalOpeningTag") {
+                    closingExternalBracketsNeeded = true;
+                    // notes stays the same
+                } else {
+                    // no type, it means it the [...] are explicit
+                    closingExternalBracketsNeeded = true;
+                    notes = notes + "[";
+                }
+                // keep the process going by substituting the analysed element with its child, the actual syllable
+                syllableNode = syllableNode.children[0];
+            }
+            // END OPENING BRACKETS
+            
+            // SYLLABLE
+            if (syllableNode.nodeName == "syllable") {
+                arrayOfStemStorage[oldLine].push([]);
+                arrayOfSingleNoteShapeStorage[oldLine].push([]);
+                arrayOfConnectingLinesStorage[oldLine].push([]);
+                arrayOfBarStorage[oldLine].push([])
+                
+                // GROUP shape //
+                let group = syllableNode.getElementsByTagName('neume')[0];
+                let groupClass = group.getAttribute('class');
+                groupClass = parseMedMelClass(groupClass);
+                arrayOfGroupShapeStorage[oldLine][syllablesInOldLine] = groupClass;
+                counter++;
+                // ***** notes ***** //
+                let neumeNodesCount = syllableNode.getElementsByTagName('neume').length;
+                
+                var ncNo_continuous = 0;
+                
+                for (let neumeNo = 0; neumeNo < neumeNodesCount; neumeNo++) {
+                    
+                    if (neumeNo > 0) {
+                        notes = notes + "-";
+                        ncNo_continuous++;
+                        processNeumeSeparation(ncNo_continuous);
+                    }
+                    if (neumeNo < 1 && countSyllable != 0 && notes.slice(-1) != "'" && notes.slice(-1) != "\n") {
+                        notes = notes + " ";
+                    }
+                    
+                    var neumeNode = syllableNode.getElementsByTagName('neume')[neumeNo];
+                    
+                    // OPEN INTERNAL BRACKETS
+                    
+                    var nOfNcInNeume = neumeNode.getElementsByTagName('nc').length;
+                    var nOfElementsInNeume = neumeNode.childElementCount;
+                    
+                    for (var ncNo = 0; ncNo < nOfElementsInNeume; ncNo++) {
+                        if (neumeNode.childNodes) {
+                            var currentNc = neumeNode.children[ncNo];
+                            
+                            if (currentNc.nodeName == "corr") {
+                                var notesInsideCorr = "";
+                                var bracketOpen = "[";
+                                var bracketClosed = "]";
+                                
+                                if (currentNc.getAttribute('type') == "suppliedInternalOpeningTag") {
+                                    bracketOpen = "";
+                                } else if (currentNc.getAttribute('type') == "suppliedInternalClosingTag") {
+                                    bracketClosed = "";
+                                }
+                                // loop through all the nc inside corr
+                                for (let corrNo = 0; corrNo < currentNc.childElementCount; corrNo++) {
+                                    notesInsideCorr = notesInsideCorr + processNc(currentNc.children[corrNo], ncNo_continuous, groupClass);
+                                }
+                                notes = notes + bracketOpen + notesInsideCorr + bracketClosed;
+                            } else {
+                                // if it's nc, supposedly
+                                notes = notes + processNc(currentNc, ncNo_continuous, groupClass);
+                            }
+                        } else {
+                            // if neume is empty?
+                            var note = neumeNode.nodeValue;
+                        }
+                        
+                        ncNo_continuous++;
+                    }
+                    // nc or corr
+                }
+                // end neumes
+                syllablesInOldLine = syllablesInOldLine + 1;
+                firstElement = false;
+            }
+            // end if syllables
+            // If clef [special clefs (5-8) can be decoded, but not encoded, yet] [edit.: now they could be encoded, but the exportMEI still needs to implement these cases]
+            else if (syllableNode.nodeName == "clef") {
+                var clefShape = syllableNode.getAttribute('shape');
+                var clefLine = syllableNode.getAttribute('line');
+                var clefLineMedMel = convert_clef_position_MEI2MedMEl(clefLine, arrayOfLinesInLineStorage[oldLine]);
+                var clef = clefShape + clefLineMedMel;
+                
+                updateGlobalKeyRef(clefShape, clefLineMedMel);
+                
+                if (! Number.isInteger(parseInt(notes[notes.length -1])) === true && notes[notes.length -1] != undefined) {
+                    clef = " " + clef;
+                }
+                notes = notes + clef;
+                firstElement = false;
+            }
+            // end if clef
+            
+            else if (syllableNode.nodeName == "keySig") {
+                // b}
+                if (syllableNode.getAttribute('accid') == 'f') {
+                    b_flat_active = true;
+                    
+                    if (Number.isInteger(parseInt(notes[notes.length -1])) || countSyllable == 0) {
+                        notes = notes + "b}";
+                    } else {
+                        notes = notes + " b}";
+                    }
+                }
+                // h}
+                else if (syllableNode.getAttribute('accid') == 'n') {
+                    b_flat_active = false;
+                    
+                    if (Number.isInteger(parseInt(notes[notes.length -1]))) {
+                        notes = notes + "h}";
+                    } else {
+                        notes = notes + " h}";
+                    }
+                }
+                firstElement = false;
+            }
+            
+            // Metrical line break
+            else if (syllableNode.nodeName == "sb" && syllableNode.getAttribute('type') == 'metricalLineBreak') {
+                if (currentStyle == 0) {
+                    notes = notes + "\n";
+                    // ho spostato questo fuori.. sembra più logico, ma potrebbe creare problemi, di certo non risolve problemi di cui sono al corrente ->
+                    // metricalLineCount = metricalLineCount+1;
+                } else {
+                    notes = notes + " '";
+                }
+                // spostato questo da dentro l'if statement ->
+                metricalLineCount = metricalLineCount + 1;
+            }
+            // Ms system break
+            else if (syllableNode.nodeName == "sb" && firstElement != true) {
+                // This implies that the influence of the b flat is interrupted with the system break
+                b_flat_active = false;
+                
+                // adding a line in the arrays structure
+                arrayOfStemStorage.push([]);
+                arrayOfSingleNoteShapeStorage.push([]);
+                arrayOfGroupShapeStorage.push([]);
+                arrayOfConnectingLinesStorage.push([]);
+                arrayOfBarStorage.push([]);
+                
+                oldLine = oldLine + 1;
+                syllablesInOldLine = 0;
+                
+                if (currentStyle == 0) {
+                    notes = notes + " '";
+                } else {
+                    notes = notes + "\n";
+                }
+            }
+            
+            // DIVLINES
+            else if (syllableNode.nodeName == "divLine") {
+                var divLineStart = 0;
+                var divLineEnd = 0;
+                // Decode MEIdivLine  encoded with @start @end
+                if (syllableNode.getAttribute("start")) {
+                    divLineStart = convert_divLine_loc_MEI2MedMel(parseFloat(syllableNode.getAttribute("start")), arrayOfLinesInLineStorage[oldLine]);
+                    divLineEnd = convert_divLine_loc_MEI2MedMel(parseFloat(syllableNode.getAttribute("end")), arrayOfLinesInLineStorage[oldLine]);
+                }
+                // Decode MEI divLine  encoded with @form @loc
+                else {
+                    divLineStart = convert_divLine_loc_MEI2MedMel(parseInt(syllableNode.getAttribute("loc")), arrayOfLinesInLineStorage[oldLine]);
+                    let form = syllableNode.getAttribute("form");
+                    if (form == "minima") {
+                        divLineEnd = divLineStart + 1;
+                    } else if (form == "maior") {
+                        divLineEnd = divLineStart + 2;
+                    } else if (form == "maxima") {
+                        divLineEnd = divLineStart + 3;
+                    }
+                }
+                // push results into bar array
+                arrayOfBarStorage[oldLine][syllablesInOldLine -1] =[divLineStart, divLineEnd, 0];
+            } else if (syllableNode.nodeName == "custos") {
+                let custos_pname = syllableNode.getAttribute("pname");
+                let custos_oct = syllableNode.getAttribute("oct");
+                let custosPosition = getCustosPositionMei2MedMel(custos_pname, custos_oct);
+                arrayOfCustosStorage[oldLine] = custosPosition;
+            }
+            
+            if (closingExternalBracketsNeeded == true) {
+                notes += "]";
+            }
+            // }
+        }
+        // children of layer
+        
+        if (staffNo != (nOfStaves -1)) {
+            if (currentStyle == 0) {
+                notes = notes + " '";
+            } else {
+                notes = notes + "\n";
+            }
+        };
+    }
+    // staff
+    document.getElementById("music_input").innerHTML = notes;
+    document.getElementById("music_input").value = notes;
+    
+    // ***  These two lines were creating a lot of problems,
+    // stemSingleNote = arrayOfStemStorage;
+    // shapeSingleNote = arrayOfSingleNoteShapeStorage;
+    //***
+    
+    //shapeGroupNote = JSON.parse(arrayOfGroupShapeStorageString);
+    
+    setTimeout(function () {
+        document.getElementById('shapeSelection').value = initialStyle;
+        setTimeout(function () {
+            updateStaves();
+            shapeGroupNote = arrayOfGroupShapeStorage;
+            stemSingleNote = arrayOfStemStorage;
+            shapeSingleNote = arrayOfSingleNoteShapeStorage;
+            linesInLine = arrayOfLinesInLineStorage;
+            connectGroupNote = arrayOfConnectingLinesStorage;
+            bar = arrayOfBarStorage;
+            custos = arrayOfCustosStorage;
+        },
+        200);
+    },
+    150);
+    
+    delete (indexGroup);
+    notesGroup = undefined;
+    delete (notesGroup);
+    
+    setTimeout(function () {
+        resizeStaves();
+    },
+    500);
+}
+
+function processNc(currentNc, ncNo, groupClass) {
+    var pname = currentNc.getAttribute('pname');
+    var oct = currentNc.getAttribute('oct');
+    var accid_attr = currentNc.getAttribute('accid.ges');
+    var tilt = currentNc.getAttribute('tilt');
+    var ligated = currentNc.getAttribute('ligated');
+    var ncClass = currentNc.getAttribute('class');
+    var con = currentNc.getAttribute('con');
+    // not used yet
+    var stem_dir_attr = currentNc.getAttribute('stem.dir');
+    var stem_pos_attr = currentNc.getAttribute('stem.pos');
+    var stem_attr = currentNc.getAttribute('stem');
+    var curve = currentNc.getAttribute('curve');
+    var plica = "";
+    var accid = "";
+    var prefixOct = "";
+    
+    // ACCID
+    if (accid_attr == null && pname == "b") {
+        pname = "h";
+    } else if (accid_attr == "f" && pname != "b") {
+        accid = "_";
+    } else if (accid_attr == "s" && pname != "b") {
+        accid = "#";
+    } else if (accid_attr == "n" && pname != "b") {
+        accid = "%";
+    } else {
+        accid = "";
+    }
+    
+    // OCTAVE
+    if (oct == 2 && pname == "g") {
+        prefixOct = "*";
+        pname = pname.toUpperCase();
+    } else if (oct == 2 && (pname == "a" || pname == "h" || pname == "b")) {
+        prefixOct = "";
+        pname = pname.toUpperCase();
+    } else if (oct == 3 && (pname == "c" || pname == "d" || pname == "e" || pname == "f" || pname == "g")) {
+        prefixOct = "";
+        pname = pname.toUpperCase();
+    } else if (oct == 3 && (pname == "a" || pname == "h" || pname == "b")) {
+        prefixOct = "";
+        pname = pname.toLowerCase();
+    } else if (oct == 4 && (pname == "c" || pname == "d" || pname == "e" || pname == "f" || pname == "g")) {
+        prefixOct = "";
+        pname = pname.toLowerCase();
+    } else if (oct == 4 && (pname == "a" || pname == "h" || pname == "b")) {
+        prefixOct = "+";
+        pname = pname.toLowerCase();
+    } else if (oct == 5 && pname == "c") {
+        prefixOct = "+";
+        pname = pname.toLowerCase();
+    } else {
+        prefixOct = "";
+        pname = "?";
+    }
+    
+    // OCTAVE (ONE OCTAVE HIGHER, see if Neon goes well)
+    // if (oct == 1 && pname == "g") {
+    //   prefixOct = "*";
+    //   pname = pname.toUpperCase();
+    // }
+    // else if (oct == 1 && (pname == "a" || pname == "h" || pname == "b")) {
+    //     prefixOct = "";
+    //     pname = pname.toUpperCase();
+    // }
+    // else if (oct == 2 && (pname == "c" || pname == "d" || pname == "e" || pname == "f" || pname == "g")){
+    //     prefixOct = "";
+    //     pname = pname.toUpperCase();
+    // }else if (oct == 2 && (pname == "a"|| pname == "h" || pname == "b")){
+    //     prefixOct = "";
+    //     pname = pname.toLowerCase();
+    // }else if (oct == 3 && (pname == "c" || pname == "d" || pname == "e" || pname == "f" || pname == "g")){
+    //     prefixOct = "";
+    //     pname = pname.toLowerCase();
+    // }else if (oct == 3 && (pname == "a"|| pname == "h"|| pname == "b")){
+    //     prefixOct = "+";
+    //     pname = pname.toLowerCase();
+    // }else if (oct == 4 && pname == "c"){
+    //     prefixOct = "+";
+    //     pname = pname.toLowerCase();
+    // }else {
+    //     prefixOct = "";
+    //     pname = "?";
+    // }
+    
+    if (currentNc.querySelector('liquescent')) {
+        plica = "(" + getPlicaPitch(prefixOct + pname, getPlicaPitch, curve) + ")";
+    }
+    
+    // STEMS
+    // Stem down
+    if (stem_dir_attr == "down" || tilt == "s") {
+        if (stem_pos_attr == "right" || tilt == "s") {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 2;
+        } else if (stem_pos_attr == "left") {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 1;
+        }
+    }
+    // Stem up
+    else if (stem_dir_attr == "up") {
+        if (stem_pos_attr == "right") {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 3;
+        } else if (stem_pos_attr == "left") {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 4;
+        }
+        arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 3;
+    }
+    // Explicit no stem
+    else if (stem_attr == "none") {
+        arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 0;
+    }
+    // No stem info
+    else {
+        // If there is no class in the group, then let it go to default
+        if (groupClass == null || plica !== "") {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = null;
+            
+            // otherwise, if there is a class, but there is no stem info, it means it really means there is no stem (right?)
+        } else {
+            arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = 0;
+        }
+    }
+    
+    // Single note shapes
+    noteShape_attr = "";
+    if (ncClass == "#align.vertical") {
+        arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo -1] = 1;
+    } else if (ligated == "true") {
+        if (typeof arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo -1] !== 'undefined' && arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo -1] == 2) {
+        } else {
+            arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo] = 2;
+        }
+    } else if (tilt == "se") {
+        arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo] = 3;
+    } else {
+        arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo] = 0;
+    }
+    
+    if (con === "") {
+        arrayOfConnectingLinesStorage[oldLine][syllablesInOldLine][ncNo] = parseInt(1);
+    } else if (con === "g") {
+        arrayOfConnectingLinesStorage[oldLine][syllablesInOldLine][ncNo - 1] = parseInt(0);
+    }
+    
+    return accid + prefixOct + pname + plica;
+}
+
+function processNeumeSeparation(ncNo) {
+    arrayOfStemStorage[oldLine][syllablesInOldLine][ncNo] = null;
+    arrayOfSingleNoteShapeStorage[oldLine][syllablesInOldLine][ncNo] = 0;
+    arrayOfConnectingLinesStorage[oldLine][syllablesInOldLine][ncNo] = parseInt(0);
+}
+
+function convert_clef_position_MEI2MedMEl(clefLineMEI, nOflinesInLine) {
+    if (nOflinesInLine == undefined) nOflinesInLine = 4;
+    clefLineMEI = parseInt(clefLineMEI);
+    return nOflinesInLine - clefLineMEI + 1;
+}
+
+function convert_divLine_loc_MEI2MedMel(meiLoc, nOfLinesInLine) {
+    // Calculate the maximum index for a line or space in MEI@loc
+    const maxIndex = 2 * (nOfLinesInLine - 1);
+    // Calculate the corresponding position in MedMel
+    const medmel_loc = (maxIndex - meiLoc) * 0.5
+    return medmel_loc;
+}
+
+function parseMedMelClass(groupClass) {
+    if (groupClass == null) {
+        return null;
+    }
+    
+    const parts = groupClass.split('.');
+    var medmelClass = parts[parts.length - 1];
+    medmelClass = parseInt(medmelClass);
+    
+    return medmelClass;
+}
+
+function getCustosPositionMei2MedMel(pname, oct) {
+    const positions = {
+        "c5": -14, "h5": -13, "b5": -12, "a5": -11, "g5": -10,
+        "f5": -9, "e5": -8, "d5": -7, "c4": -6, "h4": -5,
+        "b4": -5, "a4": -4, "g4": -3, "f4": -2, "e4": -1,
+        "d4": 0, "c4": 1, "h3": 2, "b3": 2, "a3": 3,
+        "g3": 4, "f3": 5, "e3": 6, "d3": 7, "c3": 8,
+        "h2": 9, "b2": 9, "a1": 10, "g1": 11
+    };
+    
+    // Combine pname and oct to create a lookup key
+    const pnameOct = pname + oct;
+    let pos = positions[pnameOct];
+    
+    return pos + globalKeyRef;
+}
+
+function updateGlobalKeyRef(clefShape, clefLineMedMel) {
+    if (clefShape == "C") {
+        globalKeyRef = (clefLineMedMel - 1) * 2;
+    } else if (clefShape == "F") {
+        globalKeyRef = (clefLineMedMel -3) * 2;
+    }
+}
+
+function getPlicaPitch(pname, b_flat_active, curve) {
+    const pitch_names = [ "*G", "A", "H", "C", "D", "E", "F", "G", "a", "h", "c", "d", "e", "f", "g", "+a", "+h", "+c", "+d"];
+    
+    let movement;
+    if (curve == "c") {
+        movement = -1;
+    } else if (curve == "a") {
+        movement = 1;
+    }
+    
+    let index = pitch_names.indexOf(pname);
+    let plica_pitch = pitch_names[index + movement];
+    
+    if (b_flat_active) {
+        if (plica_pitch == "H") {
+            plica_pitch = "B";
+        } else if (plica_pitch == "h") {
+            plica_pitch = "b";
+        } else if (plica_pitch == "+h") {
+            plica_pitch = "+b";
+        }
+    }
+    
+    return plica_pitch;
+}
+</script>
+
+</body>
+</html>

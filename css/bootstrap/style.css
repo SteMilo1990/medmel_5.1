@@ -1,0 +1,704 @@
+:root{
+  --back: #f3f0eb;
+  --tab: #f1f1f1;
+  --tabBorder: #ccc;
+  --buttonOver: #ddd;
+  --buttonActive: #ccc;
+}
+
+/* ovveride padding bootstrap */
+.col-md-12 {
+  padding-right: 0;
+}
+.row {
+  --bs-gutter-x: 0rem;
+  margin-right: 0px;
+}
+/* :root{
+  --back: #f1f1f1;
+  --tab: #fff;
+  --tabBorder: #fff;
+  --buttonOver: #fff;
+  --buttonActive: #fff;
+}
+ */
+#stavesContainer {
+  font-size:0;
+}
+#bodyContainer{
+    width: 100%;
+    height: 92vh;
+}
+@media only screen and (max-width: 630px){
+
+    #bodyContainer{
+        width: 100%;
+        height: 85vh;
+    }
+}
+body {
+  background-color: var(--back) !important;
+  font-family: Helvetica, 12px;
+  padding: 0px;
+}
+
+button, #title_input,#id_input, #ms_input,#author_input,#language,#f_input, #btnTextMode, select, textarea{
+  /* border-bottom: 1px solid lightgray; */
+  border-radius:2px;
+}
+.row.bgcolorWhite {
+  border-bottom: 1px solid lightgray;
+}
+
+#urlInput {
+padding: 3px;
+  border-radius:0;
+}
+#urlSubmitBtn, #fetchFacsimileBtn {
+  border: 2px solid white;
+  background-color: white;
+  font-family: Roboto;
+  border-radius: 2px;
+}
+#urlSubmitBtn:hover, #fetchFacsimileBtn:hover {
+  background-color: lightgray;
+  border-color: lightgray;
+}
+#fetchFacsimileBtn {
+  margin-left: 20px;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid var(--tabBorder);
+  background-color: var(--tab);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: var(--buttonOver);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: var(--buttonActive);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.containerColor{
+  /*background: #8FB4DB;*/
+  /*background-color: #AD6A29;*/
+  /*background-color: #e9e3ce;*/
+  background-color: var(--back);
+
+}
+/*-----Style staves container------*/
+.containerStavesFrame{
+    margin-left: 10px;
+}
+.contentPane{
+  display: flex;
+  flex-flow: column;
+  height: 73vh;
+  width: auto;
+  margin-top: 0.7em;
+  background: #fff;
+  padding: 0.7em;
+  border: solid 1px #000;
+}
+.stavesContainer{
+    display: flex;
+    flex-flow: column;
+    height: 90vh;
+    width: auto;
+
+}
+
+.scrollablePane{
+    overflow: auto;
+
+}
+/*-----End Style staves container------*/
+/*style input form panel staves page*/
+.notes{
+  background-attachment: local;
+  font-size: 15px;
+  width: 83%;
+  height: 8em;
+  background-image:
+     linear-gradient(to right, white 0.7em, transparent 0.7em),
+     linear-gradient(to left, white 0.7em, transparent 0.7em),
+     repeating-linear-gradient(white, white 23px, #ccc 23px, #ccc 24px, white 24px);
+  line-height: 24px;
+  padding: 4px 10px;
+
+  border: solid 0px #000;
+}
+.sizeDiv{
+  width: 83.5%;
+  margin-left: 23px;
+  margin-right: auto;
+  padding-left: auto;
+  padding-right: auto;
+}
+.mainContainer{
+    margin: 0px;
+    width: 99.5%;
+
+    overflow-x: none;
+}
+.controlPane{
+
+}
+.lines {width: 23px !important;margin-right: 0px !important;}
+.linedwrap {padding: 0px !important; border:none; }
+line{
+    padding: 0px;
+    margin: 0px;
+}
+
+/**----Line Separator Content -----**/
+.separator {
+    color: #2d3c43;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    background: #2d3c43;
+    border: 1.5px solid #2d3c43;
+    border-radius: 1px 1px;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}
+/**--End Line Separator Content -----**/
+
+/*End style input form panel staves page*/
+
+/**-------Style control panel Staves -----**/
+.marginTop10{
+    margin-top: 10px;
+}
+.marginTop5{
+    margin-top: 5px;
+}
+/**---End Style control panel Staves -----**/
+
+/*style text staves panel*/
+#title {
+    text-align: center;
+    font-size: 30px;
+}
+
+#author {
+    text-align: center;
+    font-size: 20px;
+    font-style: italic;
+}
+
+#id {
+    text-align: left;
+    font-size: 16px;
+}
+
+#ms {
+    text-align: left;
+    font-size: 16px;
+}
+/*End style text staves panel*/
+
+/**---------Style single note------- **/
+.singleNote{
+
+}
+.singleNote:hover{
+    fill: #555;
+}
+/**-----End style single note------- **/
+/**---------Style goup notes------- **/
+.groupNote{
+
+}
+.groupNote:hover{
+    background: #bbb;
+}
+/**-----End style group notes------- **/
+/**--------Menu style single note-------**/
+.menuStyleNote{
+    border-radius: 10px 10px;
+    background: var(--back);
+    height: 130px;
+    width: 150px;
+    position: absolute;
+}
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+/**----End Menu style single note-------**/
+.divCenter{
+    margin-left: 25px;
+    margin-top: 25px;
+}
+.divMenuLineNumber{
+    margin-left: 25px;
+    margin-top: 5px;
+}
+/*----Style Overlay Panel -----*/
+.overlayPanel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+    display: none;
+    background: #e9e3ce;
+    opacity: 0.99;
+    z-index: 10000;
+}
+.overlayPanelClean{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+    display: none;
+    opacity: 0.99;
+
+}
+/*----Style Overlay Panel -----*/
+/*----Style Placeholder Settings---*/
+.placeholderSettingsMenu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:200px;
+    height: 250px;
+
+    display: none;
+}
+
+.selectedNote {
+  fill: #E83C1D;
+}
+#frameBox{
+    overflow:auto;
+    right: -10px;
+}
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+}
+.controlBoxBtn {
+  display:none;
+  background-color:transparent;
+  border:none;
+  position:absolute;
+  right:40px;
+  top:0px;
+  padding-right: 3px;
+  padding-left: 3px;
+  color:gray;cursor: pointer;
+  border-radius: 4px;
+}
+.controlBoxBtn:hover {
+  background-color: white !important;
+  display: block;
+}
+.controlBoxBtn:not(:hover){
+    display: none;
+    background-color:transparent;
+    border:none;
+    position:absolute;
+    right:40px;
+    top:0px;
+    padding-right: 3px;
+    padding-left: 3px;
+    color:gray;cursor: pointer;
+    border-radius: 4px;
+    display:none;
+}
+
+.showBtn{
+    display:none;
+}
+.showBtn:hover{
+    display:block;
+}
+.showBtn:not(:hover ){
+    display:none;
+}
+
+#divPrint, #divPrint * {
+  visibility: hidden; /*Nascondo se non siamo in fase di stampa*/
+  background-color: white;
+}
+@media print {
+  #divPrint, #divPrint * {
+    visibility: visible; /*Mostro se siamo in fase di stampa*/
+    position:absolute;
+    top:0; left:0;
+  }
+}
+#headerContainer {
+  border-bottom:0px;
+}
+#boxStavesContainer{
+  border-color: lightgray;
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  
+  margin: 0;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding-left:35px !important;
+}
+
+#open-facsimile {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 10px;
+  background: white;
+}
+#edit-facsimile-info {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 6px;
+  background: white;
+  margin-top:-13px;
+  height: 45px;
+}
+#edit-facsimile-info-icon {
+  width: 20px
+}
+
+.playerButton{
+  width: 54px;
+  min-width: 15px;
+  max-width: 45px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 10px;
+  background: white;
+}
+
+.playerIcon{
+    max-width:100%;
+}
+
+#shapeSelection, #foliosSelect {
+    padding:5px;
+    border-radius: 5px;
+    border: 1px solid lightgray; /*#303C42;*/
+    background: white;
+    
+}
+
+#foliosSelect {
+  margin-bottom: 10px;
+}
+
+/* #btnTextMode {
+    max-width:140px;
+    max-height:60px;
+    padding:5px;
+    border-radius: 5px;
+    border: 2px solid #303C42;
+    border: none;
+    background: white;
+    color: #303C42;
+} */
+
+
+/**sidebar buttons*/
+#showSidebarBtn {
+  position:absolute;
+  top:300px;
+  right:0px;
+  border: 1px solid lightgray;
+  border-right: 0;
+  width: 0px !important;;
+  height: 40px;
+  padding-left:1px;
+  padding-right:10px;
+  border-radius: 10px 0 0 10px;
+  font-size: 10px;
+  color: gray;
+}
+
+#hideSidebarBtn {
+  position:absolute;
+  top:300px;
+  left:-15px;
+  border: 1px solid lightgray;
+  border-left: 0;
+  width: 11px;
+  height: 40px;
+  padding-left:0px;
+  border-radius: 0 10px 10px 0;
+  font-size: 13px;
+  color: gray;
+}
+
+#resizeBar {
+  position:absolute;
+  height: 100%;
+  left:-15px;
+  border: none;
+  width: 9px;
+  background-color: var(--back) !important;
+  cursor:ew-resize;
+}
+
+/* Iframe style */
+#urlBoxDiv input.fadeAway {
+  opacity:0%;
+  transition:opacity 1s
+
+}
+#urlBoxDiv:hover input {
+  opacity:100%;
+  transition:opacity 1s;
+}
+#frameSidebar #controlBox #urlBoxDiv input {
+  height: 40px;
+}
+#frameSidebar {
+  margin-top: 0 !important;
+}
+#bottomSideBar {
+  padding-left: 10px !important;
+  padding-right: 0 !important;
+}
+
+
+html {
+  overscroll-behavior-x: none;
+}
+body {
+  overscroll-behavior-x: none;
+}
+
+@font-face {
+  font-family: "Junicode";
+  src: url("fonts/Junicode/WOFF2/JunicodeVF-Roman.woff2");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Junicode";
+  src: url("fonts/Junicode/WOFF2/JunicodeVF-Italic.woff2");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "JunicodeOnline";
+  src: url("http://localhost:8888/medmel/css/fonts/Junicode/WOFF2/JunicodeVF-Roman.woff2");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JunicodeOnline";
+  src: url("http://localhost:8888/medmel/css/fonts/Junicode/WOFF2/JunicodeVF-Italic.woff2");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+
+
+
+.bold {
+  font-weight:  700;
+}
+.italic {
+  font-style: italic;
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 230px;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2d3c43;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2d3c43;
+  cursor: pointer;
+}
+input[type=text], select, textarea {
+  border: 0px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  padding-left: 3px;
+}
+#stavesBox {
+  padding-left: 0;
+}
+#containerNoteMenu {
+  z-index:1;
+}
+.mosaic-window.mosaic-drop-target {
+    z-index: 0;
+}
+
+#frameSidebar {
+  position: absolute;
+  margin-top:14px; 
+  background-color:lightgray;
+  width: 100% !important;
+  height:70vh; 
+  top:0px;
+  right:-8px;
+  left:-8px;
+  bottom:-8px;
+}
+
+
+
+
+/* Facsimile Overlay background */
+#facsimile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form container */
+#facsimile-overlayForm {
+    background: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Form inputs */
+#facsimile-overlayForm input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+/* #facsimile-overlayForm #manifestInput {
+  width: 92%;
+} */
+
+/* Form button */
+#facsimile-overlayForm input[type="button"] {
+    padding: 10px 20px;
+    background-color: #7b1b02;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#facsimile-overlayForm #searchManifestBtn {
+  margin: 10px 0;
+  padding: 10px 5px;
+  background-color: white;
+  color: gray;
+  border: 1px solid lightgray;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 6%;
+}
+
+/* Input Field */
+#facsimile-overlayForm input[type="text"] {
+  width: 100%; /* Full width */
+  padding: 10px 40px 10px 10px; /* Add padding on the right for the icon */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Search Icon Styling */
+#facsimile-overlayForm #searchManifestIcon {
+  position: absolute; /* Position the icon relative to the container */
+  top: 50%; /* Vertically center the icon */
+  right: 10px; /* Add space from the right edge of the input */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  width: 24px; /* Set icon size */
+  height: 24px;
+  cursor: pointer; /* Make the icon clickable */
+}
+/* Close button */
+.facsimile-closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}

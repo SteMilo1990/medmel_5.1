@@ -1,0 +1,145 @@
+
+<div>
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="clear"></div>
+    <div class="separator " style="margin-top: 20px;">Text visualization</div>
+    <form method="post" name="login">
+        <div class="d-flex justify-content-center ">
+            <div  style="margin-top: 40px;">
+                <select id="textModeSelection" name="textVersionSelection" style=" min-width:300px;"   onChange="">
+                    <option value="0">First stanza visualization</option>
+                    <option value="1">All stanzas (concise visualization)</option>
+                    <option value="2">All stanzas (extended visualization)</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center ">
+            <div  style="margin-top: 20px;">
+                <select id="textVersionSelection" ondblclick="setupTextMode()" autofocus MULTIPLE name="textVersionSelection" style=" min-width:300px;"   onChange="">
+
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center marginTop10">
+            <div  >
+                <input id="btnAddTextVersion" style="margin-right:10px; width:100%; " type="button" onClick="addTextVersion()"   value="Add Ver."/>
+            </div>
+            <div>
+                <input id="btnRemoveTextVersion" style="margin-left:10px; width:100%; " type="button" onClick="removeTextVersion()"   value="Remove Ver."/>
+            </div>
+        </div>
+
+        <div style="margin-top:30px;">
+            <center>
+            <input style="width: 200px" id="login" type="button" onClick="setupTextMode()"  name="login" value="Confirm"/>
+            </center>
+        </div>
+    </form>
+</div>
+
+<style>
+  @media only screen and (min-width: 769px) {
+    .containerOverlay {
+        margin: auto;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logoPanel {
+        background-color: #f3f0eb !important;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-50%;}
+        100%{top:50%;}
+    }
+}
+
+@media only screen and (max-width: 769px){
+    .closeButton{
+        display: none;
+        float:right;
+    }
+}
+
+</style>
+<script>
+function addTextVersion(){
+    texts.push("");
+    setupTextVersionMode();
+    let selectLast = texts.length;
+    selectedText = selectLast-1;
+    document.getElementById("textVersionSelection").value = selectLast;
+    document.getElementById("textModeSelection").value = 0;
+    document.getElementById("textVersionSelection").focus();
+    document.getElementById("textVersionSelection").options[selectLast-1].selected = true;
+
+}
+function removeTextVersion(){
+    let version = document.getElementById("textVersionSelection").value;
+    if(version < 0)
+        version = document.getElementById("textVersionSelection").lenght-1;
+
+    if(version > 0){
+        document.getElementById("textVersionSelection").remove(version);
+        texts.splice(version, 1);
+        if(selectedText > texts.length-1){
+            selectedText = texts.length-1;
+            if(selectedText>-1)
+                document.getElementById("textVersionSelection").options[selectedText].selected = true;
+        }
+        if(version < document.getElementById("textVersionSelection").length-1)
+            document.getElementById("textVersionSelection").options[version].selected = true;
+    }
+    document.getElementById("textVersionSelection").focus();
+}
+function setupTextMode(){
+    textMode = document.getElementById("textModeSelection").value;
+    let version = document.getElementById("textVersionSelection").value;
+    if(version > -1){
+        selectedText = version;
+        document.getElementById("text_input").value = texts[selectedText];
+    }
+
+    hideOverlay();
+    updateStaves();
+}
+function setCurrentModeText(){
+    document.getElementById("textModeSelection").value = textMode;
+}
+function setupButtonsTextMode(){
+    let page = localStorage.getItem("current_page");
+
+    if(page == "viewer.html"){
+        document.getElementById('btnAddTextVersion').remove();
+        document.getElementById('btnRemoveTextVersion').remove();
+
+    }
+}
+function setupTextVersionMode(){
+    let numVersion = texts.length;
+    let objVersionSelect = document.getElementById("textVersionSelection");
+    objVersionSelect.innerHTML = "";
+    for(let i = 0; i<numVersion; i = i+1){
+        let option = document.createElement('option');
+        option.setAttribute("value", i);
+        option.text = "Version "+(i+1);
+        objVersionSelect.appendChild(option);
+    }
+    document.getElementById("textVersionSelection").focus();
+    document.getElementById("textVersionSelection").options[selectedText].selected = true;
+}
+window.onload = setupButtonsTextMode();
+window.onload = setupTextVersionMode();
+window.onload = setCurrentModeText();
+
+</script>

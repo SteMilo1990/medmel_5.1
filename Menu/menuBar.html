@@ -1,0 +1,232 @@
+<div id="menuBar" onload="createBarStructure()">
+<center>
+    <div class="menuStyleNoteGroup2">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+        <div class="clear"></div>
+        <div id="bntHeader" class="separator " style=" margin-left:5px; margin-right:5px;">Barline</div>
+        <div id="btn1" style="margin-top:10px">
+            <button id="btn1_01" class="buttonNote" width="30px" onclick=barBtn(0,3) >
+                <img src="img/bar/03.png"  width="30px">
+            </button>
+            <button id="btn1_02" class="buttonNote" width="30px" onclick=barBtn(0,2)>
+                <img src="img/bar/02.png" width="30px">
+            </button>
+            <button id="btn1_03" class="buttonNote" width="30px" onclick=barBtn(1,3)>
+                <img src="img/bar/13.png"  width="30px">
+            </button>
+        </div>
+        <div id="btn2" style="margin-top:10px">
+            <button id="btn2_12" class="buttonNote" width="30px" onclick=barBtn(0,1) >
+                <img src="img/bar/01.png"  width="30px">
+            </button>
+            <button id="btn2_13" class="buttonNote" width="30px" onclick=barBtn(1,2)>
+                <img src="img/bar/12.png"  width="30px">
+            </button>
+            <button id="btn2_14" class="buttonNote" width="30px" onclick=barBtn(2,3)>
+                <img src="img/bar/23.png"  width="30px">
+            </button>
+        </div>
+        <div class="separator " id="btn2Header" style=" margin-left:5px; margin-right:5px;margin-top:5px">Custom barline</div>
+        <div>
+          <input type="number" value="0" style="width:60px;margin-top:5px" min="-3" max="9" id="bar_y1" onchange="changeBar()" step='0.5'/>
+          <input type="number" value="3" style="width:60px;" min="-3" max="10" id="bar_y2" onchange="changeBar()" step='0.5'/>
+        <div>
+        <div class="separator " id="btn3Header" style=" margin-left:5px; margin-right:5px;margin-top:5px">Special barlines</div>
+        <div id="btn3" style="text-align: left">
+          <input type="checkbox" style="width:60px;margin-top:5px;margin-left:20px" id="dbBar" onchange="changeBarParam()" name="bdBAr"/>
+          <label for="dbBar">Double barline</label><br>
+          <input type="checkbox" style="width:60px;margin-left:20px" id="pointCb" onchange="changeBarParam()" name="point"/>
+          <label for="pointCb">Point</label>
+        </div>
+        <button class="" onclick=resetBar() style="height:30px; margin-top: 10px; border-radius: 5px 5px; " >
+            Delete barline
+        </button>
+        <button class="" onclick=guessBarsPosition() style="height:30px; margin-top: 10px; border-radius: 5px 5px; " >
+              Predict position of barlines
+          </button>
+    </div>
+</center>
+</div>
+<style>
+  #menuBar {
+    position: absolute;
+  }
+
+    .menuStyleNoteGroup2{
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:410px;
+        width: 225px;
+        position: absolute;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    #bntHeader, #btn1, #btn2,#btn2Header, #btn3Header{
+      cursor:move;
+    }
+    .buttonNote{
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover{
+        background-color: #f3f3f3;
+    }
+</style>
+<script>
+  try{let indexGroup = -1;}catch{indexGroup = -1;}
+  try{let notesGroup = "";}catch{notesGroup = "";}
+  try{let groupLine = 0;}catch{groupLine = 0;}
+  try{let groupPos = 0;}catch{groupPos = 0;}
+
+  function setupButtonsBar(nGroup, strGroup, line, pos){
+      indexGroup = nGroup;
+      notesGroup = strGroup;
+      groupLine = line;
+      groupPos = pos;
+      if (bar[groupLine][groupPos][0] != undefined) {
+        document.getElementById("bar_y1").value = bar[groupLine][groupPos][0];
+      }else{}
+      if (bar[groupLine][groupPos][1] != undefined) {
+        document.getElementById("bar_y2").value = bar[groupLine][groupPos][1];
+      }
+      if (bar[groupLine][groupPos][2] != undefined) {
+        if (bar[groupLine][groupPos][2] == 1){
+          document.getElementById("dbBar").checked = true;
+        }
+        if (bar[groupLine][groupPos][2] == 2){
+          document.getElementById("pointCb").checked = true;
+        }
+     }
+    }
+
+  function barBtn(barY1, barY2, p = 0){
+      y1 = barY1;
+      y2 = barY2;
+      bar[groupLine][groupPos][0] = y1;
+      bar[groupLine][groupPos][1] = y2;
+      bar[groupLine][groupPos][2] = p;
+      containerNoteMenuRemove();
+      updateStaves();
+  }
+
+  function resetBar(){
+      bar[groupLine][groupPos][0] = 0;
+      bar[groupLine][groupPos][1] = 0;
+      try{
+        bar[groupLine][groupPos][2] = 0;
+      }catch{}
+      containerNoteMenuRemove();
+      updateStaves();
+  }
+
+  function changeBar() {
+      y1 = parseFloat(document.getElementById("bar_y1").value);
+      y2 = parseFloat(document.getElementById("bar_y2").value);
+      bar[groupLine][groupPos][0] = y1;
+      bar[groupLine][groupPos][1] = y2;
+      updateStaves();
+  }
+  function changeBarParam() {
+    let db = document.getElementById("dbBar");
+    let p = document.getElementById("pointCb");
+
+     if (db.checked && p.checked){
+       bar[groupLine][groupPos][2] = 3;
+     }
+     else if (db.checked){
+      bar[groupLine][groupPos][2] = 1;
+    }
+    else if (p.checked){
+      bar[groupLine][groupPos][2] = 2;
+    }else{
+      bar[groupLine][groupPos][2] = 0;
+    }
+    updateStaves();
+
+  }
+
+
+// dragElement
+dragBarMenu(document.getElementById("menuBar"));
+
+function dragBarMenu(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  //if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById("bntHeader").onmousedown = dragMouseDown;
+    document.getElementById("btn3Header").onmousedown = dragMouseDown;
+    document.getElementById("btn2Header").onmousedown = dragMouseDown;
+    document.getElementById("btn1").onmousedown = dragMouseDown;
+    document.getElementById("btn2").onmousedown = dragMouseDown;
+    document.getElementById("btn3").onmousedown = dragMouseDown;
+//  } else {
+  //  otherwise, move the DIV from anywhere inside the DIV:
+  //  elmnt.onmousedown = dragMouseDown;
+  //}
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function guessBarsPosition() {
+    let r = confirm("This will substitute all barlines. Continue?");
+    if (r == true){
+    // if there is no bar structure in the database, it needs to be created
+      // let notes = document.getElementById("music_input").value.replace(/F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |C1 |C2 |C3 |C4 |C5 |C6 |C7 |C8 |C9 |b} /g, '');
+      // notes = notes.replace(/F1|F2|F3|F4|F5|F6|F7|F8|F9|C1|C2|C3|C4|C5|C6|C7|C8|C9|b}|/g, '');
+      // notes = notes.replace(/1 |2 |3 |4 |5 |6 |7 |8 |9 |1|2|3|4|5|6|7|8|9/g, '');
+      let notes = cleanKeys(notes);
+      notes = notes.replace(/  +/g, ' ');
+      notes = notes.replace(/ \'/g, "\' ");
+      let lines = notes.split("\n");
+      bar = [];
+      for (let i=0; i < lines.length; i=i+1){
+        bar[i] = [];
+        for (let j=0; j < lines[i].split(" ").length; j=j+1){
+          let a = lines[i].split(" ")[j];
+          if (a.indexOf("'") != -1){
+            bar[i][j] = [y1,y2,0];
+          }
+
+          else{bar[i][j] = []};
+        }
+      }
+      containerNoteMenuRemove();
+      updateStaves();
+    }
+}
+</script>

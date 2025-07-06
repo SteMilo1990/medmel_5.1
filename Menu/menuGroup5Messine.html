@@ -1,0 +1,294 @@
+<div id="groupMenu5">
+
+<center>
+    <div id="menuStyleNoteGroup5" class="menuStyleNoteGroup5">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+        <div class="clear"></div>
+        <div class="separator " style=" margin-left:5px; margin-right:5px;">Group Shapes</div>
+        <div id="btn1" style="margin-top:10px">
+            <button id="btn1_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon1_1.png">
+            </button>
+            <button id="btn1_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon1_2.png">
+            </button>
+        </div>
+        <div id="btn2" style="margin-top:10px">
+            <button id="btn2_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon2_1.png">
+            </button>
+            <button id="btn2_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon2_2.png">
+            </button>
+        </div>
+        <div id="btn3" style="margin-top:10px">
+            <button id="btn3_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon3_1.png">
+            </button>
+            <button id="btn3_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon3_2.png">
+            </button>
+        </div>
+        <div id="btn4" style="margin-top:10px">
+            <button id="btn4_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon4_1.png">
+            </button>
+            <button id="btn4_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon4_2.png">
+            </button>
+            <button id="btn4_3"class="buttonNote" onclick=group5btn(2)>
+                <img src="img/group5/icon4_3.png">
+            </button>
+            <button id="btn4_4"class="buttonNote" onclick=group5btn(3)>
+                <img src="img/group5/icon4_4.png">
+            </button>
+            <button id="btn4_5"class="buttonNote" onclick=group5btn(4)>
+                <img src="img/group5/icon4_5.png">
+            </button>
+            <button id="btn4_6"class="buttonNote" onclick=group5btn(5)>
+                <img src="img/group5/icon4_6.png">
+            </button>
+            <button id="btn4_7"class="buttonNote" onclick=group5btn(6)>
+                <img src="img/group5/icon4_7.png">
+            </button>
+        </div>
+        <div id="btn5" style="margin-top:10px">
+            <button id="btn5_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon5_1.png">
+            </button>
+            <button id="btn5_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon5_2.png">
+            </button>
+        </div>
+        <div id="btn6" style="margin-top:10px">
+            <button id="btn6_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon6_1.png">
+            </button>
+            <button id="btn6_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon6_2.png">
+            </button>
+        </div>
+        <div id="btn7" style="margin-top:10px">
+            <button id="btn7_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon7_1.png">
+            </button>
+            <button id="btn7_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon7_2.png">
+            </button>
+        </div>
+        <div id="btn8" style="margin-top:10px">
+            <button id="btn8_1"class="buttonNote" onclick=group5btn(0)>
+                <img src="img/group5/icon8_1.png">
+            </button>
+            <button id="btn8_2"class="buttonNote" onclick=group5btn(1)>
+                <img src="img/group5/icon8_2.png">
+            </button>
+        </div>
+        <button class="" onclick=resetGroup() style="height:30px; margin-top: 20px; border-radius: 5px 5px; ">
+            Reset Group
+        </button>
+    </div>
+</center>
+</div>
+
+<style>
+    .menuStyleNoteGroup5{
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:170px;
+        width: 300px;
+        position: absolute;
+    }
+    .enlargedMenu {
+      width: 400px;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .buttonNote{
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover{
+        background-color: #f3f3f3;
+    }
+.buttonNote img {
+  max-width: 32px;
+}
+</style>
+<script>
+
+    try{let indexGroup = -1;}catch{indexGroup = -1;}
+    try{let notesGroup = "";}catch{notesGroup = "";}
+    try{let groupLine = 0;}catch{groupLine = 0;}
+    try{let groupPos = 0;}catch{groupPos = 0;}
+
+
+    function setupButtons5(nGroup, strGroup, line, pos){
+        indexGroup = nGroup;
+        notesGroup = strGroup;
+        groupLine = line;
+        groupPos = pos;
+
+        let typeOfGroup = -1;
+
+        if(strGroup.length == 5){
+            let a = getNoteValue(strGroup.substring(0,1));
+            let b = getNoteValue(strGroup.substring(1,2));
+            let c = getNoteValue(strGroup.substring(2,3));
+            let d = getNoteValue(strGroup.substring(3,4));
+            let e = getNoteValue(strGroup.substring(4,5));
+        
+            if (messinNotation == true){
+                if(a > b && b == c && c > d && d > e){
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a > b && b > c && c < d && d > e){
+                  removeButtons(1);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a < b && b > c && c > d && d < e){
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a < b && b < c && c > d && d > e){
+                  enlargeMenu();
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a > b && b > c && c > d && d < e){
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(6);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a == b && b > c && c > d && d < e){
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(7);
+                  removeButtons(8);
+                }else if(a < b && b < c && c < d && d > e){
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(8);
+                }else if(a > b && b > c && c < d && d < e){
+                  removeButtons(1);
+                  removeButtons(2);
+                  removeButtons(3);
+                  removeButtons(4);
+                  removeButtons(5);
+                  removeButtons(6);
+                  removeButtons(7);
+                }else{
+                  menuGroup5Remove();
+                }
+            }
+        }
+        else{
+            menuGroup5Remove();
+        }
+    }
+    function removeButtons(index){
+        let id = "btn"+(index)+"";
+        document.getElementById(id).remove();
+    }
+    function menuGroup5Remove(){
+        let group5 = $('#groupMenu5');
+        group5.remove();
+    }
+    function group5btn(shapeValue){
+        shapeGroupNote[groupLine][groupPos] = shapeValue;
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    //Da rimuovere nel caso in cui venga fixato il file printOldShape
+    // per gruppi da tre note di forma tipo aca
+    function group5btn3_2(){
+        shapeGroupNote[groupLine][groupPos] = [];
+        shapeSingleNote[groupLine][groupPos][0] = 1;
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    function group5btn2_1(shapeValue){
+        shapeGroupNote[groupLine][groupPos] = shapeValue;
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos][0] = 0;
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    function resetGroup(){
+        shapeGroupNote[groupLine][groupPos] = [];
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        updateStaves();
+    }
+
+    function enlargeMenu() {
+      let menu = document.getElementById("menuStyleNoteGroup5");
+      if (!menu.classList.contains("enlargedMenu")){
+        menu.classList.add("enlargedMenu");
+      }
+    }
+    
+    function getNoteValue(n){
+        if(n == 'J') return 1;
+        if(n == 'A') return 2;
+        if(n == 'H') return 3;
+        if(n == 'B') return 3;
+        if(n == 'C') return 4;
+        if(n == 'D') return 5;
+        if(n == 'E') return 6;
+        if(n == 'F') return 7;
+        if(n == 'G') return 8;
+        if(n == 'a') return 9;
+        if(n == 'h') return 10;
+        if(n == 'b') return 10;
+        if(n == 'c') return 11;
+        if(n == 'd') return 12;
+        if(n == 'e') return 13;
+        if(n == 'f') return 14;
+        if(n == 'g') return 15;
+        if(n == 'u') return 16;
+        if(n == 'q') return 17;
+        if(n == 'p') return 17;
+        if(n == 'r') return 18;
+    }
+</script>

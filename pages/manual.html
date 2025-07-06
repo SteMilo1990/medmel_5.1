@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H02PLTDGPT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H02PLTDGPT');
+    </script>
+
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/png" href="../img/favicon/logo.png"/>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+      body {
+        margin: 0;
+      }
+
+      h1, h3, p, ul, .withMargin {
+        font-family: Roboto;
+        color: #343148FF;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      svg{
+        fill: #303C42;
+        font-family: Roboto;
+      }
+
+      path,  line {
+        stroke: #303C42;
+      }
+
+      h1, h3 {
+        font-weight: bold;
+        padding-top: 10px
+        margin-top: 0 !important;
+      }
+
+      p, li {
+        line-height: 1.7;
+      }
+      
+      i {
+        font-weight: 700;
+      }
+
+      #title {
+        font-size: 30pt;
+        margin: 0;
+      }
+
+      .small-indent{
+        padding-left: 20px
+      }
+
+      .subHeadDiv {
+        margin-right: 10px;
+        padding: 10px 10px 10px 0px;
+      }
+
+      .subHeadDiv, #manualHeader {
+        background-color: #f3f0eb;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="mainWrapper">
+      <div id="manualHeader">
+        <a href="./../index.html"><img src="./../img/logo/m2.png" width="150px;" style="float:right; margin-right: 20px;margin-top: 15px;"/></a><br>
+        <br/><br/>
+        <p id="title">
+          Editor and Viewer Manual
+        </p>
+        <p>
+          <strong>Medieval Melody Editor</strong> allows users to encode ancient music for  digital editions.<br/>
+          Editions can be exported in PDF, HTML, and MEI or published as a part of the MedMel project.
+        </p>
+        <br/>
+      </div>
+      <p>Melodies are entered by typing the name of the note:</p>
+      <br>
+      <div id="staves" class= "withMargin"><!-- New line -->
+        <div style="width: 70px; display:inline-block;" class="g_key" id="g_key_0">
+          <svg height="150px" width="100%" overflow="visible" >
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <path id="path26" stroke="#000" transform="matrix(0.7, 0, 0, 0.7, -7, 8)" d="m51.688 5.25c-5.427-0.1409-11.774 12.818-11.563 24.375 0.049 3.52 1.16 10.659 2.781 19.625-10.223 10.581-22.094 21.44-22.094 35.688-0.163 13.057 7.817 29.692 26.75 29.532 2.906-0.02 5.521-0.38 7.844-1 1.731 9.49 2.882 16.98 2.875 20.44 0.061 13.64-17.86 14.99-18.719 7.15 3.777-0.13 6.782-3.13 6.782-6.84 0-3.79-3.138-6.88-7.032-6.88-2.141 0-4.049 0.94-5.343 2.41-0.03 0.03-0.065 0.06-0.094 0.09-0.292 0.31-0.538 0.68-0.781 1.1-0.798 1.35-1.316 3.29-1.344 6.06 0 11.42 28.875 18.77 28.875-3.75 0.045-3.03-1.258-10.72-3.156-20.41 20.603-7.45 15.427-38.04-3.531-38.184-1.47 0.015-2.887 0.186-4.25 0.532-1.08-5.197-2.122-10.241-3.032-14.876 7.199-7.071 13.485-16.224 13.344-33.093 0.022-12.114-4.014-21.828-8.312-21.969zm1.281 11.719c2.456-0.237 4.406 2.043 4.406 7.062 0.199 8.62-5.84 16.148-13.031 23.719-0.688-4.147-1.139-7.507-1.188-9.5 0.204-13.466 5.719-20.886 9.813-21.281zm-7.719 44.687c0.877 4.515 1.824 9.272 2.781 14.063-12.548 4.464-18.57 21.954-0.781 29.781-10.843-9.231-5.506-20.158 2.312-22.062 1.966 9.816 3.886 19.502 5.438 27.872-2.107 0.74-4.566 1.17-7.438 1.19-7.181 0-21.531-4.57-21.531-21.875 0-14.494 10.047-20.384 19.219-28.969zm6.094 21.469c0.313-0.019 0.652-0.011 0.968 0 13.063 0 17.99 20.745 4.688 27.375-1.655-8.32-3.662-17.86-5.656-27.375z"></path>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note1" transform="matrix(-1.19, 0, 0, -1.19, 390,485)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z" style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,309.9 295,309.9" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+              <path d="M 317,321.65 295,321.65" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">*G</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note2" transform="matrix(-1.19, 0, 0,-1.19, 390,478)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,315 295,315" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+              <path d="M 317,304 295,304" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">A</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note3" transform="matrix(-1.19, 0, 0, -1.19, 390,471)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,309.9 295,309.9" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <path transform="matrix(0.04, 0,  0, -0.04, 4, 110)" d="m 27,41 -1,-66 v -11 c 0,-22 1,-44 4,-66 45,38 93,80 93,139 0,33 -14,67 -43,67 C 49,104 28,74 27,41 z m -42,-179 -12,595 c 8,5 18,8 27,8 9,0 19,-3 27,-8 L 20,112 c 25,21 58,34 91,34 52,0 89,-48 89,-102 0,-80 -86,-117 -147,-169 -15,-13 -24,-38 -45,-38 -13,0 -23,11 -23,25 z" inkscape:connector-curvature="0" ></path>
+            <text x="18" y="146">B</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note3" transform="matrix(-1.19, 0, 0, -1.19, 390,471)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            <path d="M 317,309.9 295,309.9" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">H</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note4" transform="matrix(-1.19, 0, 0, -1.19, 390,464)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,304 295,304" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">C</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note5" transform="matrix(-1.19, 0, 0, -1.19, 390,457)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">D</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note6" transform="matrix(-1.19, 0, 0, -1.19, 390,450)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">E</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note7" transform="matrix(-1.19, 0, 0, -1.19, 390,443.3)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">F</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note8" transform="matrix(-1.19, 0, 0, -1.19, 390,436)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">G</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note9" transform="matrix(-1.19, 0, 0, -1.19, 390,429)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">a</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note11" transform="matrix(-1.19, 0, 0, -1.19, 390,422)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <path transform="matrix(0.04, 0,  0, -0.04, 4, 62)" d="m 27,41 -1,-66 v -11 c 0,-22 1,-44 4,-66 45,38 93,80 93,139 0,33 -14,67 -43,67 C 49,104 28,74 27,41 z m -42,-179 -12,595 c 8,5 18,8 27,8 9,0 19,-3 27,-8 L 20,112 c 25,21 58,34 91,34 52,0 89,-48 89,-102 0,-80 -86,-117 -147,-169 -15,-13 -24,-38 -45,-38 -13,0 -23,11 -23,25 z" inkscape:connector-curvature="0" ></path>
+            <text x="18" y="146">b</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note10" transform="matrix(-1.19, 0, 0, -1.19, 390,422)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">h</text>
+        </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note12" transform="matrix(-1.19, 0, 0, -1.19, 390,414.5)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">c</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note13" transform="matrix(-1.19, 0, 0, -1.19, 390,407)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">d</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note14" transform="matrix(-1.19, 0, 0, -1.19, 390,400.3)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">e</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note15" transform="matrix(-1.19, 0, 0, -1.19, 390,393)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">f</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note16" transform="matrix(-1.19, 0, 0, -1.19, 390,386)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+            </g>
+            <text x="18" y="146">g</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note17" transform="matrix(-1.19, 0, 0, -1.19, 390,379)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,304 295,304" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">+a</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note19" transform="matrix(-1.19, 0, 0, -1.19, 390,372)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+               <path d="M 317,298 295,298" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <path transform="matrix(0.04, 0,  0, -0.04, 4, 12)" d="m 27,41 -1,-66 v -11 c 0,-22 1,-44 4,-66 45,38 93,80 93,139 0,33 -14,67 -43,67 C 49,104 28,74 27,41 z m -42,-179 -12,595 c 8,5 18,8 27,8 9,0 19,-3 27,-8 L 20,112 c 25,21 58,34 91,34 52,0 89,-48 89,-102 0,-80 -86,-117 -147,-169 -15,-13 -24,-38 -45,-38 -13,0 -23,11 -23,25 z" inkscape:connector-curvature="0" ></path>
+             <text x="18" y="146">+b</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%" overflow="visible">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+            <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+            <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+            <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            <g id="note18" transform="matrix(-1.19, 0, 0, -1.19, 390,372)">
+              <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              <path d="M 317,298 295,298" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+            </g>
+            <text x="18" y="146">+h</text>
+          </svg>
+        </div>
+        <div style="width:54px; display:inline-block;margin-left:-5px" overflow="visible">
+          <svg height="160px" width="100%" overflow="visible">
+            <g transform="translate(0,10) rotate(0)">
+              <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+              <line x1="0" y1="45.5" x2="100%" y2="45.5" style="stroke-width:1"></line>
+              <line x1="0" y1="59.8" x2="100%" y2="59.8" style="stroke-width:1"></line>
+              <line x1="0" y1="74.1" x2="100%" y2="74.1" style="stroke-width:1"></line>
+              <line x1="0" y1="88.4" x2="100%" y2="88.4" style="stroke-width:1"></line>
+            	<g transform="matrix(-1.19, 0,   0, -1.19, 390,365)">
+                <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+                <path d="M 317,292.1 295,292.1" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">></path>
+                <path d="M 317,304 295,304" style="fill:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+              </g>
+              <text x="18" y="146">+c</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="width:2px; display:inline-block;margin-left:-5px">
+          <svg height="150px" width="100%">
+            <line x1="0" y1="88.92" x2="0" y2="30.68" style="stroke-width:2 "></line>
+          </svg>
+        </div>
+      </div>
+      <br/>
+      <br/>
+
+      <p>
+        As MedMel is thought for non-mensural medieval monody, there are no specifications for the duration of the notes, as you can see.<br/>
+        To have full control of the input melody, you can use the "Notes" text area.
+      </p>
+      <p>In the left sidebar, in Style settings, you can select to visualize and edit in <i>Modern Style</i> or <i>Old Style</i>.</p>
+
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>MODERN STEMLESS NOTATION</h3>
+      </div>
+
+      <p>
+        MedMel uses a limited number of conventional signs:
+        <ul>
+          <li><i>Blank spaces</i> separate groups of notes sung on different syllables.</li>
+          <li><i> ' </i> : Line breaks in modern editions differ from those of the manuscripts: when changing from modern to ancient notation mode and viceversa, linebreaks are translated into apostrophes.</li>
+          <li><i>( &nbsp; )</i> : Use brackets to wrap plicas (liquescences). For example <i>aa(G)</i> will be visualised as such (but check the Settings section):&nbsp;&nbsp;  <span style="width:90px; display:inline-block;margin-left:-5px">
+
+            <svg height="30px" width="80%" overflow="visible">
+              <line x1="0" y1="0" x2="100%" y2="0" style="stroke-width:1"></line>
+              <line x1="0" y1="10" x2="100%" y2="10" style="stroke-width:1"></line>
+              <line x1="0" y1="20" x2="100%" y2="20" style="stroke-width:1"></line>
+              <line x1="0" y1="30" x2="100%" y2="30" style="stroke-width:1"></line>
+              <line x1="0" y1="40" x2="100%" y2="40" style="stroke-width:1"></line>
+              <g id="note1" transform="matrix(-0.8, 0, 0, -0.8, 260,268.5)">
+                <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              </g>
+              <g id="note2" transform="matrix(-0.8, 0, 0,-0.8, 280,268.5)">
+                <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              </g>
+              <g id="note3" transform="matrix(-0.5, 0, 0, -0.5, 205,182)">
+                <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z " style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              </g><path d="m 12 10 q 20 -18 40 7 q -20 -21 -40 -7" stroke-width="0.5" ></path><text x="18" y="129"></text>
+            </svg>
+
+            </span>
+
+          </li>
+
+          <li><i> - </i> : To display two single notes on the same syllable (for metrical irregularities or any other reason), separate them with a hyphen: they will not be connected with a slur.</li>
+          <li><i> / </i> : To emphasise a break in the melody, use a slash at the end of the line. It is also possible to use in the middle of a line to separate bars, if ever needed.</li>
+          <li><i> // </i> : Use a double slash to display the final bar.</li>
+        </ul>
+      </p>
+      <br/>
+
+      <h3>Accidentals</h3>
+      <p>
+        <ul>
+          <li><i>h</i> stands for "b natural" and <i>b</i> stands for "b flat". </li>
+          <li>For flat accidentals other than <i>b</i>, type underscore (<i>_</i>) before the note;</li>
+          <li>To set a <i>b</i> flat as a key signature, type <i>b}</i> (after the clef, if there is one). The <i>b</i>s on the line will not show their flat sign.</li>
+          <li>When a <i>b</i> flat is not in the manuscript but it is implied, type an underscore before the regural <i>h</i>: <i>_h</i>. The flat will be printed on top of the note to let your reader know that the accidental is supplied by the editor. The generated melody will play <i>b</i> flat as well.</li>
+          <li>For natural accidentals, type <i>%</i> before the note.</li>
+          <li>For sharp accidentals, type <i>#</i> before the note.</li>
+        </ul>
+      </p>
+      <br/>
+
+
+      <div class="subHeadDiv">
+        <h3>MEDIEVAL NOTATION</h3>
+      </div>
+      <p>It is possible to edit and visualize the trascription in medieval notation by selecting "Medieval notation" in the dropdown menu in the sidebar, or by clicking on the icon <img width="30px" src="../img/icons/old.png"/>.</p>
+      <p>The Medieval notation uses the same features of the Modern notation for notes and accidentals, but provides some additional features:</p><br/>
+
+
+      <h3>Clefs</h3>
+      <ul>
+        <li>Clefs are relevant only in Medieval notation mode, and they are ignored in the Modern notation mode.</li>
+        <li>Clefs are described by the type of clef (C or F) and the number of line on which it is on, counting from the top.</li>
+      </ul>
+      <br/>
+      <div id="staves"  class= "withMargin">
+        <div style="width:46px; display:inline-block;margin-left:-5px" >
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);" >
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,44) scale(0.05,-0.05)">
+             <path d="M85 499 c-12 -6 -27 -20 -34 -31 -23 -37 -34 -333 -15 -416 5 -25 56 -52 99 -52 l25 0 0 100 0 100 -33 0 c-39 0 -67 25 -67 61 0 35 18 49 62 49 l38 0 0 100 0 100 -27 -1 c-16 0 -37 -5 -48 -10z"></path>
+            </g>
+            <text>&nbsp;&nbsp;C1</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,58) scale(0.05,-0.05)">
+              <path d="M85 499 c-12 -6 -27 -20 -34 -31 -23 -37 -34 -333 -15 -416 5 -25 56 -52 99 -52 l25 0 0 100 0 100 -33 0 c-39 0 -67 25 -67 61 0 35 18 49 62 49 l38 0 0 100 0 100 -27 -1 c-16 0 -37 -5 -48 -10z"></path>
+            </g>
+            <text>&nbsp;&nbsp;C2</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,72) scale(0.05,-0.05)">
+              <path d="M85 499 c-12 -6 -27 -20 -34 -31 -23 -37 -34 -333 -15 -416 5 -25 56 -52 99 -52 l25 0 0 100 0 100 -33 0 c-39 0 -67 25 -67 61 0 35 18 49 62 49 l38 0 0 100 0 100 -27 -1 c-16 0 -37 -5 -48 -10z"></path>
+            </g>
+            <text>&nbsp;&nbsp;C3</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,86) scale(0.05,-0.05)">
+              <path d="M85 499 c-12 -6 -27 -20 -34 -31 -23 -37 -34 -333 -15 -416 5 -25 56 -52 99 -52 l25 0 0 100 0 100 -33 0 c-39 0 -67 25 -67 61 0 35 18 49 62 49 l38 0 0 100 0 100 -27 -1 c-16 0 -37 -5 -48 -10z"></path>
+            </g>
+            <text>&nbsp;&nbsp;C4</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,45) scale(0.004,-0.004)">
+              <path d="M2845 6244 c-270 -45 -503 -181 -667 -389 -93 -118 -145 -214 -187 -348 -70 -220 -66 -88 -66 -2147 0 -2040 -4 -1915 60 -2134 118 -408 447 -694 875 -762 142 -22 338 -15 435 16 185 59 324 215 369 413 14 59 16 198 16 1065 l0 996 -52 -51 c-167 -161 -387 -275 -623 -324 -97 -19 -296 -14 -388 10 -234 62 -431 246 -522 486 -149 396 18 840 378 1010 193 91 419 98 654 20 164 -55 334 -152 480 -273 34 -29 65 -52 68 -52 3 0 4 460 3 1023 -3 944 -5 1027 -21 1082 -58 197 -189 317 -392 360 -87 18 -310 18 -420 -1z"></path>
+              <path d="M662 4449 c-190 -24 -359 -95 -437 -181 -26 -29 -56 -70 -67 -91 -46 -92 -48 -120 -48 -1000 l0 -829 33 21 c107 71 257 132 396 162 125 26 407 37 518 20 172 -27 310 -87 421 -182 l42 -36 0 -1074 c0 -1053 0 -1075 20 -1107 15 -24 27 -32 49 -32 39 0 66 44 80 130 7 44 11 668 11 1910 0 1982 1 1920 -50 2021 -72 140 -256 237 -513 269 -94 12 -363 11 -455 -1z"></path>
+            </g>
+            <text>&nbsp;&nbsp;F1</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,59) scale(0.004,-0.004)">
+              <path d="M2845 6244 c-270 -45 -503 -181 -667 -389 -93 -118 -145 -214 -187 -348 -70 -220 -66 -88 -66 -2147 0 -2040 -4 -1915 60 -2134 118 -408 447 -694 875 -762 142 -22 338 -15 435 16 185 59 324 215 369 413 14 59 16 198 16 1065 l0 996 -52 -51 c-167 -161 -387 -275 -623 -324 -97 -19 -296 -14 -388 10 -234 62 -431 246 -522 486 -149 396 18 840 378 1010 193 91 419 98 654 20 164 -55 334 -152 480 -273 34 -29 65 -52 68 -52 3 0 4 460 3 1023 -3 944 -5 1027 -21 1082 -58 197 -189 317 -392 360 -87 18 -310 18 -420 -1z"></path>
+              <path d="M662 4449 c-190 -24 -359 -95 -437 -181 -26 -29 -56 -70 -67 -91 -46 -92 -48 -120 -48 -1000 l0 -829 33 21 c107 71 257 132 396 162 125 26 407 37 518 20 172 -27 310 -87 421 -182 l42 -36 0 -1074 c0 -1053 0 -1075 20 -1107 15 -24 27 -32 49 -32 39 0 66 44 80 130 7 44 11 668 11 1910 0 1982 1 1920 -50 2021 -72 140 -256 237 -513 269 -94 12 -363 11 -455 -1z"></path>
+            </g>
+            <text>&nbsp;&nbsp;F2</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,73) scale(0.004,-0.004)">
+              <path d="M2845 6244 c-270 -45 -503 -181 -667 -389 -93 -118 -145 -214 -187
+              -348 -70 -220 -66 -88 -66 -2147 0 -2040 -4 -1915 60 -2134 118 -408 447 -694
+              875 -762 142 -22 338 -15 435 16 185 59 324 215 369 413 14 59 16 198 16 1065
+              l0 996 -52 -51 c-167 -161 -387 -275 -623 -324 -97 -19 -296 -14 -388 10 -234
+              62 -431 246 -522 486 -149 396 18 840 378 1010 193 91 419 98 654 20 164 -55
+              334 -152 480 -273 34 -29 65 -52 68 -52 3 0 4 460 3 1023 -3 944 -5 1027 -21
+              1082 -58 197 -189 317 -392 360 -87 18 -310 18 -420 -1z"></path>
+              <path d="M662 4449 c-190 -24 -359 -95 -437 -181 -26 -29 -56 -70 -67 -91 -46
+              -92 -48 -120 -48 -1000 l0 -829 33 21 c107 71 257 132 396 162 125 26 407 37
+              518 20 172 -27 310 -87 421 -182 l42 -36 0 -1074 c0 -1053 0 -1075 20 -1107
+              15 -24 27 -32 49 -32 39 0 66 44 80 130 7 44 11 668 11 1910 0 1982 1 1920
+              -50 2021 -72 140 -256 237 -513 269 -94 12 -363 11 -455 -1z"></path>
+            </g>
+            <text>&nbsp;&nbsp;F3</text>
+          </svg>
+        </div>
+        <div style="width:46px; display:inline-block;margin-left:-5px">
+          <svg height="110px" width="100%" overflow="visible" data-lines="0" oncontextmenu="showLineNumber(0);">
+            <line x1="0" y1="31.2" x2="100%" y2="31.2" style="stroke-width:1"></line>
+            <line x1="0" y1="45.2" x2="100%" y2="45.2" style="stroke-width:1"></line>
+            <line x1="0" y1="59.2" x2="100%" y2="59.2" style="stroke-width:1"></line>
+            <line x1="0" y1="73.2" x2="100%" y2="73.2" style="stroke-width:1"></line>
+            <g transform="translate(10,87) scale(0.004,-0.004)">
+              <path d="M2845 6244 c-270 -45 -503 -181 -667 -389 -93 -118 -145 -214 -187 -348 -70
+              -220 -66 -88 -66 -2147 0 -2040 -4 -1915 60 -2134 118 -408 447 -694 875 -762 142 -22
+              338 -15 435 16 185 59 324 215 369 413 14 59 16 198 16 1065 l0 996 -52 -51 c-167 -161
+              -387 -275 -623 -324 -97 -19 -296 -14 -388 10 -234 62 -431 246 -522 486 -149 396 18 840
+              378 1010 193 91 419 98 654 20 164 -55 334 -152 480 -273 34 -29 65 -52 68 -52 3 0 4 460 3
+              1023 -3 944 -5 1027 -21 1082 -58 197 -189 317 -392 360 -87 18 -310 18 -420 -1z"></path>
+              <path d="M662 4449 c-190 -24 -359 -95 -437 -181 -26 -29 -56 -70 -67 -91 -46
+              -92 -48 -120 -48 -1000 l0 -829 33 21 c107 71 257 132 396 162 125 26 407 37
+              518 20 172 -27 310 -87 421 -182 l42 -36 0 -1074 c0 -1053 0 -1075 20 -1107
+              15 -24 27 -32 49 -32 39 0 66 44 80 130 7 44 11 668 11 1910 0 1982 1 1920
+              -50 2021 -72 140 -256 237 -513 269 -94 12 -363 11 -455 -1z"></path>
+            </g>
+            <text>&nbsp;&nbsp;F4</text>
+          </svg>
+        </div>
+      </div>
+
+
+
+      <h3>Neume shapes</h3>
+      <p>
+        In Medieval notation mode, the shape of the notes and ligatures can be specified with a high degree of accuracy.
+        <ul>
+          <li>Click on a single note to choose from the single note menu. Select the shape, the stem direction and the presence of a connecting line with the following note within a note group.</li>
+          <br/>
+        <img width="250px" src="../img/images/menusinglenote.png"/><br/>
+          <li>Click on the space sourranding the notes to modify the shape of the note group. This is possible only for the most common groups.</li>
+          <br/>
+        <img width="250px" src="../img/images/menugroup.png"/><br/>
+
+        </ul>
+      <br/>
+
+      <h3>Default shapes</h3>
+      <p><img width="30px" src="../img/icons/defaultShapes.png"/></p>
+
+      <p>
+        Instead of changing the shape of every single note, users can choose the default shapes of the most common group configuration by clicking on the icon above.<br/>
+        The more consistent is the copyist, the more time can be save by adjusting default shapes parameters.
+        <br/>
+      <img width="350px" src="../img/images/defaultshapes.png"/>
+      </p>
+      <br/>
+
+      <h3>Number of lines in staff</h3>
+      <p>
+        Right-click on the staff to change the number of lines it contains (default is 4).
+        <br/>
+        <br/>
+      <img width="200px" src="../img/images/menustaff.png"/>
+      </p>
+      <br/>
+
+      <h3>Barlines</h3>
+      <p><img width="30px" src="../img/icons/bar.png"/></p>
+
+      <p>
+        To add a barline in ancient notation, select the above icon or press <strong>Shift</strong> and click on the relevant area on the in the musical staff.<br/>
+        Users can select one of the most common barlines, or set a customised starting and ending height, select a double bar or draw a point after the bar.<br/>
+        By clicking "Predict position of barlines", barlines will be drawn in correspondence to metrical line breaks (provided that these are already encoded). Results can be later adjusted as needed.
+        <br/>
+        <br/>
+      <img width="250px" src="../img/images/menubar.png"/>
+      </p>
+      <br/>
+
+      <h3>Custos</h3>
+      <p><img width="30px" src="../img/icons/custos.png"/></p>
+
+      <p>
+        To add a <i>custos</i> at the end of the staff, select the above icon and then click on the relevant staff, and select the correct height.<br/>
+        Use the "Predict position of custos" button to automatically set the custos on your transcription. These can be later modified in case of manuscript errors or exceptions.
+        <br/>
+      <img width="250px" src="../img/images/custosmenu.png"/>
+      </p>
+      <br/>
+
+
+      <h3>Messine notation</h3>
+
+      <p>
+        <img width="400px" src="../img/images/messineNotationExample.png"/><br>
+        MedMel provides a Messine notation encoding mode, which is activated automatically when the specified manuscript is included in our list of Messine notation sources (e.g. fr. 20050).<br>
+        When transcribing from a manuscript with Messine notation that is not already in our list, please email us.
+      </p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>TEXT</h3>
+      </div>
+      <p>
+      To add the text, type it in the dedicated text area. Remember:
+        <ul>
+          <li>A hypen ( <i>-</i> ) separates syllables. <br/>
+            Tip: click on the <img width="30px" src="../img/icons/sylSeparator.png"/> icon to use of MedMel's semi-automatic syllable separator. Please note that this tool works has different levels of accuracy in different laguages.</li>
+          <li> A new line in the text will show on a new staff (in Modern notation).</li>
+          <li> Use underscores (<i> _ </i>) for synalephas (e.g. "-le_et" will be assigned to a single note or note group and will be visualised as "le et").</li>
+          <li> To encode multiple stanzas, separate them with an empty line.</li>
+        </ul>
+
+        <h3>Text options:</h3>
+          <p><span><img width="30px" src="../img/icons/text.png"/></span></p>
+          <ul>
+            <li>Multiple stanzas:
+              <ul class="small-indent">
+                <li>To separate stanzas while trancribing, enter a blank line.</li>
+                <li>To visualize multiple stanzas, click on the text options icon, and from the dropdown menu:<br>
+                  - "Concise visualization" displays the text of each stanza under the same musical staff<br>
+                  - "Extended visualization" displays a musical staff for each stanza. <br>
+                  - As a default MedMel shows only the first stanza ("First stanza only").</li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>Multiple texts:
+              <ul class="small-indent">
+                <li>To encode and visualize multiple versions of a text (interpretative transcription, diplomatic transcription, with or without corrections, etc.) select a version of a text, or Add a new version if you are in the Editor.</li>
+              </ul>
+            </li>
+          </ul>
+        </p>
+      </p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>FACSIMILES</h3>
+      </div>
+      <p><span><img width="30px" src="../img/icons/dividescreen.png"/></span></p>
+      <p>
+        Click on the Open facsimile button in the side bar, or click on the above icon in the navigation bar.
+        <ul>
+          <li>In the viewer:<br/>
+            click to visualise the manuscript facsimile (when available online).</br>
+            Complying with copyright regulations, MedMel never stores or redistribute facsimiles, but embeds images from freely available online repositories.<br/>
+            Availability of images varies depending on the repository, which may disallow embedding or use an unsecure http protocol.
+          </li>
+          <br>
+          <li>In the editor:<br>
+            to facilitate the transcription process, MedMel allows to visualize the manuscript page directly in the editor.<br>
+            Input the URL of the website of the digitised source. <br>
+            Please note that this feature is entirely dependant on the repositories policies: while contents from Gallica will be visualised in high resolution, sources from the Vatican Library, for example, cannot be embedded.
+          </li>
+        </ul>
+      </p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>ANNOTATIONS</h3>
+      </div>
+      <p>Editorial notes or additional descriptions are entered in the Annotation text area.<br/>
+        To hide annotations, uncheck the relevant checkbox from the Settings menu.<br/>
+        This field supports HTML tags (such as &lt;i&gt;for italic&lt;/i&gt; or &lt;strong&gt;for bold&lt;/strong&gt;).
+      </p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>SETTINGS</h3>
+      </div>
+      <p>&nbsp;<span><img width="30px" src="../img/icons/settings.png"/></span> &nbsp; <br/>
+        Customize your visualisation:<br/>
+        <ul>
+          <li>Show/Hide the letter indicating the melodic scheme. By default, this is calculated automatically. (Modern notation only)</li>
+          <li>Decide whether to display the melodic structure as Latin or as Greek characters. (Modern notation only)</li>
+          <li>Choose to input the melodic scheme manually. The input should be in Latin characters, separated by a space.</li>
+          <li>Show/Hide the number of the metrical line. (Modern notation only)</li>
+          <li>Show/Hide annotations.</li>
+          <li>Show/Hide markers for manuscript line breaks. (Modern notation only)</li>
+          <li>Set the shape of the liquescence (as a smaller note or "as a comma"). (Modern notation only)</li>
+          <li>Set behaviour of accidentals: decide whether accidentals have an effect until the end of the metrical or manuscript line, and how to display them. (Modern notation only)</li>
+          <li>Change font and font size.</li>
+        </ul>
+      </p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>SAVE AND DELETE</h3>
+      </div>
+
+      <p><img width="30px" src="../img/icons/upload1.png"/></p>
+      <ul>
+        <li>Click on the above icon to save a transcription. Users need to create an account and log in to use this feature.</li>
+        <li>MedMel collaborators can publish transcriptions as part of the database ("Publish"), store them in a common repository, where other collaborators will be able to edit and publish them ("Share with content creators"), or as a private document ("Private"). Transcriptions can be published in Modern notation, Medieval notation, or both.</li>
+         <br>NB: changing the ID, the Manuscript or the Language Field, will determine a transcription to be stored as an new entry.
+      </ul>
+      <br>
+      <p><img width="30px" src="../img/icons/deleteScore.png"/></p>
+      <p>To delete a transcription, click on the Delete icon.</p>
+      <br/>
+
+      <div class="subHeadDiv">
+        <h3>IMPORT AND EXPORT</h3>
+      </div>
+      <p><span><img width="30px" src="../img/icons/import_export.png"/></span>&nbsp;&nbsp;Click on the icon to open the Import/Export menu.</p>
+      <br/>
+      <h3>Import</h3>
+      <p><span><img width="30px" src="../img/icons/xmlimport.png"/></span>&nbsp;&nbsp;Import MEI Neume files</p>
+      <p>
+      MedMel can import XML/MEI Neume files in order to visualize, modify, store, or export them in other formats.<br/>
+      
+
+<p>
+    <span><img width="30px" src="../img/icons/volpianoupload.png"/></span>&nbsp;&nbsp;Import Volpiano strings
+</p>
+
+<p>
+    Import Volpiano strings in MedMel,to visualize, edit, or export them in MEI or other formats.
+</p>
+<br>
+<h3>Export</h3>
+
+<p><img width="30px" src="../img/icons/pdf.png"/>&nbsp;&nbsp;Export PDF file</p>
+<p><span><img width="30px" src="../img/icons/exportHTML.png"/></span>&nbsp;&nbsp;Download HTML file</p>
+<p><span><img width="30px" src="../img/icons/xml.png"/></span>&nbsp;&nbsp;Export the transcription encoded in XML/MEI Neume.</p>
+<p>To encode detailed transcriptions and avoid information loss, MedMel uses additional features which are not specified in the current version of the MEI guidelines. 
+  <a href="./medmel-and-mei.html">See specifics on MEI in MedMel.</a>
+ <br>
+</p>
+<br>
+<p><span><img width="30px" src="../img/icons/volpianoExport.png"/></span>&nbsp;&nbsp;Export Volpiano.
+<p>
+    MedMel can be used as a what-you-see-is-what-you-get tool for Volpiano. You might prefer it because, unlike Volpiano, in MedMel the text character corresponds to the name of the pitch, making transcription more intuitive and less prone to error.<br>
+    MedMel and Volpiano differ in how the neumes are separated: in MedMel, groups are always separated by a space. Volpiano, on the other hand, uses <em>two</em> dashes to separate neumes sung on different syllables of the same word, and <em>three</em> dashes to separate neumes sung on syllables of different words. Both MedMel and Volpiano encode non-connected groups sung on the same syllable as separated by a dash (e.g., <em>cde-edc</em> in MedMel corresponds to <em>klm-mlk</em> in Volpiano).<br>
+    If the text is encoded with the melody in MedMel, the neumes will be separated correctly by two or three dashes when exported to Volpiano.<br>
+    If no text is entered, to obtain a Volpiano string with the correct number of dashes separating the neumes, users need to add a dash before every neume corresponding to the first syllable of a new word (e.g., <em>c d e f</em> sung to the syllables "A-ve E-va" [not encoded] will need to be encoded as <em>-c d -e f</em>).
+</p>
+
+ <br>
+</p>
+<p><span><img width="30px" src="../img/icons/medmelExport.png"/></span>&nbsp;&nbsp;Export the transcription encoded in a MedMel file.
+<p>
+    It is possible to save a MedMel transcription as a JSON file. This allows you to preserve a copy of the transcription without any information loss, including your customized settings. JSON files can be re-imported into MedMel, and thanks to the widespread use of the JSON format, they provide a convenient data source for analysis and reuse in other platforms.
+</p>
+
+ <br>
+</p>
+      <br/>
+      <div class="subHeadDiv">
+        <h3>CREATE AN ACCOUNT AND LOG IN</h3>
+      </div>
+
+      <p><img width="30px" src="../img/icons/login1.png"/></p>
+      <p>
+        Click on the User icon to login or sign up.<br>
+        Creating an account is necessary to save transcriptions, edit them at a later time, and  publish them as a contributor.<br>
+      </p>
+
+      <div class="subHeadDiv">
+        <h3>PUBLISH EDITIONS ON THE MEDMEL PORTAL</h3>
+      </div>
+      <p>
+        A complete digital edition of the medieval monody of Romance lyric requires a collective effort and we are grateful to scholars who wish to publish their editions as part of the MedMel project.<br/>
+        To become a contributor and publish a transcription on MedMel, please write to stefano.milonia[at]gmail.com.<br/>
+        Every transcriptions is credited to its editor.<br/>
+        In order to avoid duplicates, there cannot be two public editions of the same melody (i.e. two edition with same id and same ms.). It is however possible to store duplicates as private transcriptions.
+      </p>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+    </div>
+  </body>
+</html>

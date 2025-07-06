@@ -1,0 +1,1052 @@
+<!-- <button onclick="exportMEI('z')" value="EXPORT MEI">EXPORT MEI</button> -->
+<!-- Navigation -->
+<nav id="medmel-nav">
+    <a href="index.html"> <img src="img/logo/m2_1.png" class="headerLogo"/></a>
+
+    <div class="headerContainer">
+      
+      <span>
+          <input id="btnZoomIn" name="btnZoomIn" type=image src="img/icons/zoomin.png" class="menuButton lowSize" onclick="manualZoom(0.1)" title="Zoom in"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <span>
+          <input id="btnZoomOut" name="btnZoomOut" type=image src="img/icons/zoomout.png" class="menuButton lowSize" onclick="manualZoom(-0.1)" title="Zoom out"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <span>
+          <input id="btnAllowRezise" name="btnAllowRezise" type=image src="img/icons/allowresize.png" class="menuButton lowSize" onclick="autoResize()" title="Resize"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <span id="separator7" class="separatorSpan">
+          <svg class="separatorSvgEl">
+            <g>
+              <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+            </g>
+          </svg>
+      </span>
+      
+      <!-- Facsimile -->
+      <span>
+          <input id="btnCompareMs" name="btnCompareMs" type=image src="img/icons/dividescreen.png" class="menuButton lowSize"
+          style="display:none" onclick="toggleDivideScreen()" title="Facsimile"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <!-- Modern/Old -->
+      <span>
+          <input id="btnModernOld" type=image class="menuButton lowSize" style="margin-top:1px; display:none" onclick="modernOldButton()" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <!-- Player -->
+      <span>
+          <input id="btnPlayerOverlay" type=image src="img/icons/play2.png" class="menuButton lowSize" style="margin-top:1px; display:none" onclick="showPlayerOverlay()" title="Player"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+      </span>
+      <span id="separator6" class="separatorSpan" style="display:none">
+          <svg class="separatorSvgEl">
+            <g>
+              <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+            </g>
+          </svg>
+      </span>
+      
+      
+        <span>
+            <input id="editBtn" type=image src="img/icons/noedit.png" class="menuButton edit" onclick="toggleEdit()" title="Show/Hide sidebar" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span id="separator5" class="separatorSpan">
+            <svg class="separatorSvgEl">
+              <g>
+                <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+              </g>
+            </svg>
+        </span>
+        <span>
+            <input id="btnBarMode" type=image src="img/icons/bar.png" class="menuButton"  onclick="changeBarMode()" title="Barlines" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnCustosMode" type=image src="img/icons/custos.png" class="menuButton"  onclick="changeCustosMode()" title="Custos" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnDefaultShapes" type=image src="img/icons/defaultShapes.png" class="menuButton"  onclick="openDefaultShapesOverlay()" title="Default shapes" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnSylSeparatore" type=image src="img/icons/sylSeparator.png" class="menuButton" onclick="sylSeparator()" title="Syllable separator" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnTextOverlay" type=image src="img/icons/text.png" class="menuButton lowSize"  onclick="addContentToOverlay('overlayPages/textMode.html', 'logo', true)" title="Text options"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span id="separator4" class="separatorSpan">
+            <svg class="separatorSvgEl">
+              <g>
+                <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+              </g>
+            </svg>
+        </span>
+
+
+        <span>
+            <input id="btnSettings" type=image src="img/icons/settings.png" class="menuButton lowSize"  onclick="showSettings()" title="Settings"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+
+        <span id="separator3" class="separatorSpan">
+            <svg class="separatorSvgEl">
+              <g>
+                <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+              </g>
+            </svg>
+        </span>
+
+    
+    
+        <span>
+            <input id="btnSearch_Header" type=image src="img/icons/search1.png" class="menuButton lowSize" onclick="searchControllerHeader()" title="Search"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnSearchCompare_Header" type=image src="img/icons/search1.png" class="menuButton lowSize" onclick="loadWorks(1)" title="Search"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+
+
+        <span id="separator2" class="separatorSpan">
+            <svg class="separatorSvgEl">
+              <g>
+                <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+              </g>
+            </svg>
+        </span>
+        
+        <!-- import export -->
+        <span>
+            <input id="btnImportExport" type=image src="img/icons/import_export.png" class="menuButton" onclick="showImportExportMenu()" title="Import/Export" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        
+        <!-- DELETE -->
+        <span>
+            <input id="btnDelete" type=image src="img/icons/deleteScore.png" class="menuButton"  onclick="deleteStavesButton()" title="Delete score" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <!-- SAVE -->
+        <span>
+            <input id="btnUpload" type=image src="img/icons/upload1.png" class="menuButton"  onclick="openUploadForm()" title="Save" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <!-- NEW -->
+          <span>
+              <input id="btnNew" type=image src="img/icons/new1.png" class="menuButton"  onclick="resetFields()" title="Create new score"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+          </span>
+          
+        <!-- Manual -->
+        <span>
+          <div width="100px"><a href="./pages/manual.html" target="_blank"><input type=image src="img/icons/manual.png" class="menuButton" style="margin-right:2%; " title="Manual" id="manual"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()"></a>
+          </div>
+        </span>
+        
+        <span id="separator1" class="separatorSpan">
+            <svg class="separatorSvgEl">
+              <g>
+                <line x1="0" y1="0" x2="0" y2="100%" style="stroke:black;stroke-width:2"></line>
+              </g>
+            </svg>
+        </span>
+        
+        <!-- Editor / Viewer / Search / Compare -->
+        <span>
+            <input id="btnSearchMelody_Header" type=image src="img/icons/searchMelody.png" class="menuButton lowSize" onclick="goToSearchMelody()" title="Search melodic sequences" onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnCompareHeader" type=image src="img/icons/compare1.png" class="menuButton lowSize"  onclick="goToCompare()" title="Compare Tool"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnViewerHeader" type=image src="img/icons/viewer1.png" class="menuButton lowSize"  onclick="goToViewer()" title="Viewer"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        <span>
+            <input id="btnEditorHeader" type=image src="img/icons/editor1.png" class="menuButton lowSize"  onclick="goToEditor()" title="Editor"  onmouseover="showPopup(this.title)" onmouseout="hidePopup()">
+        </span>
+        
+        <!-- HOME -->
+        <!-- <span>
+            <a href="index.html"><input id="btnHome" type=image src="img/icons/home1.png" class="menuButton"  title="Home"></a>
+        </span> -->
+        
+        <!-- USER -->
+        <span>
+          <input id="userLoginStatus" type=image src="img/icons/login1.png" class="menuButton"  onclick="addContentToOverlay('overlayPages/loginForm.html', 'logo')" name="login_register" title="Login/Register" onmouseover="showPopup('Login')" onmouseout="hidePopup()">
+        </span>
+      
+        <span class="floatRight">
+            <div  id="userLoggedIn" class="user" >
+              
+            </div>
+        </span>
+    </div>
+</nav>
+
+<style>
+/* Style the nav container */
+#medmel-nav {
+    display: flex;                /* Make nav a flex container */
+    justify-content: space-between; /* Space elements apart */
+    align-items: center;          /* Vertically center items */
+    background: var(--navbar);
+    
+    overflow-x: auto;      /* Enables horizontal scroll */
+    white-space: nowrap;   /* Prevents icons from wrapping */
+  
+}
+
+body {
+  overflow-x: hidden; /* Prevents page-level horizontal scroll */
+}
+
+  
+#medmel-nav::-webkit-scrollbar {
+  display: none; /* optional: hides scrollbar for a cleaner look */
+}
+
+
+
+
+/* Style for the headerContainer */
+.headerContainer {
+    display: flex;                /* Make headerContainer a flex container */
+    align-items: center;          /* Vertically center items */
+}
+
+/* Optional: Spacing between icons */
+.headerContainer span input, .separatorSpan {
+    margin-left: 10px;            /* Add space between icons */
+}
+
+/* Style for the logo */
+.headerLogo {
+    height: 40px;                 /* Set logo height */
+    margin-left: 10px;
+}
+
+/* Style for the nav links (optional) */
+nav.menuButton {
+    height: 30px;                 /* Set the height of icons */
+    cursor: pointer;              /* Add pointer cursor */
+}
+</style>
+
+<div class="popup" id="popup"></div>
+<div id="userOptionsMenu" style="display:none;" class="">
+  <div onclick="openChangePassword()" style="margin-bottom:5px;"><span>Change password</div>
+  <div onclick="closeSession()" style="border-top:0.5px solid lightgray;margin-top:5px;">Log out</div>
+</div>
+
+<style>
+.popup {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+#userOptionsMenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: rgb(48,60, 66);
+    padding: 10px;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    z-index: 1000;
+}
+#userOptionsMenu div {
+    cursor:pointer;
+}
+</style>
+
+<script>
+function showPopup(msg) {
+  const popup = document.getElementById('popup');
+  popup.textContent = msg;
+  popup.style.display = 'block';
+  const rect = event.target.getBoundingClientRect();
+  popup.style.left = `${rect.left - 20}px`;
+  popup.style.top = `${rect.top + popup.offsetHeight}px`;
+}
+
+function hidePopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
+
+
+function modernOldButton() {
+  if (JSON.parse(document.getElementById('shapeSelection').value) == 0){
+    document.getElementById('shapeSelection').value = 1;
+    setStavesStyle(1);
+  }else{
+    document.getElementById('shapeSelection').value = 0;
+    setStavesStyle(0);
+  }
+  setBtnModernOldImg();
+}
+
+var permissionMEI = 4;
+function searchControllerHeader(){
+  let page = localStorage.getItem("current_page");
+  if (page == "viewer.html"){
+      window.location.href = "./viewer.html";
+  }
+  else if (page == "editor.html"){
+    addContentToOverlay('overlayPages/searchTool.html', 'blank')
+  } 
+} 
+
+
+function goToPage(page) {
+  let queryString = window.location.search;
+  let urlParams = new URLSearchParams(queryString);
+  var id = "";
+  if (queryString.indexOf("id1") != -1){
+    id = urlParams.get('id1');
+  } else {
+    id = urlParams.get('id');
+  }
+  window.location.href = "./"+page+"?id="+id;
+}
+
+
+function goToSearchMelody(){
+  window.location.href = "./searchMelody.php";
+}
+
+
+function goToCompare(){
+  goToPage("compareTool.html");
+}
+
+
+function goToViewer(){
+  goToPage("viewer.html");
+}
+
+
+function goToEditor(){
+  goToPage("editor.html");
+}
+
+function openChangePassword(){
+  toggleUserOptionsMenu("close");
+  addContentToOverlay('overlayPages/changePassword.html', 'logo');
+}
+
+function loadSession(){
+    /*default settings*/
+    document.cookie = "melodicStructure=1";
+    document.cookie = "lineNumber=1";
+    /*----------------*/
+    let name = localStorage.getItem("session_name");
+    let surname = localStorage.getItem("session_surname");
+    if (name!= null && name != ''){
+        let avatar = generateAvatar(name, surname);
+        let span = document.createElement("span");
+        span.setAttribute("class", "menuButton");
+        span.setAttribute("onclick", "toggleUserOptionsMenu()");
+        span.appendChild(avatar);
+        
+        
+        document.getElementById("userLoggedIn").appendChild(span);
+        document.getElementById("userLoginStatus").style.display = "none";
+    }
+    checkUserPermission();
+}
+
+function setupHeaderButtons(permission){
+    var elementsToRemove = [];
+    let page = localStorage.getItem("current_page");
+    if (page == "index.html"){
+      // Array of element IDs to be removed
+      elementsToRemove = [
+        'btnNew', 'manual', 'btnDelete', 'editBtn', 'btnUpload',
+        'btnSylSeparatore', 'btnTextOverlay', 'btnBarMode', 'btnCustosMode',
+        'btnDefaultShapes', 'separator1', 'separator2', 'separator3', 'separator4',
+        'separator5', 'btnSettings', 'btnCompareMs', 'btnImportExport',
+        'btnSearch_Header', 'btnSearchCompare_Header', 'btnSearchMelody_Header',
+        'btnViewerHeader', 'btnCompareHeader', 'btnEditorHeader', "btnZoomIn", "btnZoomOut", "btnAllowRezise", "separator7"
+      ];
+
+      checkUserPermissionHome();
+      setHomeButtonPosition();
+      window.onresize = setHomeButtonPosition;
+    }
+    else if (page == "editor.html"){
+      elementsToRemove = ["btnEditorHeader", "btnSearchCompare_Header"]
+    
+      var elementsToHideOrShow = ["btnBarMode", "btnCustosMode", "btnDefaultShapes"]
+      let showStatus = ""
+      if (currentStyle == 0) {
+        showStatus = "none";
+      } else {
+        showStatus = "block";
+      }
+      elementsToHideOrShow.forEach(elementId => {
+        const element = document.getElementById(elementId);
+        if (element) element.style.display = showStatus;
+      });   
+    }
+    else if (page === "viewer.html") {
+      // Define the elements to be removed initially
+      elementsToRemove = [
+        'btnExportMEI', 'btnNew', 'btnUpload', 'btnDelete',
+        'btnSylSeparatore', 'btnBarMode', 'btnCustosMode',
+        'btnDefaultShapes', 'btnViewerHeader', 'btnSearchCompare_Header'
+      ];
+
+      // Check URL parameters
+      let params = new URLSearchParams(window.location.search);
+      let idParam = params.get('id');
+      
+      // If 'id' parameter is missing, null, empty, or equals "null", add more elements to be removed
+      if (!params.has('id') || idParam === null || idParam.trim() === "" || idParam.toLowerCase() === "null") {
+        elementsToRemove = elementsToRemove.concat([
+          'editBtn', 'separator1', 'separator2', 'separator3', 'separator4', 'separator5',
+          'btnTextOverlay', 'btnSettings', 'manual', 'btnSearch_Header', 'btnImportExport', 
+          "btnZoomIn", "btnZoomOut", "btnAllowRezise", "separator7"
+        ]);
+      }
+
+      
+    }
+    else if(page == "compareTool.html"){
+      // Array of element IDs to be removed
+      elementsToRemove = [
+        'btnNew', 'btnUpload', 'btnSylSeparatore', 'separator2', 'separator4',
+        'btnExportMEI', 'btnBarMode', 'btnCustosMode', 'btnDefaultShapes',
+        'btnSearch_Header', 'btnCompareHeader', 'btnTextOverlay', 'btnDelete',
+        'manual', "btnSearchCompare_Header", "separator7"
+      ];
+
+    }
+    else if(page == "admin.html"){
+        elementsToRemove = [
+        'btnNew', 'editBtn', 'btnUpload', 'btnSylSeparatore', 'separator1', 
+        'separator2', 'separator3', 'separator4', 'separator5', 'separator6', 
+        'exportHTML', 'btnExportMEI', 'manual', 'btnImportExport', 'btnDelete', 
+        'btnTextOverlay', 'btnUploadMEI', 'btnSettings', 'btnCompareMs', 
+        'btnSearch_Header', 'btnSearchCompare_Header', 'btnBarMode', 
+        'btnCustosMode', 'btnDefaultShapes', "btnZoomIn", "btnZoomOut", "btnAllowRezise", "separator7"
+      ];
+    }
+    else if(page == "searchMelody.php"){
+      elementsToRemove = [
+        'btnNew', 'editBtn', 'btnUpload', 'btnSylSeparatore', 'separator2',
+        'btnTextOverlay', 'btnImportExport', 'btnCompareMs', 'btnBarMode',
+        'btnCustosMode', 'separator3', 'btnSettings', 'btnSearchCompare_Header',
+        'btnDefaultShapes', 'separator4', 'separator5', 'btnSearchMelody_Header',
+        'btnDelete', 'btnSearch_Header', "btnZoomIn", "btnZoomOut", "btnAllowRezise", "separator7"
+      ];
+    }
+    
+    // Remove each element if it exists in the DOM
+    elementsToRemove.forEach(elementId => {
+      const element = document.getElementById(elementId);
+      if (element) element.remove();
+    });   
+    
+    // Further actions
+    permissionMEI = permission;
+    if (permission > 0 && permission < 4) {
+        if(document.getElementById("btnUpload")!= null)
+            document.getElementById("btnUpload").style.display="block";
+        if(document.getElementById("btnEditorHeader")!=null)
+            document.getElementById("btnEditorHeader").style.display="block";
+        if(permission == 1 || permission == 3){
+            if(document.getElementById("btnExportMEI")!= null)
+                document.getElementById("btnExportMEI").style.display="block";
+        }
+    }
+    else {
+      if (document.getElementById("btnEditorHeader")!=null)
+          document.getElementById("btnEditorHeader").style.display="none";
+    }
+}
+
+function checkUserPermission(){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "./php/userInfo.php",  //your page
+        data : {
+          email: email, 
+          password : password
+        },
+        success : function(data){
+            try {
+                let obj = jQuery.parseJSON(data);
+                status = obj[5];
+                if (String(status) === "undefined") status = -1;
+                setupHeaderButtons(status);
+             } catch (error) {
+               console.log(error);
+             }
+        }
+    });
+}
+
+function openUploadForm(){
+  let idUser = getUserAttribute(0); //0:id_user 1:name 2:surname 3:email 4:password 5:user_permission
+  //alert(idUser);
+  
+  // check if current user is logged
+  if (parseInt(idUser) < 0) {
+    addContentToOverlay('overlayPages/loginForm.html', 'logo', true)
+      return 0;
+  }
+  
+  getMelodicStructure();
+  addContentToOverlay('overlayPages/uploadStaves.html', 'logo', true)
+}
+
+function getMelodicStructure(){
+  if (document.getElementById("melodic_structure_to_store")) {
+    melodicStructure = document.getElementById("melodic_structure_to_store").value;
+  }
+}
+
+function closeSession(top=false){
+  toggleUserOptionsMenu("close");
+  document.getElementById("userLoggedIn").innerHTML = "";
+  setupSession(null,null,null,null,null);
+  var icon = document.getElementById("userLoginStatus");
+  icon.setAttribute("src", "img/icons/login1.png");
+  icon.setAttribute("onclick", "addContentToOverlay('overlayPages/loginForm.html', 'logo')");
+  icon.style.display="block";
+  let idUser = getUserAttribute(0); //0:id_user 1:name 2:surname 3:email 4:password 5:user_permission
+  //alert(idUser);
+
+  checkUserPermission();
+
+  if (localStorage.getItem("current_page") == "admin.html"){
+      window.location.href = "./index.html";
+  }
+}
+
+function downloadInnerHtml(filename, elId, mimeType) {
+  var elHtml = document.getElementById(elId).innerHTML;
+  elHtml = "<!DOCTYPE html>\n" +
+  "<html lang=\"en\" dir=\"ltr\">\n" +
+    "<head>\n" +
+      "<meta charset=\"utf-8\">\n" +
+      "<title>"+filename+"</title>\n" +
+    "</head>\n" +
+    "<body>\n" + 
+      elHtml +
+    "\n</body>\n" +
+  "</html>";
+  
+  var link = document.createElement('a');
+  mimeType = mimeType || 'text/plain';
+  link.setAttribute('download', filename);
+  link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+  link.click();
+}
+
+function exportHTML(){
+  let temp = "medmelExport";
+  try {temp = document.getElementById('id').innerHTML} catch {}
+  downloadInnerHtml(temp+'.html', 'stavesContainer','text/html');
+}
+
+function toggleDivideScreen(escape=false) {
+    let frameSidebar = document.getElementById("frameSidebar");
+    if (frameSidebar == null) return false;
+    let containerSideBar = document.getElementById('containerSideBar');
+    let attributeSideBar = document.getElementById("rightSideBar");
+    let writingArea = document.getElementById("stavesBox");
+    let bottom = document.getElementById("bottomSideBar");
+    
+    // Frame: closed
+    // Attributes: closed
+    if (frameSidebar.style.display == "none" && attributeSideBar.style.display == "none" && !escape){
+        // open container
+        containerSideBar.style.display = "block";
+        // remove any class from writingArea
+        removeBSClasses("stavesBox");
+        // add the right class to writingArea
+        writingArea.classList.add("col-md-6");
+        // Close attributestoggleUserOptionsMenu
+        attributeSideBar.style.display = "none";
+        // Open frame
+        frameSidebar.style.display = "block";
+        
+        // Adjust measures
+        if (bottom.style.display == "none") {
+            frameSidebar.style.height = "93vh";
+            writingArea.style.height = "89vh";
+        }
+        else {
+            frameSidebar.style.height = "73vh";
+            writingArea.style.height = "73vh";
+            document.getElementById('boxStavesContainer').style.height = "73vh";
+        }
+    }
+    
+    // Frame: open
+    // Attributes: closed
+    else if (frameSidebar.style.display == "block" && attributeSideBar.style.display == "none") {
+        // Clear classes
+        removeBSClasses("stavesBox") 
+        // Make score full screen
+        writingArea.classList.add("col-md-9");
+        
+        // Display 
+        if (attributeSideBar.classList.contains("active")){
+            attributeSideBar.style.display = "block";
+            removeBSClasses("containerSideBar");
+            containerSideBar.classList.add("col-md-3");
+            attributeSideBar.classList.remove("active");
+        }
+        else {
+          containerSideBar.style.display = "none";
+          writingArea.classList.add("col-md-12");
+        }
+
+        frameSidebar.style.display = "none";
+    }
+    // frame: closed
+    // attributes: open
+    else if (frameSidebar.style.display == "none" && attributeSideBar.style.display == "block" && !escape) {
+        removeBSClasses("stavesBox");
+        writingArea.classList.add("col-md-6");
+        
+        removeBSClasses("containerSideBar");
+        containerSideBar.classList.add("col-md-6");
+
+        attributeSideBar.style.display = "none";
+        attributeSideBar.classList.add("active");
+        frameSidebar.style.display = "block";
+        
+        if (bottom.style.display == "none") {
+            frameSidebar.style.height = "93vh";
+            writingArea.style.height = "89vh";
+        }
+        else {
+            frameSidebar.style.height = "73vh";
+            writingArea.style.height = "73vh";
+            document.getElementById('boxStavesContainer').style.height = "73vh";
+        }
+    }
+    else if(frameSidebar.style.display == "block" && colMd3.style.display == "block") {
+      // do nothing
+    }
+    let page = localStorage.getItem("current_page");
+    if (page == "compareTool.html")
+        resizeCompareToolStaves();
+    if (page == "editor.html" || page == "viewer.html")
+        resizeStaves();
+
+    toggleSidebarCommandsInNavBar();
+}
+
+function removeBSClasses(id) {
+  let oneToTwelve = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  let writingArea = document.getElementById(id);
+
+  oneToTwelve.forEach((item, i) => {
+    writingArea.classList.remove("col-md-"+item)
+  });
+}
+
+function exportMEI(action="download", includeDetails=false, includeNeumeType=true, includeNeumeClass=false, modernNotation=false, meiCompliance=false, extension=".xml") {
+    setTimeout(function allowedExportMEI() {
+        let notes = document.getElementById("music_input").value;
+        let idinput = document.getElementById("id_input").value;
+        let text = document.getElementById("text_input").value;
+        let title = document.getElementById("title_input").value;
+        let language = document.getElementById("language").value;
+        let author = document.getElementById("author_input").value;
+        let manuscript = document.getElementById("ms_input").value;
+        let folio = document.getElementById("f_input").value;
+        let annotations = document.getElementById("annotationsBox").value;
+        let currentStyle = document.getElementById("shapeSelection").value;
+        let userName = localStorage.getItem("session_name") + " " + localStorage.getItem("session_surname");
+        let melodicStructureForMEI = melodicStructure;
+        let automatic_manualMelodicStructure = "automatic";
+        
+        if (useManualMelodicStructure == 1) {
+          automatic_manualMelodicStructure = "manual";
+          melodicStructureForMEI = manualMelodicStructure;
+        }
+        $.ajax({
+            type : "POST",  //type of method
+            url  : "php/medmel2mei5.v2.php",  //your page
+            data : {
+              notes: notes,
+              text_string: text,
+              annotations: annotations,
+              idinput: idinput,
+              language: language,
+              author: author,
+              title: title,
+              manuscript: manuscript,
+              folio: folio,
+              currentStyle: currentStyle,
+              linesInLine: JSON.stringify(linesInLine),
+              shapeGroupNote: JSON.stringify(shapeGroupNote),
+              shapeSingleNote: JSON.stringify(shapeSingleNote),
+              stemSingleNote: JSON.stringify(stemSingleNote),
+              connectGroupNote: JSON.stringify(connectGroupNote),
+              bar: JSON.stringify(bar),
+              custos: JSON.stringify(custos),
+              pes: pes_type,
+              clivis: united_clivis,
+              climacus: climacus_type,
+              porrectus: porrectus_type,
+              plica: plica_type,
+              scandicus: scandicus_type,
+              userName: userName,
+              melodicStructure: melodicStructureForMEI.trim(),
+              automatic_manualMelodicStructure: automatic_manualMelodicStructure,
+              includeDetails: includeDetails,
+              includeNeumeType: includeNeumeType,
+              includeNeumeClass: includeNeumeClass,
+              modernNotation: modernNotation, 
+              meiCompliance: meiCompliance
+            },// passing the values ,
+            dataType: 'text',
+            success: function(data){
+                if (action=="download"){
+                  var fileName = idinput + "_" + manuscript + "_" + folio + extension;
+                  downloadFile(data, fileName);
+                }else{
+                  //var xmlstr = data.xml ? data.xml : (new XMLSerializer()).serializeToString(data);
+                  var xmlstr = data
+                  var myWindow = window.open("", "", "width=1200,height=1200");
+                  myWindow.document.write('<textarea style="width:100%; height:100%">'+xmlstr+'</textarea>');
+                  myWindow.document.close();
+                }
+            }
+        });
+    }, 100)
+}
+
+function downloadMedMelJson() {
+  var j = medmel2Json();
+  var id = "untitled";
+  var ms = "";
+  var f = "";
+  if (j.id_input.length > 0) {
+    id = j.id_input;
+    if (j.ms_input.length > 0 || j.f_input.length > 0) {
+      id += "_";
+    }
+  }
+  if (j.ms_input.length > 0) {
+    ms = j.ms_input;
+    if (j.f_input.length > 0) {
+      ms += "_";
+    }
+  }
+  if (j.f_input.length > 0) {
+    f = j.f_input;
+  }
+
+  var fileName = id + ms + f + ".medmel.json";
+  var data = JSON.stringify(j, null, 2);
+
+  downloadFile(data, fileName);
+}
+
+function medmel2Json() {
+  syncModernOldStaves();
+  
+  // Create json container
+  var j = {};
+
+  // Get medmel id
+  const urlParams = new URLSearchParams(window.location.search);
+  j.medmel_id = urlParams.get('id');
+
+  j.modernStaves = getModernStavesUI();
+  j.oldStaves = getOldStavesUI();
+  j.id_input = document.getElementById("id_input").value;
+  j.text_input = document.getElementById("text_input").value;
+  j.title_input = document.getElementById("title_input").value;
+  j.language = document.getElementById("language").value;
+  j.author_input = document.getElementById("author_input").value;
+  j.ms_input = document.getElementById("ms_input").value;
+  j.f_input = document.getElementById("f_input").value;
+  j.annotationsBox = document.getElementById("annotationsBox").value;
+  j.shapeSelection = getParsed("shapeSelection");
+  getMelodicStructure();
+  j.melodicStructure = melodicStructure.trim();
+  j.userName = localStorage.getItem("session_name") + " " + localStorage.getItem("session_surname");
+  j.loadedModernStyle = loadedModernStyle;
+  j.loadedOldStyle = loadedOldStyle;
+  
+  j.linesPerStave = JSON.stringify(linesInLine);
+  j.shapeGroupNote = JSON.stringify(shapeGroupNote);
+  j.shapeSingleNote = JSON.stringify(shapeSingleNote);
+  j.stemSingleNote = JSON.stringify(stemSingleNote);
+  j.connectGroupNote = JSON.stringify(connectGroupNote);
+  j.divisiones = JSON.stringify(bar);
+  j.custodes = JSON.stringify(custos);
+
+  j.facsimileURL = getFacsimileURL();
+  j.iiifManifest = document.getElementById("manifestInput").value;
+  j.iiifFolio = document.getElementById("foliosSelect").value;
+  j.notationType = getParsed("changeNotationType");
+    
+  var default_shapes = {}
+  default_shapes.pes_type = pes_type;
+  default_shapes.clivis_type = united_clivis;
+  default_shapes.climacus_type = climacus_type;
+  default_shapes.porrectus_type = porrectus_type;
+  default_shapes.plica_type = plica_type;
+  default_shapes.scandicus_type = scandicus_type;
+  j.default_shapes = default_shapes;
+  j.settings = getAdvancedParametersForJson();
+  
+  return j;
+}
+
+function getFacsimileURL() {
+  var parLink = "";
+  if (document.getElementById("urlInput").value == '') {
+    try {
+      parLink = JSON.parse(settings).Link;
+    } catch(err) {console.log(err)}
+  }else{
+    parLink = document.getElementById("urlInput").value;
+  }
+  return parLink;
+}
+
+function getChecked(id){
+  return JSON.parse(document.getElementById(id).checked);
+}
+function getParsed(id){
+  return JSON.parse(document.getElementById(id).value);
+}
+
+
+function getAdvancedParametersForJson() {
+  let parMelodicStructure = getChecked("checkMelodicStructure");
+  let parLineNumber = getChecked("checkLineNumber");
+  let parAnnotation = getChecked("checkAnnotation");
+
+  let parMsBreak = getChecked("checkMsLineBreaks");
+  let parCarryBFlat = getChecked("checkCarryBFlat");
+  let parCarryBFlatBrackets = getChecked("checkCarriedBFlatBrackets");
+  let parBFlatAlwaysInKeySignature = getChecked("checkBFlatAlwaysInKeySignature");
+  let parOctave = getChecked("checkOctaveClef");
+  let parPlica = getChecked("checkPlica");
+  let parAlphabet = getParsed("changeMelodicStructure");
+  let parTextFontModern = getParsed("changeTextFontModern");
+  let parFontSizeModern = getParsed("nFontSizeModern");
+  let parTextFontOld = getParsed("changeTextFontOld");
+  let parFontSizeOld = getParsed("nFontSizeOld");
+  let parUseManualMelodicStructure = 0;
+  if (!document.getElementById("checkAutomaticMelodicStructure").checked) {
+    parUseManualMelodicStructure = 1;
+  }
+  let parManualMelodicStructure = document.getElementById("manualMelodicStructure").value;
+  let parRepetitionPattern = repetitionPattern;
+  if (parRepetitionPattern == "false" || parRepetitionPattern == false){
+    parRepetitionPattern = "";
+  }
+  let parZoomFacsimile = zoomMeasure;
+  let parFacsimileX = 0;
+  let parFacsimileY = 0;
+  try {
+    parFacsimileX = facsimileX;
+    parFacsimileY = facsimileY;
+  }catch{}
+  
+  var advancedParameters = {};
+  
+  advancedParameters.MelodicStructure = parMelodicStructure;
+  advancedParameters.LineNumber = parLineNumber;
+  advancedParameters.Annotations = parAnnotation;
+  advancedParameters.MsLineBreaks = parMsBreak;
+  advancedParameters.CarryBFlat = parCarryBFlat;
+  advancedParameters.CarriedBFlatBrackets = parCarryBFlatBrackets;
+  advancedParameters.BFlatAlwaysInKeySignature = parBFlatAlwaysInKeySignature;
+  advancedParameters.OctaveClef = parOctave;
+  advancedParameters.Plica = parPlica;
+  advancedParameters.Alphabetic = parAlphabet;
+  advancedParameters.TextFontModern = parTextFontModern;
+  advancedParameters.FontSizeModern = parFontSizeModern;
+  advancedParameters.TextFontOld = parTextFontOld;
+  advancedParameters.FontSizeOld = parFontSizeOld;
+  advancedParameters.ZoomFacsimile = parZoomFacsimile;
+  advancedParameters.facsimileX = parFacsimileX;
+  advancedParameters.facsimileY = parFacsimileY;
+  advancedParameters.UseManualMelodicStructure = parUseManualMelodicStructure;
+  advancedParameters.ManualMelodicStructure = parManualMelodicStructure;
+  advancedParameters.RepetitionPattern = parRepetitionPattern;
+  advancedParameters.syncModernMedievalTranscription = syncModernOld;
+
+  
+  return advancedParameters;
+}
+
+function changeBarMode() {
+  let btn = document.getElementById("btnBarMode");
+
+  if (barMode == false) {
+    barMode = true;
+    custosMode = false;
+
+    btn.classList.add("selectedBtn");
+    try {
+      document.getElementById("btnCustosMode").classList.remove("selectedBtn");
+    }catch{}
+  }else{
+    barMode = false;
+    btn.classList.remove("selectedBtn");
+  }
+}
+
+function changeCustosMode() {
+  let btn = document.getElementById("btnCustosMode");
+
+  if (custosMode == false) {
+    custosMode = true;
+    barMode = false;
+
+    btn.classList.add("selectedBtn");
+    try {
+      document.getElementById("btnBarMode").classList.remove("selectedBtn");
+    } catch {}
+  } else {
+    custosMode = false;
+    btn.classList.remove("selectedBtn");
+  }
+}
+
+function downloadFile(textContent, fileName) {
+    
+    // Create a Blob object from the text content
+    const blob = new Blob([textContent], { type: 'text/plain' });
+    
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    
+    // Set the download filename
+    link.download = fileName;
+    
+    // Append the link to the body (required for Firefox)
+    document.body.appendChild(link);
+    
+    // Programmatically click the link to trigger the download
+    link.click();
+    
+    // Remove the link from the document
+    document.body.removeChild(link);
+    
+    // Free up memory used by the blob  
+    URL.revokeObjectURL(link.href);
+}
+
+function generateAvatar(name, surname, size = 30, bgColor = "rgb(48,60, 66)", textColor = "#fff") {
+    const initials = name[0] + surname[0];
+    // Create an SVG container
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("width", size);
+    svg.setAttribute("height", size);
+    svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+
+    // Create a circle element as the background
+    const circle = document.createElementNS(svgNS, "circle");
+    circle.setAttribute("cx", size / 2);
+    circle.setAttribute("cy", size / 2);
+    circle.setAttribute("r", size / 2);
+    circle.setAttribute("fill", bgColor);
+    svg.appendChild(circle);
+
+    // Create text element for initials
+    const text = document.createElementNS(svgNS, "text");
+    text.setAttribute("x", "50%");
+    text.setAttribute("y", "50%");
+    text.setAttribute("dy", "0.35em");
+    text.setAttribute("font-size", size / 2.5);
+    text.setAttribute("font-family", "Arial, sans-serif");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("fill", textColor);
+    text.textContent = initials;
+    svg.appendChild(text);
+
+    return svg;
+}
+
+function manualZoom(factor) {
+  allowResize = false;
+        
+  let stavesElement = document.getElementById('staves')
+  
+  zoom = Math.round((zoom + factor) * 100) / 100;
+  stavesElement.style.transform = `scale(${zoom})`;
+  stavesElement.style.transformOrigin = "top left";
+  stavesElement.style.width = `${100 / zoom}%`;
+}
+
+function zoomOut() {
+  allowResize = false;
+  
+  resizeStaves();
+}
+
+function autoResize() {
+  allowResize = true;
+  resizeStaves();
+}
+
+
+//-------Settings Menù------------
+function toggleSidebarCommandsInNavBar() {
+  let stavesBox = $("#stavesBox");
+  if (stavesBox.hasClass('col-md-9')) {
+    document.getElementById("btnPlayerOverlay").style.display = "none";
+    document.getElementById("btnModernOld").style.display = "none";
+    document.getElementById("btnCompareMs").style.display = "none";
+  }else{
+    document.getElementById("btnPlayerOverlay").style.display = "block";
+    document.getElementById("btnModernOld").style.display = "block";
+    document.getElementById("btnCompareMs").style.display = "block";
+  }
+
+  setBtnModernOldImg();
+}
+
+function setBtnModernOldImg() {
+    let btnModernOld = document.getElementById("btnModernOld");
+    
+    if (document.getElementById("shapeSelection")){
+      if (document.getElementById("shapeSelection").value == "0"){
+        btnModernOld.setAttribute("src", "img/icons/old.png");
+        btnModernOld.setAttribute("title", "Visualize melody in old notation");
+      }else{
+        btnModernOld.setAttribute("src", "img/icons/modern.png");
+        btnModernOld.setAttribute("title", "Visualize melody in modern notation");
+      }
+    }else{
+      console.log("shapeSelection not found")
+    }
+  
+
+    if (loadedOldStyle == 0 || loadedModernStyle == 0) {
+      btnModernOld.setAttribute("disabled","disabled");
+      btnModernOld.style.opacity = 0.5;
+      btnModernOld.style.cursor= "not-allowed";
+    }
+}
+
+
+document.querySelectorAll('[title]').forEach(element => {
+  element.addEventListener('mouseover', function() {
+    // Remove title attribute to disable tooltip
+    this.setAttribute('data-title', this.getAttribute('title')); // Store the title in a data attribute
+    this.removeAttribute('title');
+  });
+
+  element.addEventListener('mouseleave', function() {
+    // Restore the title attribute after mouse leaves
+    this.setAttribute('title', this.getAttribute('data-title'));
+  });
+});
+
+window.onload = loadSession();
+</script>

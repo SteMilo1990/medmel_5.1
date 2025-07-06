@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>MedMel</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+  <!-- Bootstrap core CSS -->
+
+  <link href="css/bootstrap/bootstrap.5.0.0.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.4.5.3.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+  <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+  <link href="css/jquery-linedtextarea1.css" type="text/css" rel="stylesheet">
+
+  <!-- JavaScript -->
+  <!-- <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script> -->
+  <script src="script/libraries/jquery-2.2.3.min.js"></script>
+
+  <script src="script/jquery-linedtextarea.js"></script>
+
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/oldShapeFormatter.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+  <script type="text/javascript" src="script/playSingleNote.js"></script>
+
+  <script language="JavaScript" type="text/JavaScript" src="./script/userEvent.js"></script>
+  <!--*******************Player******************* -->
+  <script src="https://cdn.rawgit.com/mohayonao/web-audio-api-shim/master/build/web-audio-api-shim.min.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="./script/playStaves.js"></script>
+  
+  <!-- *************pdf export ****************** -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <!-- *******************Syl separator******************* -->
+  <script type="text/javascript" src="script/sylSeparator.js"></script>
+
+  <!-- *******************Divide screen******************* -->
+  <script type="text/javascript" src="script/divideScreen.js"></script>
+
+
+  <script>
+    /*default settings*/
+    document.cookie = "melodicStructure=1";
+    document.cookie = "lineNumber=1";
+  </script>
+</head>
+<body oncontextmenu="return false;" >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ6F437"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div id="header"></div>
+    </header>
+    <!-- Page Content -->
+    <div id="bodyContainer" class=" col-md-12" > <!-- Main container -->
+        <div class="clear">
+        </div>
+        <div class="row central-area">
+            <div class="col-md-9" id="stavesBox" onkeydown="clickStopPlayer()" onclick="clickStopPlayer()">
+                <div id="boxStavesContainer" class="scrollablePane contentPane">
+                    <div id="stavesContainer" class="stavesContainer"> <!-- Staves Container -->
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input component form -->
+            <input id="showSidebarBtn" type="button" value="&#9664;" onClick="toggleEdit()" style="display:none"></input>
+            <div id="containerSideBar" class="col-md-3">
+                <input id="resizeBar" type="button"></input>
+
+                <input id="hideSidebarBtn" type="button" value="&#9657;" onClick="toggleEdit()"></input>
+
+                <div class="controlPane" id="rightSideBar" class="col-md-3" style="display:block;">
+                    
+                    <div class="separator">Notation</div>
+                    <div>
+                        <div class="sizeDiv marginTop5">
+                            <select id="shapeSelection" name="shapeSelection" onchange="setStavesStyle(this.value)">
+                                <option value="0">Modern notation</option>
+                                <option value="1">Medieval notation</option>
+                            </select>
+                        </div>
+                        <div class="sizeDiv marginTop5" hidden>
+                            <input type="checkbox" id="checkOldVisible" name="oldVisible" value="" onclick="statusHideOldInput()" > Hide Old Input
+                        </div>
+                        <div class="separator marginTop10">Attributes</div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="title_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="title" value="" placeholder="Title"/>
+                        </div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="id_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="id" value="" placeholder="Id"/>
+                        </div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="author_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="author" value="" placeholder="Author"/>
+                        </div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="language" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="language" value="" placeholder="Language"/>
+                        </div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="ms_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="ms" value="" placeholder="Ms"/>
+                        </div>
+                        <div class="sizeDiv marginTop5">
+                            <input id="f_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="f_input" value="" placeholder="f°"/>
+                        </div>
+                    </div >
+
+                </div>
+                <div class="separator marginTop10" id="playerDiv">Source</div>
+                <div class="sizeDiv marginTop5">
+                    <button id="open-facsimile" onclick="openFacsimileSideBar()" style="width:80%;" name="open-facsimile" value="" disabled>Open facsimile</button>
+                    <button id="edit-facsimile-info" onclick="openFacsimileOverlay()" style="width:17%;" name="open-facsimile" value="">
+                      <img id="edit-facsimile-info-icon" src="img/icons/edit-pencil.png">
+                    </button>
+                </div>
+                
+                <div class="separator marginTop10" id="playerDiv">Player</div>
+                    <div  class="mainContainer col-md-12"  style="padding:0px;">
+                        <div class=" marginTop10">
+                            <center>
+                            <div style="padding:0px;">
+                                <div  style="width: 100%; text-align:center;">
+                                    <span>
+                                        <button class="playerButton" onclick="btnPrev()" title="Prev">
+                                            <img class="playerIcon" src="img/icons/prev1.png" >
+                                        </button>
+                                    </span>
+                                    <span>
+                                        <button id="btnPlay" class="playerButton" onclick="btnPlay(this)" title="Play">
+                                            <img id="playImg" class="playerIcon" src="img/icons/play1.png" >
+                                        </button>
+                                    </span>
+                                    <span>
+                                        <button  class="playerButton" onclick="btnStopPlayer()" title="Stop">
+                                            <img class="playerIcon" src="img/icons/stop1.png"  >
+                                        </button>
+                                    </span>
+                                    <span>
+                                        <button class="playerButton"  onclick="btnNext()" title="Next">
+                                            <img class="playerIcon" src="img/icons/next1.png" >
+                                        </button>
+                                    </span>
+                                    <span>
+                                        <button class="playerButton"  onclick="togglePlayerSettings()" title="Next">
+                                            <img class="playerIcon" src="img/icons/settings-1.png" >
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="marginTop10">
+                                <span>
+                                <input class="slider" type="range" onchange="changeSpeed()" id="speed" name="speed"
+                                    min="0.5" max="1.5" step="0.25" value="1" style="display:none">
+                                </span>
+                                <div>
+                                    <label id ="txtSpeed" for="speed" style="display:none">Music Speed: 1x</label>
+                                </div>
+                            </div>
+                            <div class=" marginTop10">
+                                <span>
+                                <input class="slider" type="range" onchange="changeOctave()" id="octave" name="octave"
+                                    min="0" max="5" step="1" value="2"  style="display:none">
+                                </span>
+                                <div>
+                                    <label id ="txtOctave" for="speed"  style="display:none">Octave: 2</label>
+                                </div>
+                            </div>
+                        </center>
+                      </div>
+                  </div>
+              <div>
+          </div>
+          <!-- End input component form -->
+          <!-- Iframe sideba -->
+          
+          <div id="facsimile-overlay" onclick="closeFacsimileOverlay(event)">
+              <div id="facsimile-overlayForm">
+                  <span class="facsimile-closeBtn" id="closeBtnFacsimileOverlay" onclick="closeFacsimileOverlay(event)">×</span>
+                  <h2>Enter Facsimile Details</h2>
+                  
+                  <strong>Image URL</strong>
+                  <input type="text" id="urlInput" placeholder="Enter facsimile's URL"><br>
+                  or<br>
+                  <strong>IIIF</strong>
+                  
+                  <div id="manifestListContainer" style="display:none">
+                    <select id="manifestListSelect" onchange="selectManifestFromList()"></select>
+                  </div>
+                  
+                  <div style="position:relative">
+                    <input type="text" id="manifestInput" placeholder="Enter IIIF manifest's URL">
+                    <img id="searchManifestIcon" src="img/icons/search1.png" alt="Search" onclick="toggleManifestList()">
+                  </div>
+            
+                  <select id="foliosSelect" style="display:none"></select>
+
+                  
+                  
+                  <input type="text" id="iiifIdInput" placeholder="Enter IIIF Folio ID" style="display:none"><br>
+                  <input type="button" value="Fetch Facsimile" onclick="fetchFacsimile()">
+                  
+              </div>
+          </div>
+          
+          <div id="frameSidebar" style="display:none">
+              <div id="controlBox" style="position:absolute; width:100%">
+                  
+                  <div id="loadingText" style="display:none;color:gray; font-size:50px; padding:40px;">
+                      <div class="windows8">
+                          <br/>
+                          <br/>
+                          <div class="wBall" id="wBall_1">
+                              <div class="wInnerBall"></div>
+                          </div>
+                          <div class="wBall" id="wBall_2">
+                              <div class="wInnerBall"></div>
+                          </div>
+                          <div class="wBall" id="wBall_3">
+                              <div class="wInnerBall"></div>
+                          </div>
+                          <div class="wBall" id="wBall_4">
+                              <div class="wInnerBall"></div>
+                          </div>
+                          <div class="wBall" id="wBall_5">
+                              <div class="wInnerBall"></div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <span onclick="zoomOut()" class="controlBoxBtn" id="zoomOut" style="right:40px;">[-]</span>
+                  <span onclick="zoomIn()" class="controlBoxBtn" id="zoomIn" style="right:70px">[+]</span>
+                  <span onclick="nextPage()" class="controlBoxBtn" id="previousPage" style="right:100px;">></span>
+                  <span onclick="previousPage()" class="controlBoxBtn" id="nextPage" style="right:130px"><</span>
+                  <span id="close" class="controlBoxBtn" onclick="closeIframe()" style="display: block;right:10px;" value="x" z-index="10">x</span>
+               </div>
+               <div id="frameBox" style="height:100%" onscroll="getXY()">
+                   <img id="msImg"/>
+                   <div id="load"></div>
+               </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="bottomSideBar" class=" col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="marginTop10 ">
+                        <textarea id="music_input"  onkeyup="updateStaves()" onkeydown="clickStopPlayer()" onclick="clickStopPlayer()"class="lined textArea short-text-area notes" wrap="off" type="input" name="notes" value="" placeholder="Notes" spellcheck="false"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="marginTop10 ">
+                        <textarea id="text_input" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="text_string" value="" placeholder="Text" spellcheck="false"></textarea>
+                    </div>
+                </div>
+                <div class=" col-md-4">
+                    <div class="marginTop10 ">
+                        <textarea id="annotationsBox" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="annotationsBox" value="" placeholder="Annotations" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel"></div>
+<div id="divPrint"></div>
+<div id="settings" style="display:none;" class="placeholderSettingsMenu"></div>
+<div id="importExport" style="display:none;" class="placeholderSettingsMenu"></div>
+<div id="player" style="display:none;" class="placeholderSettingsMenu"></div>
+</body>
+
+</html>
+<style>
+
+
+input:focus {
+  outline: none;
+}
+
+.groupClickableRect {
+  fill:transparent;
+}
+.groupClickableRect:hover, .selectedSyl {
+  fill: rgba(187, 187, 187, 0.5); 
+}
+.selectedNote-space{
+  fill:rgb(187, 187, 187); 
+}
+</style>
+
+<script>
+// Enable to make editot private (don't delete, it may come in handy)
+localStorage.setItem("current_page", "editor.html");
+var userStatus = -1;
+var loadedVisibility = -1;
+
+function checkLogin() {
+  // Get user information
+  let email = localStorage.getItem("session_email");
+  let password = localStorage.getItem("session_psw");
+
+  $.ajax({
+      type : "POST",  //type of method
+      url  : "./php/userInfo.php",  //your page
+      data : {email: email, password : password},
+      success : function(data) {
+          try {
+              let obj = jQuery.parseJSON(data);
+              if(obj == -1) {
+
+                  document.getElementById("overlayPanel").style.display = 'block';
+                  setTimeout(function() {
+                      alert("To use the editor, please log in");
+                      window.location.href = "./index.html";
+                      addContentToOverlay('overlayPages/', 'logo');
+                  }, 20);
+              }
+              else if(obj[5]>0 && obj[5]<4) {
+                  userStatus = obj[5];
+              }
+          }catch (error) {
+              document.getElementById("overlayPanel").style.display = 'block';
+              setTimeout(function() {
+                  alert("To use the editor, please log in");
+                  window.location.href = "./index.html";
+              }, 20);
+          }
+      }
+  });
+}
+function disableControls(visibility) {
+  if (userStatus == 3  && visibility == 2) {
+      document.getElementById("title_input").disabled = true;
+      document.getElementById("id_input").disabled = true;
+      document.getElementById("author_input").disabled = true;
+      document.getElementById("language").disabled = true;
+      document.getElementById("ms_input").disabled = true;
+      document.getElementById("f_input").disabled = true;
+      document.getElementById("music_input").disabled = true;
+      document.getElementById("text_input").disabled = true;
+      document.getElementById('annotationsBox').disabled = true;
+  }
+  else if (userStatus > 0 && userStatus < 4) {
+      document.getElementById("title_input").disabled = false;
+      document.getElementById("id_input").disabled = false;
+      document.getElementById("author_input").disabled = false;
+      document.getElementById("language").disabled = false;
+      document.getElementById("ms_input").disabled = false;
+      document.getElementById("f_input").disabled = false;
+      document.getElementById("music_input").disabled = false;
+      document.getElementById("text_input").disabled = false;
+      document.getElementById('annotationsBox').disabled = false;
+      document.getElementById('stavesContainer').style.pointerEvents = "auto";
+  }
+}
+
+var resizeTimer;
+$(window).on('resize', function(e) {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    if (allowResize) {
+      resizeStaves();
+    }
+  }, 250);
+
+});
+
+function callBackParametersToLoad(status) {// status 1 it's loaded 0 load error
+    if(status) {
+        //lil, sgn, ssn, stemsn, cgn, ps, uc, ct, pt, plicat, st, melodics
+        setupStavesParametersUI(loadedLinesInLine, loadedShapeGroupNote,
+            loadedShapeSingleNote, loadedStemSingleNote,
+            loadedConnectGroupNote, loadedPes_type,
+            loadedUnited_clivis, loadedClimacus_type,
+            loadedPorrectus_type, loadedPlica_type, loadedScandicus_type,
+            loadedMelodicStructure, loadedBars);
+        return 1; // if stave was loaded
+    }
+    //alert("Impossibile aprire lo spartito selezionato!");
+    return 0;
+}
+
+function callBackStavesToLoad(status) {// status 1 it's loaded 0 load error
+    if(status) {
+        setupStavesUI(loadedModernStaves, loadedOldStaves, loadedTitle, loadedId, loadedAuthor,loadedLanguage, loadedMs, loadedF, loadedTextStaves, loadedAnnotationsStaves, loadedSettings, loadedOldStyle);
+        disableControls(loadedVisibility);
+        return 1; // if stave was loaded
+    }
+    alert("Something is out of tune...Cannot load the selected melody!");
+
+    return 0;
+}
+
+function loadContentByID() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    const id = urlParams.get('id');
+
+    if(String(id) != "null" && String(id) != "") {
+        loadStavesFromDatabase(id);
+    }
+    
+    // setNotationFromURL();
+}
+
+window.onload = loadContentByID();
+
+let divSetting = document.getElementById("settings");
+$(divSetting).load("overlayPages/settings.html");
+document.cookie = "alpha=1";
+
+let divPlayer = document.getElementById("player");
+$(divPlayer).load("overlayPages/player.html");
+
+let divImpEx = document.getElementById("importExport");
+$(divImpEx).load("overlayPages/exportMenu.html");
+
+// window.onload = updateStaves();
+
+/*------Esc capture command-------*/
+$(document).keyup(function(e) {
+     if (e.key === "Escape") { // escape key maps to keycode `27`
+        menuLineNumberRemove();
+        containerNoteMenuRemove();
+        let divSettings = document.getElementById("settings");
+        let oneStep = true;
+        if (divSettings.style.display === "block") {
+          divSettings.style.display = "none";
+          oneStep = false;
+        }
+        if (oneStep) {
+          toggleDivideScreen(true);
+        }
+    }
+});
+document.getElementById('settings').addEventListener('click', function(event) {
+    if (event.target.id === 'settings') { 
+        this.style.display = 'none'; // Hide the settings div
+    }
+});
+$(document).click(function(e) {
+    if (!$(e.target).closest("#importExport, #btnImportExport, .keep-open").length) {
+        $("#importExport").hide();
+    }
+});
+
+
+/*---------------------------------*/
+
+var pos = 0;
+var stavesContainerSelected = true;
+
+$("#stavesContainer").mousemove(function() {
+    if(userStatus == 3 && loadedVisibility == 2) {
+        $(this).css({
+            "pointer-events": "none"
+        });
+        disableControls(loadedVisibility);
+    }
+    else {
+        $(this).css({
+            "pointer-events": "auto"
+        });
+    }
+});
+
+$("#music_input").mousemove(function() {
+    if(userStatus == 3 && loadedVisibility == 2) {
+        $(this).css({
+            "disabled": "true"
+        });
+        disableControls(loadedVisibility);
+    }
+    else {
+        $(this).css({
+            "disabled": "false"
+        });
+    }
+});
+
+$("#stavesContainer").mousemove(function() {
+    if (userStatus == 3 && loadedVisibility == 2) {
+        $(this).css({
+            "disabled": "true"
+        });
+        disableControls(loadedVisibility);
+    }
+    else {
+        $(this).css({
+            "disabled": "false"
+        });
+    }
+});
+
+$("#stavesContainer").mouseleave(function() {
+    stavesContainerSelected=false;
+    if(document.getElementById("checkOldVisible").checked == false) {
+        document.getElementById("music_input").disabled = false;
+    }
+});
+
+$("#stavesContainer").click(function() {
+    stavesContainerSelected = true;
+    pos = document.getElementById("music_input").selectionStart;
+    document.getElementById("music_input").disabled = true;
+});
+
+$('#music_input').click(function() {
+    updateStaves();
+});
+
+// STOP KEYBOARD CREATE Note
+document.addEventListener("DOMContentLoaded", function () {
+  // List of specific input IDs to monitor
+  const inputIds = ['text_input', 'annotationsBox', 'title_input', 'id_input', 'author_input', 'language', 'ms_input', 'f_input'];
+
+  // Select each input by its ID and add an event listener
+  inputIds.forEach(function (id) {
+    const input = document.getElementById(id);
+    if (input) {
+      input.addEventListener("focus", function () {
+        stavesContainerSelected = false;
+      });
+    }
+  });
+});
+
+$(document).keyup(function(e) {
+  if (event.getModifierState("Alt") && e.which == 69 || e.which == 119) {
+    toggleEdit();
+  }
+});
+
+// key commands
+$(document).keyup(function(e) {
+  var editOn = false;
+  try{
+    editOn = document.querySelector("#editBtn").classList.contains("edit");
+  }catch{}
+  if (stavesContainerSelected == true) {
+    document.getElementById("music_input").disabled = true;
+    var music_input_2 = document.getElementById("music_input").value;
+
+    // Delete element
+    if (e.which == 8) {
+      // check if element to be deted is a clef
+      if (Number.isInteger(parseInt(music_input_2.substring(pos-1, pos))) 
+      || music_input_2.substring(pos-1, pos) == "}") {
+        var deletingKey = true;
+        if (currentStyle == 0) {
+          if (!confirm("You are deleting a clef sign")) {
+            return;
+          }
+        }
+      } else {
+        var deletingKey = false;
+      }
+
+      music_input_3 = music_input_2.substring(0, music_input_2.length - 1);
+      var firstHalf = music_input_2.substring(0, pos-1);
+      var secondHalf = music_input_2.substring(pos, music_input_2.length);
+      document.getElementById("music_input").value = firstHalf + secondHalf;
+      setCaretPosition("music_input", pos-1);
+      if (pos > 0) {
+        pos = pos-1;
+      }
+          
+      // do not repeat special characters
+      var precedingSign = music_input_3.substring(pos-1, pos);
+      var thisAndPrecedingSign = music_input_3.substring(pos-1, pos+1);
+      
+      if (precedingSign == "#" || precedingSign == "_" || precedingSign == "%" || precedingSign == "(" || precedingSign == "+" || precedingSign == "*" || deletingKey == true) {
+        var firstHalf = music_input_2.substring(0, pos-1);
+        var secondHalf = music_input_2.substring(pos+1, music_input_2.length);
+        document.getElementById("music_input").value = firstHalf + secondHalf;
+        if (pos>0) {
+          pos = pos-1;
+        };
+        setCaretPosition("music_input", pos);
+      }
+      updateStaves();
+    }
+    // Space
+    if (e.which == 32 || e.which == 9) {
+      var firstHalf = music_input_2.substring(0,pos) + " ";
+      var secondHalf = music_input_2.substring(pos, music_input_2.length);
+      document.getElementById("music_input").value = firstHalf + secondHalf;
+      pos = pos+1;
+      setCaretPosition("music_input", pos);
+      updateStaves();
+    }
+      
+    // LETTERS/NOTES
+    // if shift AND capslock
+    if (event.shiftKey && event.getModifierState("CapsLock")) {
+      if (e.which == 65) {
+        createNote("a");
+      } else if (e.which == 66) {
+        createNote("b");
+      } else if (e.which == 72) {
+        createNote("h");
+      } else if (e.which == 67) {
+        createNote("c");
+      } else if (e.which == 68) {
+        createNote("d");
+      } else if (e.which == 69) {
+        createNote("e");
+      } else if (e.which == 70) {
+        createNote("f");
+      } else if (e.which == 71) {
+        createNote("g");
+      }
+    
+    // if shift OR capslock
+    } else if (event.shiftKey || event.getModifierState("CapsLock")) {
+       if (e.which == 65) {
+        createNote("A");
+      } else if (e.which == 66) {
+        createNote("B");
+      } else if (e.which == 72) {
+        createNote("H");
+      } else if (e.which == 67) {
+        createNote("C");
+      } else if (e.which == 68) {
+        createNote("D");
+      } else if (e.which == 69) {
+        createNote("E");
+      } else if (e.which == 70) {
+        createNote("F");
+      } else if (e.which == 71) {
+        createNote("G");
+      }
+      
+      // Bequadro
+      else if (e.which == 53) {
+        // delete flat if there is already a flat
+        if (music_input_2.substring(pos-2,pos-1) == "%") {
+          var firstHalf = music_input_2.substring(0,pos-2);
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos-1;
+          setCaretPosition("music_input", pos);
+        }
+        else {
+          var firstHalf = music_input_2.substring(0,pos-1) + "%";
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos+1;
+          setCaretPosition("music_input", pos);
+        }
+      }
+      
+      // plica
+      else if (e.which == 56) {
+        // delete flat if there is already a flat
+        if (music_input_2.substring(pos-2,pos-1) == "(") {
+          var firstHalf = music_input_2.substring(0,pos-2);
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos-1;
+          setCaretPosition("music_input", pos);
+        }
+        else {
+          var firstHalf = music_input_2.substring(0,pos-1) + "(";
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos+1;
+          setCaretPosition("music_input", pos);
+        }
+      }
+      
+      // FLAT
+      else if (e.which == 189) {
+        // delete flat if there is already a flat
+        if (music_input_2.substring(pos-2,pos-1) == "_") {
+          var firstHalf = music_input_2.substring(0,pos-2);
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos-1;
+          setCaretPosition("music_input", pos);
+        }
+        else {
+          var firstHalf = music_input_2.substring(0,pos-1) + "_";
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos+1;
+          setCaretPosition("music_input", pos);
+        }
+      }
+    } else if (event.getModifierState("Alt")) {
+      if (e.which == 71) {
+        createNote("*G");
+      } else if (e.which == 65) {
+        createNote("+a");
+      } else if (e.which == 66) {
+        createNote("+b");
+      } else if (e.which == 72) {
+        createNote("+h");
+      }
+      
+      // Sharp
+      if (e.which == 222) {
+        if (music_input_2.substring(pos-2,pos-1) == "#") {
+          var firstHalf = music_input_2.substring(0,pos-2);
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos-1;
+          setCaretPosition("music_input", pos);
+        }
+        else {
+          var firstHalf = music_input_2.substring(0,pos-1) + "#";
+          var secondHalf = music_input_2.substring(pos-1, music_input_2.length);
+          document.getElementById("music_input").value = firstHalf + secondHalf;
+          updateStaves();
+          pos = pos+1;
+          setCaretPosition("music_input", pos);
+        }
+      }
+    } else {
+      // if no shift nor capslock
+      if (e.which == 65) {
+        createNote("a");
+      } else if (e.which == 66) {
+        createNote("b");
+      } else if (e.which == 72) {
+        createNote("h");
+      } else if (e.which == 67) {
+        createNote("c");
+      } else if (e.which == 68) {
+        createNote("d");
+      } else if (e.which == 69) {
+        createNote("e");
+      } else if (e.which == 70) {
+        createNote("f");
+      } else if (e.which == 71) {
+        createNote("g");
+      } else if (e.which == 189) {
+        createNote("-");
+      } else if (e.which == 191) {
+        createNote("?");
+
+      } else if (e.which == 49) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "C") {
+          createNote("1");
+        } else {
+          createNote("C1")
+        }
+      } else if (e.which == 50) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "C") {
+          createNote("2");
+        } else {
+          createNote("C2");
+        }
+      } else if (e.which == 51) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "C") {
+          createNote("3");
+        } else {
+          createNote("C3");
+        }
+      } else if (e.which == 52) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "C") {
+          createNote("4");
+        } else {
+          createNote("C4");
+      }
+      } else if (e.which == 53) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "F") {
+          createNote("1");
+        } else {
+          createNote("F1");
+        }
+      } else if (e.which == 54) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "F") {
+          createNote("2");
+        } else {
+          createNote("F2");
+        }
+      } else if (e.which == 55) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "F") {
+          createNote("3");
+        } else {
+          createNote("F3");
+        }
+      } else if (e.which == 56) {
+        if (document.getElementById("music_input").value.substring(pos-1, pos) == "F") {
+          createNote("4");
+        }
+        else {
+          createNote("F4");
+        }
+      }
+    }
+
+    if (e.key == "/") {
+      createNote("/");
+    }
+
+    // Return
+    if (e.which == 13) {
+      var firstHalf = music_input_2.substring(0,pos)+ "\n";
+      var secondHalf = music_input_2.substring(pos, music_input_2.length);
+      document.getElementById("music_input").value = firstHalf + secondHalf;
+      pos = pos +1;
+      updateStaves(true);
+      changeSelectedNote();
+    }
+    // freccia sx
+    else if (e.which == 37) {
+      var selChar = music_input_2.substring(pos-1,pos);
+      if (selChar == "1" || selChar == "2"|| selChar == "3"|| selChar == "4" || selChar == "}") {
+        pos = pos - 3;
+      }
+
+      if (pos > 1) {
+        pos = pos -1;
+      }
+      
+      selChar = music_input_2.substring(pos-1,pos);
+      
+      if (selChar == "+" || selChar == "_" || selChar == "#" || selChar == "%" || selChar == "(" || selChar == ")" || selChar == "[" || selChar == "]" || selChar == "/") {
+        pos = pos - 1;
+      }
+      
+      var actualSelNote = document.getElementsByClassName('selectedNote')[0];
+
+      var idOfNextSelNote = "note" + music_input_2.substring(0, pos)
+      idOfNextSelNote = idOfNextSelNote.replace(/\s|_|%|#|\*|\(|\)|\[|\]|\//g,"").length;
+      
+      var newSelNote = document.getElementById(idOfNextSelNote);
+      
+      if (actualSelNote != undefined) {
+        actualSelNote.classList.remove('selectedNote');
+      }
+      if (newSelNote != null) {
+        newSelNote.classList.add('selectedNote');
+      }
+    }
+
+    // freccia dx
+    else if (e.which == 39) {
+      var nextChar = music_input_2.substring(pos,pos+1);
+      
+      if (nextChar == "1" || nextChar == "2"|| nextChar == "3"|| nextChar == "4"  || nextChar == "5" || nextChar == "}") {
+        pos = pos + 3;
+      }
+      
+      if (pos < music_input_2.length) {
+        pos = pos + 1;
+        
+        var selChar = music_input_2.substring(pos-1,pos);
+        
+        if (selChar == "+" || selChar == "_" || selChar == "#" || selChar == "%"  || selChar == "(" || selChar == ")" || selChar == "[" || selChar == "]" || selChar == "/") { 
+          pos = pos + 1;
+        }
+        var actualSelNote = document.getElementsByClassName('selectedNote')[0];
+        
+        var idOfNextSelNote = "note" + music_input_2.substring(0,pos);
+        idOfNextSelNote.replace(/\s|_|%|#|\*|\(|\)|\[|\]|\//g, "").length;
+        idOfNextSelNote = cleanKeys(idOfNextSelNote);
+        
+        var newSelNote = document.getElementById(idOfNextSelNote);
+        
+        if (actualSelNote != undefined) {
+          actualSelNote.classList.remove('selectedNote');
+        }
+        if (newSelNote != null) {
+          newSelNote.classList.add('selectedNote');
+        }
+      }
+    }
+    // canc
+    else if (e.which == 46) {
+      var music_input_2 = document.getElementById("music_input").value;
+      var firstHalf = music_input_2.substring(0,pos);
+      var secondHalf = music_input_2.substring(pos+1, music_input_2.length);
+      document.getElementById("music_input").value = firstHalf + secondHalf;
+      setCaretPosition("music_input", pos);
+      updateStaves(true);
+    }
+  }
+});
+
+// Create note
+function createNote(newClickedNote) {
+  var music_input_2 = document.getElementById("music_input").value;
+  
+  if (music_input_2.slice(-1) == "_" && newClickedNote == "b") {
+    music_input_2 = music_input_2.slice(0,music_input_2.length-1);
+  }
+
+  var firstHalf = music_input_2.substring(0, pos) + newClickedNote;
+  var secondHalf = music_input_2.substring(pos, music_input_2.length);
+  document.getElementById("music_input").value = firstHalf + secondHalf;
+  updateStaves(true);
+  
+  if (newClickedNote.length == 2) {
+    pos = pos + 1;
+  }
+  pos = pos + 1;
+  changeSelectedNote();
+}
+// changes selected note when you create a new note
+function changeSelectedNote() {
+  var currentSelNote = document.getElementsByClassName('selectedNote')[0];
+  var music_input_2 = document.getElementById('music_input').value;
+  setCaretPosition("music_input", pos);
+}
+// changes selected note when you click on it
+function selectNote(numberOfNote) {
+  if (document.getElementById("checkOldVisible").checked == false) {
+    var music_input = document.getElementById("music_input").value;
+    var pos = 0;
+    var j = 0;
+    
+    while (pos < numberOfNote) {
+      if (music_input.substring(j, j+2).match(/C1|C2|C3|C4|F1|F2|F3|F4|G1|G2|G3|G4|G5|G6|G7|G8|G9|b\}|h\}/gi)) {
+        j = j+1;
+      } 
+      else if (music_input.substring(j, j+1).match(/[a-hA-H]/g)) {
+        pos = pos+1;
+      }
+      
+      j = j+1;
+    }
+    setCaretPosition("music_input", j);
+    updateStaves();
+  }
+}
+
+function setCaretPosition(ctrl, pos) {
+  var ctrl = document.getElementById("music_input");
+  // For Most Web Browsers
+  if (ctrl.setSelectionRange) {
+    ctrl.focus();
+    setTimeout(function() {
+      ctrl.setSelectionRange(pos, pos);
+    }, 10); // Small delay to ensure focus is set
+  }
+  // IE8 and below
+  else if (ctrl.createTextRange) {
+    var range = ctrl.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', pos);
+    range.moveStart('character', pos);
+    range.select();
+  }
+}
+
+document.onreadystatechange = function () {
+  var state = document.readyState;
+  if (state == 'complete') {
+    document.getElementById('stavesBox').classList.add("short");
+    document.getElementById('interactive');
+    // document.getElementById('load').style.visibility="hidden";
+  }
+}
+
+window.addEventListener("msImg", event => {
+    var image = document.querySelector('msImg');
+    var isLoaded = image.complete && image.naturalHeight !== 0;
+    alert(isLoaded);
+});
+
+// Default shapes controller
+function openDefaultShapesOverlay() {
+  addContentToOverlay('overlayPages/defaultShapes.html', 'blank');
+
+  setTimeout(function() {
+    defaultPunctusVirga(punctus_virga_default);
+    defaultPes(pes_type);
+    defaultClivis (united_clivis);
+    defaultScandicus(scandicus_type);
+    defaultClimacus(climacus_type);
+    defaultPlica(plica_type);
+    defaultPorrectus(porrectus_type);
+    defaultTorculus(torculus_type, false);
+  }, 400);
+}
+
+function defaultPunctusVirga(param) {
+  punctus_virga_default = param;
+
+  if (param == 1) {
+    document.getElementById("def_puctVir_1").classList.add("selectedBtn");
+    document.getElementById("def_puctVir_2").classList.remove("selectedBtn");
+  } else {
+    document.getElementById("def_puctVir_1").classList.remove("selectedBtn");
+    document.getElementById("def_puctVir_2").classList.add("selectedBtn");
+  }
+}
+
+function defaultPunctusVirgaBtn(param) {
+  punctus_virga_default = param;
+
+  if (param == 1) {
+    removeStems();
+    
+    document.getElementById("def_puctVir_1").classList.add("selectedBtn");
+    document.getElementById("def_puctVir_2").classList.remove("selectedBtn");
+  } else {
+    document.getElementById("def_puctVir_1").classList.remove("selectedBtn");
+    document.getElementById("def_puctVir_2").classList.add("selectedBtn");
+    
+    addStems();
+  }
+}
+
+function defaultPes(param) {
+  pes_type = param;
+  if (param == 1) {
+    document.getElementById("def_pes_1").classList.add("selectedBtn");
+    document.getElementById("def_pes_2").classList.remove("selectedBtn");
+  } else {
+    document.getElementById("def_pes_1").classList.remove("selectedBtn");
+    document.getElementById("def_pes_2").classList.add("selectedBtn");
+  }
+  updateStaves();
+}
+
+function defaultClivis (param) {
+  united_clivis = param;
+  if (param == 1) {
+    document.getElementById("def_cl_1").classList.add("selectedBtn");
+    document.getElementById("def_cl_2").classList.remove("selectedBtn");
+  } else {
+    document.getElementById("def_cl_1").classList.remove("selectedBtn");
+    document.getElementById("def_cl_2").classList.add("selectedBtn");
+  }
+  updateStaves();
+}
+
+function addStems(refresh = true) {
+  let notes = document.getElementById("music_input").value;
+  notes = cleanKeys(notes);
+  notes = notes.replace(/'/g, "");
+  notes = notes.split("\n");
+  
+  for (let i = 0; i < notes.length; i++) {
+    let n = notes[i].split(" ");
+    for (let j = 0; j < n.length; j++) {
+      try {
+        if (n[j].length == 1 && stemSingleNote[i][j].length < 1) {
+          stemSingleNote[i][j] = [2];
+        }else{
+          console.log(stemSingleNote[i][j].length < 1)
+          console.log(stemSingleNote[i][j].length);
+          console.log(stemSingleNote[i][j]);
+        }
+      } catch (error) {}
+    }
+  }
+  if (refresh === true) {
+    updateStaves();
+  }
+}
+
+function removeStems() {
+  if (confirm("Convert every virga into a punctus?") == true) {
+    let notes = document.getElementById("music_input").value;
+    notes = cleanKeys(notes);
+    notes = notes.replace(/%|\'|\//g, '');
+    notes = notes.split("\n");
+
+    for (let i = 0; i < notes.length; i++) {
+      let n = notes[i].split(" ");
+      for (let j = 0; j < n.length; j++) {
+        if (n[j].length == 1 && stemSingleNote[i][j] == 2) {
+           stemSingleNote[i][j] = [];
+        }
+      }
+    }
+  } else {
+    return;
+  }
+  updateStaves();
+}
+
+function defaultScandicus(param) {
+  scandicus_type = param;
+  for (let i = 1; i <= 3; i++) {
+    const id = `def_sc_${i}`;
+    if (i == param) {
+      document.getElementById(id).classList.add("selectedBtn");
+    }else{
+      document.getElementById(id).classList.remove("selectedBtn");
+    }
+  }
+
+  updateStaves();
+}
+
+function defaultClimacus(param) {
+  climacus_type = param;
+  for (let i = 1; i <= 5; i++) {
+    const id = `def_clim_${i}`;
+    if (i == param) {
+      document.getElementById(id).classList.add("selectedBtn");
+    }else{
+      document.getElementById(id).classList.remove("selectedBtn");
+    }
+  }
+  updateStaves();
+}
+
+function defaultPlica(param) {
+  plica_type = param;
+  
+  for (let i = 1; i <= 4; i++) {
+    const id = `def_pl_${i}`;
+    if (i == param) {
+      document.getElementById(id).classList.add("selectedBtn");
+    }else{
+      document.getElementById(id).classList.remove("selectedBtn");
+    }
+  }
+  updateStaves();
+}
+
+function defaultTorculus(param, refresh=true) {
+  torculus_type = param;
+  let tor1 = document.getElementById("def_tor_1").classList;
+  let tor2 = document.getElementById("def_tor_2").classList;
+
+  if (param == 1) {
+    tor1.add("selectedBtn");
+    tor2.remove("selectedBtn");
+  } else {
+    tor1.remove("selectedBtn");
+    tor2.add("selectedBtn");
+  }
+  setDefaultTorculus(param, refresh);
+}
+
+function setDefaultTorculus(param, refresh=true) {
+  if (refresh == true) {
+    if (confirm("This will override the shape of every torculus. Continue?") == false) {
+      return;
+    }
+  }
+
+  let notes = document.getElementById("music_input").value;
+  notes = cleanKeys(notes);
+  notes = notes.replace(/%|\'|\//g, '');
+  notes = notes.split("\n");
+  
+  for (let i = 0; i < notes.length; i++) {
+    var n = notes[i].split(" ");
+    for (let j = 0; j < n.length; j++) {
+
+      if (n[j].length == 3) {
+        let a = getNoteValue(n[j].substring(0,1));
+        let b = getNoteValue(n[j].substring(1,2));
+        let c = getNoteValue(n[j].substring(2,3));
+
+        if (a < b && b > c) {
+          if (param == 1) {
+            shapeSingleNote[i][j] = [];
+          } else if (param == 2) {
+            shapeSingleNote[i][j] = [1];
+          }
+        }
+      }
+    }
+    if (refresh === true) {
+      updateStaves();
+    }
+  }
+}
+
+function defaultPorrectus(param) {
+  porrectus_type = param;
+  console.log(param)
+  for (let i = 1; i <= 3; i++) {
+    const id = `def_por_${i}`;
+    if (i == param) {
+      document.getElementById(id).classList.add("selectedBtn");
+    }else{
+      document.getElementById(id).classList.remove("selectedBtn");
+    }
+  }
+  updateStaves();
+}
+//*** End default shapes controller
+
+// Set conditions for sound while edit
+$("#music_input").mouseleave(function() {
+    musicInputSelected = false;
+});
+$("#music_input").click(function() {
+    if (localStorage.getItem("session_iduser") == 10 && getCookie("soundWhileEdit") == 1) {
+    musicInputSelected = true;
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('popup');
+  document.querySelectorAll('.menuButton').forEach(element => {
+    element.addEventListener('mouseover', (event) => {
+      const titleText = event.target.getAttribute('title');
+      popup.textContent = titleText;
+      popup.style.display = 'block';
+      const rect = event.target.getBoundingClientRect();
+      popup.style.left = `${rect.left}px`;
+      popup.style.top = `${rect.top - popup.offsetHeight}px`;
+    });
+
+    element.addEventListener('mouseout', () => {
+      popup.style.display = 'none';
+    });
+  });
+});
+
+
+// Prevent the default action (scrolling) except when typing in input or textarea
+document.addEventListener("keydown", function(event) {
+  // Check if the pressed key is the space bar
+  if (event.code === 'Space') {
+    // Check if the event target is an input or textarea
+    const isTypingField = event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA';
+
+    // Prevent default only if the target is not an input or textarea
+    if (!isTypingField) {
+      event.preventDefault();
+    }
+  }
+});
+
+function deleteStavesButton(){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    if(confirm('Are you sure you want to delete this melody?')){
+        $.ajax({
+            type : "POST",
+            url  : "./php/deleteStaves.php", 
+            data : {id_staves:loadedIdStaves, email: email, password : password},
+            success : function(data){
+                alert(data);
+                if(data == "The melody has been deleted!"){
+                    resetLoadStaves();
+                    resetLoadParameters();
+                    resetFields();
+                }
+            }
+        });
+    }
+}
+</script>
+<!-- *******************Mirador******************* -->
+<script type="text/javascript" src="script/mirador_operations.js"></script>
+
+<script>window.addEventListener("DOMContentLoaded", function() {
+  const script = document.createElement("script");
+  script.src = "https://unpkg.com/mirador@3.0.0/dist/mirador.min.js";
+  script.onload = function() {
+    document.getElementById("open-facsimile").disabled = false;
+    // Initialize Mirador here if necessary
+  };
+  document.body.appendChild(script);
+});
+</script>
+
+<script>
+function JSaccess(loadedIdStaves){
+  if (loadedIdStaves == null){
+    
+      // Get user information
+      let email = localStorage.getItem("session_email");
+      let password = localStorage.getItem("session_psw");
+
+      $.ajax({
+          type : "POST",  //type of method
+          url  : "./php/userInfo.php",  //your page
+          data : {email: email, password : password},
+          success : function(data) {
+              let userId = -1;
+              try {
+                  let obj = jQuery.parseJSON(data);
+                  if (obj != -1) {
+                    userId = obj[0];
+                  }
+              }catch (error) {
+                
+              }
+              $.ajax({
+                  type : "POST",  //type of method
+                  url  : "./php/JSaccess.php",  //your page
+                  data : {userId:userId, idStaves:0, repId:"", page:"editor"},
+                  success : function(data){
+                  }
+              });
+          }
+      });
+    }
+}
+JSaccess(loadedIdStaves);
+  
+
+</script>

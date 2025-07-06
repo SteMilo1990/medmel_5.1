@@ -1,0 +1,407 @@
+html {
+
+}
+polygon {
+  fill: transparent;
+}
+
+
+body {
+  background-color: white !important;
+}
+
+.clickablePolygon {
+  fill: transparent;
+}
+.clickablePolygon:hover {
+  fill: lightgray;
+}
+
+input:focus{
+  outline: none;
+}
+
+.title {
+  font-size: 1em;
+}
+.modifier {
+  border-color: gray !important;
+  border-style: solid;
+  background-color: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.active {
+  background-color: gray !important;
+  color: white !important;
+}
+
+input:focus, .modifier:focus, {
+  outline: 0 !important;
+}
+
+.slider {
+  width:210px;
+}
+#musicStringInput {
+  border: 1px solid transparent;
+  background-color: lightgray;
+}
+#musicStringInput:focus {
+  border: 1px solid gray;
+  outline: none;
+} 
+#svgSearchWrap {
+  cursor: none;
+}
+#musicStringInput:focus {
+  background-color: white;
+}
+#bodyContainer {
+  background-color: white;
+  padding:0;
+}
+line {
+  stroke: black !important;
+  z-index: 10;
+}
+#checkboxesContainer {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 7px 0 0 15px;
+}
+.optionLabel:after {
+  height: 10px;
+}
+
+#optionsBox {
+  display: flex; 
+  margin-left: 10px;
+  margin-bottom: 10px
+}
+
+input:focus {
+}
+
+/* .cursor {
+  display: none;
+  margin-top:55px;
+  position: absolute;
+  z-index: 1;
+  transition: 0.5s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+      0.2s cubic-bezier(0.75, -1.27, 0.3, 2.33) opacity;
+  user-select: none;
+  pointer-events: none;
+  transform: scale(0.8);
+  width: 15px;
+  height: 12px;
+  background: #484848;
+  transform: rotate(145deg);
+  -moz-border-radius: 100px / 89px;
+  -webkit-border-radius: 100px / 89px;
+  border-radius: 100px / 89px;
+} */
+
+/* #svgWrap:hover {
+  cursor: none;
+} */
+
+#svgSearchWrap:hover {
+cursor: url('../img/images/notehead.png') 0 10, auto; /* Center hotspot for a 32x32 SVG */
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 10px;
+  border-radius: 5px;
+  background: lightgray;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2d3c43;
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  background: #2d3c43;
+  cursor: pointer;
+}
+.progress-bar-custom {
+  background-color: #c0c0c0 !important;
+}
+
+#startQuerySearch {
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid #2D3C43;
+  padding: 10px;
+  color: #2D3C43;
+}
+
+#selectLanguage {
+  border-color: gray;
+  border-radius: 4px;
+  width: 210px;
+  margin-top:0px
+}
+
+.editBtn {
+  margin: 10px 0px 10px 10px;
+  background-color: #e7e7e7; /* Green */
+  border: none;
+  padding: 5px 17px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+#musicInput {
+  border: 1px solid lightgray;
+  margin: 10px 0 10px 10px;
+}
+#positionOptionBox {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 7px;
+}
+#filtersContainer {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 7px 0 7px 15px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+#option-box-container {
+  display:flex;
+  flex-wrap: wrap; /* Wrap items to the next row if needed */
+  justify-content: space-between; /* Add spacing between columns */
+  gap: 10px; /* Control the gap between the columns (horizontal and vertical) */
+  margin:2px;
+}
+
+.option-box {
+  flex: 0 0 calc(25%); /* Each column takes 25% of the container width minus gap */
+}
+
+#searchMelodiesWrapper{
+  flex: 1; /* Allows this div to grow and take up remaining space */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .option-box {
+    flex: 0 0 calc(50% - 20px); /* On small screens, each column takes 50% width */
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .option-box {
+    flex: 0 0 calc(100% - 20px); /* On very small screens, each column takes 100% width */
+    margin-bottom: 10px;
+  }
+}
+
+
+/* CHECKBOX STYLE  */
+/* The container */
+.label-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.label-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.label-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.label-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+.label-container input:disabled ~ .checkmark {
+  background-color: lightblue;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.label-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.label-container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* CHECKBOX STYLE END */
+
+
+/* RADIO BUTTON */
+/* The container */
+.radio-container {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .radio-checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .radio-checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .radio-checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .radio-checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+/* RADIO BUTTONS END */
+
+/* Search history */
+  .toggle-container {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .history-arrow {
+    display: inline-block;          /* Ensure the arrow is inline-block for rotation */
+    margin-left: 5px;
+    transition: transform 0.3s ease; /* Arrow rotation animation */
+  }
+
+  .expand-arrow {
+    transform: rotate(-90deg); /* Rotate arrow to indicate expanded state */
+  }
+  
+  #searchMelodiesWrapper {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  #searchMelodiesWrapper .toggle-container {
+    margin-left:15px;
+    margin-top:7px;
+  }
+
+  #searchedMelodies {
+    height: 100px;
+    transition: height 0.3s ease; /* Smooth height transition for expand/collapse */
+    padding: 0 10px; /* Ensure padding doesn't add to the collapsed height */
+    max-height:300px;
+    overflow: auto;
+  }
+
+  #clearHistoryBtnWrapper{
+    margin-left: auto;
+  }
+  #clearHistoryBtn {
+    margin:10px;
+    cursor:pointer; 
+    background-color:rgb(231, 231, 231);
+    padding-right:5px;
+    padding-left:5px;    
+  }
+  /* Optional: Add some content styling */
+
+  .searchedMelodyContainer {
+    cursor:pointer;
+  }
+  .col-md-6 {
+    padding-left:0 !important;
+  }

@@ -1,0 +1,49 @@
+#boxStavesContainer {
+  margin: 0;
+  border-top: 0;
+  border-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding-left:35px !important;
+  /* height: 92.2vh; */
+}
+
+#stavesBox {
+  padding-left: 0;
+}
+
+.headerContainer {
+border-bottom: 1px solid gray !important;
+}
+
+#bottomSideBar {
+  padding-left: 10px !important;
+  padding-right: 0 !important;
+}
+
+.playerButton {
+  width: 17%;
+  min-width: 15px;
+  max-width: 45px !important;
+}
+.playerButton img {
+  width: 100%;
+  min-width: 10px;
+  max-width: 10px;
+}
+
+.contentPane {
+  height: 73vh;
+}
+
+#frameBox {
+  /* margin-top: -10px; */
+
+  right: -10px;
+}
+#frameSidebar {
+  margin-top: 0 !important;
+}
+#rightSideBar {
+  /* margin-top: 10px; */
+}

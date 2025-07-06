@@ -1,0 +1,155 @@
+<div class="">
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="clear"></div>
+    <div class="separator"  style="margin-top: 5px;">Sign up</div>
+    <form method="post" name="registration">
+        <div class=" justify-content-center ">
+            <div class="divInputField" style="margin-top: 10px;">
+                <input id="name" type="text" onkeyup="" class="inputFields" name="" value="" name="name" value="" placeholder="Name"/>
+            </div>
+            <div class="marginTop5 divInputField">
+                <input id="surname" type="text" onkeyup="" class="inputFields" name="surname" value="" placeholder="Surname"/>
+            </div>
+            <div class=" marginTop5 divInputField">
+                <input id="email" type="text" onkeyup="" class="inputFields" name="" value="" name="email" value="" placeholder="E-mail"/>
+            </div>
+            <div class="marginTop5 divInputField">
+                <input id="password" type="password" onkeyup="" class="inputFields" name="password" value="" placeholder="Password"/>
+            </div>
+            <div style="text-align:center; margin-top: 30px;">
+                <img src="" id="captchaImg1"  name="captchaImg1"/>
+                <img src="" id="captchaImg2"  name="captchaImg2"/>
+            </div>
+            <div class="marginTop5 divInputField">
+                <input id="captcha_text" onkeyup="" class="inputFields" name="captchaText" value="" placeholder="Transcribe captcha"/>
+            </div>
+        <div id="error_field" style="text-align:center;">
+            <br />
+        </div>
+        </div>
+
+        <div style="margin-top:10px;">
+            <center>
+            <input id="signin" style="width: 200px" type="button" onClick="userRegistration()"  name="id" value="Sign up"/>
+            </center>
+        </div>
+        <div style="margin-top:10px;">
+            <center>
+            <input id="login" style="width: 200px" type="button" onClick="switchOverlayContent('overlayPages/loginForm.html', 'logo')"  name="register" value="Login"/>
+            </center>
+        </div>
+        <div style="margin-top:10px;">
+            <center>
+            <input id="cancel" style="width: 200px" type="button" onClick="hideOverlay()"  name="id" value="Cancel"/>
+            </center>
+        </div>
+    </form>
+</div>
+<style>
+  @media only screen and (min-width: 769px) {
+    .containerOverlay {
+        margin: auto;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logoPanel {
+        background-color: #f3f0eb !important;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-50%;}
+        100%{top:50%;}
+    }
+}
+
+    #captchaImg1, #captchaImg2 {
+        height: 40px;
+        border-radius: 2px;
+    }
+    @media only screen and (min-width: 769px){
+        /*----Style Overlay Template -----*/
+        .containerOverlay{
+            width: 100%;
+            margin: auto;
+            height: 550px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+    @media only screen and (max-width: 769px){
+        /*----Style Overlay Template -----*/
+        .containerOverlay{
+            width: 100%;
+            margin: auto;
+            height: 550px;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%,-25%);
+
+        }
+    }
+
+    @media only screen and (max-width: 769px){
+        .closeButton{
+            display: none;
+            float:right;
+        }
+    }
+    /* ----Apply this style when width screen size is more then 767 */
+    @media only screen and (min-width: 769px){
+        .closeButton{
+
+        }
+    }
+</style>
+<script>
+    $("#name").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#surname").focus();
+            }
+        });
+    $("#surname").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#email").focus();
+            }
+        });
+    $("#email").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#password").focus();
+            }
+        });
+    $("#password").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#signin").click();
+            }
+        });
+
+var trascr_text = "";
+function generateCaptcha(){
+      let transc_ar = ["chantar", "senhers", "chan", "mout", "belh", "plazen", "dous", "fuellas", "flors", "avinen", "razo", "digz", "apleg", "pessan", "solatz", "gens", "signes", "amatz", "cors", "coratge", "lengua", "amoros", "dregz", "fassa", "pres", "ditz", "finas", "ma", "uoler", "hom", "fi", "ferm", "bes"];
+      let random_number1 = Math.floor(Math.random()* 34);
+      //let random_number2 = Math.floor(Math.random()* 34);
+      let png1 = "./img/captcha_imgs/"+(random_number1+1) + ".png";
+      //let png2 = "./img/captcha_imgs/"+(random_number2+1) + ".png";
+      document.getElementById("captchaImg1").setAttribute("src", png1);
+      //document.getElementById("captchaImg2").setAttribute("src", png2);
+      //trascr_text = transc_ar[random_number1]+transc_ar[random_number2];
+      trascr_text = transc_ar[random_number1];
+}
+
+generateCaptcha();
+
+</script>

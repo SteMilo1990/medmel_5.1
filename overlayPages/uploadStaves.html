@@ -1,0 +1,146 @@
+<div class="">
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="clear"></div>
+
+    <div class="separator marginTop10">Upload Staves</div>
+    <br />
+        <div>
+            <div class="justify-content-center">
+                <div class=" marginTop10 ">
+
+                    <div id="divVisibility" class="sizeDiv marginTop10">
+                        <div>
+                        <select id="visibility" name="visibility" style="width:100%; min-width:300px;">
+                            <option value="0" selected="selected">Private (just for me)</option>
+                            <option value="1">Publisher (shared with content creators)</option>
+                            <option value="2">Public (all users)</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="sizeDiv marginTop10">
+                        <select id="upload" name="upload" style="width:100%; min-width:300px;">
+                            <option value="0">Modern transcription</option>
+                            <option value="1">Medieval transcription</option>
+                            <option value="2" selected="selected">Modern and Medieval transcriptions</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        <div id="error_field_login" style="text-align:center;">
+            <br />
+        </div>
+        <div class="clean"></div>
+        <div class="d-flex justify-content-center marginTop10 ">
+            <div style="margin-right:30px;">
+                <input id="btnStartUpload" type="button" onClick="uploadStavesButton()"   value="Upload"/>
+            </div>
+
+            <div >
+                <input id="btnCancelUpload" type="button" onClick="hideOverlay()" value="Cancel"/>
+            </div>
+        </div>
+</div>
+
+<style>
+  @media only screen and (min-width: 769px) {
+    .containerOverlay {
+        margin: auto;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logoPanel {
+        background-color: #f3f0eb !important;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-50%;}
+        100%{top:50%;}
+    }
+}
+
+@media only screen and (max-width: 769px){
+    .closeButton{
+        display: none;
+        float:right;
+    }
+}
+
+  
+</style>
+<script>
+    function loadUploadUI(permission){
+        setModernOldUploadDefault();
+        if(permission == 3){
+            document.getElementById("divVisibility").style.display = "none";
+            document.getElementById("visibility").value = 0;
+            if(parseInt(loadedVisibility) == 1 || parseInt(loadedVisibility) == 2){
+                document.getElementById("btnDeleteUpload").disabled = true;
+                document.getElementById("btnStartUpload").disabled = true;
+            }
+            else if(parseInt(loadedVisibility) == 0 || loadedVisibility == null){
+                document.getElementById("btnStartUpload").disabled = false;
+            }
+        }
+        else if(permission == 1 || permission == 2){
+            if(loadedVisibility != null){
+                document.getElementById("visibility").value = loadedVisibility;
+            }
+        }
+        else{
+            hideOverlay();
+        }
+        //userPermission = getUserLevel();
+        //----check if staves exist------
+    }
+
+    function uploadStavesButton(){
+          let visibility = document.getElementById('visibility').value;
+          let upload = document.getElementById('upload').value;
+
+          storeStavesToDatabase(visibility, upload);
+    }
+    function checkPermission(){
+        let status = 4;
+        //current user----------------------------------------------
+        let email = localStorage.getItem("session_email");
+        let password = localStorage.getItem("session_psw");
+        $.ajax({
+            type : "POST",  //type of method
+            url  : "./php/userInfo.php",  //your page
+            data : {email: email, password : password},
+            success : function(data){
+                try{
+                    let obj = jQuery.parseJSON(data);
+                    status = obj[5];
+                    loadUploadUI(status);
+                }catch{}
+
+            }
+        });
+
+    }
+
+    function setModernOldUploadDefault() {
+      if (loadedModernStyle == 1 && loadedOldStyle == 1){
+        document.getElementById("upload").value = 2;
+      }else if (loadedModernStyle == 1 && loadedOldStyle == 0){
+        document.getElementById("upload").value = 0;
+      }else if (loadedModernStyle == 0 && loadedOldStyle == 1){
+        document.getElementById("upload").value = 1;
+      }
+    }
+
+    window.onload = checkPermission();
+</script>

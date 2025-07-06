@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Med Mel</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+  <!-- Bootstrap core CSS -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/oldShapeFormatter.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+  <script type="text/javascript" src="comparetool/script/controllerCompareTool.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="script/userEvent.js"></script>
+  <!--*******************Player******************* -->
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <script>
+      /*default settings*/
+      document.cookie = "melodicStructure=1";
+      document.cookie = "lineNumber=1";
+      /*----------------*/
+      </script>
+      <style type="text/css">
+        #bodyContainer {
+          padding: 0;
+        }
+        #stavesBox, #header, #bodyEditor{
+            background-color: white;
+        }
+        #boxStavesContainer {
+            border: none;
+        }
+        #credits {
+          padding-left: 20px
+        }
+      </style>
+</head>
+<body oncontextmenu="return false;">
+    <div>
+        <div id="header" width="80%">
+            <a id="logo" target="_blanck"><img src="./img/logo/m2.png" width="140px" style="padding:10px;"></a>
+        </div>
+    </div>
+    <div id="bodyContainer" class="   containerColor" > <!-- Main container -->
+
+        <div id="bodyEditor" class="  containerColor" >
+
+            <div class="clear">
+            </div>
+            <div class="row">
+                <div id="stavesBox" style="height:100%;"  >
+                    <div id="boxStavesContainer" class="scrollablePane contentPane" style="height:100%;" >
+                        <div id="stavesContainer" class="stavesContainer" style="pointer-events:none;"> <!-- Staves Container -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ***************Input component form*************************** -->
+                <div id="containerSideBar" class="col-md-3" hidden>
+                    <div id="rightSideBar" class="active" style="display:block;">
+                        <div class="separator">Compare with others Ms</div>
+                        <center>
+                        <div class="center marginTop10" style="width:250px;">
+                            <input id="btnloadSameWorks"  style=" width:200px; " type="button" onClick="loadWorks(1)"   value="Search works"/>
+                        </div>
+                        </center>
+                        <div class="separator" style="margin-top:20px;">List to compare</div>
+                        <div class="marginTop10">
+                            <select id="ListStavesToCompare" name="ListStavesToCompare" size="2" style="overflow:auto;  border-radius:0px 0px 0px 0px; width:100%; height:300px;" >
+
+                            </select>
+                        </div>
+                        <div class="rowLine center marginTop10">
+                            <div  style="margin-right:30px;">
+                                <input id="btnAddCompare" style="width:100px; " type="button" onClick="loadWorks(0)"   value="Add"/>
+                            </div>
+                            <div>
+                                <input id="btnRemoveCompare" style="width:100px; " type="button" onClick="btnRemoveCompare()"   value="Remove"/>
+                            </div>
+                        </div>
+                        <div class="separator" style="margin-top:20px;">Options</div>
+                        <div style="margin-left:40px;" style="width:250px;">
+                            <input type="checkbox" id="btnHideNotesCompare" onclick="btnOptions()" name="hideNotes" value="Hide">
+                            <label for="btnHideNotesCompare"> Show differences only</label><br>
+                            <input type="checkbox" id="btnColorNoteCompare" onclick="btnOptions()" name="ColorNote" value="Color">
+                            <label for="btnColorNoteCompare"> Highlight differencies</label><br>
+                        </div>
+                    </div>
+                    <!-- ***************Iframe sidebar*************************** -->
+                    <div id="frameSidebar" style="position: absolute; margin-top:14px; top:14px;
+                    background-color:black;width: 200% !important;height:70%; top:-3px;right:-8px;left:-8px; bottom:-8px;display:none;">
+                       <div id="controlBox" style="position:absolute; width:100%">
+                           <input type="text" id="urlInput" placeholder="Enter manuscript URL"/>
+                           <input type="button" id="urlSubmitBtn" onclick="processURL()" style="position:inline-block;" value="Search">
+                            <span onclick="zoomOut()" class="controlBoxBtn" id="zoomOut" style="right:40px;">[-]</span>
+                            <span onclick="zoomIn()" class="controlBoxBtn" id="zoomIn" style="right:70px">[+]</span>
+                            <span onclick="nextPage()" class="controlBoxBtn" id="previousPage" style="right:100px;">></span>
+                            <span onclick="previousPage()" class="controlBoxBtn" id="nextPage" style="right:130px"><</span>
+                            <span id="close" class="controlBoxBtn" onclick="closeIframe()" style="  display: block;right:10px;" value="x" z-index="10">x</span>
+                       </div>
+                       <div id="frameBox" style="height:100%">
+                           <img id="msImg"/>
+                           <div id="load"></div>
+                       </div>
+                    </div>
+                    <!-- ***************End Iframe sidebar*************************** -->
+                </div>
+                <div id="credits"></div>
+                <div id ="bottomSideBar" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel ">
+    </div>
+    <div id="divPrint" >
+    </div>
+    <div id="settings" style="display:none;" class="placeholderSettingsMenu">
+    </div>
+</body>
+</html>
+<script>
+var typeResult = 0; //0: single load 1: multiple load
+function loadWorks(type){
+
+    typeResult = type;
+    addContentToOverlay('comparetool/overlayPages/searchStavesToCompare.html', 'blank');
+}
+function btnRemoveCompare(){
+    if(document.getElementById("ListStavesToCompare").length>0){
+        let index = document.getElementById("ListStavesToCompare").selectedIndex;
+        if(index < 0 ) index = document.getElementById("ListStavesToCompare").length-1;
+        removeStaveToCompare(index);
+        document.getElementById("ListStavesToCompare").remove(index);
+    }
+}
+function btnOptions(){
+    let color = document.getElementById("btnColorNoteCompare").checked;
+    let hide = document.getElementById("btnHideNotesCompare").checked;
+    setupDifference(color, hide);
+}
+/*------Esc capture command-------*/
+$(document).keyup(function(e) {
+     if (e.key === "Escape") { // escape key maps to keycode `27`
+        menuLineNumberRemove();
+        containerNoteMenuRemove();
+        let divSettings = document.getElementById("settings");
+        let oneStep = true;
+        if (divSettings.style.display === "block") {
+          divSettings.style.display = "none";
+          oneStep = false;
+        }
+        if(oneStep){
+            toggleDivideScreen();
+        }
+
+    }
+})
+//close menù setting when user click on body
+$("body").click(function(e) {
+    //ignore the element of menù
+    if(e.target.id == "btnSettings" || e.target.id == "checkMelodicStructure" || e.target.id == "checkAlpabetic" ||
+     e.target.id == "checkLineNumber" || e.target.id == "checkOctaveClef" || e.target.id == "checkPlica"  || e.target.id == "changeTextFontModern" || e.target.id == "nFontSizeModern" || e.target.id == "changeTextFontOld" || e.target.id == "nFontSizeOld"){}
+    else{
+        let divSettings = document.getElementById("settings");
+        if (divSettings.style.display === "block") {
+          divSettings.style.display = "none";
+        }
+    }
+});
+if(document.getElementById("settings")!= null){
+    let divSetting = document.getElementById("settings");
+    $(divSetting).load("overlayPages/settings.html");
+}
+
+
+$(document).ready(function(){
+    $("#ListStavesToCompare").dragOptions({
+        onDrag: function(){
+
+        },
+        onChange: function(){
+            //concreteDragAndDrop();
+        }
+    });
+});
+
+var resizeTimer;
+
+$(window).on('resize', function(e) {
+
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+
+    resizeCompareToolStaves();
+
+  }, 250);
+
+});
+
+function seelectStavesToLoad(id){
+    loadStavesFromDatabase(id);
+}
+
+function loadContentByID(){
+
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get('id');
+    if(id == null || id == ""){
+        updateCompare();
+    }
+    else {
+        loadMulipleStaves_mss(id, true);
+        var publishers_name = addCredits(id);
+    }
+    document.getElementById("logo").setAttribute("href","https://medmel.seai.uniroma1.it/compareTool.html?id="+id);
+}
+
+function addCredits(id_staves) {
+  var pub_stmt = "Ed.: ";
+  
+  $.ajax({
+      type: "GET",
+      url: "comparetool/php/getPublishers.php",
+      data: {id_staves: id_staves}
+    }).done(function(publishers) {
+      var publishers_arr = JSON.parse(publishers);
+      var publishers_set = new Set(publishers_arr);
+      
+      publishers_set.forEach(function(pub, i) {
+        pub_stmt += pub;
+        if (i < publishers_set.length){
+          pub_stmt += ", ";
+        }
+      });
+      document.getElementById('credits').innerHTML = pub_stmt;
+    });
+}
+
+window.onload = loadContentByID();
+
+window.onload = localStorage.setItem("current_page", "compareTool.html");
+
+</script>
+<style>
+
+.center{
+    width: 100%;
+    justify-content:center;
+}
+.controllerContainer{
+    width: 250px;
+    margin: 0px 10px 20px 0px;
+    padding-left: 10px;
+
+}
+
+
+.rowLine{
+    display: flex;
+
+}
+.differentNote{
+    fill:blue;
+}
+.hideSameNote{
+    display:none;
+}
+
+
+</style>

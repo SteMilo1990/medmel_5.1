@@ -1,0 +1,171 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div>
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div id="titleSettings">
+        <div class="separator">Upload MedMel File</div>
+        <input type="file" id="fileInput" accept=".json">
+
+    </div>    
+
+
+    <div id="output"></div>
+</div>
+
+<style>
+@media only screen and (min-width: 769px) {
+  .containerOverlay {
+      margin: auto;
+      height: 20%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+  .logoPanel {
+      background-color: #f3f0eb !important;
+      height: 100%;
+      margin: 0px;
+      border-top-left-radius: 20px 20px;
+      border-bottom-left-radius: 20px 20px;
+      border-right: 1px solid #2d3c43;
+  }
+  @-webkit-keyframes expand{
+      0%{top:-50%;}
+      100%{top:50%;}
+  }
+}
+/**--------Menu style single note-------**/
+@media only screen and (max-width: 769px){
+        .closeButton{
+            display: none;
+            float:right;
+        }
+    }
+    /* ----Apply this style when width screen size is more then 767 */
+    @media only screen and (min-width: 769px){
+        .closeButton{
+
+        }
+    }
+
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#titleSettings{
+    padding-left:15px;
+    padding-right:15px;
+    margin-top: 10px;
+    text-align: center;
+}
+#controlSettings{
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:15px;
+
+}
+</style>
+
+
+<script>
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    
+    if (file && file.type === "application/json") {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const jsonContent = JSON.parse(e.target.result);
+                uploadMedMelFile(jsonContent);
+            } catch (error) {
+                document.getElementById('output').textContent = 'Error parsing JSON: ' + error.message;
+            }
+        };
+        reader.readAsText(file);
+    } else {
+        document.getElementById('output').textContent = 'Please upload a valid JSON file.';
+    }        
+});
+
+function changeSelectedOption() {
+  const selectElement = document.getElementById('shapeSelection');
+  selectElement.value = 0; // Change the selected value
+  updateStaves()
+}
+
+function uploadMedMelFile(j){
+  document.getElementById("music_input").value = j.modernStaves;
+  modernStaves = j.modernStaves;
+  oldStaves = j.oldStaves;
+  document.getElementById("id_input").value = j.id_input;
+  document.getElementById("text_input").value = j.text_input;
+  document.getElementById("title_input").value = j.title_input;
+  document.getElementById("language").value = j.language;
+  document.getElementById("author_input").value = j.author_input;
+  document.getElementById("ms_input").value = j.ms_input;
+  document.getElementById("f_input").value = j.f_input;
+  document.getElementById("annotationsBox").value = j.annotationsBox;
+  document.getElementById("urlInput").value = j.facsimileURL;
+        
+  linesInLine = JSON.parse(j.linesPerStave);
+  shapeGroupNote = JSON.parse(j.shapeGroupNote);
+  shapeSingleNote = JSON.parse(j.shapeSingleNote);
+  stemSingleNote = JSON.parse(j.stemSingleNote);
+  connectGroupNote = JSON.parse(j.connectGroupNote);
+  bar = JSON.parse(j.divisiones);
+  custos = JSON.parse(j.custodes);
+
+  pes_type = j.default_shapes.pes_type;
+  united_clivis = j.default_shapes.clivis_type;
+  climacus_type = j.default_shapes.climacus_type;
+  porrectus_type = j.default_shapes.porrectus_type;
+  plica_type = j.default_shapes.plica_type;
+  scandicus_type = j.default_shapes.scandicus_type;
+  loadedModernStyle = j.loadedModernStyle;
+  loadedOldStyle = j.loadedOldStyle;
+  melodicStructure = j.melodicStructure;
+
+  document.getElementById("checkMelodicStructure").checked = j.settings.MelodicStructure;
+  document.getElementById("checkLineNumber").checked = j.settings.LineNumber;
+  document.getElementById("checkAnnotation").checked = j.settings.Annotations;
+  document.getElementById("checkMsLineBreaks").checked = j.settings.MsLineBreaks;
+  document.getElementById("checkCarryBFlat").checked = j.settings.CarryBFlat;
+  document.getElementById("checkCarriedBFlatBrackets").checked = j.settings.CarriedBFlatBrackets;
+  document.getElementById("checkBFlatAlwaysInKeySignature").checked = j.settings.BFlatAlwaysInKeySignature;
+  document.getElementById("checkOctaveClef").checked = j.settings.OctaveClef;
+  document.getElementById("checkPlica").checked = j.settings.Plica;
+  document.getElementById("changeMelodicStructure").value = j.settings.Alphabetic;
+  document.getElementById("changeTextFontModern").value = j.settings.TextFontModern;
+  document.getElementById("nFontSizeModern").value = j.settings.FontSizeModern;
+  document.getElementById("changeTextFontOld").value = j.settings.TextFontOld;
+  document.getElementById("nFontSizeOld").value = j.settings.FontSizeOld;      
+  document.getElementById("checkAutomaticMelodicStructure").checked = j.settings.UseManualMelodicStructure;
+  document.getElementById("manualMelodicStructure").value = j.settings.ManualMelodicStructure;  
+  repetitionPattern = j.settings.RepetitionPattern;
+
+  if (j.settings.syncModernMedievalTranscription === false){
+    syncModernOld = false;
+    document.getElementById("independent-transcriptions").checked = true;
+  }else {
+    syncModernOld = true
+    document.getElementById("independent-transcriptions").checked = false;
+  }
+
+  zoomMeasure = j.settings.ZoomFacsimile;
+  facsimileX = j.settings.facsimileX;
+  facsimileY = j.settings.facsimileY;
+
+  setTimeout(function() {
+    updateStaves();
+    hideOverlay();
+
+  }, 500);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+<div>
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="clear"></div>
+    <div class="separator " style="margin-top: 5px;">Login</div>
+    <div align="center" id="message" style="display:none">Sign up or Login to save your transcriptions</div>
+
+    <form method="post" name="login">
+        <div class="justify-content-center">
+            <div class=" divInputField" style="margin-top: 50px;">
+                <input id="email" type="text"  class="inputFields" name="email" value="" name="email" value="" autocomplete="username" placeholder="E-mail"/>
+            </div>
+            <div class="marginTop5 divInputField">
+                <input id="password" type="password" class="inputFields" name="password" value="" autocomplete="current-password" placeholder="Password"/>
+            </div>
+        </div>
+        <div id="error_field_login" style="text-align:center;">
+            <br />
+        </div>
+
+        <div style="margin-top:10px;">
+            <center>
+            <input style="width: 200px" id="login" type="button" onClick="userLogin()"  name="login" value="Login"/>
+            </center>
+        </div>
+        <div style="margin-top:10px;">
+            <center>
+            <input style="width: 200px" id="register" type="button" onClick="switchOverlayContent('overlayPages/signinForm.html', 'logo')"  name="register" value="Sign up"/>
+            </center>
+        </div>
+        <div style="margin-top:10px;">
+            <center>
+            <input style="width: 200px" id="recovery" type="button" onClick="switchOverlayContent('overlayPages/recoveryPassword.html', 'logo')"  name="recovery" value="Recovery Password"/>
+            </center>
+        </div>
+        <div style="margin-top:10px;">
+            <center>
+            <input style="width: 200px" id="cancelLogin" type="button" onClick="hideOverlay()"  name="id" value="Cancel"/>
+            </center>
+        </div>
+
+    </form>
+    <br>
+</div>
+
+<style>
+  @media only screen and (min-width: 769px) {
+    .containerOverlay {
+        margin: auto;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logoPanel {
+        background-color: #f3f0eb !important;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-50%;}
+        100%{top:50%;}
+    }
+}
+    @media only screen and (max-width: 769px){
+        .closeButton{
+            display: none;
+            float:right;
+        }
+    }
+    /* ----Apply this style when width screen size is more then 767 */
+    @media only screen and (min-width: 769px){
+        .closeButton{
+
+        }
+    }
+</style>
+<script>
+    $("#email").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#password").focus();
+            }
+        });
+    $("#password").keypress(function(event) {
+            if (event.keyCode === 13) {
+                $("#login").click();
+            }
+        });
+    window.onload = document.getElementById("email").focus();
+</script>

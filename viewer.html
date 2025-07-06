@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>MedMel</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+  
+  <!-- *****************************DataTable Library*********************************** -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+  <script data-require="lodash.js@*" data-semver="3.1.0" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.1.0/lodash.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/api/fnFakeRowspan.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/natural.js"></script>
+  <!-- ******************************************************************* -->
+
+
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+  <link href="css/jquery-linedtextarea1.css" type="text/css" rel="stylesheet">
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/oldShapeFormatter.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+
+  <script language="JavaScript" type="text/JavaScript" src="./script/userEvent.js"></script>
+  <!--*******************Player******************* -->
+  <script src="https://cdn.rawgit.com/mohayonao/web-audio-api-shim/master/build/web-audio-api-shim.min.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="./script/playStaves.js"></script>
+
+  <!-- *************pdf export ****************** -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <!-- *******************Syl separator******************* -->
+  <script type="text/javascript" src="script/sylSeparator.js"></script>
+
+  <!-- *******************Divide screen******************* -->
+  <script type="text/javascript" src="script/divideScreen.js"></script>
+  
+  <style>
+  .svg{
+    display: block;
+  }
+  .hide{
+    display:none;
+  }
+
+  #bodyContainer {
+    padding-left: 0;
+    background-color: white;
+  }
+
+  .groupClickableRect {
+    fill: transparent;
+  }
+  /*------------------------css table works------------------------------*/
+  /* Go from zero to full opacity */
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  tr.hide-table-padding td {
+    padding: 0;
+  }
+
+  .expand-button {
+      position: relative;
+  }
+
+  .accordion-toggle .expand-button:after
+  {
+    position: absolute;
+    left:.75rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    content: '-';
+  }
+  .accordion-toggle.collapsed .expand-button:after
+  {
+    content: '+';
+  }
+  /* -------------------------------------- */
+
+  .selectMSbold{
+      font-size: 1em;
+      /* text-decoration: underline; */
+      cursor:pointer;
+  }
+
+  .selectRow {
+    /* background: #F3F0E1; */
+    background: #E3ECF7;
+  }
+
+  .searchBar{
+      padding:5px;
+  }
+  .searchButton{
+      max-width: 30px;
+  }
+  .searchResult{
+
+  }
+  .divResult{
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      /* border-radius: 10px 10px; */
+      padding-left:20px;
+      padding-bottom:40px;
+      padding-top:20px;
+      /* border-top:1px solid #aaa */
+  }
+  .tab {
+    border-bottom:1px solid #aaa !important
+  }
+  .tableContent{
+      height:100%;
+      width:100%;
+      overflow: auto;
+  }
+
+  
+  #manualMelodicStructure, #manualMelodicStructureLabel {
+    display: none !important;
+  }
+  .marginTop30{
+    margin-top: 30px !important;
+  }
+  #titleSlot{
+    width:200px; 
+    margin:auto; 
+    font-size:30px;
+  }
+
+  #manuscriptsListTable_filter {
+    right:10px;
+  }
+  #manuscriptsListTable_wrapper, #divWorksListTable, #authorsListTable_wrapper {
+    padding-right: 20px;
+  }
+
+  #staves, #id, #ms {
+    text-align: center;
+  }
+  #title {
+    margin-top:30px;
+  }
+  #id, #ms {
+    text-align: center !important; /* Centers the content inside these elements */
+  }
+
+  #boxStavesContainer {
+    padding-left: 0 !important;
+  }
+
+  #staves {
+    align-items: center;
+  }";
+  .line {
+    cursor:pointer;
+  }
+  #titleDigitalEditions {
+    text-align: center;
+    font-size: 30pt;
+    padding: 20px;
+    /* background: linear-gradient(to right, rgba(133, 44, 28), rgba(172, 70, 35)); */
+    color:white;
+    color: rgba(0,0,0,0.8);
+    color: rgba(133, 44, 28);
+    font-family: "Roboto"
+  }
+  /* Make table 100% width */
+  .col-md-12 {
+    padding-right:0;
+    padding-left: 0;
+  }
+  .mainContainer {
+    width: 100%;
+  }
+
+</style>
+</head>
+    <body oncontextmenu="return false;">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ6F437"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <header>
+            <div id="header"></div>
+        </header>
+        <!-- Page Content -->
+        <div id="bodyContainer" class=" col-md-12" >
+            <div id="bodyViewer">
+                <div id="bodyViewerContent" class="col-md-12" style="display:none;">
+                    <div class="clear">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9" id="stavesBox"  >
+                            <div id="boxStavesContainer" class="scrollablePane contentPane" style="height:92.2vh;" >
+                                <div id="stavesContainer" class="stavesContainer" style="pointer-events:none;">
+                                    <div id="stavesContainer" class="stavesContainer" style="pointer-events:none;">
+                                      <!-- Staves Container -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ***************Input component form*************************** -->
+                        <input id="showSidebarBtn" type="button" value="&#9664" onClick="toggleEdit()" style="display:none; right:-20px"></input>
+                        <div id="containerSideBar" class="col-md-3">
+                          <input id="resizeBar" type="button"></input>
+
+                            <input id="hideSidebarBtn" type="button" value="&#9657" onClick="toggleEdit()"></input>
+                            <div class="controlPane" id="rightSideBar" class="col-md-3" style="display:block;">
+                                <div class="separator">Notation</div>
+                                <div>
+                                    <div class="sizeDiv marginTop5">
+                                        <select id="shapeSelection" name="shapeSelection" style="width:100%;"   onChange="setStavesStyle(this.value)" disabled>
+                                            <option value="0">Modern notation</option>
+                                            <option value="1">Medieval notation</option>
+                                        </select>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input type="checkbox" id="checkOldVisible" name="oldVisible" value="" onclick="statusHideOldInput()" > Hide Old Input
+                                    </div>
+                                    <div class="separator" hidden>Attributes</div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="title_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="title" value="" placeholder="Title"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="id_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="id" value="" placeholder="Id"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="author_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="author" value="" placeholder="Author"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="language" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="language" value="" placeholder="Language"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="ms_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="ms" value="" placeholder="Ms"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="f_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="f_input" value="" placeholder="f°"/>
+                                    </div>
+                                </div >
+
+                                </div>
+                                <div class="separator marginTop10" id="facsimile-header">Source</div>
+                                <div class="sizeDiv marginTop5">
+                                    <button id="open-facsimile" onclick="openFacsimileSideBar()" style="width:100%;" name="open-facsimile" value="Open facsimile" disabled=true>Open facsimile</button>
+                                </div>
+                                <div class="separator marginTop10">Player</div>
+                                <div class="mainContainer col-md-12"  style="padding:0px;">
+                                    <div class=" marginTop10">
+                                        <center>
+                                            <div>
+                                                <div  style="width: 100%; text-align:center;">
+                                                    <span>
+                                                        <button class="playerButton" onclick="btnPrev()" title="Prev">
+                                                            <img class="playerIcon" src="img/icons/prev1.png" >
+                                                        </button>
+                                                    </span>
+                                                    <span>
+                                                        <button id="btnPlay" class="playerButton" onclick="btnPlay(this)" title="Play">
+                                                            <img id="playImg" class="playerIcon" src="img/icons/play1.png" >
+                                                        </button>
+                                                    </span>
+                                                    <span>
+                                                        <button  class="playerButton" onclick="btnStopPlayer()" title="Stop">
+                                                            <img class="playerIcon" src="img/icons/stop1.png"  >
+                                                        </button>
+                                                    </span>
+                                                    <span>
+                                                        <button class="playerButton"  onclick="btnNext()" title="Next">
+                                                            <img class="playerIcon" src="img/icons/next1.png" >
+                                                        </button>
+                                                    </span>
+                                                    <span>
+                                                        <button class="playerButton"  onclick="togglePlayerSettings()" title="Next">
+                                                            <img class="playerIcon" src="img/icons/settings-1.png" >
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class=" marginTop10">
+                                                <span>
+                                                    <input class="slider" type="range" onchange="changeSpeed()" id="speed" name="speed"
+                                                        min="0.5" max="1.5" step="0.25" value="1" style="display: none">
+                                                </span>
+                                                <div>
+                                                    <label id="txtSpeed" for="speed" style="display: none">Music Speed: 1x</label>
+                                                </div>
+                                            </div>
+                                            <div class=" marginTop10">
+                                                <span>
+                                                <input class="slider" type="range" onchange="changeOctave()" id="octave" name="octave"
+                                                    min="0" max="5" step="1" value="2" style="display: none">
+                                                </span>
+                                                <div>
+                                                    <label id="txtOctave" for="octave" style="display: none">Octave: 2</label>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- ***************Iframe sidebar*************************** -->
+                                <div id="frameSidebar" style="position: absolute; margin-top:14px; top:14px;
+                                background-color:black;width: 100% !important; top:0px;right:-8px;left:-8px; bottom:0px;display:none;">
+                                    <div id="controlBox" style="position:absolute; width:100%">
+                                      <div id="urlBoxDiv" style="visibility:hidden">
+                                        <input type="text" id="urlInput" placeholder="Enter facsimile's URL"/>
+                                        <input type="text" id="manifestInput" placeholder="Enter IIIF manifest's URL">
+                                        <input type="text" id="iiifIdInput" placeholder="Enter IIIF Folio ID">
+                                        <input type="button" id="urlSubmitBtn" onclick="processURL()" style="position:inline-block;" value="Search">
+                                      </div>
+                                      <div id="loadingText" style="display:none;color:gray; font-size:50px; padding:40px;"><div class="windows8">
+                                            <br/><br/>
+                                            <div class="wBall" id="wBall_1">
+                                          		<div class="wInnerBall"></div>
+                                          	</div>
+                                          	<div class="wBall" id="wBall_2">
+                                          		<div class="wInnerBall"></div>
+                                          	</div>
+                                          	<div class="wBall" id="wBall_3">
+                                          		<div class="wInnerBall"></div>
+                                          	</div>
+                                          	<div class="wBall" id="wBall_4">
+                                          		<div class="wInnerBall"></div>
+                                          	</div>
+                                          	<div class="wBall" id="wBall_5">
+                                          		<div class="wInnerBall"></div>
+                                          	</div>
+                                          </div>
+                                      </div>
+                                        <span onclick="zoomOut()" class="controlBoxBtn" id="zoomOut" style="right:40px;">[-]</span>
+                                        <span onclick="zoomIn()" class="controlBoxBtn" id="zoomIn" style="right:70px">[+]</span>
+                                        <span onclick="nextPage()" class="controlBoxBtn" id="previousPage" style="right:100px;">></span>
+                                        <span onclick="previousPage()" class="controlBoxBtn" id="nextPage" style="right:130px"><</span>
+                                        <span id="close" class="controlBoxBtn" onclick="closeIframe()" style="  display: block;right:10px;" value="x" z-index="10">x</span>
+                                    </div>
+                                    <div id="frameBox" style="height:100%">
+                                       <img id="msImg"/>
+                                       <div id="load"></div>
+                                    </div>
+                                </div>
+                                <div id="credit-editor" style="position: absolute; bottom:10px; right: 20px;"></div>
+                                <!-- ***************End Iframe sidebar*************************** -->
+                            </div>
+                            <div class=" col-md-12" style="padding-left:25px;" hidden>
+                                <div class="row">
+                                    <div class="col-md-4" style="padding:0px; ">
+                                        <div class="marginTop10 ">
+                                            <textarea id="music_input"  onkeyup="updateStaves()" onkeydown="clickStopPlayer()" onclick="clickStopPlayer()"class="lined textArea short-text-area notes" wrap="off" type="input" name="notes" value="" placeholder="Notes" spellcheck="false" disabled></textarea>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-4" style="padding:0px; ">
+                                        <div class="marginTop10 ">
+                                            <textarea id="text_input" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="text_string" value="" placeholder="Text" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-4" style="padding:0px; ">
+                                        <div class="marginTop10 ">
+                                            <textarea id="annotationsBox" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="annotationsBox" value="" placeholder="Annotations" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id ="bottomSideBar" style="display:none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!-- MENU PAGE -->
+                <div id="bodyList">
+                    <div id="titleDigitalEditions">EDITIONS</div>
+                    <div id="bodyListContent" class="mainContainer col-md-12" style="padding-top: 10px; padding-bottom:20px;">
+                        <!-- Tab links -->
+                        <div class="tab">
+                          <button id="btnWorksList" class="tablinks" onclick="openTabList(event, 'worksList')">Works</button>
+                          <button id="btn_authorsList" class="tablinks" onclick="openTabList(event, 'authorsList')">Authors</button>
+                          <button id="btn_manuscriptsList" class="tablinks" onclick="openTabList(event, 'manuscriptsList')">Manuscripts</button>
+                          </div>
+                        <div id="titleSlot"></div>
+                        
+                        <!-- Tab content -->
+                        <div id="worksList" class="tabcontent">
+                          <!-- Language work -->
+                            <div id="divSelectLanguageWorks" class="divSelectLanguage" style="margin-left: auto;">
+                                <label for="selectLanguageWorks">Language</label>
+                                <select id="selectLanguageWorks" name="selectLanguage"  onchange="reloadTableBylanguageSelect('selectLanguageWorks')">
+                                </select>
+                            </div>
+                            <div id="divWorksListTable" class="divResult">
+
+                                <table id="worksListTable" class="stripe cell-border compact " style="width:100%">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Language</th>
+                                            <th>MS</th>
+                                            <th>Editor</th>
+                                            <th>Vis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id = "bodyWorksContent">
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Language</th>
+                                            <th>MS</th>
+                                            <th>Editor</th>
+                                            <th>Vis</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="manuscriptsList" class="tabcontent">
+                          <!-- Language mss -->
+                          <div id="divSelectLanguageManuscripts" class="divSelectLanguage">
+                              <label for="selectLanguageManuscripts">Language</label>
+                              <select id="selectLanguageManuscripts" name="selectLanguage" onchange="reloadTableBylanguageSelect('selectLanguageManuscripts')">
+                              </select>
+                          </div>
+                          <!-- language works in mss -->
+                          <!-- This should never appear -->
+                          <div id="divSelectLanguageManuscriptsSub" class="divSelectLanguage" style="display:none">
+                              <label for="selectLanguageManuscriptsSub">Language</label>
+                              <br>
+                              <select id="selectLanguageManuscriptsSub" name="selectLanguage">
+                              </select>
+                          </div>
+                            <div id="divManuscriptsListTable" class="divResult">
+                                <table id="manuscriptsListTable" class="stripe cell-border compact" style="width:100%">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Language</th>
+                                            <th>Siglum</th>
+                                            <th>Source name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id = "bodyManuscriptsContent">
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Language</th>
+                                            <th>Siglum</th>
+                                            <th>Source name</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="authorsList" class="tabcontent">
+                          <!-- language author -->
+                          <div id="divSelectLanguageAuthors" class="divSelectLanguage">
+                              <label for="selectLanguageAuthors">Language</label>
+                              <select id="selectLanguageAuthors" name="selectLanguage" onchange="reloadTableBylanguageSelect('selectLanguageAuthors')">
+                              </select>
+                          </div>
+                          <!-- language works of author -->
+                          <div id="divSelectLanguageAuthorsSub" class="divSelectLanguage" style="display:none">
+                              <label for="selectLanguageAuthorsSub">Language</label>
+                              <select id="selectLanguageAuthorsSub" name="selectLanguage" >
+                              </select>
+                          </div>
+                        
+                            <div id="divAuthorsListTable" class="divResult" >
+                                <table id="authorsListTable" class="stripe cell-border compact" style="width:100%">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="text-align:center;">Authors</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id = "bodyAuthorsContent">
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Authors</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    <div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel"></div>
+    <div id="divPrint"></div>
+    <div id="settings" style="display:none;" class="placeholderSettingsMenu"></div>
+    <div id="importExport" style="display:none;" class="placeholderSettingsMenu"></div>
+    <div id="player" style="display:none;" class="placeholderSettingsMenu"></div>
+</body>
+</html>
+
+<script>
+
+function reloadTableBylanguageSelect(tab){
+    if (tab == 'selectLanguageWorks'){
+        document.getElementById("divWorksListTable").innerHTML = ''+
+        '<table id="worksListTable" class="stripe cell-border compact " style="width:100%">'+
+            '<thead class="thead-light">'+
+                '<tr>'+
+                '<th>ID</th>'+
+                '<th>Title</th>'+
+                '<th>Author</th>'+
+                '<th>Language</th>'+
+                '<th>MS</th>'+
+                '<th>Editor</th>'+
+                '<th>Vis</th>'+
+                '</tr>'+
+            '</thead>'+
+            '<tbody id = "bodyWorksContent">'+
+            '</tbody>'+
+            '<tfoot>'+
+                '<tr>'+
+                '<th>ID</th>'+
+                '<th>Title</th>'+
+                '<th>Author</th>'+
+                '<th>Language</th>'+
+                '<th>MS</th>'+
+                '<th>Editor</th>'+
+                '<th>Vis</th>'+
+                '</tr>'+
+            '</tfoot>'+
+        '</table>';
+       loadTableWorks();
+    }
+    else if (tab == 'selectLanguageManuscripts'){
+        document.getElementById("divManuscriptsListTable").innerHTML = ''+
+        '<table id="manuscriptsListTable" class="stripe cell-border compact " style="width:100%">'+
+            '<thead class="thead-light">'+
+                '<tr>'+
+                    '<th>Language</th>'+
+                    '<th>Sigla</th>'+
+                    '<th>Extended Name</th>'+
+                '</tr>'+
+            '</thead>'+
+            '<tbody id = "bodyManuscriptsContent">'+
+            '</tbody>'+
+            '<tfoot>'+
+                '<tr>'+
+                    '<th>Language</th>'+
+                    '<th>Sigla</th>'+
+                    '<th>Manuscript</th>'+
+                '</tr>'+
+            '</tfoot>'+
+        '</table>';
+       loadTableManuscripts();
+    }
+    else if (tab == 'selectLanguageAuthors'){
+        document.getElementById("divAuthorsListTable").innerHTML = ''+
+        '<table id="authorsListTable" class="stripe cell-border compact " style="width:100%">'+
+            '<thead class="thead-light">'+
+                '<tr>'+
+                    '<th style="text-align:center;">Authors</th>'+
+                '</tr>'+
+            '</thead>'+
+           '<tbody id = "bodyAuthorsContent">'+
+            '</tbody>'+
+            '<tfoot>'+
+                '<tr>'+
+                    '<th>Authors</th>'+
+                '</tr>'+
+            '</tfoot>'+
+        '</table>';
+         loadTableAuthors();
+    }
+}
+
+function setupLanguageUI(tab){
+    try {
+        if (tab == 'selectLanguageWorks'){
+            document.getElementById('divSelectLanguageWorks').style.display = "flex";
+            if (document.getElementById(tab).length > 0) return true;
+        }
+        else if (tab == 'selectLanguageManuscripts'){
+            document.getElementById('divSelectLanguageManuscripts').style.display = "flex"; 
+            document.getElementById('divSelectLanguageManuscriptsSub').style.display = "none";
+            if (document.getElementById(tab).length > 0) return;
+        }
+        else if (tab == 'selectLanguageAuthors'){
+            document.getElementById('divSelectLanguageAuthors').style.display = "flex";
+            document.getElementById('divSelectLanguageAuthorsSub').style.display = "none";
+            if (document.getElementById(tab).length > 0) return;
+        }
+        else if (tab == 'selectLanguageManuscriptsSub'){
+            // ALWAYS HIDE THIS LANGUAGE OPTION, IT'S not useful and causes issues
+            if (document.getElementById(tab).length > 0) return;
+        }
+        else if (tab == 'selectLanguageAuthorsSub'){
+            document.getElementById('divSelectLanguageAuthorsSub').style.display = "flex";
+            if (document.getElementById(tab).length > 0) return;
+        }
+        let optionDefault = document.createElement("option");
+        optionDefault.setAttribute("value",'') ;
+        optionDefault.text = "All";
+
+        let objSelect = document.getElementById(tab);
+        objSelect.innerHTML = '';
+        objSelect.appendChild(optionDefault);
+
+        $.ajax({
+            type : "POST",  //type of method
+            url  : "php/getLanguageList.php",  //your page
+            data: {},
+            success: function(data){
+                try{
+                    let query = jQuery.parseJSON(data);
+                    let dim = Object.keys(query).length;
+                    //console.log(dim);
+                    for(let i =0; i< dim; i = i+1){
+                        let option = document.createElement("option");
+                        option.setAttribute("value", query[i]);
+                        option.text = ""+query[i];
+                        objSelect.appendChild(option);
+                    }
+                }catch{}
+            }
+        });
+    }catch{}
+}
+
+//-----------Load ViewerUI or ListUI--------------------------------------------
+var viewerUI = document.getElementById("bodyViewer").innerHTML;
+var listUI = document.getElementById("bodyList").innerHTML;
+function switchUI(){
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get('id');
+    if(String(id) != "null" && String(id) != ""){
+        loadViewerUI("viewer");
+        document.getElementById("bodyViewerContent").style.display ="block";
+    }
+    else {
+        loadViewerUI("list");
+        openTabList('', 'worksList');
+        loadTableWorks();
+        loadTableManuscripts();
+        loadTableAuthors();
+    }
+}
+function loadViewerUI(view){
+    if(view == "viewer")
+        document.getElementById("bodyContainer").innerHTML = viewerUI;
+    else
+        document.getElementById("bodyContainer").innerHTML = listUI;
+}
+window.onload = switchUI();
+//------------------------------------------------------------------------------
+localStorage.setItem("current_page", "viewer.html");
+//----------------TabList Controller--------------------------------------------
+function openTabList(evt, tabName) {
+    // Declare all variables
+    resetTitleSlot();
+
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    try{
+        document.getElementById("btn_"+tabName).className += " active";
+    }catch{
+        document.getElementById("btnWorksList").className += " active";
+    }
+    
+    ["divSelectLanguageWorks", "divSelectLanguageManuscripts", "divSelectLanguageManuscriptsSub", "divSelectLanguageAuthors", "divSelectLanguageAuthorsSub"].forEach((item, i) => {
+      document.getElementById(item).style.display = "none";
+    });
+    
+    if (tabName == 'manuscriptsList') {
+      document.getElementById("divSelectLanguageManuscripts").style.display = "flex";
+    }
+    else if (tabName == 'worksList') {
+      document.getElementById("divSelectLanguageWorks").style.display = "flex";
+    }
+    else if(tabName == 'authorsList') {
+      document.getElementById("divSelectLanguageAuthors").style.display = "flex";
+    }
+}
+
+//----------TABLE WORKS---------------------------------------------------------
+function loadTableWorks(){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    let bodyTable = document.getElementById("bodyWorksContent");
+    let lang = document.getElementById('selectLanguageWorks').value;
+
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/viewerSearch.php",  //your page
+        data : {email:email, password:password,
+                tab:"works", language:lang
+        },
+        success : function(data){
+            const works = JSON.parse(data);
+            const rows = [];
+
+            works.forEach(work => {
+              work.ms_items.forEach(ms => {
+                rows.push([
+                  work.id,
+                  work.title,
+                  work.author,
+                  work.language,
+                  ms.ms,
+                  ms.editor,
+                  ["Private","Creators","Public"][ms.visibility],
+                  work.id_staves
+
+                ]);
+              });
+            });
+            
+            var tableWorks = $('#worksListTable').DataTable({
+              lengthMenu: [50, 100, 150, 200],
+              pageLength: 100,
+              autoWidth: false,
+              columnDefs: [
+                { type: 'natural', targets: 0 },
+                { orderable: false, targets: [4, 5] },
+                { targets: 4, width: "200px" }
+              ],
+              createdRow: function(row, data /* the array you pushed */, dataIndex) {
+                // ---- your click-handler logic here ----
+                const id_stave = data[7];
+                const repId   = String(data[1]).replace(/\s+/g,'');
+
+                // now annotate each <td>
+                $('td', row).each((i, cell) => {
+                  const $c = $(cell);
+                  // if (i === 0) {
+                  //   $c.attr("style", "display:none")
+                  // }
+                  // else 
+                  if (i > 0 && i < 4) {
+                    $c.addClass(`line line-${repId}`)
+                      .attr('onclick', `goToWorks('compare', '${id_stave}', '${data[0]}')`);
+                  }
+                  else {
+                    $c.addClass(`selectMS line line-${repId}`)
+                      .attr('onclick', `goToWorks('viewer', '${id_stave}')`);
+                  }
+                });
+              }
+            });
+            
+            tableWorks.clear();
+            tableWorks.rows.add(rows).draw();
+
+            setupUITableWorks();
+            setupLanguageUI('selectLanguageWorks');
+            hoverTableWorks();
+    }         
+  });
+}
+
+//---------Refresh TableWorks on events-------------------------------------
+$( "#worksList" ).keydown(function() {
+    setTimeout(function(){
+        $('#worksListTable td').each(function(){
+            $(this).removeClass('hide');
+        });
+        setupUITableWorks();
+    }, 10);
+});
+
+$( "#worksList" ).click(function() {
+    $('#worksListTable td').each(function(){
+        $(this).removeClass('hide');
+    });
+    setupUITableWorks();
+});
+//------End Refresh TableWorks on events------------------------------------
+
+//------------------Hover works table---------------------------------------
+function hoverTableWorks(){
+  $('#worksListTable')
+    .on('mouseenter','td', function(){
+      const $td = $(this);
+      const $tr = $td.closest('tr');
+      
+      // 1) evidenzio tutta la riga
+      $tr.find('td').addClass('selectRow');
+      
+      // 2) in base alla cella su cui sono:
+      if ( $td.is('.selectMS') ) {
+        // se sono su una cella MS, bold solo quelle con selectMS
+        $tr.find('td.selectMS').addClass('selectMSbold');
+      } else {
+        // altrimenti, bold le prime 4 colonne
+        $tr.find('td').slice(0,4).addClass('selectMSbold');
+      }
+    })
+    .on('mouseleave','td', function(){
+      const $tr = $(this).closest('tr');
+      // tolgo tutto in un colpo solo
+      $tr.find('td').removeClass('selectRow selectMSbold');
+    });
+}
+//-------------End Hover Works Table----------------------------------------
+
+//--------Format UI TableWorks after Concrete Table-------------------------
+function setupUITableWorks(){
+    let data0 = [];
+    $('#worksListTable td').each(function(){
+        let $this = $(this);
+        let index = $this.index();
+        let txt =  $this.text();
+
+        if (index == 0 ) {
+            let item0 =  _.find(data0, function(o) {
+                return o.v == txt;
+            });
+
+            if (item0) {
+                item0.t = item0.t + 1;
+                item0.o.attr('rowspan', item0.t).removeClass('hide');
+                $(item0.o.parents().children("td")[1]).attr('rowspan', item0.t).removeClass('hide');
+                $(item0.o.parents().children("td")[2]).attr('rowspan', item0.t).removeClass('hide');
+                $(item0.o.parents().children("td")[3]).attr('rowspan', item0.t).removeClass('hide');
+
+                $this.addClass('hide');
+                $($this.parents().children("td")[1]).addClass('hide');
+                $($this.parents().children("td")[2]).addClass('hide');
+                $($this.parents().children("td")[3]).addClass('hide');
+            } else {
+                data0.push({
+                  i: index,
+                  t: 1,
+                  o: $this,
+                  v: txt
+                });
+            }
+        }
+    });
+}
+//----End Format UI TableWorks after Concrete Table-------------------------
+function concreteTable(table, rows){
+    if (table == "worksListTable"){
+
+        var tableWorks = $('#'+table).DataTable({
+            "lengthMenu": [ 50, 100, 150, 200 ],
+             "pageLength": 100,
+             "autoWidth": false,  // Disable default width enforcement
+             columnDefs: [{ type: 'natural', targets: 0 },
+                          { orderable: false, targets: [4, 5]},
+                          { targets: 4, width: "200px" } // Adjust width dynamically
+                        ]
+        });
+        return tableWorks;
+    }
+    else if (table == "manuscriptsListTable"){
+        var tableManuscripts = $('#'+table).DataTable({
+            "lengthMenu": [ 50, 100, 150, 200 ],
+             "pageLength": 100
+        });
+        return tableManuscripts;
+    }
+    else if(table == "authorsListTable"){
+        var tableAuthors = $('#'+table).DataTable({
+            "lengthMenu": [ 50, 100, 150, 200 ],
+             "pageLength": 100
+        });
+        return tableAuthors;
+    }
+
+}
+//-----------END TABLE WORKS----------------------------------------------------
+
+//----------TABLE MANUSCRIPTS---------------------------------------------------
+var htmlManuscriptsTable;
+function loadTableManuscripts(){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    let bodyTable = document.getElementById("bodyManuscriptsContent");
+    let lang = document.getElementById('selectLanguageManuscripts').value;
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/viewerSearch.php",  //your page
+        data : {email:email, password:password,
+                tab:"manuscripts", language:lang
+        },
+        success : function(data){
+            let obj = jQuery.parseJSON(data);
+            let length = obj.length;
+
+            for (let i = 0; i < length; i = i+1){
+                let tr1 = document.createElement('tr');
+
+                let language = document.createElement('td');
+                language.setAttribute('onclick', 'explodeContentManuscriptsTable("'+obj[i][3]+'", "'+obj[i][2]+'")');
+                language.setAttribute("class", "rowTable");
+                language.setAttribute("style", "cursor:pointer");
+                if(obj[i][2] == "" || obj[i][2] == null )
+                    language.innerHTML = obj[i][1];
+                else
+                    language.innerHTML = obj[i][2];
+
+                let sigla = document.createElement('td');
+                sigla.setAttribute('onclick', 'explodeContentManuscriptsTable("'+obj[i][3]+'", "'+obj[i][2]+'")');
+                sigla.setAttribute("class", "rowTable");
+                sigla.setAttribute("style", "cursor:pointer");
+                sigla.innerHTML = obj[i][3];
+
+                let extendedName = document.createElement('td');
+                extendedName.setAttribute('onclick', 'explodeContentManuscriptsTable("'+obj[i][3]+'", "'+obj[i][2]+'")');
+                extendedName.setAttribute("class", "rowTable");
+                extendedName.setAttribute("style", "cursor:pointer");
+                extendedName.innerHTML = obj[i][4];
+
+                tr1.appendChild(language);
+                tr1.appendChild(sigla);
+                tr1.appendChild(extendedName);
+                bodyTable.appendChild(tr1);
+            }
+            concreteTable("manuscriptsListTable");
+            setupHoverManuscripts();
+            setupLanguageUI('selectLanguageManuscripts');
+        }
+    });
+}
+
+function appendLanguageControllerToTable(tableWrapperId) {
+  let div = document.createElement("div");
+  div.innerHTML = "fghjkhghjk";
+  document.getElementById().append(div);
+}
+
+function explodeContentManuscriptsTable(ms, lang, ms2=null, lang2=null){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+
+    setupLanguageUI('selectLanguageManuscriptsSub');
+      
+    if (document.getElementById('divSelectLanguageManuscripts').style.display == "none")
+        lang = document.getElementById('selectLanguageManuscriptsSub').value;
+    else {
+        // lang = document.getElementById('selectLanguageManuscripts').value;
+    }
+    document.getElementById('divSelectLanguageManuscripts').style.display = "none";
+
+    setTimeout(() => document.getElementById('selectLanguageManuscriptsSub').value = lang, 50);
+
+    let sel = document.getElementById('selectLanguageManuscriptsSub');
+    sel.setAttribute('onchange', "explodeContentManuscriptsTable('"+ms+"')");
+
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/viewerSearch.php",  //your page
+        data : {email:email, password:password,
+                tab:"manuscripts_id", subParam:ms, language:lang, ms2:ms2, lang2:lang2
+        },
+        success : function(subData){
+            let subObj = jQuery.parseJSON(subData);
+            let subLength = subObj.length;
+            let strBody = "";
+            for(let j = 0; j<subLength; j =j+1){
+                let tr = document.createElement
+                strBody +=
+                '<tr onClick=\"goToWorks(\'viewer\','+ subObj[j][0]+')\">'+
+                '<td class="rowTable">'+subObj[j][1]+'</td>'+
+                '<td class="rowTable">'+subObj[j][2]+'</td>'+
+                '<td class="rowTable">'+subObj[j][3]+'</td>'+
+                '<td class="rowTable">'+subObj[j][4]+'</td>'+
+                '</tr>';
+            }
+            let strTable =
+            '<table id="manuscriptsListTable" class="stripe cell-border compact" >'+
+                '<thead class="thead-light">'+
+                    '<tr>'+
+                    '<th>Folio</th>'+
+                    '<th>Id</th>'+
+                    '<th>Title</th>'+
+                    '<th >Author</th>'+
+                    '</tr>'+
+                '</thead>'+
+                '<tbody id="bodyManuscriptsContent">'+
+                    strBody+
+                '</tbody></table></div>'+
+            '</td></tr>';
+
+            htmlManuscriptsTable = document.getElementById("divManuscriptsListTable").innerHTML;
+            document.getElementById("divManuscriptsListTable").innerHTML = strTable;
+
+            let table = $('#manuscriptsListTable').DataTable({
+                "lengthMenu": [ 50, 100, 150, 200 ],
+                 "pageLength": 500,
+                 "dom": '<"toolbar">frtip',
+            });
+            $("div.toolbar").html('<center style="text-decoration:underline; font-size:1.4em;"><b>'
+            + lang + " " + ms +'</b></center>');
+            setupHoverManuscripts();
+            $(document).ready(function() {
+                new $.fn.dataTable.Buttons( table, {
+                   buttons: [
+                       {
+                           text: 'Back',
+                           action: function ( e, dt, node, conf ) {
+                               document.getElementById("divManuscriptsListTable").innerHTML = ''+
+                               '<table id="manuscriptsListTable" class="stripe cell-border compact " style="width:100%">'+
+                                   '<thead class="thead-light">'+
+                                       '<tr>'+
+                                           '<th>Language</th>'+
+                                           '<th>Sigla</th>'+
+                                           '<th>Extended Name</th>'+
+                                       '</tr>'+
+                                   '</thead>'+
+                                   '<tbody id = "bodyManuscriptsContent">'+
+                                   '</tbody>'+
+                                   '<tfoot>'+
+                                       '<tr>'+
+                                           '<th>Language</th>'+
+                                           '<th>Sigla</th>'+
+                                           '<th>Extended Name</th>'+
+                                       '</tr>'+
+                                   '</tfoot>'+
+                               '</table>';
+                              loadTableManuscripts();
+                           }
+                       },
+                   ]
+                } );
+
+                table.buttons( 0, null ).container().prependTo(
+                  table.table().container()
+                );
+            });
+            sortTable();
+        }
+    });
+}
+    
+//------------------Hover Manuscripts table---------------------------------
+function setupHoverManuscripts(){
+    $('#bodyManuscriptsContent').mouseenter(function(){
+        $('#manuscriptsListTable').on("mouseenter", 'td.rowTable', function(){
+            $this = $(this);
+            let index = $this.index();
+            $($this.parents().children("td")[0]).addClass('selectRow');
+            $($this.parents().children("td")[1]).addClass('selectRow');
+            $($this.parents().children("td")[2]).addClass('selectRow');
+            $($this.parents().children("td")[3]).addClass('selectRow');
+
+            $($this.parents().children("td")[0]).addClass('selectMSbold');
+            $($this.parents().children("td")[1]).addClass('selectMSbold');
+            $($this.parents().children("td")[2]).addClass('selectMSbold');
+            $($this.parents().children("td")[3]).addClass('selectMSbold');
+        });
+        $('#manuscriptsListTable').on("mouseleave", 'td.rowTable', function(){
+            $this = $(this);
+            let index = $this.index();
+            $($this.parents().children("td")[0]).removeClass('selectRow');
+            $($this.parents().children("td")[1]).removeClass('selectRow');
+            $($this.parents().children("td")[2]).removeClass('selectRow');
+            $($this.parents().children("td")[3]).removeClass('selectRow');
+            $($this.parents().children("td")[0]).removeClass('selectMSbold');
+            $($this.parents().children("td")[1]).removeClass('selectMSbold');
+            $($this.parents().children("td")[2]).removeClass('selectMSbold');
+            $($this.parents().children("td")[3]).removeClass('selectMSbold');
+        });
+    });
+}
+//--------------End Hover Manuscripts table-----------------------------
+//----------END TABLE MANUSCRIPTS---------------------------------------
+
+//--------------TABLE AUTHORS-------------------------------------------
+var htmlAuthorsTable;
+function loadTableAuthors(){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    let bodyTable = document.getElementById("bodyAuthorsContent");
+    let lang = document.getElementById('selectLanguageAuthors').value;
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/viewerSearch.php",  //your page
+        data : {email:email, password:password,
+                tab:"authors", language: lang
+        },
+        success : function(data){
+            let obj = jQuery.parseJSON(data);
+            let length = obj.length;
+
+            for (let i = 0; i < length; i = i+1){
+                let tr1 = document.createElement('tr');
+                
+                let author = document.createElement('td');
+                author.setAttribute('onclick', 'explodeContentAuthorsTable("'+obj[i][0]+'")');
+                author.setAttribute("class", "rowTable");
+                author.setAttribute("style", "cursor:pointer; text-align:center;");
+                author.innerHTML = obj[i][0];
+
+                tr1.appendChild(author);
+                bodyTable.appendChild(tr1);
+            }
+            concreteTable("authorsListTable");
+            setupHoverAuthors();
+            setupLanguageUI('selectLanguageAuthors');
+        }
+    });
+}
+
+function explodeContentAuthorsTable(authorSearch){
+    let email = localStorage.getItem("session_email");
+    let password = localStorage.getItem("session_psw");
+    let bodyTable = document.getElementById("bodyWorksContent");
+
+    setupLanguageUI('selectLanguageAuthorsSub');
+    let lang = '';
+    if (document.getElementById('divSelectLanguageAuthors').style.display == "none")
+        lang = document.getElementById('selectLanguageAuthorsSub').value;
+    else
+        lang = document.getElementById('selectLanguageAuthors').value;
+  
+    document.getElementById('divSelectLanguageAuthors').style.display = "none";
+    setTimeout(() => document.getElementById('selectLanguageAuthorsSub').value = lang, 50);
+
+    let sel = document.getElementById('selectLanguageAuthorsSub');
+    sel.setAttribute('onchange', "explodeContentAuthorsTable('"+authorSearch+"')");
+
+    let strBody = "";
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/viewerSearch.php",  //your page
+        data : {email:email, password:password,
+                tab:"authors_id", author:authorSearch, language:lang
+        },
+        success : function(data){
+                try{
+                let obj = jQuery.parseJSON(data);
+
+                for (let i = 0; i <obj.length; i = i+1){
+                    $.ajax({
+                        type : "POST",  //type of method
+                        url  : "php/viewerSearch.php",  //your page
+                        data : {email:email, password:password,
+                                tab:"authors_ms", subParam:obj[i][1],
+                                author:authorSearch, language:lang
+                        },
+                        success : function(subData) {
+                            let subObj = jQuery.parseJSON(subData);
+                            let length = subObj.length;
+
+                            for (let j = 0; j<length; j =j+1){
+                                let tr = document.createElement
+                                if (length == 1){
+                                  strBody += `
+                                    <tr>
+                                      <td class="line${i}" onclick="goToWorks('viewer', ${obj[i][0]})">${obj[i][1]}</td>
+                                      <td class="line${i}" onclick="goToWorks('viewer', ${obj[i][0]})">${obj[i][2]}</td>
+                                      <td class="line${i}" onclick="goToWorks('viewer', ${obj[i][0]})">${obj[i][3]}</td>
+                                      <td class="selectMS" onclick="goToWorks('viewer', ${obj[i][0]})">${subObj[j][1]}</td>
+                                      <td class="selectMS" onclick="goToWorks('viewer', ${obj[i][0]})">${subObj[j][2]}</td>
+                                    </tr>
+                                    `;
+                                }
+                                else if (length > 1){
+                                  strBody += `
+                                    <tr>
+                                      <td class="line${i}" onclick="goToWorks('compare','${obj[i][0]}','${obj[i][1]}')">${obj[i][1]}</td>
+                                      <td class="line${i}" onclick="goToWorks('compare','${obj[i][0]}','${obj[i][1]}')">${obj[i][2]}</td>
+                                      <td class="line${i}" onclick="goToWorks('compare','${obj[i][0]}','${obj[i][1]}')">${obj[i][3]}</td>
+                                      <td class="selectMS" onclick="goToWorks('viewer','${obj[i][0]}')">${subObj[j][1]}</td>
+                                      <td class="selectMS" onclick="goToWorks('viewer','${obj[i][0]}')">${subObj[j][2]}</td>
+                                    </tr>
+                                  `;
+                                }
+
+                                if (i == (obj.length-1))  printExplodeAuthorsTable(authorSearch, strBody);
+
+                            }
+                        }
+                    });
+                }
+
+                if (obj.length < 1){
+                    printExplodeAuthorsTable(authorSearch, "");
+                }
+            }catch{}
+        }
+    });
+}
+
+function printExplodeAuthorsTable(authorSearch, strBody){
+
+    let strTable =
+    '<table id="authorsListTable" class="stripe cell-border compact" >'+
+        '<thead class="thead-light">'+
+            '<tr>'+
+            '<th>Id</th>'+
+            '<th>Title</th>'+
+            '<th>Language</th>'+
+            '<th >Ms</th>'+
+            '<th >Editor</th>'+
+            '</tr>'+
+        '</thead>'+
+        '<tbody id="bodyAuthorsContent">'+
+            strBody +
+        '</tbody></table></div>'+
+    '</td></tr>'
+
+    htmlAuthorsTable = document.getElementById("divAuthorsListTable").innerHTML;
+    document.getElementById("divAuthorsListTable").innerHTML = strTable;
+
+    let table = $('#authorsListTable').DataTable({
+        "lengthMenu": [ 50, 100, 150, 200 ],
+         "pageLength": 100,
+         "rowGroup":[4],
+         columnDefs: [{ orderable: false, targets: 3 },
+                      { orderable: false, targets: 4 }
+                     ],
+                     "dom": '<"toolbar">frtip',
+     });
+
+    $("div.toolbar").html('<center style="text-decoration:underline; font-size:1.4em;"><b>'
+    +authorSearch+'</b></center>');
+    setupHoverAuthors();
+    refreshSubAuthorsTable();
+    setupUITableSubAuthors();
+    $(document).ready(function() {
+        new $.fn.dataTable.Buttons( table, {
+           buttons: [
+               {
+                   text: 'Back',
+                   action: function ( e, dt, node, conf ) {
+                       document.getElementById("divAuthorsListTable").innerHTML = ''+
+                       '<table id="authorsListTable" class="stripe cell-border compact " style="width:100%">'+
+                           '<thead class="thead-light">'+
+                               '<tr>'+
+                                   '<th style="text-align:center;">Authors</th>'+
+                               '</tr>'+
+                           '</thead>'+
+                          '<tbody id = "bodyAuthorsContent">'+
+                           '</tbody>'+
+                           '<tfoot>'+
+                               '<tr>'+
+                                   '<th>Authors</th>'+
+                               '</tr>'+
+                           '</tfoot>'+
+                       '</table>';
+                        loadTableAuthors();
+                   }
+               },
+
+           ]
+        } );
+
+        table.buttons( 0, null ).container().prependTo(
+          table.table().container()
+        );
+    });
+}
+
+//--------Format UI Table sub Authors after Concrete Table-------------------------
+function setupUITableSubAuthors(){
+    let data0 = [];
+    $('#authorsListTable td').each(function()
+       {
+          let $this = $(this);
+          let index = $this.index();
+          let txt =  $this.text();
+        
+          if (index == 0 ) {
+              let item0 =  _.find(data0, function(o) {
+                  return o.v == txt;
+              });
+
+              if (item0) {
+              item0.t = item0.t + 1;
+              // console.log(item0);
+              item0.o.attr('rowspan', item0.t).removeClass('hide');
+              $(item0.o.parents().children("td")[1]).attr('rowspan', item0.t).removeClass('hide');
+              $(item0.o.parents().children("td")[2]).attr('rowspan', item0.t).removeClass('hide');
+
+
+              $this.addClass('hide');
+              $($this.parents().children("td")[1]).addClass('hide');
+              $($this.parents().children("td")[2]).addClass('hide');
+
+              } else {
+                  data0.push({
+                      i: index,
+                      t: 1,
+                      o: $this,
+                      v: txt
+                  });
+              }
+          }
+     });
+}
+
+function refreshSubAuthorsTable(){
+    $( "#authorsList" ).keydown(function() {
+        setTimeout(function(){
+            $('#authorsListTable td').each(function(){
+                $(this).removeClass('hide');
+            });
+            setupUITableSubAuthors();
+        }, 10);
+
+    });
+    $( "#authorsList" ).click(function() {
+        $('#authorsListTable td').each(function(){
+            $(this).removeClass('hide');
+        });
+        setupUITableSubAuthors();
+
+    });
+}
+
+function setupHoverAuthors(){
+    //------------------Hover works table---------------------------------------
+    $('#bodyAuthorsContent').mouseenter(function(){
+        $('#authorsListTable').on("mouseenter", 'td', function(){
+            $this = $(this);
+            let index = $this.index();
+            $($this.parents().children("td")[0]).addClass('selectRow');
+            $($this.parents().children("td")[1]).addClass('selectRow');
+            $($this.parents().children("td")[2]).addClass('selectRow');
+            $($this.parents().children("td")[3]).addClass('selectRow');
+            $($this.parents().children("td")[4]).addClass('selectRow');
+
+            if (index < 3){
+                $($this.parents().children("td")[0]).addClass('selectMSbold');
+                $($this.parents().children("td")[1]).addClass('selectMSbold');
+                $($this.parents().children("td")[2]).addClass('selectMSbold');
+            }
+        });
+        $('#authorsListTable').on("mouseleave", 'td', function(){
+            $this = $(this);
+            $($this.parents().children("td")[0]).removeClass('selectRow');
+            $($this.parents().children("td")[1]).removeClass('selectRow');
+            $($this.parents().children("td")[2]).removeClass('selectRow');
+            $($this.parents().children("td")[3]).removeClass('selectRow');
+            $($this.parents().children("td")[4]).removeClass('selectRow');
+
+            $($this.parents().children("td")[0]).removeClass('selectMSbold');
+            $($this.parents().children("td")[1]).removeClass('selectMSbold');
+            $($this.parents().children("td")[2]).removeClass('selectMSbold');
+        });
+        $('#authorsListTable').on("mouseenter", 'td.selectMS', function(){
+            $this = $(this);
+            $row = $($this.parents().children("td")[2]).attr("class").split(/\s+/)[0];
+
+            $('.'+$row).addClass('selectRow');
+
+            $($this.parents().children("td")[3]).addClass('selectRow');
+            $($this.parents().children("td")[4]).addClass('selectRow');
+            $($this.parents().children("td")[3]).addClass('selectMSbold');
+            $($this.parents().children("td")[4]).addClass('selectMSbold');
+        });
+        $('#authorsListTable').on("mouseleave", 'td.selectMS', function(){
+            $this = $(this);
+            $row = $($this.parents().children("td")[2]).attr("class").split(/\s+/)[0];
+
+            $('.'+$row).removeClass('selectRow');
+
+            $($this.parents().children("td")[3]).removeClass('selectRow');
+            $($this.parents().children("td")[4]).removeClass('selectRow');
+            $($this.parents().children("td")[3]).removeClass('selectMSbold');
+            $($this.parents().children("td")[4]).removeClass('selectMSbold');
+            let classes = $this.attr('class');
+        });
+    });
+    //-------------End Hover Works Table----------------------------------------
+}
+//----------END TABLE AUTHORS---------------------------------------------------
+//-------End Table Controller---------------------------------------------------
+
+
+function goToWorks(view, id_staves, id = null) {
+  // se non serve il compare, redirecta subito
+  if (view !== "compare") {
+      return window.location.href = `./viewer.html?id=${id_staves}`;
+  }
+
+  // altrimenti controlla prima se ci sono più ms
+  checkMultipleMs(id).then(isMultiple => {
+    console.log(id);
+      const link = isMultiple
+          ? `./compareTool.html?id=${id_staves}`
+          : `./viewer.html?id=${id_staves}`;
+      window.location.href = link;
+  }).catch(err => {
+      console.error("Errore checking MS count:", err);
+      // in caso di errore fallback su viewer
+      window.location.href = `./viewer.html?id=${id_staves}`;
+  });
+}
+
+function checkMultipleMs(searchedId) {
+  let email = localStorage.getItem("session_email");
+  let password = localStorage.getItem("session_psw");
+  return $.ajax({
+      type:     "POST",
+      url:      "php/checkMultipleSongsWithId.php",
+      data:     {email:email, password:password, searchedId:searchedId},
+      dataType: "text"
+  })
+  .then(response => response.trim() === 'true');
+}
+
+
+//-----------Player Controllers-------------------------------------------------
+var resizeTimer;
+$(window).on('resize', function(e) {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    try {
+      resizeStaves();
+    }catch{
+      console.log("An attempt to resize staves has failed");
+    }
+  }, 250);
+});
+
+function callBackParametersToLoad(status){// status 1 it's loaded 0 load error
+    if(status){
+        // lil, sgn, ssn, stemsn, cgn, ps, uc, ct, pt, plicat, st, melodics
+        setupStavesParametersUI(loadedLinesInLine, loadedShapeGroupNote,
+            loadedShapeSingleNote, loadedStemSingleNote,
+            loadedConnectGroupNote, loadedPes_type,
+            loadedUnited_clivis, loadedClimacus_type,
+            loadedPorrectus_type, loadedPlica_type, loadedScandicus_type,
+            loadedMelodicStructure, loadedBars);
+        return 1; // if stave was loaded
+    }
+    return 0;
+}
+function callBackStavesToLoad(status){// status 1 it's loaded 0 load error
+    if (status) {
+        setupStavesUI(loadedModernStaves, loadedOldStaves, loadedTitle, loadedId, loadedAuthor,loadedLanguage, loadedMs, loadedF, loadedTextStaves, loadedAnnotationsStaves, loadedSettings, loadedOldStyle, loadedNamePublisher);
+        
+        return 1; // if stave was loaded
+    }
+    alert("Cannot open selected item!");
+    return 0;
+}
+
+function loadContentByID(){
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get('id');
+    if(String(id) != "null" && String(id) != ""){
+      loadStavesFromDatabase(id);
+    }else{
+      checkLoadMss(urlParams);
+    }
+}
+window.onload = loadContentByID();
+
+function checkLoadMss(urlParams){
+  let mss = urlParams.get('mss');
+  if(String(mss) != "null" && String(mss) != ""){
+    var el = ["", "", null, null];
+    let els = mss.split("-")
+    let title;
+    els.forEach((item, i) => {
+      if (i % 2 == 0) {
+        // capitalize siglum if needed
+        el[i] = checkIfMsIsUpperCase(item)
+      }else{
+        // capitalize Language
+        el[i] = item.charAt(0).toUpperCase() + item.slice(1);
+      }
+    });
+    
+    openTabList("click", 'manuscriptsList'); 
+    explodeContentManuscriptsTable(el[0], el[1], el[2], el[3]);
+    fillTitleSlot(el);
+  }
+}
+    
+function fillTitleSlot(el){
+  let titleSlot = document.getElementById("titleSlot");
+  titleSlot.innerHTML = el[1] + " " + el[0];
+  if (el[2] != null){
+    titleSlot.innerHTML = titleSlot.innerHTML + "<br>" + el[3] + " " + el[2];
+  }
+  titleSlot.classList.add("marginTop30");
+}
+
+function resetTitleSlot(){
+  titleSlot = document.getElementById("titleSlot");
+  titleSlot.innerHTML = "";
+  titleSlot.classList.remove("marginTop30");
+}
+
+function checkIfMsIsUpperCase(el){
+  if (el[1] == "_"){
+    if (el[2] == "u")
+      return el[0].toUpperCase();
+  }else{
+    return el[0];
+  }
+}
+
+let divSetting = document.getElementById("settings");
+$(divSetting).load("overlayPages/settings.html");
+document.cookie = "alpha=1";
+
+let divPlayer = document.getElementById("player");
+$(divPlayer).load("overlayPages/player.html");
+
+let divImpEx = document.getElementById("importExport");
+$(divImpEx).load("overlayPages/exportMenu.html");
+
+/*------Esc capture command-------*/
+$(document).keyup(function(e) {
+     if (e.key === "Escape") { // escape key maps to keycode `27`
+        menuLineNumberRemove();
+        containerNoteMenuRemove();
+        let divSettings = document.getElementById("settings");
+        let oneStep = true;
+        if (divSettings.style.display === "block") {
+          divSettings.style.display = "none";
+          oneStep = false;
+        }
+        if (oneStep){
+            toggleDivideScreen(true);
+        }
+    }
+});
+
+// close menu setting when user click on body
+document.getElementById('settings').addEventListener('click', function(event) {
+    if (event.target.id === 'settings') { 
+        this.style.display = 'none'; // Hide the settings div
+    }
+});
+$(document).click(function(e) {
+    if (!$(e.target).closest("#importExport, #btnImportExport, .keep-open").length) {
+        $("#importExport").hide();
+    }
+});
+
+setTimeout(function(){
+    try{
+        document.getElementsByClassName("selectedNote")[0].classList.remove("selectedNote");
+    }catch{}
+}, 1000);
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("bodyManuscriptsContent");
+
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    
+    for (i = 0; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0].innerHTML.split('-')[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0].innerHTML.split('-')[0];
+      //check if the two rows should switch place:
+      if (x.length > y.length) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+
+</script>
+
+<!-- *******************Mirador******************* -->
+<script type="text/javascript" src="script/mirador_operations.js"></script>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+  const script = document.createElement("script");
+  script.src = "https://unpkg.com/mirador@3.0.0/dist/mirador.min.js";
+  script.onload = function() {
+    try {
+      document.getElementById("open-facsimile").disabled = false;
+    }catch{}
+  };
+  document.body.appendChild(script);
+});
+</script>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Med Mel</title>
+  <!-- favicon -->
+  <!-- *****************************DataTable Library*********************************** -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+  <!-- <script data-require="lodash.js@*" data-semver="3.1.0" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.1.0/lodash.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/api/fnFakeRowspan.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+
+ <script src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/natural.js"></script> -->
+
+
+  <!-- ******************************************************************* -->
+
+
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --back: #fff;
+    --tab: #fff;
+    --tabBorder: #fff;
+    --buttonOver: #fff;
+    --buttonActive: #fff;
+}
+#boxStavesContainer {
+  border:none;
+}
+
+.selectedNote {
+  fill: black;
+}
+.hidden{
+  display: none;
+}
+#credits {
+  left: 500px;
+}
+</style>
+
+</head>
+    <body oncontextmenu="return false;">
+      <div id="header" hidden>Prevent header loading</div>
+      
+      <a id="logo" target="_blank"><img src="./img/logo/m2.png" width="140px" style="padding:10px;right:0"></a>
+      <!-- <a id="logo" target="_blank" href="https://medmel.seai.uniroma1.it/searchMelody.php"><img src="./img/icons/searchMelody.png" width="60px" style=";padding-right: 80px;padding:10px; visibility:hidden" ></a> -->
+        <!-- Page Content -->
+      <div id="bodyContainer" class="mainContainer col-md-12 containerColor" > <!-- Main container -->
+          <div id="bodyViewer">
+              <div id="bodyViewerContent" class="mainContainer col-md-12 containerColor" style="display:none;"> <!-- Main container -->
+                      <div class="col-md-12" id="stavesBox"  >
+                          <div id="boxStavesContainer" class="scrollablePane contentPane" style="height:88vh;" >
+                              <div id="stavesContainer" class="stavesContainer" style="pointer-events:none;"> <!-- Staves Container -->
+                              </div>
+                          </div>
+                      </div>
+                        <!-- ***************Input component form*************************** -->
+                                <div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <select id="shapeSelection" name="shapeSelection" style="width:100%;"   onChange="setStavesStyle()" disabled>
+                                            <option value="0" hidden>Modern Style</option>
+                                            <option value="1" hidden>Old Style</option>
+                                        </select>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input type="checkbox" id="checkOldVisible" name="oldVisible" value="" onclick="statusHideOldInput()" > Hide Old Input
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="title_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="title" value="" placeholder="Title"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="id_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="id" value="" placeholder="Id"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="author_input" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="author" value="" placeholder="Author"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="language" type="text" onkeyup="updateStaves(true)" style="width:100%;" name="language" value="" placeholder="Language"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="ms_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="ms" value="" placeholder="Ms"/>
+                                    </div>
+                                    <div class="sizeDiv marginTop5" hidden>
+                                        <input id="f_input"  type="text" onkeyup="updateStaves(true)" style="width:100%;" name="f_input" value="" placeholder="f°"/>
+                                    </div>
+                                </div >
+                                </div>
+                                <div class="col-md-12" style="padding-left:25px;" hidden>
+                                    <div class="row">
+                                        <div class="col-md-4" style="padding:0px; ">
+                                            <div class="marginTop10 ">
+                                                <textarea id="music_input"  onkeyup="updateStaves()" onkeydown="clickStopPlayer()" onclick="clickStopPlayer()"class="lined textArea short-text-area notes" wrap="off" type="input" name="notes" value="" placeholder="Notes" spellcheck="false" disabled></textarea>
+                                            </div>
+                                        </div>
+                                        <div class=" col-md-4" style="padding:0px; ">
+                                            <div class="marginTop10 ">
+                                                <textarea id="text_input" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="text_string" value="" placeholder="Text" spellcheck="false"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class=" col-md-4" style="padding:0px; ">
+                                            <div class="marginTop10 ">
+                                                <textarea id="annotationsBox" class="lined textArea short-text-area notes" onkeyup="updateStaves()"  type="input"  cols="30" name="annotationsBox" value="" placeholder="Annotations" spellcheck="false"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id ="bottomSideBar" style="display:none;"></div>
+                                </div>
+                            </div>
+                        </div><!-- ***************End input component form*************************** -->
+                    </div>
+            </div>
+    </div>
+    </div>
+    <div id="credits" ></div>
+    <div id="settings" class="placeholderSettingsMenu" hidden></div>
+</body>
+</html>
+
+<script>
+// Load hidden settings 
+$( document ).ready(function() {
+  if(document.getElementById('settings').innerHTML == ''){    
+      $("#settings").load("overlayPages/settings.html");
+  }
+});
+//-----------Load ViewerUI or ListUI--------------------------------------------
+    var viewerUI = document.getElementById("bodyViewer").innerHTML;
+
+    function switchUI(){
+        let queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        let id = urlParams.get('id');
+        if(String(id) != "null" && String(id) != ""){
+            loadViewerUI("viewer");
+            document.getElementById("bodyViewerContent").style.display ="block";
+        }
+        else {
+            loadViewerUI("list");
+            openTabList('', 'worksList');
+            loadTableWorks();
+            loadTableManuscripts();
+            loadTableAuthors();
+        }
+    }
+    function loadViewerUI(view){
+        if(view == "viewer")
+            document.getElementById("bodyContainer").innerHTML = viewerUI;
+        else
+            document.getElementById("bodyContainer").innerHTML = listUI;
+    }
+    window.onload = switchUI();
+//------------------------------------------------------------------------------
+    localStorage.setItem("current_page", "viewer.html");
+//----------------TabList Controller--------------------------------------------
+
+
+    var resizeTimer;
+    $(window).on('resize', function(e) {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        resizeStaves();
+      }, 250);
+    });
+    
+    function callBackParametersToLoad(status){// status 1 it's loaded 0 load error
+        if(status){
+            //lil, sgn, ssn, stemsn, cgn, ps, uc, ct, pt, plicat, st, melodics
+            setupStavesParametersUI(loadedLinesInLine, loadedShapeGroupNote,
+                loadedShapeSingleNote, loadedStemSingleNote,
+                loadedConnectGroupNote, loadedPes_type,
+                loadedUnited_clivis, loadedClimacus_type,
+                loadedPorrectus_type, loadedPlica_type, loadedScandicus_type,
+                loadedMelodicStructure);
+            return 1; // if stave was loaded
+        }
+        //alert("Impossibile aprire lo spartito selezionato!");
+        return 0;
+    }
+    
+    function callBackStavesToLoad(status){// status 1 it's loaded 0 load error
+        if(status){
+            setupStavesUI(loadedModernStaves, loadedOldStaves, loadedTitle, loadedId, loadedAuthor,loadedLanguage, loadedMs, loadedF, loadedTextStaves, loadedAnnotationsStaves, loadedOldStyle);
+
+            return 1; // if stave was loaded
+        }
+        alert("Unable to open the selected score");
+        return 0;
+    }
+
+    function loadContentByID(){
+        let queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        let id = urlParams.get('id');
+        if(String(id) != "null" && String(id) != ""){
+            loadStavesFromDatabase(id);
+        }
+            document.getElementById("logo").setAttribute("href","https://medmel.seai.uniroma1.it/viewer.html?id="+id);
+            
+            setCredits(loadedNamePublisher);
+    }
+    
+function setCredits(){
+  setTimeout(()=>{
+    if (loadedNamePublisher){
+      let credits = document.createElement("div")
+      credits.setAttribute("id", "credits");
+      credits.innerHTML = "Ed. " + loadedNamePublisher;
+      document.getElementById("bodyViewerContent").appendChild(credits);
+    }else{
+      setCredits(loadedNamePublisher);
+    }
+  }, 100);
+  
+    // setTimeout(()=>{
+    //   if (loadedNamePublisher){
+    //     document.getElementById("credits").innerHTML = "Ed. " + loadedNamePublisher;
+    //   }else{
+    //     setCredits(loadedNamePublisher);
+    //   }
+    // }, 100);
+  }
+
+    window.onload= loadContentByID();
+
+
+</script>

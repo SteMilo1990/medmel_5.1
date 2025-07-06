@@ -1,0 +1,305 @@
+<div id="importExportInner" class="keep-open" >
+    <div class="impExSection" style="margin-top:10px">
+        <div class="separator">Import</div>
+    </div>
+    <div class="impExOptions">
+      <div>
+          <input id="btnUploadMedMel" type=image src="img/icons/medmelimport.png" style="width:40px; vertical-align: sub" onclick="addContentToOverlay('overlayPages/uploadMedMelFile.html', 'logo')" title="Import MedMel file">
+          <label onclick="addContentToOverlay('overlayPages/uploadMedMelFile.html', 'logo')">&nbsp;&nbsp;MedMel file</label>
+      </div>
+      <div>
+          <input id="btnUploadMEI" type=image src="img/icons/xmlimport.png" style="width:40px; vertical-align: sub" onclick="addContentToOverlay('overlayPages/uploadMEI.html', 'logo')" title="Import MEI">
+          <label onclick="addContentToOverlay('overlayPages/uploadMEI.html', 'logo')">&nbsp;&nbsp;MEI</label>
+      </div>
+      <div>
+          <input id="btnUploadVolpiano" type=image src="img/icons/volpianoupload.png" style="width:40px; vertical-align: sub" onclick="addContentToOverlay('overlayPages/volpianoUpload.html', 'logo')" title="Import MEI">
+          <label onclick="addContentToOverlay('overlayPages/volpianoUpload.html', 'logo')">&nbsp;&nbsp;Volpiano</label>
+      </div>
+    </div>
+
+    <div class="impExSection" class="keep-open" >
+      <div class="separator">Export</div>
+    </div>
+    <div class="impExOptions">
+        <div>
+            <input id="btnPrintPDF" name="printPDF" type=image src="img/icons/pdf.png" style="width:38px; vertical-align: sub" onclick="printPDF()" title="Save as PDF">
+             <label onclick="printPDF()">&nbsp;&nbsp;PDF</label>
+        </div>
+        <div>
+            <input id="exportHTML" type="image"  src="img/icons/exportHTML.png" style="width:41px; vertical-align: sub" onclick="exportHTML()" title="Export HTML">
+            <label onclick="exportHTML()">&nbsp;&nbsp;HTML</label>
+        </div>
+        <div>
+            <input id="exportPNG" type="image"  src="img/icons/exportPNG.png" style="width:41px; vertical-align: sub" onclick="exportStavesAsPNG()" title="Export HTML">
+            <label onclick="exportStavesAsPNG()">&nbsp;&nbsp;Image (PNG)</label>
+        </div>
+        <div id="btnExportMedmel">
+            <input type=image  src="img/icons/medmelExport.png" style="width:42px; vertical-align: sub; margin:0" onclick="downloadMedMelJson()" title="Export MEI">
+            <label onclick="downloadMedMelJson()">&nbsp;&nbsp;MedMel (JSON)</label>
+        </div>
+        <div id="btnExportMEI">
+            <input type=image  src="img/icons/xml.png" style="width:42px; vertical-align: sub; margin:0" onclick="addContentToOverlay('overlayPages/exportMEI.html', 'blank')" title="Export MEI">
+            <label onclick="addContentToOverlay('overlayPages/exportMEI.html', 'blank')">&nbsp;&nbsp;MEI</label>
+        </div>
+        
+        <div id="btnExportVolpiano">
+            <input type=image  src="img/icons/volpianoExport.png" style="width:42px; vertical-align: sub; margin:0" onclick="medmel2volpiano()" title="Export Volpiano">
+            <label onclick="medmel2volpiano()">&nbsp;&nbsp;Volpiano</label>
+        </div>
+        
+        <div id="btnShowSnipped" class="keep-open" >
+            <input type=image class="keep-open" src="img/icons/embed.png" style="width:42px; vertical-align: sub; margin:0" onclick="toggleSnippet()">
+            <label class="keep-open"  onclick="toggleSnippet()">&nbsp;&nbsp;Embed in HTML</label>
+        </div>
+        <div id="snippetDiv" class="keep-open" style="display:none">
+            <textarea id="snippet" class="keep-open"></textarea>
+        </div>
+    </div>
+</div>
+<style>
+/**--------Menu style single note-------**/
+#importExportInner{
+  background-color: white;
+    border-radius: 10px 10px;
+    width: 250px;
+    position: absolute;
+    border: 0.5px solid gray;
+}
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.impExSection{
+    padding-left:15px;
+    padding-right:15px;
+    text-align: center;
+}
+.impExOptions{
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:15px;
+
+}
+#snippet {
+  resize: none;
+  color: gray;
+  font-size: 10px;
+  font-family: Courier;
+  width: 100%;
+  height: 70px;
+  scrollable: true;
+  
+}
+</style>
+<script>
+function toggleSnippet(){
+  var currentUrl = window.location.href;
+  currentUrl = currentUrl.replace("viewer", "embed");
+  currentUrl = currentUrl.replace("editor", "embed");
+  let link = "<iframe src=\""+currentUrl+"\" style=\"border:none\" width=\"100%\" height=\"100%\"></iframe>";
+  
+  document.getElementById("snippet").innerHTML = link;
+  let div = document.getElementById("snippetDiv");
+  if (div.style.display == "none"){
+    div.style.display = "block";
+  }else{
+    div.style.display = "none";
+  }
+}
+function medmel2volpiano() {
+  let str = document.getElementById("music_input").value;
+
+  // Replace complex patterns first
+  str = str.replace(/\(\*G\)/g, ")");
+  str = str.replace(/\*G/g, "9");
+
+  str = str.replace(/\(\+a\)/g, "P");
+  str = str.replace(/\(\+b\)/g, "zQ");
+  str = str.replace(/\(\+h\)/g, "Q");
+  str = str.replace(/\(\+c\)/g, "R");
+  str = str.replace(/\(\+d\)/g, "S");
+
+
+  // Replace individual note patterns
+  str = str.replace(/\(A\)/g, "A");
+  str = str.replace(/\(B\)/g, "yB");
+  str = str.replace(/\(H\)/g, "B");
+  str = str.replace(/\(C\)/g, "C");
+  str = str.replace(/\(D\)/g, "D");
+  str = str.replace(/\(E\)/g, "E");
+  str = str.replace(/\(F\)/g, "F");
+  str = str.replace(/\(G\)/g, "G");
+  str = str.replace(/\(a\)/g, "H");
+  str = str.replace(/\(b\)/g, "iJ");
+  str = str.replace(/\(h\)/g, "J");
+  str = str.replace(/\(c\)/g, "K");
+  str = str.replace(/\(d\)/g, "L");
+  str = str.replace(/\(e\)/g, "M");
+  str = str.replace(/\(f\)/g, "N");
+  str = str.replace(/\(g\)/g, "O");
+
+  str = str.replace(/\(%B\)/g, "YB");
+  str = str.replace(/\(%H\)/g, "YB");
+  str = str.replace(/\(%b\)/g, "IJ");
+  str = str.replace(/\(%h\)/g, "IJ");
+  str = str.replace(/\(%\+b\)/g, "Zq");
+  str = str.replace(/\(%\+h\)/g, "Zq");
+  
+
+
+  // Replace symbols like '%' back to the original set (Y, I, or Z)
+  str = str.replace(/%}/g, "Y"); // Choose "Y" or adjust based on your original mapping
+  str = str.replace(/%/g, "Y"); // Choose "Y" or adjust based on your original mapping
+  str = str.replace(/b}/g, "i"); // Choose "Y" or adjust based on your original mapping
+  
+  // Replace lowercase letters to corresponding volpiano notes
+  str = str.replace(/\+a/g, "p");
+  str = str.replace(/\+b/g, "zq");
+  str = str.replace(/\+h/g, "q");
+  str = str.replace(/\+c/g, "r");
+  str = str.replace(/\+d/g, "s");
+
+  str = str.replace(/g/g, "o");
+  str = str.replace(/f/g, "n");
+  str = str.replace(/e/g, "m");
+  str = str.replace(/d/g, "l");
+  str = str.replace(/c/g, "k");
+  str = str.replace(/b/g, "ij"); // `ib` before `b` to avoid conflict
+  str = str.replace(/h/g, "j");
+  str = str.replace(/a/g, "h");
+
+  str = str.replace(/G/g, "g");
+  str = str.replace(/F/g, "f");
+  str = str.replace(/E/g, "e");
+  str = str.replace(/D/g, "d");
+  str = str.replace(/C/g, "c");
+  str = str.replace(/B/g, "yb"); // `ib` before `b` to avoid conflict
+  str = str.replace(/H/g, "b");
+  str = str.replace(/A/g, "a");
+  
+  // Replace formatting characters back
+  if (currentStyle == 0) {
+    str = str.replace(/'/g, "7");
+    str = str.replace(/\//g, "3");
+  }else{
+    str = str.replace(/[\r|\n]/g, "7");
+    str = str.replace(/\//g, "3");
+  }
+  str = str.replace(/\/\//g, "4");
+
+  // Reversing any replacements done in volpiano2medmel
+  str = str.replace(/\s*$/g, ""); // Trim any spaces at the end
+  str = alignWithText(str);
+  str = "1---" + str; 
+  showStyledPopupWithCopyButton(str)
+}
+
+function showStyledPopupWithCopyButton(str) {
+  // Open a new window
+  var myWindow = window.open("", "", "width=600,height=400");
+
+  // Create the content of the popup window
+  var doc = myWindow.document;
+  doc.write(`
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+          }
+          .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+          }
+          textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            margin-bottom: 20px;
+          }
+          button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+          }
+          button:hover {
+            background-color: #0056b3;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h2>Volpiano output</h2>
+          <textarea id="volpianoText">${str}</textarea>
+          <button id="copyButton">Copy Volpiano string</button>
+        </div>
+      </body>
+    </html>
+  `);
+
+  doc.close();
+
+  // Add the script dynamically to the popup document
+  var script = doc.createElement("script");
+  script.innerHTML = `
+    document.getElementById("copyButton").onclick = function() {
+      var textArea = document.getElementById("volpianoText");
+      textArea.select();
+      document.execCommand("copy");
+      alert("Copied to clipboard!");
+    };
+  `;
+  doc.head.appendChild(script);
+}
+
+// Simply add dashes in the Volpiano depending on text word division
+function alignWithText(volpStr="") {
+  let text = document.getElementById("text_input").value;
+  
+  let textSeparation = text.replace(/[^-\s]/g, '');
+  
+  volpStrAr = volpStr.split(" ");
+  
+  var newVolpStr = "";
+  for (var i = 0; i < volpStrAr.length; i++) {
+    newVolpStr += volpStrAr[i] + "--";
+    if (textSeparation[i] == " ") {
+      newVolpStr += "-";
+    }
+  }
+  return newVolpStr;
+}
+
+function checkAllowedExport() {
+  let currPage = localStorage.getItem("current_page") || "";
+  let exportButtonIds = ["btnExportVolpiano", "btnExportMedmel"];
+
+  exportButtonIds.forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return; // Prevent errors if button does not exist
+
+    if (currPage === "editor.html") {
+      btn.style.display = "block";
+    } else {
+      btn.remove();
+    }
+  });
+}
+
+checkAllowedExport()
+</script>

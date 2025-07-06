@@ -1,0 +1,22 @@
+/*style text staves panel*/
+#title {
+    text-align: center;
+    font-size: 30px;
+}
+
+#author {
+    text-align: center;
+    font-size: 20px;
+    font-style: italic;
+}
+
+#id {
+    text-align: left;
+    font-size: 16px;
+}
+
+#ms {
+    text-align: left;
+    font-size: 16px;
+}
+/*End style text staves panel*/

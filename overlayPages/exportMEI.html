@@ -1,0 +1,289 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div>
+    <div class="closeButton">
+        <input type="image" src="img/icons/close1.png" class="menuButton" style="width:10px;" onclick="hideOverlay()" title="Close">
+    </div>
+    <div id="titleSettings">
+        <div class="separator">Export MEI</div>
+        <div id="optionWrapper">
+            <div class="meiExportOptions" style="font-weight:bold">Options</div>
+            <div class="options-container">
+                <div class="options-left">
+                    <div class="option-item" onmouseover="showPopup('Use @type in <neume>. E.g. <neume type=&ldquo;climacus&ldquo;>')" onmouseout="hidePopup()">
+                        <input type="checkbox" id="includeNeumeType" name="includeNeumeType" onchange="statusIncludeNeumeType()" checked/>
+                        <label for="includeNeumeType">&nbsp;Include neume types <span><img src="img/icons/info.png"/ class="info_icon"></span></label>
+                    </div>
+                    <div class="option-item" onmouseover="showPopup('Use @class in <neume>. E.g. <neume type=&ldquo;climacus.type.1&ldquo;>. This are MedMel specific classes to differenciate between different graphic configurations of a neume')" onmouseout="hidePopup()">
+                        <input type="checkbox" id="includeNeumeClass" name="includeNeumeClass" onchange="statusIncludeNeumeClass()"/>
+                        <label for="includeNeumeClass">&nbsp;Do not include neume classes<sup>*</sup> <span><img src="img/icons/info.png"/ class="info_icon"></span></label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="includeDetails" name="includeDetails" onchange="statusIncludeDetails()"/>
+                        <label for="includeDetails">&nbsp;Include taxonomy descriptions of MedMel classes</label>
+                    </div>
+                    <div class="option-item" onmouseover="showPopup('Useful for transcriptions using modern notation only. The neumes contain pitch information. If encoded, clefs and manuscript system breaks will also be included, as they can be relevant to the interpretation of the musical score.')" onmouseout="hidePopup()">
+                        <input type="checkbox" id="modernNotation" name="modernNotation" onchange="statusModernNotation()"/>
+                        <label for="modernNotation">&nbsp;Minimal notation <sup>*</sup><span><img src="img/icons/info.png"/ class="info_icon"></span></label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="meiCompliance" name="meiCompliance" onchange="statusMeiCompliance()"/>
+                        <label for="meiCompliance">&nbsp;Strictly comply to MEI 5.0 standard <sup>*</sup></label>
+                    </div>
+                </div>
+                <div class="options-right">
+                    <div class="meiExportOptions">Download file as:</div>
+                    <label>
+                        <input type="radio" name="fileType" value=".xml" id="xml" onchange="statusMeiExportFileType('xml')" checked> *.xml
+                    </label>&nbsp;&nbsp;
+                    <label>
+                        <input type="radio" name="fileType" value=".mei" id="mei" onchange="statusMeiExportFileType('mei')"> *.mei
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <input id="generateMeiBtn" type="button" value="Generate MEI File" onclick="prepareMEIexport('generate')">
+        <input id="downloadMeiBtn" type="button" value="Download MEI File" onclick="prepareMEIexport('download')">
+    </div>
+    <br>
+    <div style="font-size:12px">* <strong>Warning: Selecting these options may lead to loss of information.</strong><br>
+Some specific details, such as exact neume shapes, stem positions, and vertical lines encoded with the MedMel editor, may not be preserved in the XML file. When re-imported into MedMel, any neume shapes that were not explicitly specified will revert to the default setting.
+<br>
+For more information about MedMel's customization of the MEI Neumes module, <a target="_blank" href="../pages/medmel-and-mei.html">click here.</a></div>
+</div>
+
+<style>
+/**--------Menu style single note-------**/
+@media only screen and (max-width: 769px){
+    .closeButton{
+        display: none;
+        float:right;
+    }
+}
+
+/* ----Apply this style when width screen size is more then 767 */
+@media only screen and (min-width: 769px){
+    .closeButton{
+
+    }
+}
+
+@keyframes fading {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#titleSettings{
+  padding-left:15px;
+  padding-right:15px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#controlSettings{
+  padding-left: 15px;
+  padding-right:15px;
+  padding-bottom:15px;
+}
+
+#optionWrapper {
+  text-align: left;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-between;  /* Distributes space between the options */
+  flex-wrap: wrap;  /* Ensures responsiveness */
+}
+
+.options-left, .options-right {
+  flex: 1;  /* Takes equal space */
+  padding: 10px;
+}
+
+.option-item {
+  margin-bottom: .2rem;
+}
+
+#bottom-aligned {
+  position: absolute;      /* Position the child div absolutely */
+  bottom: 20px;            /* Align it at the bottom of the parent */
+  left: 20px;              /* Optionally align to the left */
+  right: 20px;             /* Optionally align to the right */
+}
+
+.button-container {
+  display: flex;  /* Aligns buttons in a row */
+  justify-content: center;  /* Centers the buttons */
+  margin-bottom: 20px;
+}
+
+input[type=checkbox] {
+  margin-bottom: .7rem;
+}
+
+#generateMeiBtn, #downloadMeiBtn {
+  text-align: center;
+  font-weight:bold;
+  margin: 0 10px;           /* Adds space between buttons */
+  padding: 10px 20px;          /* Adds padding for a larger clickable area */
+  background-color: white;     /* Sets the button background color to white */
+  color: #2d3c43;              /* Sets the text color to black */
+  border: 2px solid #2d3c43;   /* Adds a gray border */
+  border-radius: 5px;          /* Rounds the corners of the button */
+  font-size: 16px;             /* Sets a medium font size */
+  font-weight: bold;           /* Makes the text bold */
+  cursor: pointer;             /* Changes the cursor to a pointer on hover */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Adds smooth transitions */
+}
+
+/* Hover effect */
+#generateMeiBtn:hover, #downloadMeiBtn:hover {
+  background-color: #2d3c43;        /* Changes the background to black on hover */
+  color: white;                     /* Changes the text color to white on hover */
+  border-color: #2d3c43;            /* Changes the border color to black on hover */
+}
+
+/* Focus effect for accessibility */
+#generateMeiBtn:focus, #downloadMeiBtn:focus {
+  outline: none;                    /* Removes the default focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5); /* Adds a custom focus outline */
+}
+
+.info_icon {
+  height: 17px;
+  width: 17px;
+}
+</style>
+
+<script>
+
+function prepareMEIexport(action="download") {
+  var includeDetails = document.getElementById("includeDetails").checked;
+  var modernNotation = document.getElementById("modernNotation").checked;
+  var meiCompliance = document.getElementById("meiCompliance").checked;
+  var includeNeumeType = document.getElementById("includeNeumeType").checked;
+  var includeNeumeClass = document.getElementById("includeNeumeClass").checked;
+  var extension = getRadioValue('fileType');
+  exportMEI(action, includeDetails, includeNeumeType, includeNeumeClass, modernNotation, meiCompliance, extension);
+  updateStaves(false);
+  hideOverlay();
+}
+
+function getRadioValue(radioBtnName) {
+     const radios = document.getElementsByName(radioBtnName);
+     // Loop through the radio buttons to find the selected one
+     for (const radio of radios) {
+         if (radio.checked) {
+            return radio.value;
+         }
+     }
+}
+
+function statusIncludeDetails() {
+  if (document.getElementById('includeDetails').checked) {
+      document.cookie = "includeDetails=1";
+  } else {
+    document.cookie = "includeDetails=";
+  }
+}
+
+function statusIncludeNeumeType() {
+  if (document.getElementById('includeNeumeType').checked) {
+      document.cookie = "includeNeumeType=1";
+  } else {
+    document.cookie = "includeNeumeType=";
+  }
+}
+
+function statusIncludeNeumeClass() {
+  if (document.getElementById('includeNeumeClass').checked) {
+      // WARNING: activating includeNeumeClass actually excludes them.
+      document.cookie = "includeNeumeClass=1";
+      document.getElementById('includeDetails').checked = false;
+      document.getElementById('includeDetails').disabled = true;
+  } else {
+    document.cookie = "includeNeumeClass=";
+    document.getElementById('includeDetails').disabled = false;
+  }
+}
+
+function statusModernNotation() {
+  if (document.getElementById('modernNotation').checked) {
+      document.cookie = "modernNotation=1";
+      document.getElementById('includeDetails').checked = false;
+      document.getElementById('includeNeumeType').checked = false;
+      document.getElementById('includeNeumeClass').checked = false;
+      document.getElementById('includeDetails').disabled = true;
+      document.getElementById('includeNeumeType').disabled = true;
+      document.getElementById('includeNeumeClass').disabled = true;
+  } else {
+    document.cookie = "modernNotation=";
+    document.getElementById('includeDetails').disabled = false;
+    document.getElementById('includeNeumeType').disabled = false;
+    document.getElementById('includeNeumeClass').disabled = false;
+  }
+}
+
+function statusMeiCompliance() {
+  if (document.getElementById('meiCompliance').checked) {
+      document.cookie = "meiCompliance=1";
+  } else {
+    document.cookie = "meiCompliance=";
+  }
+}
+
+function setCheckboxes() {
+  var includeDetails = getCookie("includeDetails");
+  var includeNeumeType = getCookie("includeNeumeType");
+  var includeNeumeClass = getCookie("includeNeumeClass");
+  var modernNotation = getCookie("modernNotation");
+  var meiCompliance = getCookie("meiCompliance");
+  
+  if (includeDetails) {
+    document.getElementById("includeDetails").checked = true;
+  } else {
+    document.getElementById("includeDetails").checked = false;
+  }
+  
+  if (includeNeumeType) {
+    document.getElementById("includeNeumeType").checked = true;
+  } else {
+    document.getElementById("includeNeumeType").checked = false;
+  }
+  
+  if (includeNeumeClass) {
+    document.getElementById("includeNeumeClass").checked = true;
+    // then exclude also the taxonomy descriptions
+    document.getElementById("includeDetails").checked = false;
+    document.getElementById("includeDetails").disabled = true;
+  } else {
+    document.getElementById("includeNeumeClass").checked = false;
+    // Make sure includeDetails selection is enabled
+    document.getElementById("includeDetails").disabled = false;
+  }
+  
+  if (modernNotation) {
+    document.getElementById("modernNotation").checked = true;
+  } else {
+    document.getElementById("modernNotation").checked = false;
+  }
+  
+  if (meiCompliance) {
+    document.getElementById("meiCompliance").checked = true;
+  } else {
+    document.getElementById("meiCompliance").checked = false;
+  }
+
+
+}
+setCheckboxes();
+
+
+
+</script>
+
+</body>
+</html>

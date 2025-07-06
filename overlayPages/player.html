@@ -1,0 +1,192 @@
+<div id="playerOverlay">
+  <div class="closeButton">
+      <input id="closePlayer" type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="togglePlayerOverlay()" title="Close">
+  </div>
+    <div id="playerOverlayheader" class="playerOverlayheader">
+        <div class="separator">Player</div>
+    </div>
+
+        <div  class="mainContainer col-md-12 containerColor"  style="padding:0px;">
+            <div class=" marginTop10">
+                <center>
+                    <div style="padding:0px;">
+                        <div  style="width: 100%; text-align:center;">
+                            <span>
+                                <button class="playerButton" onclick="btnPrev()" title="Prev">
+                                    <img class="playerIcon" src="img/icons/prev1.png" >
+                                </button>
+                            </span>
+                            <span>
+                                <button id="btnPlay" class="playerButton" onclick="btnPlay(this)" title="Play">
+                                    <img id="playImgOverlay" class="playerIcon" src="img/icons/play1.png" >
+                                </button>
+                            </span>
+                            <span>
+                                <button  class="playerButton" onclick="btnStopPlayer()" title="Stop">
+                                    <img class="playerIcon" src="img/icons/stop1.png"  >
+                                </button>
+                            </span>
+                            <span>
+                                <button class="playerButton"  onclick="btnNext()" title="Next">
+                                    <img class="playerIcon" src="img/icons/next1.png" >
+                                </button>
+                            </span>
+                            <span>
+                                <button class="playerButton"  onclick="togglePlayerOverlaySettings()" title="Next">
+                                    <img class="playerIcon" src="img/icons/settings-1.png" >
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="marginTop10">
+                        <span>
+                            <input class="slider" type="range" onchange="changeSpeedOverlay()" id="speedOverlay" name="speed"
+                                min="0.5" max="1.5" step="0.25" value="1" style="display: none">
+                        </span>
+                        <div>
+                            <label id ="txtSpeedOverlay" for="speed" style="display: none">Music Speed: 1x</label>
+                        </div>
+                    </div>
+                    <div class="marginTop10">
+                        <span>
+                        <input class="slider" type="range" onchange="changeOctaveOverlay()" id="octaveOverlay" name="octave"
+                            min="0" max="5" step="1" value="2" style="display: none">
+                        </span>
+                        <div>
+                            <label id ="txtOctaveOverlay" for="octave" style="display: none">Octave: 2</label>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+</div>
+
+<style>
+/**--------Menu style single note-------**/
+#playerOverlay {
+    border-radius: 10px 10px;
+    background: #f3f0eb;
+    width: 300px;
+    position: absolute;
+    z-index: 9;
+}
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#playerOverlayheader{
+    padding-left:15px;
+    padding-right:15px;
+    margin-top: 10px;
+    text-align: center;
+    cursor: move;
+     z-index: 10;
+  }
+}
+#controlPlayer{
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:15px;
+}
+
+#closePlayer {
+  margin: 5px;
+}
+
+</style>
+<script>
+
+
+dragElement(document.getElementById("playerOverlay"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+ //  elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function togglePlayerOverlaySettings(){
+  if(document.getElementById("speedOverlay").style.display != "none") {
+    document.getElementById("speedOverlay").style.display = "none";
+    document.getElementById("octaveOverlay").style.display = "none";
+    document.getElementById("txtSpeedOverlay").style.display = "none";
+    document.getElementById("txtOctaveOverlay").style.display = "none";
+  }else{
+    document.getElementById("speedOverlay").style.display = "block";
+    document.getElementById("octaveOverlay").style.display = "block";
+    document.getElementById("txtSpeedOverlay").style.display = "block";
+    document.getElementById("txtOctaveOverlay").style.display = "block";
+  }
+}
+
+
+function changeSpeedOverlay(){
+
+    let speedOverlay = document.getElementById("speedOverlay").value;
+    let labelOverlay = document.getElementById("txtSpeedOverlay");
+    labelOverlay.innerHTML = "Music Speed: "+speedOverlay+"x";
+
+    document.getElementById("speed").value = speedOverlay;
+    let label = document.getElementById("txtSpeed");
+    label.innerHTML = "Music Speed: "+speedOverlay+"x";
+
+    let textarea = document.getElementById("music_input");
+    //textarea.focus();
+    if(audioContext.state === 'running'){
+        stopMusic();
+        playMusic();
+    }
+}
+function changeOctaveOverlay(){
+
+    let octaveOverlay = document.getElementById("octaveOverlay").value;
+    let labelOverlay = document.getElementById("txtOctaveOverlay");
+    labelOverlay.innerHTML = "Octave: "+octaveOverlay+"";
+
+    document.getElementById("octave").value = octaveOverlay;
+    let label = document.getElementById("txtOctave");
+    label.innerHTML = "Octave: "+octaveOverlay+"";
+
+    let textarea = document.getElementById("music_input");
+    //textarea.focus();
+    if(audioContext.state === 'running'){
+        stopMusic();
+        playMusic();
+    }
+}
+</script>

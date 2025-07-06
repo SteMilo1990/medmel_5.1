@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Med Mel</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+  <!-- Bootstrap core CSS -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link href="css/jquery-linedtextarea1.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="script/jquery-linedtextarea.js"></script>
+
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/oldShapeFormatter.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+  <script type="text/javascript" src="comparetool/script/controllerCompareTool.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="script/userEvent.js"></script>
+  <!--*******************Player******************* -->
+  <!-- <script src="https://cdn.rawgit.com/mohayonao/web-audio-api-shim/master/build/web-audio-api-shim.min.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="script/playStaves.js"></script> -->
+
+  <!-- *************pdf export ****************** -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> -->
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <!-- *******************Divide screen******************* -->
+  <script type="text/javascript" src="script/divideScreen.js"></script>
+  
+  <script>
+      /*default settings*/
+      document.cookie = "melodicStructure=1";
+      document.cookie = "lineNumber=1";
+      /*----------------*/
+      </script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body oncontextmenu="return false;">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ6F437"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div id="header"></div>
+    </header>
+    <div id="bodyContainer" class="mainContainer col-md-12 containerColor" > <!-- Main container -->
+        <div id="bodyEditor" class="col-md-12" > <!-- Main container -->
+            <div class="clear">
+            </div>
+            <div class="row">
+                <div class="col-md-9" id="stavesBox" style="height:89vh;"  >
+                    <div id="boxStavesContainer" class="scrollablePane contentPane" style="height:92vh;" >
+                        <div id="stavesContainer" class="stavesContainer" style="pointer-events:none;"> <!-- Staves Container -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ***************Input component form*************************** -->
+                <div id="containerSideBar" class="col-md-3" style="height:92vh">
+                    <div id="rightSideBar" class="active" style="display:block;">
+                      <center>
+                      
+                        <div class="separator" style="margin-top:0px;">Compared melodies</div>
+                        <div style="text-align:center; color:gray">(Drag to change order)</div>
+                        <div class="marginTop10">
+                            <select id="ListStavesToCompare" name="ListStavesToCompare" size="2" style="overflow:auto;  border-radius:0px 0px 0px 0px; width:100%; height:300px;" >
+
+                            </select>
+                        </div>
+                        <div class=" center marginTop10">
+                            <div  style="margin-right:10px;">
+                                <input id="btnAddCompare" style="" type="button" onClick="loadWorks(0)"   value="Search works with concordances"/>
+                            </div>
+                            <!-- <div class="center marginTop10">
+                                <input id="btnloadSameWorks" type="button" onClick="loadWorks(1)"   value="Search works with concordances"/>
+                            </div> -->
+                            <div>
+                                <input id="btnRemoveCompare" style="width:100px; margin-top:5px" type="button" onClick="btnRemoveCompare()"   value="Remove"/>
+                            </div>
+                        </div>
+                        <div class="separator" style="margin-top:20px;">Options</div>
+                        <div style="width:250px;">
+                            <input type="checkbox" id="btnHideNotesCompare" onclick="btnOptions()" name="hideNotes" value="Hide">
+                            <label for="btnHideNotesCompare"> Show differences only</label><br>
+                            <input type="checkbox" id="btnColorNoteCompare" onclick="btnOptions()" name="ColorNote" value="Color">
+                            <label for="btnColorNoteCompare"> Highlight differences</label><br>
+                        </div>
+                    </div>
+                    <!-- ***************Iframe sidebar*************************** -->
+                    <div id="frameSidebar" style="position: absolute; margin-top:14px; top:14px;
+                    background-color:black;width: 200% !important;height:70vh; top:-3px;right:-8px;left:-8px; bottom:-8px;display:none;">
+                       <div id="controlBox" style="position:absolute; width:100%">
+                           <input type="text" id="urlInput" placeholder="Enter manuscript URL"/>
+                           <input type="button" id="urlSubmitBtn" onclick="processURL()" style="position:inline-block;" value="Search">
+                            <span onclick="zoomOut()" class="controlBoxBtn" id="zoomOut" style="right:40px;">[-]</span>
+                            <span onclick="zoomIn()" class="controlBoxBtn" id="zoomIn" style="right:70px">[+]</span>
+                            <span onclick="nextPage()" class="controlBoxBtn" id="previousPage" style="right:100px;">></span>
+                            <span onclick="previousPage()" class="controlBoxBtn" id="nextPage" style="right:130px"><</span>
+                            <span id="close" class="controlBoxBtn" onclick="closeIframe()" style="  display: block;right:10px;" value="x" z-index="10">x</span>
+                       </div>
+                       <div id="frameBox" style="height:100%">
+                           <img id="msImg"/>
+                           <div id="load"></div>
+                       </div>
+                    </div>
+                    <!-- ***************End Iframe sidebar*************************** -->
+                </div>
+                <div id="bottomSideBar" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel ">
+    </div>
+    <div id="divPrint">
+    </div>
+    <div id="settings" style="display:none;" class="placeholderSettingsMenu">
+    </div>
+    <div id="importExport" style="display:none;" class="placeholderSettingsMenu">
+    </div>
+</body>
+</html>
+<script>
+var typeResult = 0; // 0: single load 1: multiple load
+
+function loadWorks(type){
+    typeResult = type;
+    addContentToOverlay('comparetool/overlayPages/searchStavesToCompare.html', 'blank');
+}
+
+function btnRemoveCompare(){
+    if (document.getElementById("ListStavesToCompare").length > 0){
+        let index = document.getElementById("ListStavesToCompare").selectedIndex;
+        if (index < 0) index = document.getElementById("ListStavesToCompare").length-1;
+        removeStaveToCompare(index);
+        document.getElementById("ListStavesToCompare").remove(index);
+    }
+}
+
+function btnOptions(){
+    let color = document.getElementById("btnColorNoteCompare").checked;
+    let hide = document.getElementById("btnHideNotesCompare").checked;
+    setupDifference(color, hide);
+}
+
+//close menù setting when user click on body
+document.getElementById('settings').addEventListener('click', function(event) {
+    if (event.target.id === 'settings') { 
+        this.style.display = 'none'; // Hide the settings div
+    }
+});
+
+$(document).click(function(e) {
+    if (!$(e.target).closest("#importExport, #btnImportExport, .keep-open").length) {
+        $("#importExport").hide();
+    }
+});
+
+if (document.getElementById("settings") != null){
+    // need var, not let
+    var divSetting = document.getElementById("settings");
+    $(divSetting).load("overlayPages/settings.html");
+}
+
+let divImpEx = document.getElementById("importExport");
+$(divImpEx).load("overlayPages/exportMenu.html");
+
+
+$(document).ready(function(){
+    $("#ListStavesToCompare").dragOptions({
+        onDrag: function(){
+
+        },
+        onChange: function(){
+            //concreteDragAndDrop();
+        }
+    });
+});
+
+var resizeTimer;
+
+$(window).on('resize', function(e) {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    resizeCompareToolStaves();
+  }, 250);
+});
+
+function selectStavesToLoad(id){
+    loadStavesFromDatabase(id);
+}
+
+function loadContentByID(multiple = true){
+    let queryString = window.location.search;
+    var nOfIds = queryString.split("id").length - 1;
+    // If there is an id
+    if (nOfIds > 0) {
+      // get id's
+      let urlParams = new URLSearchParams(queryString);
+      
+      // Load parameter
+      if (urlParams.get('id_label') != null || urlParams.get('id_label')) {
+        useIdAsStaffLabel = urlParams.get('id_label');
+      }
+      
+      if (urlParams.get('lines') != null || urlParams.get('lines')) {
+        setOfLines = JSON.parse(decodeURIComponent(urlParams.get('lines')));
+      }
+      
+      if (urlParams.get('id') != null || urlParams.get('id')) {
+        var id = urlParams.get('id');
+        var id_array = id.split(",");
+        id_array = cleanIdArray(id_array);
+      }
+      // Multiple ids, it means that the request is precise, no need to search alternative mss
+      if (id_array.length > 1) {
+        console.log(1);
+        loadMulipleStaves(id_array, true);
+      }
+      // Single ID (and multiple == true), search for other mss
+      else if (multiple) {
+        loadMulipleStaves_mss(id, true);
+      }
+      // Single ID (triggered by ADD) so just add this 
+      else {
+        console.log(3);
+        loadSingleStavesToCompare(id, true)
+      }
+    
+      // Get lines parameters after everything is already loaded
+    }
+}
+
+
+function cleanIdArray(id_array) {
+  let newArr = [];
+  id_array.forEach((item, i) => {
+    if (!newArr.includes(item)) {
+      newArr.push(item);
+    }
+  });
+  return newArr;
+}
+localStorage.setItem("current_page", "compareTool.html");
+window.onload = loadContentByID();
+
+// after content loaded, handle selected lines in URL if any
+window.addEventListener("load", function () {
+  setTimeout(() => {
+    loadSelectedLinesOnLoad();
+  }, 100);
+});
+
+
+</script>
+<style>
+
+#ListStavesToCompare option {
+  cursor: grab; /* Indicates draggable content */
+}
+#ListStavesToCompare option:active {
+  cursor: grabbing; /* While dragging */
+}
+#containerSideBar {
+  border-left: 10px solid var(--navbar);
+  padding:10px;
+}
+.center{
+    width: 100%;
+    justify-content:center;
+}
+.controllerContainer{
+    width: 250px;
+    margin: 0px 10px 20px 0px;
+    padding-left: 10px;
+}
+.rowLine{
+    display: flex;
+}
+.differentNote{
+    fill:#0161FE;
+}
+.hideSameNote{
+    display:none;
+}
+#btnloadSameWorks, #btnAddCompare, #btnRemoveCompare {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #2d3c43;
+  padding: 10px;
+  color: #2d3c43;
+}
+
+.concordancesBtn, .addSingle {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #2d3c43;
+  padding: 3px 7px;
+  color: #2d3c43;
+}
+.concordancesBtn:hover, .addSingle:hover {
+  border: 1px solid #3b82f6;
+  color: #3b82f6
+}
+
+.title{ 
+  text-align: center;
+  font-size: 40px;
+}
+.author {
+  text-align: center;
+  font-size: 30px;
+  font-style: italic;
+}
+.id_mss_fs {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom:20px !important;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+
+// Different and BETTER than the other PDF exports. Ultimately they will need to be changed to things like this
+// The advantage with them is that staves are already single <svg>, so they don't need fragmenting
+function printPDFCompare(){
+  const a4Height = 1588; // Pixels
+  const a4Width = 1123; 
+  const svg = document.getElementById("mainSVG");
+  const header = svg.querySelector("#titleHeader");
+  const headerHeight = header.getBBox().height + 70;
+  const headerWidth = header.getBBox().width;
+  const stavesGroups = svg.querySelectorAll(".stavesGroup");
+  const margins = 50;
+  // const singleStavesGroupHeight = stavesGroups[0].getBBox().height;
+  const singleStavesGroupHeight = stavesGroups[0].querySelectorAll(".singleStave").length * 155;
+  const singleStavesGroupWidth = stavesGroups[0].getBBox().width;
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  let scale = 1;
+  if (singleStavesGroupHeight < a4Width){
+      scale =   (a4Width - margins * 2) / singleStavesGroupWidth * 100;
+  }
+  scale = window.prompt(`Enter preferred zoom level (auto: ${(scale)}%)`, scale);
+  scale = scale / 100
+  
+    
+  // create first page
+  let mainContainer = document.createElement("div");
+  mainContainer.setAttribute("style", "zoom:"+scale)
+
+  // append header to first page
+  const headerSVGContainer = document.createElementNS(svgNS, "svg");
+  headerSVGContainer.appendChild(header.cloneNode(true));
+  headerSVGContainer.setAttribute("height", headerHeight);
+  headerSVGContainer.setAttribute("width", headerWidth);
+  mainContainer.appendChild(headerSVGContainer);
+  
+  
+  for (let i = 0; i < stavesGroups.length; i++) {
+    // append first element
+    const stavesGroupSVGContainer = document.createElementNS(svgNS, "svg");
+    const currentStaveGroup = stavesGroups[i].cloneNode(true);
+    const stavesInGroup = currentStaveGroup.querySelectorAll(".singleStave");
+
+    for (let j = 0; j < stavesInGroup.length; j++) {
+      const currentStave = stavesInGroup[j];
+      currentStave.setAttribute("transform", "translate(0, "+ (j*155)+")");
+    }
+    stavesGroupSVGContainer.append(currentStaveGroup);
+    stavesGroupSVGContainer.setAttribute("height", singleStavesGroupHeight);
+    stavesGroupSVGContainer.setAttribute("width", singleStavesGroupWidth);
+    mainContainer.append(stavesGroupSVGContainer);
+
+  }
+
+  // Open a new window for printing
+  let printWindow = window.open('', '_blank');
+  printWindow.document.write('<html><head><title>Print SVG</title></head><body>');
+  printWindow.document.write('<style>svg { display: block; margin: 0 auto; }</style>');
+  printWindow.document.write('<div id="printContent"></div>');
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  
+  // Append the paginated SVG
+  let printContent = printWindow.document.getElementById('printContent');
+  printContent.appendChild(mainContainer);
+
+  // Print after a short delay to ensure rendering
+  setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+  }, 500);
+}
+
+
+function JSaccessCompare(){
+    
+  // Get user information
+  let email = localStorage.getItem("session_email");
+  let password = localStorage.getItem("session_psw");
+
+  $.ajax({
+      type : "POST",  //type of method
+      url  : "./php/userInfo.php",  //your page
+      data : {email: email, password : password},
+      success : function(data) {
+          let userId = -1;
+          try {
+              let obj = jQuery.parseJSON(data);
+              if (obj != -1) {
+                userId = obj[0];
+              }
+          }catch (error) {
+            
+          }
+          let idStaves = -1;
+          if (idStavesToCompare.length > 0){
+            idStaves = idStavesToCompare[0];
+          }
+          $.ajax({
+              type : "POST",  //type of method
+              url  : "./php/JSaccess.php",  //your page
+              data : {userId:userId, idStaves:idStaves, repId:"", page:"compare"},
+              success : function(data){
+              }
+          });
+      }
+  });
+}
+
+JSaccessCompare();
+
+
+</script>

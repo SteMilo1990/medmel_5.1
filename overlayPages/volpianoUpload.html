@@ -1,0 +1,141 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div>
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div id="titleSettings">
+        <div class="separator">Import Volpiano</div>
+        <div class="">Paste a valid Volpiano string</div>
+    </div>
+
+    <form>
+    <textarea id="volpiano_input" style="width:100%; height:375px;"></textarea>
+    <input type="button" value="Transform" onclick="volpiano2medmel()">
+    </form>
+    <p id="demo"></p>
+</div>
+
+<style type="text/css">
+  @media only screen and (min-width: 769px) {
+    .containerOverlay {
+        margin: auto;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logoPanel {
+        background-color: #f3f0eb !important;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-50%;}
+        100%{top:50%;}
+    }
+}@media only screen and (max-width: 769px){
+        .closeButton{
+            display: none;
+            float:right;
+        }
+    }
+    /* ----Apply this style when width screen size is more then 767 */
+    @media only screen and (min-width: 769px){
+        .closeButton{
+
+        }
+    }
+
+@keyframes fading {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#titleSettings{
+    padding-left:15px;
+    padding-right:15px;
+    margin-top: 10px;
+    text-align: center;
+}
+#controlSettings{
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:15px;
+
+}
+</style>
+
+
+<script type="text/javascript">
+
+function volpiano2medmel(notes_input){
+  let str = document.getElementById("volpiano_input").value
+  str = str.replace(/\)/g, "*G");
+
+
+	str = str.replace(/9/g, "(*g)");
+	str = str.replace(/G/g, "(g)");
+	str = str.replace(/F/g, "(f)");
+	str = str.replace(/E/g, "(e)");
+	str = str.replace(/D/g, "(d)");
+	str = str.replace(/C/g, "(c)");
+  str = str.replace(/B/g, "(b)");
+	str = str.replace(/A/g, "(a)");
+	str = str.replace(/H/g, "(h)");
+	str = str.replace(/O/g, "(o)");
+	str = str.replace(/N/g, "(n)");
+	str = str.replace(/M/g, "(m)");
+	str = str.replace(/L/g, "(l)");
+	str = str.replace(/K/g, "(k)");
+	str = str.replace(/iJ/g, "(ij)");
+	str = str.replace(/J/g, "(j)");
+
+	str = str.replace(/Y/g, "%");
+	str = str.replace(/I/g, "%");
+	str = str.replace(/Z/g, "%");
+
+	str = str.replace(/g/g, "G");
+	str = str.replace(/f/g, "F");
+	str = str.replace(/e/g, "E");
+	str = str.replace(/d/g, "D");
+	str = str.replace(/c/g, "C");
+	str = str.replace(/ib/g, "B");
+	str = str.replace(/b/g, "H");
+	str = str.replace(/a/g, "A");
+	str = str.replace(/h/g, "a");
+	str = str.replace(/o/g, "g");
+	str = str.replace(/n/g, "f");
+	str = str.replace(/m/g, "e");
+	str = str.replace(/l/g, "d");
+	str = str.replace(/k/g, "c");
+	str = str.replace(/ij/g, "b");
+	str = str.replace(/j/g, "h");
+	str = str.replace(/p/g, "+a");
+	str = str.replace(/zq/g, "+b");
+	str = str.replace(/q/g, "+h");
+
+	str = str.replace(/1/g, "");
+	str = str.replace(/7/g, "'");
+	str = str.replace(/3/g, "\r");
+	str = str.replace(/4/g, "/");
+  str = str.replace(/5/g, "");
+  str = str.replace(/6/g, "/");
+
+	str = str.replace(/---/g, " ");
+	str = str.replace(/--/g, " ");
+	str = str.replace(/-/g, " ");
+  str = str.replace(/—/g, "-");
+	str = str.trim();
+	str = str.replace(/\r /g, "\r");
+
+  document.getElementById("music_input").value = str;
+  updateStaves();
+  hideOverlay();
+}
+
+
+</script>

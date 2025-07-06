@@ -1,0 +1,104 @@
+<div id="menuSingleNote">
+<center>
+    <div id="menuStyleSingleNote">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+        <div class="clear"></div>
+        <div id="btn1" style="margin-top:10px; ">
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Note Shape</div>
+            
+            <div id="shapeSingleNote"  style="margin-top:10px;">
+                <button id="btn1_1"class="buttonNote" onclick=groupSingleShapebtn(0) >
+                  <img src="img/group1/icon1_1.png" width="37px">
+                </button>
+                <button id="btn1_2"class="buttonNote" onclick=groupSingleShapebtn(1) >
+                  <img src="img/group1/icon1_2.png" width="37px">
+                </button>
+                <button id="btn1_3"class="buttonNote" onclick=groupSingleShapebtn(2) >
+                  <img src="img/group1/icon1_3.png" width="37px">
+                </button>
+                <button id="btn1_4"class="buttonNote" onclick=groupSingleShapebtn(3) >
+                  <img src="img/group1/icon1_4.png" width="37px">
+                </button>
+                <button id="btn1_5"class="buttonNote" onclick=groupSingleShapebtn(4) >
+                  <img src="img/group1/icon1_5.png" width="37px">
+                </button>    
+  
+            </div>
+        </div>
+        
+        <button class="" onclick=resetGroup() style="height:30px; margin-top: 5px; border-radius: 5px 5px; " >
+            Reset Group
+        </button>
+    </div>
+</center>
+</div>
+<style>
+    #menuStyleSingleNote {
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:180px;
+        width: 280px;
+        position: absolute;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .buttonNote {
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover {
+        background-color: #f3f3f3;
+    }
+</style>
+<script>
+  try{let indexGroup = -1;}catch{indexGroup = -1;}
+  try{let notesGroup = "";}catch{notesGroup = "";}
+  try{let groupLine = 0;}catch{groupLine = 0;}
+  try{let groupPos = 0;}catch{groupPos = 0;}
+  try{let notePos = 0;}catch{notePos = 0;}
+
+  function setupButtonsSingleNote(nGroup, strGroup, nNote, line, pos){
+      indexGroup = nGroup;
+      notesGroup = strGroup;
+      groupLine = line;
+      groupPos = pos;
+      notePos = nNote;
+
+      let typeOfGroup = -1;
+    }
+
+    function removeButtons(index){
+        let id = "btn"+(index)+"";
+        document.getElementById(id).remove();
+    }
+    function groupSingleNoteRemove(){
+        let group1 = $('#menuSingleNote');
+        group1.remove();
+    }
+
+    function groupSingleShapebtn(shapeValue){
+        shapeSingleNote[groupLine][groupPos][notePos] = shapeValue;
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+
+    function resetGroup(){
+        let tmp = [];
+        for(let i = 0; i < shapeGroupNote[groupLine].length; i= i+1){
+            if(i != groupPos)
+                tmp[i] = shapeGroupNote[groupLine][i];
+        }
+        shapeGroupNote[groupLine] = tmp;
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        updateStaves();
+    }
+  
+</script>

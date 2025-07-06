@@ -1,0 +1,844 @@
+<div id="maskModal" class="settings-modal keep-open">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h2>Settings</h2>
+    <div class="modal-body" id="settings-wrapper">
+      <div id="modern-notation-side" style="display:block">
+        <h3>Modern notation</h3>
+            
+        <label id="checkMelodicStructureLabel" for="checkMelodicStructure" class="settings-label">
+          <input type="checkbox" id="checkMelodicStructure" name="melodicStructure" onclick="statusMelodicStructure()" checked>
+          Melodic Structure
+        </label>
+        
+        <select id="changeMelodicStructure" name="alphabet for melodic structure" value="" onchange="statusAlphabetic()" style="margin-left:10px">
+            <option value="0">Greek characters</option>
+            <option value="1">Latin characters</option>
+        </select>
+        
+        <label for="checkAutomaticMelodicStructure" id="checkAutomaticMelodicStructureLabel" class="settings-label">
+          <input type="checkbox" id="checkAutomaticMelodicStructure" name="checkAutomaticMelodicStructure" onclick="statusAutomaticMelodicStructure()" checked></input>
+          Automatic melodic structure
+        </label>
+        
+        <label id="manualMelodicStructureLabel" for="manualMelodicStructure" style="display:none">Manual melodic structure:
+          <input type="text" class="settings-input-text" id="manualMelodicStructure" name="manualMelodicStructure" value="" onkeyup="updateManualMelodicStructure()" onclick="stavesContainerSelected=false" placeholder="ex. A B A B"></input>
+        </label>
+  
+                
+        <label for="checkLineNumber" class="settings-label">
+          <input type="checkbox" id="checkLineNumber" name="lineNumber" value="" onclick="statusLineNumber()" checked></input>
+          Line numbers
+        </label>
+        <br>
+        
+        <label for="checkAnnotation" class="settings-label">
+          <input type="checkbox" id="checkAnnotation" name="annotations" value="" onclick="statusAnnotations()" checked>
+          Show annotations
+        </label>
+        <br>
+        
+        <label for="checkMsLineBreaks" class="settings-label">
+          <input type="checkbox" id="checkMsLineBreaks" name="msLineBreaks" value="" onclick="statusMsLineBreaks()" checked></input>
+          Show ms line breaks
+        </label>
+        <br>
+        
+        <label for="checkOctaveClef" class="settings-label">
+          <input type="checkbox" id="checkOctaveClef" name="octaveClef" value="" onclick="statusOctaveClef()"> </input>
+          Octave Clef
+        </label>
+        <br>    
+        
+        <label for="checkPlica" class="settings-label">
+          <input type="checkbox" id="checkPlica" class="keep-open " name="plica" value="" onclick="statusPlica()"></input>
+          Plica shape         
+          <svg height="20px" width="20px" overflow="visible">
+            <g transform="translate(0,10) rotate(0) scale(0.7)">
+              
+              <g onclick="selectNote(1)" id="note1" transform="matrix(-1.19, 0, 0, -1.19, 373,359)">
+                <path d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z" style="opacity:1;fill-opacity:1;" class="single_note"></path>
+              </g>
+              <g onclick="selectNote(2)" id="note2" transform="matrix(1, 0, 0, 1, -297,-308)">
+                <path style="opacity:1;fill:#000000;stroke:#000000;stroke-width:8.54173;stroke-linejoin:round;stroke-dasharray:0, 93.95900000000000318;stroke-dashoffset:69.188;stroke-opacity:0.972125" d="m 308.29783,299.6101 c 0.18137,0.0423 0.3719,0.0559 0.54411,0.12679 1.59879,0.65812 3.46244,2.09589 4.48652,3.45394 0.29152,0.38659 -0.76106,0.98314 -0.49289,1.38629 1.73689,1.92759 2.3584,4.66496 2.26644,7.09011 0.052,0.52015 -0.0893,0.66851 -0.32888,2.28543 -0.35959,1.27081 -0.92055,2.47054 -1.72756,3.58344 -0.0795,0.10961 0.57314,0.69021 0.98672,1.35852 0.0335,0.0542 1.15761,-1.60137 1.9208,-3.28534 1.88869,-3.69063 1.59572,-8.53954 -0.26748,-11.72723 -0.7651,-1.33612 -1.60421,-2.51875 -2.63176,-3.42979 -0.18863,-0.17443 -0.72044,-0.54318 -0.88781,-0.6661 -0.20446,-0.15015 -0.65149,-0.46912 -0.87765,-0.59186 -0.10133,-0.055 -0.19094,-0.0927 -0.30793,-0.14591 -0.0859,-0.0391 -0.19695,-0.0906 -0.28555,-0.14328 -0.0966,-0.0575 -0.4632,-0.17944 -0.77477,-0.26228 -0.19636,-0.0522 -0.37406,-0.0729 -0.43844,-0.10243 l -1.18367,1.0697 z"></path>          </g>
+              <text style="font-family:'Times New Roman'; font-size:16px;" x="18" y="129"> </text>
+            </g>
+          </svg>
+        </label>
+                          
+        <div class="separator">Font</div>
+        
+          <select id="changeTextFontModern" class="settings-select" name="Change text font" onchange="changeTextFontModern()">
+              <option value="1">Times New Roman</option>
+              <option value="2">Garamond</option>
+              <option value="3">Courier</option>
+              <option value="4">Roboto</option>
+              <option value="5">Junicode</option>
+          </select>
+  
+          <input type="number" id="nFontSizeModern" class="settings-input-number" value="19" min="1" max="50"  onchange="changeFontSizeModern()">
+                
+        </div> <!--end modern-->
+      
+        <div id="medieval-notation-side">
+          <h3>Medieval notation</h3>
+          <!-- Notation type -->
+          <div id="medievalNotationLabel" class="separator">Notation type</div>
+          <select id="changeNotationType" class="settings-select" name="notationType" value="" onchange="changeNotationType()">
+              <option value="0">Square notation</option>
+              <option value="1">Messine (fr. 20050)</option>
+              <option value="2">West German (Kolmar Lh)</option>
+          </select>
+                  
+          <div class="separator">Font</div>
+          <!---Font settings Old -->
+          <select id="changeTextFontOld" class="settings-select" name="Change text font" value="" onchange="changeTextFontOld()">
+            <option value="1">Times New Roman</option>
+            <option value="2">Garamond</option>
+            <option value="3">Courier</option>
+            <option value="4">Roboto</option>
+            <option value="5">Junicode</option>
+          </select>                  
+          <input type="number" id="nFontSizeOld" class="settings-input-number" value="17" min="1" max="50"  onchange="changeFontSizeOld()">
+      </div>
+          
+      <div id="general-settings">
+        <h3>General settings</h3>
+        
+        <!-- FLAT SETTINGS -->
+        <div id="mainflatSettingLabel" class="separator">Flat settings</div>
+          <label for="checkCarryBFlat" id="checkCarryBFlatLabel">
+            <input type="checkbox" id="checkCarryBFlat" name="CarryBFlat" value="" onclick="statusCarryBFlat()" checked></input>
+            B♭ active until ms staff break
+          </label>
+          <br>
+          
+          <label for="checkCarriedBFlatBrackets" id="checkCarriedBFlatBracketsLabel" class="settings-label">
+            <input type="checkbox" id="checkCarriedBFlatBrackets" name="CarriedBFlatBrackets" value="" onclick="statusCarriedBFlatBrackets()" checked></input>
+            Brackets on implied B♭
+          </label>
+          <br>
+            
+          <label for="checkBFlatAlwaysInKeySignature" id="checkBFlatAlwaysInKeySignatureLabel" class="settings-label">
+            <input type="checkbox" id="checkBFlatAlwaysInKeySignature" name="checkBFlatAlwaysInKeySignature" onclick="statusBFlatAlwaysInKeySignature()"></input>
+            B♭ always in key signature
+          </label>
+          <br>    
+          
+          <!-- REPETITIONS -->
+          <div class="separator">Repetitions</div>
+            <label for="checkRepetition" id="checkRepetitionLabel" class="settings-label">
+              <input type="checkbox" id="checkRepetition" name="checkRepetition" onclick="toggleRepetitionSequenceSlot()"></input>
+              Apply repetition pattern
+              </label>
+              
+              <input type="text" id="repetitionSequence" class="settings-input-text" style="display:none" onkeyup="updateSequenceRepetition()" onclick="stavesContainerSelected=false" placeholder="ex. ABAB"></input>
+              
+          <div class="separator">Sound</div>
+          <label for="soundWhileEditing" id="soundWhileEditingLabel" class="settings-label">
+            <input type="checkbox" id="soundWhileEditing" name="soundWhileEditing" onclick="toggleSoundWhileEditing()" checked></input>
+            Play sound while editing
+          </label>
+          
+          <div class="separator">Transcription's sync</div>
+          <label for="independent-transcriptions" id="independent-transcriptionsLabel" class="settings-label">
+            <input type="checkbox" id="independent-transcriptions" name="independent-transcriptions" onclick="toggleIndependentTranscriptions()"></input>
+            Make modern and medieval transcriptions independent 
+          </label>
+      </div>
+      <div id="compare-settings">
+        <h3>Compare settings</h3>
+        
+        <label for="id-as-staff-label" class="settings-label">
+          <input type="checkbox" id="id-as-staff-label" name="id-as-staff-label" onchange="toggleUseIdAsStaffLabel()">
+          Use ids as staff label
+        </label>
+        <br>
+        <br>
+        
+        <div id="new-select-lines-wrapper" style="max-height:450px;overflow:auto">
+          <p>Select individual lines</p>
+          <input type="button" id="add-slot" value="Add set of lines to compare" onclick="createNewGroupSlot()">
+          
+          <div id="new-select-lines">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+   <button id="apply-button">Apply</button>
+  </div>
+</div>
+
+<style>
+.viewer-disabled {
+  display: none;
+}
+.settings-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: "Inter", sans-serif;
+}
+
+.modal-body{
+  display:flex
+}
+/* Responsività: torna a una colonna su schermi piccoli */
+@media screen and (max-width: 768px) {
+  .modal-body {
+    flex-direction: column;
+  }
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  #modern-notation-side, #medieval-notation-side, #general-settings {
+    width: 100%;
+  }
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.close-button {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff5252;
+}
+
+#apply-button {
+  text-align: right;
+  float: right;
+}
+#apply-button,  #add-slot {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+#apply-button:hover, #add-slot:hover {
+  background-color: #0056b3;
+}
+
+h2, h3 {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Griglia a due colonne */
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Stile degli input */
+input[type="checkbox"], .settings-select, .settings-input-number, .settings-input-text {
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: #007bff;
+}
+
+.settings-input-number{
+  width: 50px;
+  padding: 5px;
+}
+.settings-select {
+  padding: 7px;
+}
+
+/* Pulsante */
+.apply-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.apply-button:hover {
+  background: #0056b3;
+}
+
+.separator {
+  font-weight: bold; 
+  margin-top:10px;
+}
+#settings {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.groupSlot {
+  background-color: #F0F0F0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 3px;
+}
+.groupSlot * {
+  margin: 0;
+}
+.groupSlot label span {
+  margin-right: 5px;
+}
+.groupSlot label:not(:first-of-type) span {
+  margin-left: 15px;
+}
+.groupSlot .deleteSlot {
+  margin-left: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+</style>
+<script>
+
+function setUseIdAsStaffLabelFromURL(){
+  let queryString = window.location.search;
+  let urlParams = new URLSearchParams(queryString);
+  if (urlParams.get('id_label') != null || urlParams.get('id_label')) {
+    useIdAsStaffLabel = urlParams.get('id_label');
+    document.getElementById("id-as-staff-label").checked = JSON.parse(useIdAsStaffLabel);
+  }
+  // updateData();
+}
+setUseIdAsStaffLabelFromURL();
+
+function toggleUseIdAsStaffLabel() {
+  if (useIdAsStaffLabel){
+    useIdAsStaffLabel = false;
+  }else{
+    useIdAsStaffLabel = true;
+  }
+  updateData();
+}
+function validateSelectLines() {
+  // initialize stavesToCompare_orig and textToCompare_orig
+  if (stavesToCompare_orig.length === 0) {
+  console.log("setting stavesToCompare_orig");
+    stavesToCompare_orig = stavesToCompare;
+    textToCompare_orig = textToCompare;
+  }
+  
+  
+  const userInputSelectLines = "[" + document.getElementById("select-lines").value + "]";
+  try {    
+    const input = JSON.parse(userInputSelectLines);
+
+    if (input.length > 0){
+      input.forEach((group, i) => {
+        if (group.length == numberStavesToCompare){
+          group.forEach((lineN, j) => {
+            if (lineN > stavesToCompare_orig[j].split("\n").length) {
+              document.getElementById("select-lines-message").innerHTML = "Numbers provided do not correspond to a valid melody line";
+            }else{
+              setOfLines = input;
+              document.getElementById("select-lines-message").innerHTML = "Valid input <input type='button' onclick='selectSpecificVersesToCompare("+JSON.stringify(input)+")' value='Apply'>";
+              
+              return true;
+            }
+          });
+        }else{
+          document.getElementById("select-lines-message").innerHTML = "Error: One line number for each melody must be provided in each group"
+        }
+      });
+    }else{
+      document.getElementById("select-lines-message").innerHTML = "Error: At least one group must be specified"
+    }
+    return false
+  }catch{
+    document.getElementById("select-lines-message").innerHTML = "Error: Input is incomplete"
+  }
+}
+
+function disableButtons(){
+  
+  let page = localStorage.getItem("current_page");
+  if (page == "viewer.html"){
+    let idsToHide = ["checkRepetition", "checkAutomaticMelodicStructure", "manualMelodicStructureLabel", "checkRepetitionLabel", "changeNotationType", "checkCarryBFlat", "checkCarriedBFlatBrackets", "checkBFlatAlwaysInKeySignature", "medievalNotationLabel", "mainflatSettingLabel", "checkCarryBFlatLabel", "checkCarriedBFlatBracketsLabel", "checkBFlatAlwaysInKeySignatureLabel", "checkAutomaticMelodicStructureLabel", "general-settings", "compare-settings"];
+    
+    idsToHide.forEach((id, i) => {
+      document.getElementById(id).classList.add("viewer-disabled");
+    });
+  }
+  
+  if (page == "compareTool.html"){
+    let idsToHide = ["checkMelodicStructure", "checkMelodicStructureLabel","changeMelodicStructure","checkAutomaticMelodicStructureLabel", "checkAutomaticMelodicStructure", "manualMelodicStructureLabel", "checkRepetitionLabel", "changeNotationType", "checkCarryBFlat", "checkCarriedBFlatBrackets", "checkBFlatAlwaysInKeySignature", "medieval-notation-side", "mainflatSettingLabel", "checkCarryBFlatLabel", "checkCarriedBFlatBracketsLabel", "checkBFlatAlwaysInKeySignatureLabel", "checkAutomaticMelodicStructureLabel", "general-settings"];
+    
+    idsToHide.forEach((id, i) => {
+      document.getElementById(id).classList.add("viewer-disabled");
+    });
+    
+    document.getElementById("settings-wrapper").style = "display:flex";
+  }
+  
+  if (page == "editor.html"){
+    let idsToHide = ["compare-settings"];
+    
+    idsToHide.forEach((id, i) => {
+      document.getElementById(id).classList.add("viewer-disabled");
+    });
+  }
+}
+disableButtons();
+
+// JavaScript to open and close the modal
+const closeButton = document.querySelector('.close-button');
+// Close the modal when clicking on the "x"
+closeButton.addEventListener('click', () => {
+  const settings = document.getElementById('settings');
+  settings.style.display = 'none';
+});
+const applyButton = document.querySelector('#apply-button');
+applyButton.addEventListener('click', () => {
+  const settings = document.getElementById('settings');
+  settings.style.display = 'none';
+});
+
+
+function updateData(){
+    if (localStorage.getItem("current_page") == "compareTool.html"){
+        updateCompare();
+    }else{
+        updateStaves();
+    }
+}
+
+function updateSequenceRepetition() {
+  repetitionPattern = "";
+  if (document.getElementById('checkRepetition').checked == true){
+    repetitionPattern = document.getElementById('repetitionSequence').value.toUpperCase();
+    document.getElementById('repetitionSequence').value = repetitionPattern;
+    updateStaves();
+  }
+}
+
+function getLinesToSyllablesForRepetition(repetitionStart_line, repetitionEnd_line){
+  let separator;
+  if (currentStyle == 0){
+    separator = "\n";
+  }else{
+    separator = "'"
+  }
+  let music = document.getElementById("music_input").value;
+  let music_modern_lines = music.split(separator);
+  var countSyllablesPre = 0;
+  var start = 1;
+  var end = 0;
+  for (let i = 0; i < repetitionEnd_line; i++){
+    if (i < repetitionStart_line) {
+      countSyllablesPre += music_modern_lines[i].split(" ").length;
+    } else {
+      start = countSyllablesPre;
+      end += music_modern_lines[i].split(" ").length;
+    }
+  }
+  return [start, start + end - 1];
+}
+
+function statusMelodicStructure(){
+    if(document.getElementById('checkMelodicStructure').checked){
+        document.cookie = "melodicStructure=1";
+        document.getElementById("changeMelodicStructure").disabled = false;
+        document.getElementById("checkAutomaticMelodicStructure").disabled = false;
+        if (useManualMelodicStructure){
+          document.getElementById('manualMelodicStructure').style.display = "block";
+          document.getElementById('manualMelodicStructureLabel').style.display = "block";
+        }
+    }
+    else {
+        document.cookie = "melodicStructure=";
+        document.getElementById("changeMelodicStructure").disabled = true;
+        document.getElementById("checkAutomaticMelodicStructure").disabled = true;
+        document.getElementById('manualMelodicStructure').style.display = "none"
+        document.getElementById('manualMelodicStructureLabel').style.display = "none"
+    }
+    updateData();
+}
+
+function statusAutomaticMelodicStructure() {
+  if(!document.getElementById('checkAutomaticMelodicStructure').checked){
+    document.cookie = "useManualMelodicStructure=1";
+    useManualMelodicStructure = 1;
+    if (manualMelodicStructureFirstUse) {
+      manualMelodicStructureFirstUse = false;
+      document.cookie = "manualMelodicStructureFirstUse=false";
+    }
+    document.getElementById('manualMelodicStructure').style.display = "block";
+    document.getElementById('manualMelodicStructureLabel').style.display = "block";
+    document.getElementById('manualMelodicStructure').value = manualMelodicStructure;
+    updateStaves();
+  }
+  else {
+    useManualMelodicStructure = 0;
+    document.cookie = "useManualMelodicStructure=";
+    document.getElementById('manualMelodicStructure').style.display = "none";
+    document.getElementById('manualMelodicStructureLabel').style.display = "none";
+    updateStaves();
+  } 
+}
+
+function toggleRepetitionSequenceSlot(triggerStatusRepetition=true){
+  
+    var repetitionSequenceInput = document.getElementById('repetitionSequence');
+    if (repetitionSequenceInput.style.display == "block") {
+      repetitionSequenceInput.style.display = "none";
+      repetitionPattern = "";
+      repetitionSequenceInput.value = "";
+    }else{
+      repetitionSequenceInput.style.display = "block";
+      if (triggerStatusRepetition){
+        statusSequenceRepetition();
+      }
+    }
+    updateData();
+  }
+
+  
+function statusSequenceRepetition() {
+  if (repetitionPattern && repetitionPattern != "" && repetitionPattern != "false") {
+    document.getElementById("checkRepetition").checked = true;
+
+    toggleRepetitionSequenceSlot(false);
+
+    document.getElementById("repetitionSequence").value = repetitionPattern;
+
+    updateData();
+  }
+}
+
+function getLinesToSyllablesForRepetition(repetitionStart_line, repetitionEnd_line){
+  let separator;
+  if (currentStyle == 0){
+    separator = "\n";
+  }else{
+    separator = "'"
+  }
+  let music = document.getElementById("music_input").value;
+  let music_modern_lines = music.split(separator);
+  var countSyllablesPre = 0;
+  var start = 1;
+  var end = 0;
+  for (let i = 0; i < repetitionEnd_line; i++){
+    if (i < repetitionStart_line){
+      countSyllablesPre += music_modern_lines[i].split(" ").length;
+    }else{
+      start = countSyllablesPre;
+      end += music_modern_lines[i].split(" ").length;
+    }
+  }
+  return [start, start + end - 1];
+}
+
+function statusLineNumber(){
+    if (document.getElementById('checkLineNumber').checked){
+        document.cookie = "lineNumber=1";
+    }
+    else{
+        document.cookie = "lineNumber=";
+    }
+    updateData();
+}
+
+function statusPlica(){
+    if(document.getElementById('checkPlica').checked){
+        document.cookie = "plicaType=1";
+    }
+    else{
+        document.cookie = "plicaType=";
+    }
+    updateData();
+}
+
+function statusOctaveClef(){
+    if(document.getElementById('checkOctaveClef').checked){
+        document.cookie = "octaveClef=1";
+    }
+    else{
+        document.cookie = "octaveClef=";
+    }
+    updateData();
+}
+
+function statusAllowResize(){
+    if(document.getElementById('allowResizeCB').checked){
+        document.cookie = "allowResize=1"; // necessary? 
+        allowResize = true;
+    }
+    else{
+        document.cookie = "allowResize="; // necessary? 
+        allowResize = 0;
+    }
+    updateData();
+}
+
+function statusAlphabetic(){
+    if(document.getElementById('changeMelodicStructure').value == 0){
+        document.cookie = "alpha=1";
+    }
+    else{
+        document.cookie = "alpha=";
+    }
+    updateData();
+}
+
+function statusAnnotations(){
+    if(document.getElementById('checkAnnotation').checked){
+        document.cookie = "showAnnotations=1";
+    }
+    else{
+        document.cookie = "showAnnotations=2";
+    }
+    updateData();
+}
+
+function statusSettings(){
+    // Not sure if we need this
+}
+
+function statusMsLineBreaks(){
+    if(document.getElementById('checkMsLineBreaks').checked){
+        document.cookie = "showMsLineBreaks=1";
+    }
+    else{
+        document.cookie = "showMsLineBreaks=2";
+    }
+    updateData();
+}
+
+function statusCarryBFlat() {
+    if (document.getElementById('checkCarryBFlat').checked){
+        document.cookie = "showCarryBFlat=1";
+    }
+    else{
+        document.cookie = "showCarryBFlat=2";
+    }
+    updateData();
+}
+
+function statusCarriedBFlatBrackets() {
+    if (document.getElementById('checkCarriedBFlatBrackets').checked){
+        document.cookie = "showCarriedBFlatBrackets=1";
+    }
+    else{
+        document.cookie = "showCarriedBFlatBrackets=2";
+    }
+    updateData();
+}
+
+function statusBFlatAlwaysInKeySignature() {
+    if (document.getElementById('checkBFlatAlwaysInKeySignature').checked){
+        bFlatAlwaysInKeySignature = 1;
+    }
+    else{
+        bFlatAlwaysInKeySignature = 0;
+    }
+    updateData();
+}
+
+
+function changeTextFontModern() {
+    var textFont = document.getElementById("changeTextFontModern").value;
+    document.cookie = "textFont="+textFont;
+    updateData();
+}
+
+function changeFontSizeModern() {
+    var fontSize = document.getElementById("nFontSizeModern").value;
+    document.cookie = "fontSize="+fontSize;
+    updateData();
+}
+
+function changeTextFontOld() {
+    var textFontOld = document.getElementById("changeTextFontOld").value;
+    document.cookie = "textFontOld="+textFontOld;
+    updateData();
+}
+
+function changeFontSizeOld() {
+    var fontSizeOld = document.getElementById("nFontSizeOld").value;
+    document.cookie = "fontSizeOld=" + fontSizeOld;
+    updateData();
+}
+
+function updateManualMelodicStructure() {
+    manualMelodicStructure = document.getElementById("manualMelodicStructure").value.toUpperCase();
+    document.getElementById("manualMelodicStructure").value = manualMelodicStructure;
+    document.cookie = "manualMelodicStructure="+manualMelodicStructure
+    manualMelodicStructureToStore = manualMelodicStructure;
+    updateData();
+}
+
+function changeNotationType() {
+    notationType = document.getElementById("changeNotationType").value;
+    document.cookie = "notationType="+notationType;
+    updateData();
+}
+
+function createNewGroupSlot() {
+    if (stavesToCompare_orig.length === 0){
+      stavesToCompare_orig = stavesToCompare;
+      textToCompare_orig = textToCompare;
+    }
+    const slotId = createUniqueId();
+    let slot = document.createElement("div");
+    slot.setAttribute("id", slotId);
+    slot.setAttribute("class", "groupSlot");
+
+    for (var i = 0; i < numberStavesToCompare; i++) {
+      
+      let input = document.createElement("input");
+      input.setAttribute("class", "mel_slot");
+      input.setAttribute("type", "number");
+      input.setAttribute("min", "1");
+      input.setAttribute("max", stavesToCompare_orig[i].split("\n").length);
+      input.setAttribute("value", 1);
+      input.setAttribute("onchange", "buildLineSelectArray()");
+      let label = document.createElement("label");
+      let labelSpan = document.createElement("span");
+      labelSpan.innerHTML = `${idsToCompare[i]} ${msToCompare[i]}`;
+      label.appendChild(labelSpan);
+      label.appendChild(input);
+      slot.appendChild(label)
+    }
+    
+    let closeBtn = document.createElement("span");
+    closeBtn.setAttribute("class", "deleteSlot");
+    closeBtn.setAttribute("onclick", `deleteSlot('${slotId}')`);
+    closeBtn.innerHTML = "⨯";
+    slot.appendChild(closeBtn);
+    
+    document.getElementById("new-select-lines").appendChild(slot);
+    return slotId;
+}
+
+function createUniqueId(){
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+function deleteSlot(slotId) {
+  document.getElementById(slotId).remove();
+  buildLineSelectArray();
+
+  // If there are no more slots, then reinstate full view
+  if (document.getElementsByClassName("groupSlot").length == 0){
+    stavesToCompare = stavesToCompare_orig;
+    stavesToCompare_orig = [];
+    textToCompare = textToCompare_orig;
+    textToCompare_orig = [];
+    updateCompare();
+  }
+}
+function buildLineSelectArray(){
+  setOfLines = []; // reset array
+  const groupsSlot = document.getElementsByClassName("groupSlot"); // get slots
+  for (var i = 0; i < groupsSlot.length; i++) { // Loop through slots
+    setOfLines.push([]); // prepare empty group in array
+    const inputs = groupsSlot[i].getElementsByTagName("input"); // loop through all elements
+    for (var j = 0; j < inputs.length; j++) {
+      setOfLines[i].push(JSON.parse(inputs[j].value)); // populate array
+    }
+  }
+  selectSpecificVersesToCompare(setOfLines, false);
+}
+
+function buildSlotsFromArray(linesArray) {
+  // Create a slot for each group in the array
+  linesArray.forEach((group, i) => {
+    const slotId = createNewGroupSlot();
+    const inputs = document.getElementById(slotId).getElementsByTagName("input");
+    // Populate the inputs of the slot
+    group.forEach((value, j) => {
+      inputs[j].value = value;
+    });
+  });
+}
+
+function toggleSoundWhileEditing(){
+  const status = document.getElementById("soundWhileEditing").checked;
+  if (status){
+    document.cookie = "soundWhileEdit=1";
+    sound_while_editing = true
+  }else{
+    document.cookie = "soundWhileEdit=0";
+    sound_while_editing = false
+  }
+}
+function statusSoundWhileEditing(){
+  const status = getCookie("soundWhileEdit");
+  if (status == 1 || status == "undefined"){
+    document.getElementById("soundWhileEditing").checked = true;
+    document.cookie = "soundWhileEdit=1";
+    sound_while_editing = true;
+    return true;
+  }else{
+    document.getElementById("soundWhileEditing").checked = false;
+    sound_while_editing = false;
+    return false;
+  }
+}
+statusSoundWhileEditing(); // Check cookies to remember user's choice
+
+
+function toggleIndependentTranscriptions(){
+  const status = document.getElementById("independent-transcriptions").checked;
+  if (status === true){
+    syncModernOld = false;
+    return false;
+  } else {
+    syncModernOld = true;
+    return true;
+  }
+}
+
+function statusSyncTranscriptions(){
+  if (syncModernOld === false){
+    document.getElementById("independent-transcriptions").checked = true;
+    return true;
+  } else { // cookie explicitely set to 0
+    document.getElementById("independent-transcriptions").checked = false;
+    return false;
+  }
+}
+statusSyncTranscriptions(); // Check cookies to remember user's choice
+</script>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Med Mel</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+  <!-- Bootstrap core CSS -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link href="css/jquery-linedtextarea1.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="script/jquery-linedtextarea.js"></script>
+
+
+  <!-- Custom JavaScript controller -->
+  <script type="text/javascript" src="script/controllerStaves.js"></script>
+  <script type="text/javascript" src="script/oldShapeFormatter.js"></script>
+  <script type="text/javascript" src="script/controllerMenu.js"></script>
+  <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+
+  <script language="JavaScript" type="text/JavaScript" src="./script/userEvent.js"></script>
+  <!--*******************Player******************* -->
+  <script src="https://cdn.rawgit.com/mohayonao/web-audio-api-shim/master/build/web-audio-api-shim.min.js"></script>
+  <script language="JavaScript" type="text/JavaScript" src="./script/playStaves.js"></script>
+
+  <!-- *************pdf export ****************** -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+  <!-- ************* Font *************-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <!-- *******************Syl separator******************* -->
+  <script type="text/javascript" src="script/sylSeparator.js"></script>
+
+  <!-- *******************Divide screen******************* -->
+  <script type="text/javascript" src="script/divideScreen.js"></script>
+</head>
+    <body oncontextmenu="return false;">
+        <header>
+            <div id="header"></div>
+        </header>
+        <!-- Page Content -->
+        <div id="bodyContainer" class="mainContainer col-md-12 containerColor" > <!-- Main container -->
+        <div id="containerAdmin" class="containerAdmin stavesContainer">
+            <div id="showResult" >
+                <!-- Tab links -->
+                <div class="tab">
+                  <button id="btnProfile" class="tablinks" onclick="openTab(event, 'Profile')">Profile</button>
+                  <button class="tablinks" onclick="openTab(event, 'StavesAdmin')">Workflow Staves</button>
+                  <button class="tablinks" onclick="openTab(event, 'extendedName')">Extended name</button>
+                </div>
+
+                <!-- Tab content -->
+                <div id="Profile" class="tabcontent">
+
+                    <div id="userProfile" class="userProfile">
+                        <div class="d-flex justify-content-center  searchBar ">
+                            <div class=" divSearchField">
+                                <input id="searchBarAdmin" type="text"  class="inputFields" name="searchBar" onkeyup="searchUserResult()" value="" placeholder="Search"/>
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <input id="searchButton" type="image" class=" marginTop10 searchButton" src="img/icons/search1.png" onClick="searchUserResult()"  name="searchButton" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="marginTop10 divResult">
+                            <div class="tableContent">
+                                <table class="table" style="text-align: center;">
+                                    <thead class="thead-light">
+                                        <tr >
+                                            <th scope="col">
+                                                ID
+                                            </th>
+                                            <th scope="col">
+                                                Name
+                                            </th>
+                                            <th scope="col">
+                                                Surname
+                                            </th>
+                                            <th scope="col">
+                                                E-mail
+                                            </th>
+                                            <th scope="col">
+                                                Degree
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultBodyContentAdmin">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="separator">User Profile</div>
+                        <div class="clean"></div>
+                        <div class="infoContainer" >
+                            <div class="labelProfileGroup">
+                                <div class="labelProfile">
+                                    ID
+                                </div>
+                                <div class="labelProfile">
+                                    Name
+                                </div>
+                                <div class="labelProfile">
+                                    Surname
+                                </div>
+                                <div class="labelProfile">
+                                    E-mail
+                                </div>
+                                <div class="labelProfile">
+                                    Degree
+                                </div>
+                            </div>
+                            <span>
+                            <div class="fieldProfileGroup">
+                                <div class="fieldProfile">
+                                    <input  id="id_user" type="text" onkeyup="" style="width:100%;" name="title" value="Id User" placeholder="Id User" disabled/>
+                                </div>
+
+                                <div class="fieldProfile">
+                                    <input  id="name" type="text" onkeyup="" style="width:100%;"  name="name" value="" placeholder="Name" disabled/>
+                                </div>
+
+                                <div class="fieldProfile">
+                                    <input  id="surname" type="text" onkeyup="" style="width:100%;" name="surname" value="" placeholder="Surname" disabled/>
+                                </div>
+
+                                <div class="fieldProfile">
+                                    <input  id="email" type="text" onkeyup="" style="width:100%;" name="email" value="" placeholder="E-mail" disabled/>
+                                </div>
+                                <div class="fieldProfile">
+                                    <select id="degreeSelection" name="degreeSelection" style="height:29px; width:100%;"  >
+                                        <option value="1">Administrator</option>
+                                        <option value="2">Content Creator</option>
+                                        <option value="3">User</option>
+                                    </select>
+                                </div>
+                                <div class="fieldProfile btnProfile" >
+                                    <button onclick="saveUserInfo()" style="width: 200px">Save</button>
+                                </div>
+                            </div>
+                            </span>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="StavesAdmin" class="tabcontent">
+                    <div id="works" class="works">
+                        <div class="d-flex justify-content-center  searchBar ">
+                            <div class=" divSearchField">
+                                <input id="searchBar" type="text"  class="inputFields" name="searchBar" onkeyup="searchResultStavesAdmin()" value="" placeholder="Search"/>
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <input id="searchButton" type="image" class=" marginTop10 searchButton" src="img/icons/search1.png" onClick="searchResultStavesAdmin()"  name="searchButton" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="marginTop10 divResult">
+                            <div class="tableContent">
+                                <table class="table" style="text-align: center;">
+                                    <thead class="thead-light">
+                                        <tr >
+                                            <th scope="col">
+                                                ID
+                                            </th>
+                                            <th scope="col">
+                                                Ms
+                                            </th>
+                                            <th scope="col">
+                                                Title
+                                            </th>
+                                            <th scope="col">
+                                                Author
+                                            </th>
+                                            <th scope="col">
+                                                Editor
+                                            </th>
+                                            <th scope="col">
+                                                Visibility
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bodyContentStavesAdmin">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr class="mt-5">
+
+                        <div>
+                            <table class="table" style="background:white;">
+                            <thead>
+                                <tr>
+                                     <th scope="col">#</th>
+                                     <th scope="col">Name</th>
+                                     <th scope="col">Surname</th>
+                                     <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id=bodyResultStavesAdmin>
+
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="extendedName" class="tabcontent">
+                    <div id="userProfile" class="userProfile">
+                        <div style="margin-top:20px;"></div>
+                        <div class="separator">Add Extended name</div>
+                        <div style="margin-top:20px;"></div>
+                        <div class="clean"></div>
+                        <div class="infoContainer" >
+                            <div class="labelProfileGroup">
+                                <div class="labelProfile">
+                                    MS
+                                </div>
+                                <div class="labelProfile">
+                                    Language
+                                </div>
+                                <div class="labelProfile">
+                                    Extended name
+                                </div>
+                            </div>
+                            <span>
+                            <div class="fieldProfileGroup">
+                                <div class="fieldProfile">
+                                    <input  id="msExtendedName" type="text" onkeyup="" style="width:100%;" name="title" value="" placeholder="Ms" />
+                                </div>
+
+                                <div class="fieldProfile">
+                                    <input  id="languageExtendedName" type="text" onkeyup="" style="width:100%;"  name="name" value="" placeholder="Language" />
+                                </div>
+
+                                <div class="fieldProfile">
+                                    <input  id="extendedNametxt" type="text" onkeyup="" style="width:100%;" name="surname" value="" placeholder="Extended name" />
+                                </div>
+
+                                <div class="fieldProfile btnProfile" >
+                                    <button onclick="saveExtendedName()" style="width: 200px">Save</button>
+                                </div>
+                            </div>
+                            </span>
+
+                        </div>
+                        <div style="margin-top:20px;"></div>
+                        <div class="separator">Search Extended name</div>
+                        <div class="clean"></div>
+                        <div style="margin-top:20px;"></div>
+                        <div class="d-flex justify-content-center  searchBar ">
+                            <div class=" divSearchField">
+                                <input id="searchBarExtendedName" type="text"  class="inputFields" name="searchBar" onkeyup="searchExtendedNameResult()" value="" placeholder="Search"/>
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <input id="searchButton" type="image" class=" marginTop10 searchButton" src="img/icons/search1.png" onClick="searchExtendedNameResult()"  name="searchButton" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="marginTop10 divResult">
+                            <div class="tableContent">
+                                <table class="table" style="text-align: center;">
+                                    <thead class="thead-light">
+                                        <tr >
+                                            <th scope="col">
+                                                MS
+                                            </th>
+                                            <th scope="col">
+                                                Language
+                                            </th>
+                                            <th scope="col">
+                                                Extended name
+                                            </th>
+                                            <th scope="col">
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultBodyContentExtendedName">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel ">
+    </div>
+<body>
+</html>
+<style>
+
+tr.header
+{
+    cursor:pointer;
+}
+    .works{
+        width:70vw;
+        display:absolute;
+        margin:auto;
+        margin-bottom:30px;
+    }
+
+    .userProfile{
+        width:60vw;
+        display:absolute;
+        margin:auto;
+        margin-bottom:30px;
+    }
+/*--------search bar style------------*/
+    .inputFields{
+        width: 100%;
+        border: 0px;
+    }
+    .inputFields:focus{
+        outline: none;
+
+    }
+    .divSearchField{
+        width: 100%;
+        background-color: #fff;
+        border-radius: 6px 6px;
+        border: 1px solid #2d3c43;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 16px;
+        padding-right: 16px;
+        position: relative;
+        margin-left:  auto;
+        margin-right:  auto;
+    }
+    .infoContainer{
+        width:100%;
+        display: flex;
+        justify-content: center;
+    }
+    .fieldProfileGroup{
+        width:90%;
+        display:inline;
+    }
+    .labelProfileGroup{
+        width:10%;
+        display:inline;
+    }
+    .labelProfile{
+        width:100%;
+        margin-top:11px;
+        /*border-bottom: 2px solid #2d3c43;*/
+    }
+    .fieldProfile{
+        width:100%;
+        min-width:300px;
+        margin-top:5px;
+
+
+    }
+    .btnProfile{
+        width: 200px;
+        display: flex;
+        justify-content: center;
+    }
+/*------End search bar style----------*/
+    .selectRow{
+
+    }
+    .selectRow:hover{
+        background: #e0e0e0;
+    }
+    .searchBar{
+        padding:5px;
+    }
+    .searchButton{
+        max-width: 30px;
+    }
+    .searchUserResult{
+
+    }
+    .divResult{
+        width: 100%;
+        height: 300px;
+        background: #fff;
+        border-radius: 10px 10px;
+        padding:10px;
+
+    }
+    .tableContent{
+        height:100%;
+        width:100%;
+        overflow: auto;
+    }
+
+    .containerAdmin{
+        padding-top: 20px;
+        width: 80vw;
+        display:absolute;
+        margin:auto;
+
+    }
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      border-radius: 10px 10px 0px 0px;
+
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+    .tabcontent {
+      animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    }
+
+    /* Go from zero to full opacity */
+    @keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    tr.hide-table-padding td {
+      padding: 0;
+    }
+
+    .expand-button {
+    	position: relative;
+    }
+
+    .accordion-toggle .expand-button:after
+    {
+      position: absolute;
+      left:.75rem;
+      top: 50%;
+      transform: translate(0, -50%);
+      content: '-';
+    }
+    .accordion-toggle.collapsed .expand-button:after
+    {
+      content: '+';
+    }
+</style>
+
+<script>
+
+
+    function saveUserInfo(){
+        let id_user = document.getElementById("id_user").value;
+        let newPermission = document.getElementById("degreeSelection").value;
+        if(id_user =='Id User') return;
+        $.ajax({
+              type: "POST",
+              url: "php/admin_saveUserInfo.php",
+              data: {id_user: id_user, new_permission: newPermission,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+
+              searchUserResult();
+          });
+
+    }
+    function openTab(evt, tabName) {
+
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      try{
+          evt.currentTarget.className += " active";
+      }catch{
+          document.getElementById("btnProfile").className += " active";
+      }
+
+    }
+    $("#searchBarExtendedName").keypress(function(event) {
+            if (event.keyCode === 13) {
+                searchExtendedNameResult();
+            }
+        });
+    function searchExtendedNameResult(){
+        let searchText = document.getElementById('searchBarExtendedName').value;
+        searchText = searchText.replace(/  +/g, ' ');
+        searchText = searchText.trim();
+
+        let tbody = document.getElementById('resultBodyContentExtendedName');
+        tbody.innerHTML = "";
+        $.ajax({
+              type: "POST",
+              url: "administrator/php/searchExtendedName.php",
+              data: {searchText: searchText,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              let query = jQuery.parseJSON(data);
+              let dim = Object.keys(query).length;
+
+
+      //---------------print content search result----------------------------
+      //---------id_user, name,  surname, email, degree-----------------------
+              for (let i = 0; i< dim; i = i+1 ){
+                  let tr = document.createElement('tr');
+
+                  let ms = document.createElement('td');
+                  ms.innerHTML = query[i][1];
+
+                  let language = document.createElement('td');
+                  language.innerHTML = query[i][2];
+
+                  let extendedName = document.createElement('td');
+                  extendedName.innerHTML = query[i][3];
+
+                  let imgDelete = document.createElement('img');
+                  imgDelete.setAttribute("style", "width:20px;");
+                  imgDelete.setAttribute("src", "img/icons/trash1.png");
+
+                  let deleteExtendedName = document.createElement('td');
+                  deleteExtendedName.appendChild(imgDelete);
+                  deleteExtendedName.setAttribute("onclick", "deleteExtendedName("+query[i][0]+")");
+
+                  tr.appendChild(ms);
+                  tr.appendChild(language);
+                  tr.appendChild(extendedName);
+                  tr.appendChild(deleteExtendedName);
+                  tbody.appendChild(tr);
+              }
+        });
+    }
+    function saveExtendedName(){
+        let ms = document.getElementById('msExtendedName').value;
+        let language = document.getElementById('languageExtendedName').value;
+        let extendedName = document.getElementById('extendedNametxt').value;
+
+        $.ajax({
+              type: "POST",
+              url: "administrator/php/insertExtendedName.php",
+              data: {ms:ms, language:language, extendedName: extendedName,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              if(data == "error"){
+                  alert("Error, operation failed!");
+              }
+              else{
+                  searchExtendedNameResult();
+              }
+
+          });
+
+    }
+    function deleteExtendedName(id){
+        if(confirm('Are you sure to remove this record ?')){
+            $.ajax({
+                  type: "POST",
+                  url: "administrator/php/deleteExtendedName.php",
+                  data: {id_extendedName: id,
+                         email : localStorage.getItem("session_email"),
+                         password : localStorage.getItem("session_psw"),
+                     }
+              }).done(function( data ) {
+                  if(data == "error"){
+                      alert("Error, operation failed!");
+                  }
+                  else{
+                      searchExtendedNameResult();
+                  }
+
+              });
+        }
+    }
+    $("#searchBarAdmin").keypress(function(event) {
+            if (event.keyCode === 13) {
+                searchUserResult();
+            }
+        });
+    function searchUserResult(){
+        let searchText = document.getElementById('searchBarAdmin').value;
+        searchText = searchText.replace(/  +/g, ' ');
+        searchText = searchText.trim();
+        let tbody = document.getElementById('resultBodyContentAdmin');
+        tbody.innerHTML = "";
+        $.ajax({
+              type: "POST",
+              url: "./php/searchUser.php",
+              data: {searchText: searchText,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              let query = jQuery.parseJSON(data);
+              let dim = Object.keys(query).length;
+
+
+      //---------------print content search result----------------------------
+      //---------id_user, name,  surname, email, degree-----------------------
+              for (let i = 0; i< dim; i = i+1 ){
+                  let tr = document.createElement('tr');
+                  tr.setAttribute("class", "selectRow");
+                  tr.setAttribute("onclick", "loadUserInfo("+query[i][0]+")");
+
+                  let id = document.createElement('th');
+                  id.setAttribute("scope", "row");
+                  id.innerHTML = query[i][0];
+
+                  let name = document.createElement('td');
+                  name.innerHTML = query[i][1];
+
+                  let surname = document.createElement('td');
+                  surname.innerHTML = query[i][2];
+
+                  let email = document.createElement('td');
+                  email.innerHTML = query[i][3];
+
+                  let degree = document.createElement('td');
+                  degree.innerHTML = query[i][4];
+
+                  tr.appendChild(id);
+                  tr.appendChild(name);
+                  tr.appendChild(surname);
+                  tr.appendChild(email);
+                  tr.appendChild(degree);
+                  tbody.appendChild(tr);
+              }
+        });
+    }
+
+    function loadUserInfo(id){
+        $.ajax({
+              type: "POST",
+              url: "php/admin_loadUserInfo.php",
+              data: {id_user:id,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              let query = jQuery.parseJSON(data);
+
+
+              document.getElementById("id_user").value = query[0];
+              document.getElementById("name").value = query[1];
+              document.getElementById("surname").value = query[2];
+              document.getElementById("email").value = query[3];
+              document.getElementById("degreeSelection").value = query[4];
+          });
+    }
+    function searchResultStavesAdmin(){
+        let searchText = document.getElementById('searchBar').value;
+        searchText = searchText.replace(/  +/g, ' ');
+        searchText = searchText.trim();
+        let tbody = document.getElementById('bodyContentStavesAdmin');
+        tbody.innerHTML = "";
+        $.ajax({
+              type: "POST",
+              url: "./php/searchTool.php",
+              data: {searchText: searchText,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              var query = jQuery.parseJSON(data);
+              var dim = Object.keys(query).length;
+
+
+      //---------------print content search result----------------------------
+      //---------id, ms,  title, author, mm_staves_stored.id_staves, modern, old, name surname-----------
+              for (let i = 0; i< dim; i = i+1 ){
+                  let tr = document.createElement('tr');
+                  tr.setAttribute("class", "selectRow");
+                  tr.setAttribute("onclick", "selectStavesInfo("+query[i][4]+")");
+
+                  let id = document.createElement('th');
+                  id.setAttribute("scope", "row");
+                  id.innerHTML = truncateString(query[i][0], 10)
+
+                  let ms = document.createElement('td');
+                  ms.innerHTML = truncateString(query[i][1], 10);
+
+                  let title = document.createElement('td');
+                  title.innerHTML = query[i][2];
+
+                  let author = document.createElement('td');
+                  author.innerHTML = query[i][3];
+
+
+                  let publisher = document.createElement('td');
+                  publisher.innerHTML = query[i][7];
+
+                  let visibility = document.createElement('td');
+                  let strVisibility = "";
+
+                  if(parseInt(query[i][8])==0) strVisibility = "Private";
+                  else if(parseInt(query[i][8])==1) strVisibility = "Creators";
+                  else if(parseInt(query[i][8])==2) strVisibility = "Public";
+                  visibility.innerHTML = strVisibility;
+
+
+                  tr.appendChild(id);
+                  tr.appendChild(ms);
+                  tr.appendChild(title);
+                  tr.appendChild(author);
+                  tr.appendChild(publisher);
+                  tr.appendChild(visibility);
+                  tbody.appendChild(tr);
+              }
+        });
+    }
+    function truncateString(str, dim){
+        if(str.length > dim){
+            return str.substring(0, dim);
+        }
+        return str;
+    }
+    function selectStavesInfo(id_staves){
+        let tbody = document.getElementById('bodyResultStavesAdmin');
+        tbody.innerHTML = "";
+        $.ajax({
+              type: "POST",
+              url: "./php/admin_loadStavesWorkflow.php",
+              data: {id_staves:id_staves,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw"),
+                 }
+          }).done(function( data ) {
+              var query = jQuery.parseJSON(data);
+              var dim = Object.keys(query).length;
+
+      //---------------print content search result----------------------------
+
+              for (let i = 0; i< dim; i = i+1 ){
+                  let tr1 = document.createElement('tr');
+                  tr1.setAttribute("class", "header");
+
+                  let toggleBtn =  document.createElement('td');
+                  toggleBtn.innerHTML = "<span>+</span>";
+
+                  let name =  document.createElement('td');
+                  name.innerHTML = query[i][0];
+
+                  let surname =  document.createElement('td');
+                  surname.innerHTML = query[i][1];
+
+                  let date =  document.createElement('td');
+                  date.innerHTML = query[i][2];
+
+                  let tr2 = document.createElement('tr');
+                  tr2.setAttribute("style", "display:none");
+                  tr2.setAttribute("id", ""+i);
+
+                  let subTd1 =  document.createElement('td');
+                  subTd1.setAttribute("colspan", "4");
+
+                  let div1 = document.createElement('div');
+                  div1.setAttribute("style", "border-bottom:2px solid black; border-top:2px solid black;");
+
+                  let subDivLabel1 = document.createElement('div');
+                  subDivLabel1.setAttribute("class", "row");
+
+                  let titleLabel = document.createElement('div');
+                  titleLabel.setAttribute("class", "col-1");
+                  titleLabel.innerHTML = "Title";
+                  let idLabel = document.createElement('div');
+                  idLabel.setAttribute("class", "col-1");
+                  idLabel.innerHTML = "Id";
+                  let authorLabel = document.createElement('div');
+                  authorLabel.setAttribute("class", "col-1");
+                  authorLabel.innerHTML = "Author";
+                  let languageLabel = document.createElement('div');
+                  languageLabel.setAttribute("class", "col-1");
+                  languageLabel.innerHTML = "Language";
+                  let msLabel = document.createElement('div');
+                  msLabel.setAttribute("class", "col-1");
+                  msLabel.innerHTML = "Ms";
+                  let fLabel = document.createElement('div');
+                  fLabel.setAttribute("class", "col-1");
+                  fLabel.innerHTML = "F";
+                  let modernLabel = document.createElement('div');
+                  modernLabel.setAttribute("class", "col-1");
+                  modernLabel.innerHTML = "Modern";
+                  let oldLabel = document.createElement('div');
+                  oldLabel.setAttribute("class", "col-1");
+                  oldLabel.innerHTML = "Old";
+                  let textLabel = document.createElement('div');
+                  textLabel.setAttribute("class", "col-1");
+                  textLabel.innerHTML = "Text";
+                  let annotationsLabel = document.createElement('div');
+                  annotationsLabel.setAttribute("class", "col-1");
+                  annotationsLabel.innerHTML = "Annotations";
+
+                  subDivLabel1.appendChild(titleLabel);
+                  subDivLabel1.appendChild(idLabel);
+                  subDivLabel1.appendChild(authorLabel);
+                  subDivLabel1.appendChild(languageLabel);
+                  subDivLabel1.appendChild(msLabel);
+                  subDivLabel1.appendChild(fLabel);
+                  subDivLabel1.appendChild(modernLabel);
+                  subDivLabel1.appendChild(oldLabel);
+                  subDivLabel1.appendChild(textLabel);
+                  subDivLabel1.appendChild(annotationsLabel);
+
+                  let subDiv1 = document.createElement('div');
+                  subDiv1.setAttribute("class", "row");
+
+                  let title = document.createElement('div');
+                  title.setAttribute("class", "col-1");
+                  title.innerHTML = query[i][3];
+                  let id = document.createElement('div');
+                  id.setAttribute("class", "col-1");
+                  id.innerHTML = query[i][4];
+                  let author = document.createElement('div');
+                  author.setAttribute("class", "col-1");
+                  author.innerHTML = query[i][5];
+                  let language = document.createElement('div');
+                  language.setAttribute("class", "col-1");
+                  language.innerHTML = query[i][6];
+                  let ms = document.createElement('div');
+                  ms.setAttribute("class", "col-1");
+                  ms.innerHTML = query[i][7];
+                  let f = document.createElement('div');
+                  f.setAttribute("class", "col-1");
+                  f.innerHTML = query[i][8];
+                  let modern = document.createElement('div');
+                  modern.setAttribute("class", "col-1");
+                  modern.innerHTML = query[i][9];
+                  let old = document.createElement('div');
+                  old.setAttribute("class", "col-1");
+                  old.innerHTML = query[i][10];
+                  let text = document.createElement('div');
+                  text.setAttribute("class", "col-1");
+                  text.innerHTML = query[i][11];
+                  let annotations = document.createElement('div');
+                  annotations.setAttribute("class", "col-1");
+                  annotations.innerHTML = query[i][12];
+                  subDiv1.appendChild(title);
+                  subDiv1.appendChild(id);
+                  subDiv1.appendChild(author);
+                  subDiv1.appendChild(language);
+                  subDiv1.appendChild(ms);
+                  subDiv1.appendChild(f);
+                  subDiv1.appendChild(modern);
+                  subDiv1.appendChild(old);
+                  subDiv1.appendChild(text);
+                  subDiv1.appendChild(annotations);
+
+                  let div2 = document.createElement('div');
+                  div2.setAttribute("style", "border-bottom:2px solid black;");
+
+                  let subDivLabel2 = document.createElement('div');
+                  subDivLabel2.setAttribute("class", "row");
+
+                  let linesLabel = document.createElement('div');
+                  linesLabel.setAttribute("class", "col-2");
+                  linesLabel.innerHTML = "Lines Number";
+                  let groupLabel = document.createElement('div');
+                  groupLabel.setAttribute("class", "col-2");
+                  groupLabel.innerHTML = "Shape Group";
+                  let noteLabel = document.createElement('div');
+                  noteLabel.setAttribute("class", "col-2");
+                  noteLabel.innerHTML = "Shape Note";
+                  let stemLabel = document.createElement('div');
+                  stemLabel.setAttribute("class", "col-2");
+                  stemLabel.innerHTML = "Stem Note";
+                  let connLabel = document.createElement('div');
+                  connLabel.setAttribute("class", "col-2");
+                  connLabel.innerHTML = "Connecting Line";
+
+                  subDivLabel2.appendChild(linesLabel);
+                  subDivLabel2.appendChild(groupLabel);
+                  subDivLabel2.appendChild(noteLabel);
+                  subDivLabel2.appendChild(stemLabel);
+                  subDivLabel2.appendChild(connLabel);
+                  let subDiv2 = document.createElement('div');
+                  subDiv2.setAttribute("class", "row");
+
+                  let lines = document.createElement('div');
+                  lines.setAttribute("class", "col-2");
+                  lines.innerHTML = query[i][13];
+                  let group = document.createElement('div');
+                  group.setAttribute("class", "col-2");
+                  group.innerHTML = query[i][14];
+                  let note = document.createElement('div');
+                  note.setAttribute("class", "col-2");
+                  note.innerHTML = query[i][15];
+                  let stem = document.createElement('div');
+                  stem.setAttribute("class", "col-2");
+                  stem.innerHTML = query[i][16];
+                  let conn = document.createElement('div');
+                  conn.setAttribute("class", "col-2");
+                  conn.innerHTML = query[i][17];
+
+                  subDiv2.appendChild(lines);
+                  subDiv2.appendChild(group);
+                  subDiv2.appendChild(note);
+                  subDiv2.appendChild(stem);
+                  subDiv2.appendChild(conn);
+
+                  div1.appendChild(subDivLabel1);
+                  div1.appendChild(subDiv1);
+                  div2.appendChild(subDivLabel2);
+                  div2.appendChild(subDiv2);
+
+                  subTd1.appendChild(div1);
+                  subTd1.appendChild(div2);
+
+                  tr2.appendChild(subTd1);
+
+                  tr1.appendChild(toggleBtn);
+                  tr1.appendChild(name);
+                  tr1.appendChild(surname);
+                  tr1.appendChild(date);
+
+                  tbody.appendChild(tr1);
+                  tbody.appendChild(tr2);
+              }
+              $('tr.header').click(function(){
+                  $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+                  $(this).nextUntil('tr.header').slideToggle(100, function(){
+                  });
+              });
+        });
+    }
+    window.onload = searchExtendedNameResult();
+    window.onload = searchUserResult();
+    window.onload = searchResultStavesAdmin();
+    window.onload = openTab('', 'Profile');
+
+</script>

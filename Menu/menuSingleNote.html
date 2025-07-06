@@ -1,0 +1,719 @@
+<div id="menuSingleNote">
+<center>
+    <div id="menuStyleSingleNote">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+        <div class="clear"></div>
+        <div id="btn1" style="margin-top:10px; ">
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Note Shape</div>
+            <div id="shapeSingleNote"  style="margin-top:10px; margin-left:25px;">
+                <button id="btn1_1"class="buttonNote" onclick=groupSingleShapebtn(0) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0,  0.16, -2,-3)">
+                            <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn1_2"class="buttonNote" onclick=groupSingleShapebtn(3) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.0025, 0, 0, -0.0025, 12, 15)">
+                            <path d="M1541 3503 c-480 -582 -873 -1061 -874 -1064 -3 -8 1744 -2124 1754 -2124 6 0 1144 1373 1700 2051 l58 71 -875 1062 c-482 583 -879 1061 -883 1061 -4 0 -400 -476 -880 -1057z">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn1_3"class="buttonNote" onclick=groupSingleShapebtn(4) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0,  0.16, -7.5,-3)">
+                            <path d="M 100,100 V 50 c 0,-5 100,-5 100,0 v 50 c 0,-5 -100,-5 -100,0">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn1_4"class="buttonNote" onclick=groupSingleShapebtn(10) >
+                  <svg height="16px" width="100%" overflow="visible">
+                    <g transform="matrix(0.16, 0,   0,  0.16, -2,-3)">
+                        <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                        </path>
+                        <line x1="75" x2="175" y1="74" y2="74" style="stroke:black;stroke-width:6"/>
+                    </g>
+
+                  </svg>
+                </button>
+                <!-- Ascending note options (= pes)-->
+                <div id="btn4" style="float:right;  margin-right:25px;">
+                    <button id="btn4_1"class="buttonNote" onclick=groupSingleShapebtn(0) >
+                        <svg height="16px" width="100%" overflow="visible">
+                        <g transform="translate(-6  -54)">
+                            <g transform="matrix(0.16, 0,   0, 0.16, 0,55)">
+                                <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                </path>
+                            </g>
+                            <g transform="matrix(0.16, 0,  0,  0.16, 7, 48)">
+                                <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                </path>
+                            </g>
+                        </g>
+                        </svg>
+                    </button>
+                    
+                    <button id="btn4_2"class="buttonNote" onclick=groupSingleShapebtn(1) >
+                        <svg height="16px" width="100%" overflow="visible">
+                            <g transform="translate(-6  -54)">
+                                <g transform="matrix(0.16, 0,  0, 0.16, 3.5, 55)">
+                                    <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                    </path>
+                                </g>
+                                <g transform="matrix(0.16, 0, 0, 0.16, 3.5,45)">
+                                    <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                    </path>
+                                </g>
+                                <line class="connecting_line" x1="27" y1="69" x2="27" y2="56" style="stroke:black;stroke-width:1    ">
+                                </line>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Descending note options (= obique)-->
+                <div id="btn5" style="float:right;  margin-right:25px;">
+                    <button id="btn5_1"class="buttonNote" onclick=groupSingleShapebtn(0) >
+                        <svg height="16px" width="100%" overflow="visible">
+                            <g transform="translate(-6  -54)">
+                                <g transform="matrix(0.16, 0,   0, 0.16, 0,48)">
+                                    <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                    </path>
+                                </g>
+                                <g transform="matrix(0.16, 0,   0, 0.16, 7,55)">
+                                    <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                                    </path>
+                                </g>
+                                <line class="connecting_line" x1="23.5" y1="69" x2="23.5" y2="56" style="stroke:black;stroke-width:1    ">
+                                </line>
+                            </g>
+                        </svg>
+                    </button>
+                    <button id="btn5_2"class="buttonNote" onclick=groupSingleShapebtn(2) >
+                        <svg height="16px" width="100%" overflow="visible">
+                            <g transform="translate(-10 -54)">
+                                <polygon points="16,54 38,63 38,71 16,62" style="fill:black;stroke:purple;stroke-width:0">
+                                </polygon>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Plica shape asc -->
+        <div id="btn6" style="margin-top:10px; "> 
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Note Shape</div>
+            <div id="plicaShapeSingleNote"  style="margin-top:10px;">
+                <button id="btn6_1"class="buttonNote" onclick=groupSingleShapebtn(5)  >
+                    <svg height="25px" width="100%" overflow="visible">
+                      <g transform="translate(-3  -35)">
+                        <line class="stem_top_left" id="s.t.l_3.2.0" x1="16.5" y1="35" x2="16.5" y2="51" style="stroke:black;stroke-width:1 "></line>
+                        <g transform="matrix(0.16, 0,   0, 0.16, 0,41)">
+                          <path id="note.3.2.0" class="simple_note" d="
+                                M100,100 l0,-50
+                                c0,5 50,5 50,0
+                                l0,50
+                                c0,5 -50,5 -50,0"></path>
+                        </g>
+                        <line class="stem_top_right" id="s.t.r_3.2.0" x1="23.5" y1="35" x2="23.5" y2="51" style="stroke:black;stroke-width:1 "></line>
+                      </g>
+                    </svg>
+                </button>
+                <button id="btn6_2"class="buttonNote" onclick=groupSingleShapebtn(6)  >
+                    <svg height="25px" width="100%" overflow="visible">
+                      <g transform="translate(-3  -35)">
+                        <line class="stem_top_left" id="s.t.l_3.3.0" x1="16.5" y1="35" x2="16.5" y2="51" style="stroke:black;stroke-width:1 "></line>
+                        <g transform="matrix(0.16, 0,   0,
+                                             0.16, 0,41)">
+                        <path id="note.0.1.0" d="m 100,50 v 50 c 0,5 50,0 50,-40 v -50 c 0,40 -50,40 -50,40"></path></g>
+                        <line class="stem_top_left_plica_2_right" x1="23.5" y1="33" x2="23.5" y2="49" style="stroke:black;stroke-width:1 "></line>
+                        <g transform="matrix(0.16, 0,   0, 0.16, 0,31)">  </g>
+                      </g>
+                    </svg>
+                </button>
+                <button id="btn6_3"class="buttonNote" onclick=groupSingleShapebtn(7) >
+                    <svg height="25px" width="100%" overflow="visible">
+                      <g transform="translate(-3  -35)">
+                        <line class="stem_top_left" id="s.t.l_3.3.0" x1="16.5" y1="35" x2="16.5" y2="51" style="stroke:black;stroke-width:1 "></line>
+                        <g transform="matrix(0.16, 0,   0,
+                                             0.16, 0,41)">
+                          <path id="note.0.1.0" d="m 100,50 v 50 c 0,5 50,0 50,-40 v -50 c 0,40 -50,40 -50,40"></path>
+                        </g>
+                      </g>
+                    </svg>
+                </button>
+                <button id="btn6_4"class="buttonNote" onclick=groupSingleShapebtn(8) >
+                    <svg height="25px" width="100%" overflow="visible">
+                        <g transform="translate(-3  -35)">
+                          <g transform="matrix(0.16, 0,   0,
+                                               0.16, 0,41)">
+                            <path id="note.0.1.0" d="m 100,50 v 50 c 0,5 50,0 50,-40 v -50 c 0,40 -50,40 -50,40"></path>
+                          </g>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn6_5"class="buttonNote" onclick=groupSingleShapebtn(9) >
+                  <svg height="25px" width="100%" overflow="visible">
+                    <g transform="translate(-3  -35)">
+                      <g transform="matrix(0.16, 0,   0, 0.16, 0,41)">
+                        <path id="note.3.2.0" class="simple_note" d="
+                              M100,100 l0,-50
+                              c0,5 50,5 50,0
+                              l0,50
+                              c0,5 -50,5 -50,0"></path>
+                      </g>
+                      <line class="stem_top_right" id="s.t.r_3.2.0" x1="23.5" y1="35" x2="23.5" y2="51" style="stroke:black;stroke-width:1 "></line>
+                    </g>
+                  </svg>
+                </button>
+                <button id="btn6_6"class="buttonNote" onclick=groupSingleShapebtn(10) style="margin-top:3px">
+                  <svg height="25px" width="100%" overflow="visible">
+                    <g transform="translate(-4 0)">
+                      <g transform="translate(-3  -35)">
+                      <g transform="matrix(0.0025, 0,   0, -0.0025, 15,55)">
+                        <path id="note.3.2.0" class="simple_note" d="
+                              M1541 3503 c-480 -582 -873 -1061 -874 -1064 -3 -8 1744 -2124 1754 -2124 6 0 1144 1373 1700 2051 l58 71 -875 1062 c-482 583 -879 1061 -883 1061 -4 0 -400 -476 -880 -1057z"></path>
+                      </g>
+                      <line class="stem_top_right_tilted" x1="32" y1="40" x2="21" y2="54" style="stroke:black;stroke-width:1 "></line>                    </g>
+                      </g>
+                  </svg>
+                </button>
+
+            </div>
+        </div>
+        
+        <!--Plica shape disc-->
+        <div id="btn7" style="margin-top:10px; "> 
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Note Shape</div>
+            <div id="plicaShapeSingleNote"  style="margin-top:10px;">
+                <button id="btn7_1"class="buttonNote" onclick=groupSingleShapebtn(5) >
+                    <svg height="25px" width="100%" overflow="visible">
+                        <g transform="translate(-3  -40)">
+                            <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                            <g transform="matrix(0.16, 0,   0, 0.16, 0,34)">
+                                <path id="note.1.2.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0"></path>
+                            </g>
+                            <line class="stem_bottom_right" x1="23.5" y1="42" x2="23.5" y2="62" style="stroke:black;stroke-width:1  "></line>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn7_2"class="buttonNote" onclick=groupSingleShapebtn(6) >
+                    <svg height="25px" width="100%" overflow="visible">
+                        <g transform="translate(-3  -40)">
+                            <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                            <g transform="matrix(0.16, 0,   0, 0.16, 0,34)">
+                              <path id="note.0.1.0" d="
+                                              M100,100
+                                              l00,-50
+                                              c0,-5   50,  0  50,40
+                                              l0,50
+                                              c0,-40 -50,-40 -50,-40
+                                              ">
+                                              </path>
+                        </g>
+                            <line class="stem_of_plica_2_right" x1="23.5" y1="50" x2="23.5" y2="65" style="stroke:black;stroke-width:1 "></line>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn7_3"class="buttonNote" onclick=groupSingleShapebtn(7) >
+                    <svg height="25px" width="100%" overflow="visible">
+                        <g transform="translate(-3  -40)">
+                            <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                            <g transform="matrix(0.16, 0, 0, 0.16, 0,34)">
+                                <path id="note.0.1.0" d="
+                                              M100,100
+                                              l00,-50
+                                              c0,-5   50,  0  50,40
+                                              l0,50
+                                              c0,-40 -50,-40 -50,-40
+                                              "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn7_4"class="buttonNote" onclick=groupSingleShapebtn(8)>
+                    <svg height="25px" width="100%" overflow="visible">
+                        <g transform="translate(-3  -40)">
+                            <g transform="matrix(0.16, 0, 0, 0.16, 0,34)">
+                                <path id="note.0.1.0" d="
+                                              M100,100
+                                              l00,-50
+                                              c0,-5   50,  0  50,40
+                                              l0,50
+                                              c0,-40 -50,-40 -50,-40
+                                              "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        <!--Stem menu-->
+        <div id="btn2" style="margin-top:10px">
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Stem</div>
+            <div  style="margin-top:10px">
+                <button id="btn2_1"class="buttonNote" onclick=groupSingleStembtn(1) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_bottom_left" x1="14.5" y1="5" x2="14.5" y2="25" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn2_2"class="buttonNote" onclick=groupSingleStembtn(2) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0,  0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_bottom_right" x1="21.5" y1="5" x2="21.5" y2="25" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn2_3"class="buttonNote" onclick=groupSingleStembtn(4) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_top_left" x1="14.5" y1="-8" x2="14.5" y2="12" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+
+                <button id="btn2_4"class="buttonNote" onclick=groupSingleStembtn(3) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_top_right" x1="21.5" y1="-8" x2="21.5" y2="12" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn2_5"class="buttonNote" onclick=groupSingleStembtn(0) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+
+        <!--Stem menu for oblique (?)-->
+        <div id="btn8" style="margin-top:10px">
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Stem</div>
+            <div  style="margin-top:10px">
+                <button id="btn8_1"class="buttonNote" onclick=groupSingleStembtn(1) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_bottom_left" x1="14.5" y1="5" x2="14.5" y2="25" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn8_2"class="buttonNote" onclick=groupSingleStembtnNext(2) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0,  0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_bottom_right" x1="21.5" y1="5" x2="21.5" y2="25" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn8_3"class="buttonNote" onclick=groupSingleStembtn(4) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_top_left" x1="14.5" y1="-8" x2="14.5" y2="12" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+
+                <button id="btn8_4"class="buttonNote" onclick=groupSingleStembtnNext(3) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                        <line class="stem_top_right" x1="21.5" y1="-8" x2="21.5" y2="12" style="stroke:black;stroke-width:1">
+                        </line>
+                    </svg>
+                </button>
+                <button id="btn8_5"class="buttonNote" onclick=groupSingleStembtnBoth(0) >
+                    <svg height="16px" width="100%" overflow="visible">
+                        <g transform="matrix(0.16, 0,   0, 0.16, -2,-3)">
+                            <path  d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0" style="fill:silver">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Connecting line -->
+        <div id="btn3" style="margin-top:10px">
+            <div class="separator " style=" margin-left:5px; margin-right:5px;">Connecting Line</div>
+            <div  style="margin-top:10px">
+                <input type="checkbox" id="connectingLine" name="connectingLine" value="1" onclick=groupSingleConnectbtn(this)>
+                <label for="connectingLine"> Active</label>
+            </div>
+        </div>
+        <!-- Button Reset -->
+        <button class="" onclick=resetGroup() style="height:30px; margin-top: 5px; border-radius: 5px 5px; " >
+            Reset Group
+        </button>
+    </div>
+</center>
+</div>
+<style>
+    #menuStyleSingleNote {
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:330px;
+        width: 320px;
+        position: absolute;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .buttonNote {
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover {
+        background-color: #f3f3f3;
+    }
+</style>
+<script>
+    try{let indexGroup = -1;}catch{indexGroup = -1;}
+    try{let notesGroup = "";}catch{notesGroup = "";}
+    try{let groupLine = 0;}catch{groupLine = 0;}
+    try{let groupPos = 0;}catch{groupPos = 0;}
+    try{let notePos = 0;}catch{notePos = 0;}
+
+    function cleanGroupFromPreviousInternalPlicas(strGroup, nNote) {
+      let count = 0;
+      for (let i = 0; i < strGroup.length; i++) {
+        if (count == nNote){
+          return strGroup;
+        }else{
+          if (strGroup[i] == "("){
+            strGroup = strGroup.substring(0, i) + strGroup.substring(i+1, i+2) + strGroup.substring(i+3);
+          }
+          count += 1;
+        }
+      }
+    }
+    
+// I decided that aa(G) cannot be a double plica. Only a(G)a(G). If I change my mind, this might come in handy
+// function checkIf_aaGliqu_or_aahLiqu(strGroup, nNote) {
+//     // If first note of group made of 5 elements
+//     if (nNote == 0 && strGroup.length == 5) {
+//         let a = getNoteValue(strGroup.substring(0,1));
+//         let b = getNoteValue(strGroup.substring(1,2));
+//         let c = strGroup.substring(2,3);
+//         let d = getNoteValue(strGroup.substring(3,4));
+//         let e = strGroup.substring(4,5);
+//         // if structure is xx(y), give a value ("asc" or "desc")
+//         if (c == "(" && e == ")" && a == b) { // aa(G) or aa(h)
+//           if (b > d) { // aa(G)
+//             return "desc";
+//           } else if (b < d) { // aa(h)
+//             return "asc";
+//           }
+//         }
+//     }
+//     // otherwise juse return false
+//     return false;
+// }
+  
+    
+function setupButtonsSingleNote(nGroup, strGroup, nNote, line, pos){
+  
+    strGroup = cleanGroupFromPreviousInternalPlicas(strGroup, nNote);
+    indexGroup = nGroup;
+    notesGroup = strGroup;
+    groupLine = line;
+    groupPos = pos;
+    notePos = nNote;
+    
+    // Don't call this anymore
+    // const aaGliqu_or_aahLiqu = checkIf_aaGliqu_or_aahLiqu(strGroup, nNote);
+
+    let typeOfGroup = -1;
+    if (strGroup.substring(nNote+1, nNote+2) == "-") { // if next note is "-", do as if it was simple note
+      removeButtons(4);
+      removeButtons(5);
+      removeButtons(6);
+      removeButtons(7);
+      removeButtons(8);
+      document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+    }
+    // Plica within a group
+    // == if following char is "("
+    else if (strGroup.substring(nNote+1, nNote+2) == "("){
+        if (nNote + 3 < strGroup.length){ // Check, just in case there is a missing note, ex. "a("
+            let a = getNoteValue(strGroup.substring(nNote,nNote+1));
+            let b = getNoteValue(strGroup.substring(nNote+2, nNote+3));
+
+            if (a > b) {
+              // ...a descendent Plica;
+              removeButtons(1);
+              removeButtons(6);
+              removeButtons(8);
+              document.getElementById("menuStyleSingleNote").style.width = "370px";
+            }
+            else if (a < b){
+                // ...an ascendant Plica;
+                removeButtons(1);
+                removeButtons(7);
+                removeButtons(8);
+                document.getElementById("menuStyleSingleNote").style.width = "370px";
+            }
+            else if (a == b){ // This should not exist be triggered
+                console.log("...a unison plica?????");
+                removeButtons(4);
+                removeButtons(5);
+                removeButtons(6);
+                removeButtons(7);
+                removeButtons(8);
+                document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+            }else{
+              
+            }
+        }
+        else {
+            // This should never be triggered
+            removeButtons(4);
+            removeButtons(5);
+            removeButtons(6);
+            removeButtons(7);
+            removeButtons(8);
+            document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+        }
+        
+    }
+    // Decided that aa(G) cannot be a double plica. Only a(G)a(G). If I change my mind, this might come in handy
+    // else if (aaGliqu_or_aahLiqu) {
+    //   console.log(aaGliqu_or_aahLiqu);
+    //   if (aaGliqu_or_aahLiqu == "asc") {
+    //     removeButtons(4);
+    //     removeButtons(5);
+    //     removeButtons(7);
+    //     removeButtons(8);
+    //   } else if (aaGliqu_or_aahLiqu == "desc") {
+    //     removeButtons(4);
+    //     removeButtons(5);
+    //     removeButtons(6);
+    //     removeButtons(8);
+    //   }
+    // }
+    //-----------------------------------
+    else if (strGroup.length == 2){
+        removeButtons(4);
+        removeButtons(5);
+        removeButtons(6);
+        removeButtons(7);
+        let a = strGroup.substring(0,1);
+        let b = strGroup.substring(1,2);
+        if (getNoteValue(a) > getNoteValue(b) && (shapeGroupNote[groupLine][groupPos] == undefined || shapeGroupNote[groupLine][groupPos] == 1)){
+          removeButtons(2);
+        }else{
+          removeButtons(8);
+        }
+        document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+    }
+    else if (strGroup.length == 1){
+        document.getElementById("connectingLine").disabled = true;
+        removeButtons(4);
+        removeButtons(5);
+        removeButtons(6);
+        removeButtons(7);
+        removeButtons(8);
+        document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+    }
+    else{
+        if (nNote + 1 < strGroup.length) {
+            let a = strGroup.substring(nNote, nNote + 1);
+            let b = strGroup.substring(nNote + 1, nNote + 2);
+            if (b == '(' || b == ')') { // plica
+                removeButtons(1);
+                disableStem();
+
+                if(nNote + 2 < strGroup.length){
+                    let c = strGroup.substring(nNote+2,nNote+3);
+                    if(getNoteValue(a)<=getNoteValue(c) && b == '(') { //plica asc
+                        if((getNoteValue(c) - getNoteValue(a)) > 1 ){
+                            let btn = $('#btn6_1');
+                            btn.remove();
+                            btn = $('#btn6_2');
+                            btn.remove();
+                        }
+                        removeButtons(7);
+                    }
+                    else if (getNoteValue(a)>getNoteValue(c) && b == '('){ //plica disc
+                        if((getNoteValue(a) - getNoteValue(c)) > 1 ){
+                            let btn = $('#btn7_2');
+                            btn.remove();
+                        }
+                        removeButtons(6);
+                    }
+                }
+
+            }
+            else if(getNoteValue(a) > getNoteValue(b)){
+                removeButtons(4);
+                removeButtons(6);
+                removeButtons(7);
+                if (shapeSingleNote[groupLine][groupPos][notePos] == 2){
+                  removeButtons(2);
+                }else{
+                  removeButtons(8);
+                }
+                document.getElementById("menuStyleSingleNote").style.width = "370px";
+            }
+            else if(getNoteValue(a) < getNoteValue(b)){
+                removeButtons(5);
+                removeButtons(6);
+                removeButtons(7);
+                removeButtons(8);
+                document.getElementById("menuStyleSingleNote").style.width = "370px";
+            }
+            else if(getNoteValue(a) == getNoteValue(b)){
+                removeButtons(4);
+                removeButtons(5);
+                removeButtons(6);
+                removeButtons(7);
+                removeButtons(8);
+                document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+            }
+        }
+        else {
+            removeButtons(4);
+            removeButtons(5);
+            removeButtons(6);
+            removeButtons(7);
+            removeButtons(8);
+            document.getElementById("shapeSingleNote").style.marginLeft = "0px";
+        }
+    }
+    checkedConnectingLine();
+}
+    
+function checkedConnectingLine(){
+    if(notePos+1 < notesGroup.length)
+        if(connectGroupNote[groupLine][groupPos][notePos+1] == 1){
+            try{
+                document.getElementById("connectingLine").checked = true;
+            }catch{}
+
+        }
+    if(notePos + 1 == notesGroup.length)
+        document.getElementById("connectingLine").disabled = true;
+}
+function removeButtons(index){
+    let id = "btn"+(index)+"";
+    document.getElementById(id).remove();
+}
+function groupSingleNoteRemove(){
+    let group2 = $('#menuSingleNote');
+    group2.remove();
+}
+
+function disableStem(){
+    for (let i = 1; i<6; i = i+1){
+      //  document.getElementById("btn2_"+i+"").disabled = true;
+    }
+        removeButtons(8);
+}
+function groupSingleShapebtn(shapeValue){
+    shapeSingleNote[groupLine][groupPos][notePos] = shapeValue;
+    containerNoteMenuRemove();
+    updateStaves();
+}
+function groupSingleStembtn(shapeValue){
+    stemSingleNote[groupLine][groupPos][notePos] = shapeValue;
+
+    containerNoteMenuRemove();
+    updateStaves();
+}
+function groupSingleStembtnNext(shapeValue){
+    stemSingleNote[groupLine][groupPos][notePos+1] = shapeValue;
+
+    containerNoteMenuRemove();
+    updateStaves();
+}
+function groupSingleStembtnBoth(shapeValue){
+  stemSingleNote[groupLine][groupPos][notePos] = shapeValue;
+  stemSingleNote[groupLine][groupPos][notePos+1] = shapeValue;
+
+    containerNoteMenuRemove();
+    updateStaves();
+}
+function groupSingleConnectbtn(check){
+    if(check.checked == true)
+        connectGroupNote[groupLine][groupPos][notePos+1] = 1;
+    else
+        connectGroupNote[groupLine][groupPos][notePos+1] = 0;
+    containerNoteMenuRemove();
+    updateStaves();
+}
+function resetGroup(){
+    let tmp = [];
+    for(let i = 0; i < shapeGroupNote[groupLine].length; i= i+1){
+        if(i != groupPos)
+            tmp[i] = shapeGroupNote[groupLine][i];
+    }
+    shapeGroupNote[groupLine] = tmp;
+    shapeSingleNote[groupLine][groupPos] = [];
+    stemSingleNote[groupLine][groupPos] = [];
+    connectGroupNote[groupLine][groupPos] = [];
+    updateStaves();
+}
+function getNoteValue(n){
+    if(n == 'J') return 1;
+    if(n == 'A') return 2;
+    if(n == 'H') return 3;
+    if(n == 'B') return 3;
+    if(n == 'C') return 4;
+    if(n == 'D') return 5;
+    if(n == 'E') return 6;
+    if(n == 'F') return 7;
+    if(n == 'G') return 8;
+    if(n == 'a') return 9;
+    if(n == 'h') return 10;
+    if(n == 'b') return 10;
+    if(n == 'c') return 11;
+    if(n == 'd') return 12;
+    if(n == 'e') return 13;
+    if(n == 'f') return 14;
+    if(n == 'g') return 15;
+    if(n == 'u') return 16;
+    if(n == 'q') return 17;
+    if(n == 'p') return 17;
+    if(n == 'r') return 18;
+}
+</script>

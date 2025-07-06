@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Search Song tool</title>
+    
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="img/favicon/logo.png"/>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/searchTooltip.css"/>
+    <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"/>
+
+    <!-- Custom JavaScript controller -->
+    <script type="text/javascript" src="script/controllerMenu.js"></script>
+    <script type="text/javascript" src="script/controllerStaves.js"></script>
+    <script type="text/javascript" src="script/storeLoadStavesController.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./script/userEvent.js"></script>
+
+    <!-- ************* Font *************-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  </head>
+  <body oncontextmenu="return false;">
+    <header>
+      <div id="header"></div>
+    </header>
+
+      <!-- Page Content -->
+      <div id="bodyContainer"> <!-- Main container -->
+        <div class="clear"> </div>
+            <div id="title-page">SEARCH SONG SIMILARITIES</div>
+
+            <div class="mainContainer" style="background:white; padding-bottom:10px;">
+              <div class="clear"></div>
+              <div class="">
+                <div class ="col-md-12" style="padding:10px;">
+                  
+                  <div class="" id="optionContainer" style="display:flex">
+  
+                    <!-- Tolerance -->
+                    <div style="margin-right:25px;">
+                      <label for="tolerance">Match accuracy:</label>
+                      <span id="txttolerance">100%</span>
+                      <input class="slider" type="range" id="tolerance" name="tolerance" min="50" max="100" step="1" value="100" onmousemove="updateSlider()">
+                    </div>
+                    
+                    
+                    <!-- Trim checkbox -->
+                    <div style="margin-right:25px;">
+                      <input type=checkbox id=trimCB name="trimCB" onchange="updateURLparams(idStaves)"/>
+                      <label for="trimCB">Entire target line</label>
+                    </div>
+                    
+                    <!-- Consider spaces checkbox -->
+                    <div style="margin-right:25px;">
+                      <input type=checkbox id=spacesCB name="spacesCB" onchange="updateURLparams(idStaves)"/>
+                      <label for="spacesCB">Consider syllable divisions</label>
+                    </div>
+                    
+                    <!-- Transpositions checkbox -->
+                    <div style="margin-right:25px;">
+                      <input type=checkbox id=transposeCB name="transposeCB" onchange="updateURLparams(idStaves)"/>
+                      <label for="transposeCB">Transpositions</label>
+                    </div>
+                    <!-- First X groups of Line checkbox -->
+                    <label for="first-notes"></label>
+                    <select id="first-notes" name="first-notes" onchange="updateURLparams(idStaves)">
+                      <option value="all">Entire source line</option>
+                      <option value=1>First syllable</option>
+                      <option value=2>First 2 syllables</option>
+                      <option value=3>First 3 syllables</option>
+                      <option value=4>First 4 syllables</option>
+                      <option value=5>First 5 syllables</option>
+                    </select>
+              
+                    
+                    <div style="margin-left: auto; display: flex; align-items: center;">
+                      <label for="selectAlgorithm">Algorithm &nbsp;</label>
+                      <select id="selectAlgorithm" name="selectAlgorithm" onchange="updateURLparams(idStaves)">
+                        <option value=1>Needleman-Wunsch</option>
+                        <option value=2>Syllable based</option>
+                      </select>
+                      &nbsp;
+                    </div>
+                  </div>
+                </div>
+                  
+                <!-- Batches -->
+                <div id="radioContainer" style="margin-top:10px; display: flex; align-items: center;">
+                  <div class="repertoryRadio">
+                    <input type="radio" id="rep1" name="repertory" value="0" checked />
+                    <label for="rep1">Song repertory</label>
+                  </div>
+                  <div class="repertoryRadio">
+                    <input type="radio" id="rep2" name="repertory" value="1" />
+                    <label for="rep2">Antiphons (CantusDB)</label>
+                  </div>
+                  <div class="repertoryRadio">
+                    <input type="radio" id="rep3" name="repertory" value="2" />
+                    <label for="rep3">Responsory (CantusDB)</label>
+                  </div>
+                  <div class="repertoryRadio">
+                    <input type="radio" id="rep4" name="repertory" value="3" />
+                    <label for="rep4">Other genres (CantusDB)</label>
+                  </div>
+                  <!-- <div class="repertoryRadio">
+                    <input type="radio" id="rep5" name="repertory" value="4" />
+                    <label for="rep5">Trecento (emmsap)</label>
+                  </div> -->
+                  
+                  <!-- Language -->
+                  <div style="margin-left: auto; display: flex; align-items: center;">
+                    <label for="selectLanguage">Language &nbsp;</label>
+                    <select id="selectLanguage" name="selectLanguage" onchange="triggerSearch()">
+                    </select>
+                    &nbsp;
+                  </div>
+                </div>
+                <div id="chantusCredit">
+                  Source melodies for comparison and searching marked as "CantusDB" are from the Cantus Database, funded by the Social Sciences and Humanities Research Council of Canada through the Digital Analysis of Chant Transmission Partnership Grant 895-2023-1002.
+                </div>
+                                  
+                <div style="margin-top:20px">
+                <div style="display:flex; justify-content: center; align-items: center;" id="selectedMelody" class="hidden">
+                  <input id="selectMelodyBtn" type="button" value="SELECT MELODY" onclick="addContentToOverlay('overlayPages/searchTool_searchMelody.html', 'blank')">
+        
+                  <table id="selectedMelodyTable" style="margin-left: 25px" class="hidden">
+                    <tr>
+                      <td class="searchVizTd" id="author_vis"></td>
+                      <td class="searchVizTd" id="id_vis"></td>
+                      <td class="searchVizTd" id="title_vis"></td>
+                      <td class="searchVizTd" id="ms_vis"></td>
+                      <td class="searchVizTd" id="f_vis"></td>
+                    </tr>
+                  </table>
+                  <input type="text" id="settings" class="hidden">
+    
+                </div>
+              
+                <div style="display:flex; justify-content: center; align-items: center;">
+                
+                  <input type="text" id="searchText" name="searchText" hidden>
+                  <input type="submit" id="startQuerySearch" value="SEARCH" onclick="triggerSearch()"/>
+                </div>
+              </div>
+                         
+            </div>
+
+            <div class="col-md-12" style="display:flex; justify-content: center; align-items: center;padding-top:30px;">
+              <div class ="marginTop10" style="width:50%;">
+                  <div class="progress position-relative" style="display:none">
+                      <div  class="progress-bar progress-bar-custom progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                      <small id="txtProgressBar" class="justify-content-center d-flex position-absolute w-100" style="margin-top:6px;"></small>
+                  </div>
+              </div>
+
+            </div>
+            <div id="progressByLineMsg" style="margin-left:15px"></div>
+
+            <hr style="padding:0px; margin-bottom:0px; margin-top:20px;">
+            <center style="height:53vh;">
+                <br><br/>
+                <div id="resultDiv" style=""></div>
+            </center>
+        </div>
+
+    <div id="overlayPanel" style="display:none; overflow: auto;" class="overlayPanel"></div>
+  </body>
+</html>
+<script>
+
+window.onload = localStorage.setItem("current_page", "searchMelody.php");
+setupLenguageUI();
+
+var selectedBatches = new Set([0]);
+var noteString = "";
+var statusAction = true;
+let notePositionX = 20;
+var idStaves;
+var numberOfLines;
+var cumulative_perc = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]]; 
+
+
+function triggerSearch(startAt=0) {
+  if (idStaves == "undefined" || idStaves == null) {
+    addContentToOverlay('overlayPages/searchTool_searchMelody.html', 'blank');
+    return
+  }
+  if (startAt == 0) {
+    cumulative_perc = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
+    document.getElementsByClassName('progress-bar')[0].classList.add("progress-bar-animated");
+    
+    // Clear previous results
+    var resultDiv = document.getElementById('resultDiv');
+    resultDiv.innerHTML = '';
+  }
+
+  document.getElementById('progressByLineMsg').innerHTML = "";
+  
+  // Disable buttons
+  document.getElementById('startQuerySearch').disabled = true;
+  document.getElementById('startQuerySearch').classList = "disabled";
+  document.getElementById('tolerance').disabled = true;
+  document.getElementById('selectLanguage').disabled = true;
+  document.getElementsByClassName('progress-bar')[0].classList.add("progress-bar-animated");
+
+  
+  // Prepare empty slots for start lines
+  for (let i = 0; i < numberOfLines; i++){
+    drawLineTable(i);
+  }
+  
+  let lang = document.getElementById("selectLanguage").value;
+  let tolerance = document.getElementById("tolerance").value;
+  let email = localStorage.getItem("session_email");
+  let password = localStorage.getItem("session_psw");
+  let repertory = document.querySelector('input[name="repertory"]:checked').value;
+  let exactSearch = document.querySelector('input[name="trimCB"]').checked;
+  let considerSpaces = document.querySelector('input[name="spacesCB"]').checked;
+  let transpose = document.querySelector('input[name="transposeCB"]').checked;
+  let algorithmPath = "php/full_search_functions/search_melody_2024-05-30.php";
+  let algorithm =document.getElementById("selectAlgorithm").value;
+  let firstNotes =document.getElementById("first-notes").value;
+  
+  if (algorithm == 2) {
+    algorithmPath = "php/full_search_functions/searchMelody_syllableBySyllable.php";
+  }
+  
+  // Function to create and send an AJAX request
+  function sendAjaxRequest(batch) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', algorithmPath, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    let lastResponseLength = 0;
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE) {
+        const newResponse = xhr.responseText.substring(lastResponseLength);
+
+        lastResponseLength = xhr.responseText.length;
+
+        if (newResponse) {
+          responses = processMultipleJSONstring(newResponse);
+          responses.forEach((n, i) => {
+            if (n[0] == "progress"){
+              updateProgressBar(n[1], repertory, batch, n[2], n[3]);
+            } else if (n[0] == "end_progress") {
+              updateProgressBar(100, repertory, batch, "max", "max");
+            } else if (n[0] == "end") {
+              console.log('Execution Time: '+ n[1] +' seconds');
+            } else {
+              if (n[0] != -1){
+                let s = n[0] 
+                getLineStavesUI_startLine(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8]);
+              }
+
+              getLineStavesUI(n[1], n[2], n[3], n[4], n[5], n[6], n[7], n[8], n[9], n[10], n[11], n[12], n[13], n[14], n[15]);
+              updateProgressBar(n[17], repertory, batch, n[2], n[3], n[15], [16]);
+            }
+          });
+        }
+      }
+    };
+
+    const params = `lang=${encodeURIComponent(lang)}
+    &tolerance=${encodeURIComponent(tolerance)}
+    &repertory=${encodeURIComponent(repertory)}
+    &batch=${encodeURIComponent(batch)}
+    &id_staves=${encodeURIComponent(idStaves)}
+    &email=${encodeURIComponent(email)}
+    &password=${encodeURIComponent(password)}
+    &startLine=${encodeURIComponent(cumulative_perc[batch][1])}
+    &startCompareData=${encodeURIComponent(cumulative_perc[batch][2])}
+    &exactSearch=${encodeURIComponent(exactSearch)}
+    &considerSpaces=${encodeURIComponent(considerSpaces)}
+    &transpose=${encodeURIComponent(transpose)}
+    &firstNotes=${encodeURIComponent(firstNotes)}`;
+    xhr.send(params);
+  }
+
+  if (repertory == 0) {
+    sendAjaxRequest(0)
+  }
+  else {
+    // Send four asynchronous AJAX requests
+    for (let i = 0; i < 4; i++) {
+      sendAjaxRequest(i);
+    }
+  }
+  
+  setTimeout(()=> checkProcessBlock(), 119000);
+}
+
+function continueSearch() {
+  document.getElementsByClassName('progress-bar')[0].classList.add("progress-bar-animated");
+  triggerSearch(cumulative_perc);
+}
+
+function checkProcessBlock() {
+  let progress = JSON.parse($('.progress-bar').attr('aria-valuenow'));
+  if (progress < 100) {
+    document.getElementById('startQuerySearch').disabled = false;
+    document.getElementById('startQuerySearch').classList.remove("disabled");
+    document.getElementById('tolerance').disabled = false;
+    document.getElementById('selectLanguage').disabled = false;
+    statusAction = true;
+    document.getElementsByClassName('progress-bar')[0].classList.remove("progress-bar-animated");
+    document.getElementById('progressByLineMsg').innerHTML = '<br><input type="btn" id="continueSearch" value="Keep searching?" onclick="continueSearch()"/>';
+  }
+}
+
+function getLineStavesUI_startLine(strNotes, idStaves, id, ms, folio, title, author, text, ln){
+  let resultThead = document.getElementById("result-thead-"+ln);
+  if (resultThead.innerHTML == ""){
+    
+    // heading
+    let tr = document.createElement('tr');
+    tr.setAttribute('style', 'background:white;');
+    tr.setAttribute('onClick', 'openViewer("'+idStaves+'")');
+
+    let td1 = document.createElement('td');
+    td1.setAttribute('style', 'cursor:pointer');
+    td1.setAttribute('class', 'line-heading');
+
+    let td2 = document.createElement('td');
+    td2.setAttribute('style', 'cursor:pointer');
+    td2.setAttribute('class', 'line-heading');
+    td2.setAttribute('colspan', '3');
+    td2.innerHTML = "<b class='title'>"+title+" - l. "+(JSON.parse(ln)+1)+"</b>";
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    resultThead.appendChild(tr);
+    
+    tr = document.createElement('tr');
+    tr.setAttribute('style', 'background:white;');
+    tr.setAttribute('class', 'start-line');
+
+    td1 = document.createElement('td');
+    td1.setAttribute('class', 'song-info');
+
+    td1.innerHTML = "<i>"+title + "</i><br>"+author+"<br>"+id+", l. "+(ln+1)+"<br>"+ms+" "+folio+"";
+    td2 = document.createElement('td');
+    td2.setAttribute('colspan', '2');
+    
+    
+    let svg = document.createElement('div');
+    svg.setAttribute('style', 'zoom:0.5');
+    svg.disabled = true;
+    strNotes = strNotes.replace(/[CFGAD]\d ?|[bh]} ?/gi, "");
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/printStaves.php",  //your page
+        data : {notes : strNotes, text_string : text, callingFrom : "searchTool", matches : -1},// passing the values
+        success: function(res){
+            svg.innerHTML = res;
+            svg.innerHTML = svg.getElementsByTagName("div")[0].innerHTML;
+        }
+    });
+    
+    trSeparator = document.createElement('tr');
+    trSeparator.setAttribute('class', 'separatorTr');
+    
+    td = document.createElement('td');
+    td.setAttribute('colspan', '3');
+    trSeparator.appendChild(td);
+
+    td2.appendChild(svg);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    
+    resultThead.appendChild(tr);
+    resultThead.appendChild(tr);
+    resultThead.appendChild(trSeparator);
+  }
+}
+
+
+function getLineStavesUI(strNotes, idStaves, id, ms, folio, title, author, text, row, score, transposed, shift, equivalence, matches, start_ln) {
+
+    let tr = document.createElement('tr');
+    tr.setAttribute('style', 'background:white;');
+
+    let td1 = document.createElement('td');
+    tr.setAttribute('class', 'song-info');
+    td1.innerHTML = "<i>" + title + "</i><br>" + author + "<br>" + id + ", l. " + (parseInt(row)+1) + "<br>" + ms + " " + folio;
+    
+    let td2 = document.createElement('td');
+    td2.setAttribute('style', 'cursor:pointer');
+    if (author == "") { // author == "" it's a strategy to understand if it is a Cantus item
+      td2.setAttribute('onClick', 'redirectToPage("https://cantusdatabase.org/chant/'+idStaves+'")');
+    } else {
+      td2.setAttribute('onClick', 'openViewer("'+idStaves+'")');
+    }
+    
+    let td3 = document.createElement('td');
+    td3.setAttribute('style', 'cursor:pointer');
+    td3.innerHTML = "<div style='font-size:12px;'>"
+    + "<b>Score : "+score+"%</b><br>"
+    + transposed + "<br>"
+    // + shift + "<br>" 
+    // + "<span style='font-family:courier'>" + equivalence + "<br>*"
+    // + JSON.parse(matches).join('')+"</span>";  
+    // + matches+"</span>";  
+
+    let svg = document.createElement('div');
+    svg.setAttribute('style', 'zoom:0.5');
+    svg.disabled = true;
+    
+    strNotes = strNotes.replace(/[CFGAD]\d ?|[bh]} ?|\[.*?\]/gi, "");
+    
+    matchesIndividualNotes = processMatches(matches);
+  
+    //matchesIndividualNotes = JSON.stringify(matches);
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/printStaves.php",  //your page
+        data : {notes : strNotes, text_string : text, callingFrom : "searchTool", matchesIndividualNotes : matchesIndividualNotes}, // passing the values
+        success: function(res){
+            svg.innerHTML = res;
+            svg.innerHTML = svg.getElementsByTagName("div")[0].innerHTML;
+        }
+    });
+
+    td2.appendChild(svg);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+
+    document.getElementById('resultBodyContainer-'+start_ln).appendChild(tr);
+}
+
+function loadStavesFromDatabase_melodySearch(idStaves){
+  if (idStaves == null) return;
+  document.getElementById("selectedMelodyTable").classList.remove("hidden");
+  
+  let email = localStorage.getItem("session_email");
+  let password = localStorage.getItem("session_psw");
+  let page = localStorage.getItem("current_page");
+  
+  updateURLparams(idStaves);
+  
+  if (idStaves < 0 || idStaves == null || idStaves == '') { return -1 } //check if id_staves is valid
+  else {
+    $.ajax({
+        type: "POST",
+        url: "./php/loadStaves.php",
+        data: {id_staves:idStaves, email:email, password:password, page:page}
+      }).done(function(data) {
+        if (parseInt(data) == -1) {
+          callBackStavesToLoad(0);
+          return 0;
+        }
+        else {
+          //0:id_staves 1:title 2:id 3:author 4:lang 5:ms 6:f 7:modernStyle 8:oldStyle 9:staves(JSON) 10:text  11:annot 12:visibility 13:id_user(publisher)
+          let obj = jQuery.parseJSON(data);
+          let dimStaves = Object.keys(obj.staves).length;
+          let dataStaves = obj.staves;
+          numberOfLines = jQuery.parseJSON(dataStaves[9])[0].split("\n").length;
+          if (dimStaves > 0) {
+            setupStavesInfo(dataStaves[0],dataStaves[1],dataStaves[2],dataStaves[3],
+                dataStaves[5],dataStaves[6]);
+          }
+          else {
+            callBackStavesToLoad(0);
+            return 0;
+          }
+        }
+      });
+  }
+  document.getElementById("selectedMelody").classList.remove("hidden");
+  try {
+    hideOverlay();
+  }catch{}
+}
+
+
+function setupStavesInfo(id_staves, title, id_input, author, ms, f) {
+  document.getElementById("selectedMelody").classList.remove("hidden");
+  // Setup visible
+  document.getElementById("title_vis").innerHTML = title;
+  document.getElementById("id_vis").innerHTML = id_input; 
+  document.getElementById("author_vis").innerHTML = author;
+  document.getElementById("ms_vis").innerHTML = ms;
+  document.getElementById("f_vis").innerHTML = f;
+  
+  idStaves = id_staves
+}
+
+
+// HELPER FUNCTIONS
+function processMatches(matches) {
+  var newMatchArray = [];
+  let matchesObject = JSON.parse(matches);
+  matchesObject.forEach((el, i) => {
+    if (typeof(el) == "number") newMatchArray.push(el);
+  });
+  return JSON.stringify(newMatchArray);
+}
+
+function redirectToPage(url) {
+    // Create a new anchor element
+    var anchor = document.createElement('a');
+    
+    // Set the href attribute to the desired URL
+    anchor.href = url;
+    anchor.target = "_blank";
+
+    // Trigger a click event on the anchor element
+    anchor.click();
+}
+
+function syncDatasetShapes(){};
+selectedText = 0;
+
+
+function setupLenguageUI(prev=''){
+    let optionDefault = document.createElement("option");
+    optionDefault.setAttribute("value",'') ;
+    optionDefault.text = "All";
+
+    let objSelect = document.getElementById('selectLanguage');
+    objSelect.appendChild(optionDefault);
+
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "php/getLanguageList.php",  //your page
+        data: {},
+        success: function(data){
+            try{
+                let query = jQuery.parseJSON(data);
+                let dim = Object.keys(query).length;
+                // console.log(dim);
+                for(let i =0; i< dim; i = i+1){
+                    let option = document.createElement("option");
+                    option.setAttribute("value", query[i]);
+                    option.text = "" + query[i];
+                    objSelect.appendChild(option);
+                }
+            }catch{}
+
+            if (prev!='') {
+                objSelect.value = prev;
+            }
+        }
+    });
+}
+
+// SEARCH
+function updateProgressBar(perc, repertory, batch, ln, i){
+    if (repertory > 0) {
+      cumulative_perc[batch][0] = perc;
+      cumulative_perc[batch][1] = ln;
+      cumulative_perc[batch][2] = i;
+      perc = (cumulative_perc[0][0] + cumulative_perc[1][0] + cumulative_perc[2][0] + cumulative_perc[3][0]) / 4;
+    }  
+    $('.progress-bar').attr('aria-valuenow', perc).css('width', perc+'%');
+    document.getElementsByClassName('progress')[0].style.display = 'flex';
+    document.getElementById('txtProgressBar').innerHTML = "<b>"+perc.toFixed(0)+"% Completed</b>";
+
+    statusAction = false;
+    if (perc == 100) {
+        setTimeout(()=> document.getElementsByClassName('progress')[0].style.display = 'none', 100);
+        setTimeout(()=> document.getElementById('startQuerySearch').disabled = false, 100);
+        setTimeout(()=> document.getElementById('startQuerySearch').classList.remove("disabled"), 100);
+        setTimeout(()=> document.getElementById('tolerance').disabled = false, 100);
+        setTimeout(()=> document.getElementById('selectLanguage').disabled = false, 100);
+        setTimeout(()=> statusAction = true, 200);
+        document.getElementById('progressByLineMsg').innerHTML = 'Search completed';
+    }
+}
+
+function openViewer(param) {
+  window.open("viewer.html?id="+param, "_blank");
+}
+
+function drawHeader() {
+  $("#header").load("header.html");
+}
+
+function drawLineTable(ln) {
+  let table = document.createElement("table");
+  let thead = document.createElement("thead");
+  let tbody = document.createElement("tbody");  
+  
+  table.setAttribute("id", "stavesTable-"+ln);
+  table.setAttribute("class", "table");
+  table.setAttribute("style", "width:100%");
+  thead.setAttribute("id", "result-thead-"+ln);
+  thead.setAttribute("class", "result-thead");
+
+  tbody.setAttribute("id", "resultBodyContainer-"+ln);
+  tbody.setAttribute("class", "resultBodyContainer");
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  
+  document.getElementById("resultDiv").appendChild(table);  
+}
+
+function processMultipleJSONstring(string) {
+  var arrays = [];
+  
+  // Split the string into individual array substrings
+  var arrayStrings = string.substring(1, string.length - 1).split("][");
+
+    // Parse each array substring separately
+  arrayStrings.forEach(function(arrayString) {
+    // Add back the square brackets
+    arrayString = "[" + arrayString + "]";
+    
+    // Parse the array
+    var array = JSON.parse(arrayString);
+    
+    // Do something with the parsed array
+    arrays.push(array);
+  });
+  return arrays;
+}
+
+function parseBool(str) {
+  if (str === "false") {
+    return false;
+  }
+  return true;
+}
+
+function loadContentByURL(){
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    if (urlParams.get('id') != null && urlParams.get('id') != "undefined") {
+      var id = urlParams.get('id');
+      loadStavesFromDatabase_melodySearch(id);
+      // Set global id
+      idStaves = id;
+    }
+    if (urlParams.get('tolerance') != null || urlParams.get('tolerance')) {
+      var tol = urlParams.get('tolerance');
+      document.getElementById("tolerance").value = tol;
+    }
+    if (urlParams.get('repertory') != null || urlParams.get('repertory')) {
+      var repertory = urlParams.get('repertory');
+      $('input[name="repertory"][value="'+repertory+'"]').prop('checked', true);
+    }
+    if (urlParams.get('trim') != null || urlParams.get('trim')) {
+      var trimActive = parseBool(urlParams.get('trim'));
+      document.getElementById("trimCB").checked = trimActive;
+    }
+    if (urlParams.get('spaces') != null || urlParams.get('spaces')) {
+      var spacesActive = parseBool(urlParams.get('spaces'));
+      document.getElementById("spacesCB").checked = spacesActive;
+    }
+    if (urlParams.get('transpose') != null || urlParams.get('transpose')) {
+      var transpose = parseBool(urlParams.get('transpose'));
+      document.getElementById("transposeCB").checked = transpose;
+    }
+    if (urlParams.get('alg') != null || urlParams.get('alg')) {
+      var alg = urlParams.get('alg');
+      document.getElementById("selectAlgorithm").value = alg;
+    }
+    if (urlParams.get('sect') != null || urlParams.get('sect')) {
+      const firstNotes = urlParams.get('sect');
+      document.getElementById("first-notes").value = firstNotes;
+    }
+
+    updateSlider();
+}
+
+function updateSlider() {
+  document.getElementById('txttolerance').innerHTML= $('#tolerance').val()+'%';
+  updateURLparams(idStaves);
+}
+
+function updateURLparams(idStaves) {
+  let radio = $('input[name="repertory"]:checked').val();
+  let tolerance = $('#tolerance').val();
+  let trim = document.getElementById('trimCB').checked;
+  let spaces = document.getElementById('spacesCB').checked;
+  let transpose = document.getElementById('transposeCB').checked;
+  let alg = document.getElementById('selectAlgorithm').value;
+  let onlyFirstXsyls = document.getElementById('first-notes').value;
+  if (alg == 2) {
+    spaces = document.getElementById('spacesCB').checked = true;
+    document.getElementById('spacesCB').disabled = true; 
+  }else{
+    document.getElementById('spacesCB').disabled = false;
+  }
+  window.history.replaceState(null, null, `?id=${idStaves}&tolerance=${tolerance}&repertory=${radio}&trim=${trim}&spaces=${spaces}&transpose=${transpose}&alg=${alg} &sect=${onlyFirstXsyls}`);
+  
+  if (radio == 1 || radio == 2 || radio == 3) {
+      $("#chantusCredit").show();
+  } else {
+      $("#chantusCredit").hide();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+        const radios = document.querySelectorAll('input[type="radio"][name="repertory"]');
+        radios.forEach((radio) => {
+            radio.addEventListener('change', () => {
+              updateURLparams(idStaves)
+            });
+        });
+    });
+
+
+window.onload = loadContentByURL();
+
+function appendTitlePageInNav(title) {
+      // Select the target div
+    const div = document.querySelector('#medmel-nav');
+
+    // Create the <h2> element
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+
+    // Insert as second child
+    if (div.children.length >= 1) {
+      div.insertBefore(h2, div.children[1]);
+    } else {
+      div.appendChild(h2); // If there's no first child, just append
+    }
+}
+</script>
+
+<style>
+body{
+  background-color: white !important;
+}
+polygon {
+    fill: transparent;
+}
+.clickablePolygon {
+  fill: transparent;
+}
+.clickablePolygon:hover {
+  fill: lightgray;
+}
+
+.title{
+    font-size: 1em;
+}
+.song-info {
+  min-width: 250px;
+}
+
+line {
+  stroke: black !important;
+  z-index: 10;
+}
+
+.cursor {
+  display: none;
+  margin-top:-5px;
+  position: absolute;
+  z-index: 1;
+  transition: 0.5s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+      0.2s cubic-bezier(0.75, -1.27, 0.3, 2.33) opacity;
+  user-select: none;
+  pointer-events: none;
+  transform: scale(0.8);
+  width: 15px;
+  height: 12px;
+  background: #484848;
+  transform: rotate(145deg);
+  -moz-border-radius: 100px / 89px;
+  -webkit-border-radius: 100px / 89px;
+  border-radius: 100px / 89px;
+}
+
+#svgWrap:hover {
+  cursor: none;
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 10px;
+  border-radius: 5px;
+  background: lightgray;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2d3c43;
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  background: #2d3c43;
+  cursor: pointer;
+}
+.progress-bar-custom {
+      background-color: #c0c0c0 !important;
+}
+
+#startQuerySearch, #continueSearch, #selectMelodyBtn {
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid rgb(146,55,28);
+  padding: 10px;
+  color: rgb(146,55,28);
+  width: 180px;
+}
+
+#selectLanguage, #selectAlgorithm {
+  border-color: gray;
+  border-radius: 4px;
+  margin-top: -8px
+}
+
+
+#selectedMelody {
+  padding-bottom: 10px;
+}
+
+#selectedMelodyTable {
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+#author_vis{
+  padding-left: 25px;
+}
+
+#f_vis{
+  padding-right: 25px;
+}
+
+#optionContainer {
+  padding-left: 25px;
+  border-bottom: 1px solid gray;   
+}
+#radioContainer {
+  border-bottom: 1px solid gray;   
+  padding-left: 25px;
+}
+
+table {
+}
+
+.annotationsContainer {
+  display: none !important;
+}
+
+.searchVizTd {
+  padding: 10px
+}
+
+.line-heading {
+  border-bottom: none;
+}
+.start-line td {
+  border-top: none !important;
+  /*background-color: rgba(167, 199, 231, 0.1);*/
+}
+.start-line, .start-line td {
+  border: none;
+  /*background-color: rgba(167, 199, 231, 0.1);*/
+}
+
+.result-thead {
+  background-color: rgba(167, 199, 231, 0.1) !important;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.separatorTr {
+  height: 0px;
+  background-color: black;
+  margin: 0;
+  padding: 0 !important;
+  border: none;
+}
+
+.separatorTr td {
+  height: 1px;
+  background-color: black;
+  border: 0 !important;
+  margin: 0;
+  padding: 0 !important;
+}
+
+.table td {
+  border-top:none;
+}
+.table {
+  margin-bottom: 0;
+}
+.s10 {
+  fill: #4CAF50; /* green */
+}
+.s10 path {  
+  stroke: #4CAF50 !important;
+}
+
+.s5-9 {
+  fill: #FFC107; /* yello */
+}
+
+.s3-5 {
+  fill: #FF8A2D; /* orange */
+}
+
+.s0-3 {
+  fill: #FF5252; /* red */
+}
+.s0-3 path {  
+  stroke: #FF5252 !important;
+}
+
+.hidden {
+  display: none;
+}
+.repertoryRadio {
+  margin-right: 15px;
+}
+.disabled {
+  border: 3px solid lightgray !important;
+  color:lightgray !important;
+}
+input:focus {
+  outline: none;
+}
+
+#title-page {
+  text-align: center;
+  font-size: 20pt;
+  padding: 20px;
+  /* background: linear-gradient(to right, rgba(133, 44, 28), rgba(172, 70, 35)); */
+  color: white;
+  color: rgba(0, 0, 0, 0.8);
+  color: rgba(133, 44, 28);
+  font-family: "Roboto";  
+}
+</style>
+

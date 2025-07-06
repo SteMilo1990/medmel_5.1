@@ -1,0 +1,192 @@
+
+<div class="">
+    <div style="float:right">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="clear"></div>
+
+    <div class="d-flex justify-content-center  searchBarCompare ">
+        <div class=" divSearchField">
+            <input id="searchBarCompare" type="text"  class="inputFields" name="searchBarCompare" onkeyup="searchResultCompare()" value="" placeholder="Search"/>
+        </div>
+        <div style="margin-left: 10px;">
+            <input id="searchButton" type="image" class=" marginTop10 searchButton" src="img/icons/search1.png" onClick="searchResultCompare()"  name="searchButton" value=""/>
+        </div>
+    </div>
+
+    <div class="marginTop10 divResult">
+        <div class="tableContent">
+            <table class="table" style="text-align: center;">
+                <thead class="thead-light">
+                    <tr >
+                        <th scope="col">
+                          Add
+                        </th>
+                        <th scope="col">
+                          Concordances
+                        </th>
+                        <th scope="col">
+                            ID
+                        </th>
+                        <th scope="col">
+                            Ms
+                        </th>
+                        <th scope="col">
+                            Title
+                        </th>
+                        <th scope="col">
+                            Author
+                        </th>
+                        <th scope="col">
+                            Editor
+                        </th>
+                        <th scope="col">
+                            Visibility
+                        </th>                        
+                    </tr>
+                </thead>
+                <tbody id="bodyContentSearchCompare">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .selectRow{
+
+    }
+    .selectRow:hover{
+        background: #e0e0e0;
+    }
+    .searchBarCompare{
+        padding:5px;
+    }
+    .searchButton{
+        max-width: 30px;
+    }
+    .searchResultCompare{
+
+    }
+    .divResult{
+        width: 100%;
+        height: 635px;
+        background: #fff;
+        border-radius: 10px 10px;
+        padding:10px;
+
+    }
+    .tableContent{
+        height:100%;
+        width:100%;
+        overflow: auto;
+    }
+
+
+</style>
+
+<script>
+
+    $("#searchBarCompare").keypress(function(event) {
+            if (event.keyCode === 13) {
+                searchResultCompare();
+            }
+        });
+    function searchResultCompare(){
+        let searchText = document.getElementById('searchBarCompare').value;
+        searchText = searchText.replace(/  +/g, ' ');
+        searchText = searchText.replace(/\'+/g, '\\\\\'');
+        searchText = searchText.trim();
+        let tbody = document.getElementById('bodyContentSearchCompare');
+        tbody.innerHTML = "";
+        $.ajax({
+              type: "POST",
+              url: "php/searchTool.php",
+              data: {searchText: searchText,
+                     email : localStorage.getItem("session_email"),
+                     password : localStorage.getItem("session_psw")
+                 }
+          }).done(function( data ) {
+              var query = jQuery.parseJSON(data);
+              var dim = Object.keys(query).length;
+
+
+      //---------------print content search result----------------------------
+              for (let i = 0; i< dim; i = i+1 ){
+                  let tr = document.createElement('tr');
+                  tr.setAttribute("class", "selectRow");
+
+                  // if( typeResult == 0){//single load by id_satves
+                  //     tr.setAttribute("onclick", "loadSingleStavesToCompare("+query[i][4]+", true)");
+                  // }
+                  // else{ //multiple load by id_staves
+                  //     tr.setAttribute("onclick", "loadMulipleStaves_mss("+query[i][4]+", true)");
+                  // }
+
+
+                  let id = document.createElement('th');
+                  id.setAttribute("scope", "row");
+                  id.innerHTML = query[i][0];
+
+                  let ms = document.createElement('td');
+                  ms.innerHTML = truncateString(query[i][1], 10);
+
+                  let title = document.createElement('td');
+                  title.innerHTML = query[i][2];
+
+                  let author = document.createElement('td');
+                  author.innerHTML = query[i][3];
+
+                  let publisher = document.createElement('td');
+                  publisher.innerHTML = query[i][7];
+
+                  let visibility = document.createElement('td');
+                  let strVisibility = "";
+                  
+                  let addSingle = document.createElement('td');
+                  let addSingleBtn = document.createElement('input');
+                  addSingleBtn.setAttribute("type", "button");
+                  addSingleBtn.setAttribute("value", "Add");
+                  addSingleBtn.setAttribute("class", "addSingle");
+                  addSingleBtn.setAttribute("onclick", "loadSingleStavesToCompare("+query[i][4]+", true)");
+                  addSingle.appendChild(addSingleBtn);
+                  
+                  
+                  let concordances = document.createElement('td');
+                  let concordancesBtn = document.createElement('input');
+                  concordancesBtn.setAttribute("type", "button");
+                  concordancesBtn.setAttribute("value", "Concordances");
+                  concordancesBtn.setAttribute("class", "concordancesBtn");
+                  concordancesBtn.setAttribute("onclick", "loadMulipleStaves_mss("+query[i][4]+", true)");
+                  concordances.appendChild(concordancesBtn);
+                  
+
+                  if(parseInt(query[i][8])==0) strVisibility = "Private";
+                  else if(parseInt(query[i][8])==1) strVisibility = "Creators";
+                  else if(parseInt(query[i][8])==2) strVisibility = "Public";
+                  visibility.innerHTML = strVisibility;
+
+                  tr.appendChild(addSingle);
+                  tr.appendChild(concordances);
+                  tr.appendChild(id);
+                  tr.appendChild(ms);
+                  tr.appendChild(title);
+                  tr.appendChild(author);
+                  tr.appendChild(publisher);
+                  tr.appendChild(visibility);
+                
+
+                  tbody.appendChild(tr);
+              }
+        });
+    }
+    function truncateString(str, dim){
+        if(str.length > dim){
+            return str.substring(0, dim);
+        }
+        return str;
+    }
+
+    window.onload = searchResultCompare();
+</script>

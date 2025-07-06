@@ -1,0 +1,316 @@
+<div class="parent">
+    <div class="closeButton">
+        <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="hideOverlay()" title="Close">
+    </div>
+    <div class="separator marginTop10">
+      Default shapes
+    </div>
+    <div>
+      <div id="defaultShapeContainer" class="justify-content-center ">
+<!-- col left -->
+<div id="defLeftCol">
+        <div class="marginTop10">
+          <div>
+            Single Note
+          </div>
+          <div id="" class="marginTop5">
+            <button id="def_puctVir_1"class="buttonNote" onclick=defaultPunctusVirgaBtn(1) >
+              <svg height="16px" width="100%" overflow="visible">
+                <g transform="matrix(0.16, 0,   0,  0.16, -3,-4.7)">
+                  <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                  </path>
+                </g>
+              </svg>
+            </button>
+            <span>
+              &nbsp;&nbsp;&nbsp;
+            </span>
+            <button id="def_puctVir_2" class="buttonNote" onclick=defaultPunctusVirgaBtn(2) >
+              <svg height="25px" width="100%" overflow="visible">
+                <g transform="translate(-3  -40)">
+                  <g transform="matrix(0.16, 0,   0, 0.16, 0,34)">
+                    <path id="note.1.2.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0"></path>
+                  </g>
+                  <line class="stem_bottom_right" x1="23.5" y1="42" x2="23.5" y2="62" style="stroke:black;stroke-width:1  "></line>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="marginTop10 ">
+          <div class="">
+            Pes
+          </div>
+          <div id="" class="marginTop5">
+            <button id="def_pes_1"class="buttonNote" onclick=defaultPes(1) onload=setDefaults()>
+                <svg height="25px" width="100%" overflow="visible">
+                    <g transform="translate(-6  -49)">
+                        <g transform="matrix(0.16, 0,  0, 0.16, 3.5, 55)">
+                            <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                            </path>
+                        </g>
+                        <g transform="matrix(0.16, 0, 0, 0.16, 3.5,45)">
+                            <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                            </path>
+                        </g>
+                        <line class="connecting_line" x1="27" y1="69" x2="27" y2="56" style="stroke:black;stroke-width:1    ">
+                        </line>
+                    </g>
+                </svg>
+            </button>
+            <span>
+              &nbsp;&nbsp;&nbsp;
+            </span>
+            <button id="def_pes_2"class="buttonNote" onclick=defaultPes(2) >
+                <svg height="25px" width="100%" overflow="visible">
+                <g transform="translate(-6  -49)">
+                  <g transform="matrix(0.16, 0,  0,  0.16, 7, 48)">
+                      <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0"></path>
+                  </g>
+                  <g transform="matrix(0.16, 0,   0, 0.16, 0,55)">
+                      <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0"></path>
+                  </g>
+                </g>
+                </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class=" marginTop10 ">
+          <div class="">
+            Clivis
+          </div>
+          <div id="" class="marginTop5">
+            <button id="def_cl_1"class="buttonNote" onclick=defaultClivis(1) >
+                <svg height="25px" width="100%" overflow="visible">
+                    <g transform="translate(-10 -54)">
+                      <line class="stem_bottom_right" x1="16.5" y1="58" x2="16.5" y2="74" style="stroke:black;stroke-width:1  "></line>
+
+                        <polygon points="16,54 38,63 38,71 16,62" style="fill:black;stroke:purple;stroke-width:0">
+                        </polygon>
+                    </g>
+                </svg>
+            </button>
+            <span>
+              &nbsp;&nbsp;&nbsp;
+            </span>
+            <button id="def_cl_2"class="buttonNote" onclick=defaultClivis(2) >
+                <svg height="25px" width="100%" overflow="visible">
+                    <g transform="translate(-6  -54)">
+                      <line class="stem_bottom_right" x1="16.5" y1="58" x2="16.5" y2="74" style="stroke:black;stroke-width:1  "></line>
+                        <g transform="matrix(0.16, 0,   0, 0.16, 0,48)">
+                            <path id="note.0.3.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                            </path>
+                        </g>
+                        <g transform="matrix(0.16, 0,   0, 0.16, 7,55)">
+                            <path id="note.0.3.1" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+          </div>
+        </div>
+
+        <div >
+          <div class="marginTop10">
+            Torculus
+          </div>
+          <button id="def_tor_1" class="buttonNote" onclick="defaultTorculus(1)">
+            <img src="img/group3/icon3_1.png">
+          </button>
+          <span>
+            &nbsp;&nbsp;&nbsp;
+          </span>
+          <button id="def_tor_2" class="buttonNote" onclick="defaultTorculus(2)">
+              <img src="img/group3/icon3_2.png">
+          </button>
+        </div>
+
+</div><!-- end col left -->
+
+<div id="defRightCol"><!-- col right -->
+  <div>
+    <div style="padding-top: 10px">
+      Porrectus
+    </div>
+    <button id="def_por_1" class="buttonNote" onclick="defaultPorrectus(1)">
+        <img src="img/group3/icon4_2.png">
+    </button>
+    <button id="def_por_2" class="buttonNote" onclick="defaultPorrectus(2)">
+        <img src="img/group3/icon4_3.png">
+    </button>
+    <button id="def_por_3" class="buttonNote" onclick="defaultPorrectus(3)">
+        <img src="img/group3/icon4_1.png">
+    </button>
+  </div>
+
+        <div>
+          <div class=" marginTop10 ">
+            Scandicus
+          </div>
+            <div id="" style="margin-top:5px">
+              <button id="def_sc_1"class="buttonNote" onclick=defaultScandicus(1)  >
+                <img src="img/group3/icon1_2.png" >
+              </button>
+              <button id="def_sc_3"class="buttonNote" onclick=defaultScandicus(3)  >
+                <img src="img/group3/icon1_1.png" >
+              </button>
+              <button id="def_sc_2"class="buttonNote" onclick=defaultScandicus(2) >
+                  <img src="img/group3/icon1_3.png" >
+              </button>
+            </div>
+        </div>
+
+
+        <div class=" marginTop10 ">
+          <div class="">
+            Climacus
+          </div>
+          <div id="" style="margin-top:5px">
+            <button id="def_clim_1" class="buttonNote" onclick=defaultClimacus(1) >
+                <img src="img/group3/icon2_2.png" >
+            </button>
+            <button id="def_clim_2" class="buttonNote" onclick=defaultClimacus(2) >
+              <img src="img/group3/icon2_3.png" >
+            </button>
+            <!-- <button id="def_clim_3"class="buttonNote" onclick=defaultClimacus(2) >
+                <img src="img/group3/icon2_3.png" >
+            </button> -->
+            <button id="def_clim_3" class="buttonNote" onclick=defaultClimacus(3)  >
+                <img src="img/group3/icon2_4.png" >
+            </button>
+            <button id="def_clim_4" class="buttonNote" onclick=defaultClimacus(4) >
+                <img src="img/group3/icon2_5.png" >
+            </button>
+            <button id="def_clim_5" class="buttonNote" onclick=defaultClimacus(5) >
+                <img src="img/group3/icon2_6.png" >
+            </button>
+          </div>
+      </div>
+
+      <div class=" marginTop10 ">
+        <div class="">
+          Plica
+        </div>
+          <button id="def_pl_1" class="buttonNote" onclick="defaultPlica(1)">
+              <svg height="25px" width="100%" overflow="visible">
+                  <g transform="translate(-3 -40)">
+                      <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                      <g transform="matrix(0.16, 0,   0, 0.16, 0,34)">
+                          <path id="note.1.2.0" class="simple_note" d="M100,100 l0,-50 c0,-5 50,-5 50,0 l0,50 c0,-5 -50,-5 -50,0"></path>
+                      </g>
+                      <line class="stem_bottom_right" x1="23.5" y1="42" x2="23.5" y2="62" style="stroke:black;stroke-width:1  "></line>
+                  </g>
+              </svg>
+          </button>
+          <button id="def_pl_2" class="buttonNote" onclick="defaultPlica(2)">
+              <svg height="25px" width="100%" overflow="visible">
+                  <g transform="translate(-3 -40)">
+                      <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                      <g transform="matrix(0.16, 0,   0, 0.16, 0,34)">
+                        <path id="note.0.1.0" d="
+                                        M100,100
+                                        l00,-50
+                                        c0,-5   50,  0  50,40
+                                        l0,50
+                                        c0,-40 -50,-40 -50,-40
+                                        ">
+                                        </path>
+                  </g>
+                      <line class="stem_of_plica_2_right" x1="23.5" y1="50" x2="23.5" y2="65" style="stroke:black;stroke-width:1 "></line>
+                  </g>
+              </svg>
+          </button>
+          <button id="def_pl_3" class="buttonNote" onclick="defaultPlica(3)">
+              <svg height="25px" width="100%" overflow="visible">
+                  <g transform="translate(-3 -40)">
+                      <line class="stem_bottom_left" x1="16.5" y1="42" x2="16.5" y2="62" style="stroke:black;stroke-width:1"></line>
+                      <g transform="matrix(0.16, 0, 0, 0.16, 0,34)">
+                          <path id="note.0.1.0" d="
+                                        M100,100
+                                        l00,-50
+                                        c0,-5   50,  0  50,40
+                                        l0,50
+                                        c0,-40 -50,-40 -50,-40
+                                        "></path>
+                      </g>
+                  </g>
+              </svg>
+          </button>
+          <button id="def_pl_4" class="buttonNote" onclick="defaultPlica(4)">
+              <svg height="25px" width="100%" overflow="visible">
+                  <g transform="translate(-3 -40)">
+                      <g transform="matrix(0.16, 0, 0, 0.16, 0,34)">
+                          <path id="note.0.1.0" d="
+                                        M100,100
+                                        l00,-50
+                                        c0,-5   50,  0  50,40
+                                        l0,50
+                                        c0,-40 -50,-40 -50,-40
+                                        "></path>
+                      </g>
+                  </g>
+              </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <br/>
+  </div>
+</div> <!-- end col right -->
+
+<style>
+  #defaultShapeContainer {
+    width: 600px;
+    margin: 0 auto;
+  }
+  #defLeftCol    {
+      width: 300px;
+      float: left;
+  }
+
+  #defRightCol  {
+      width: 300px;
+      margin-left: 300px;
+  }
+
+  @media only screen and (max-width: 769px){
+      .closeButton{
+          display: none;
+          float:right;
+      }
+  }
+  @media only screen and (min-width: 769px){
+    top: 45%;
+      .closeButton{}
+
+  }
+
+  .menuStyleSingleNote{
+      border-radius: 10px 10px;
+      background: #f3f0eb;
+      height:330px;
+      width: 320px;
+      position: absolute;
+  }
+  @keyframes fading {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  .buttonNote{
+      background-color: #fff;
+      border-radius: 5px 5px;
+      width: 50px;
+      height: 50px;
+  }
+  .buttonNote:hover{
+      background-color: #f3f3f3;
+  }
+
+  .parent {
+    text-align:center;
+  }
+</style>

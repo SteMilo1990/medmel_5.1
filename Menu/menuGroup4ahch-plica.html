@@ -1,0 +1,154 @@
+<div id="groupMenu4">
+<!-- It's only in Messine notation -->
+<center>
+    <div class="menuStyleNoteGroup4-Plica">
+        <div class="closeButton" style="margin-right: 5px; margin-top:5px;">
+            <input type=image src="img/icons/close1.png" class="menuButton" style=" width:10px; "  onclick="containerNoteMenuRemove()" title="Close">
+        </div>
+        <div class="clear"></div>
+        <div class="separator " style=" margin-left:5px; margin-right:5px;">Group Shapes</div>
+        <div id="btn1" style="margin-top:10px">
+            <button id="btn4ahch_1"class="buttonNote" onclick=group4btn(0)  >
+                <img src="img/group4ahch/icon1_1.png" >
+            </button>
+            <button id="btn1_2"class="buttonNote" onclick=group4btn(1)  >
+                <img src="img/group4ahch/icon1_2.png" >
+            </button>
+            <button id="btn1_3"class="buttonNote" onclick=group4btn(2)  >
+                <img src="img/group4ahch/icon1_3.png" >
+            </button>
+        </div>
+
+        <button class="" onclick=resetGroup() style="height:30px; margin-top: 20px; border-radius: 5px 5px; " >
+            Reset Group
+        </button>
+    </div>
+</center>
+</div>
+
+<style>
+    .menuStyleNoteGroup4-Plica{
+        border-radius: 10px 10px;
+        background: #f3f0eb;
+        height:170px;
+        width: 300px;
+        position: absolute;
+    }
+    @keyframes fading {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .buttonNote{
+        background-color: #fff;
+        border-radius: 5px 5px;
+        width: 50px;
+        height:50px;
+    }
+    .buttonNote:hover{
+        background-color: #f3f3f3;
+    }
+    .buttonNote img {
+      width: 37px;
+    }
+</style>
+<script>
+  console.log("ACHC-PLICA");
+    try{let indexGroup = -1;}catch{indexGroup = -1;}
+    try{let notesGroup = "";}catch{notesGroup = "";}
+    try{let groupLine = 0;}catch{groupLine = 0;}
+    try{let groupPos = 0;}catch{groupPos = 0;}
+
+    function setupButtons4ahch(nGroup, strGroup, line, pos){
+        indexGroup = nGroup;
+        notesGroup = strGroup;
+        groupLine = line;
+        groupPos = pos;
+        
+        let typeOfGroup = -1;
+
+        if(strGroup.length == 6){
+            let a = getNoteValue(strGroup.substring(0,1));
+            let b = getNoteValue(strGroup.substring(1,2));
+            let c = getNoteValue(strGroup.substring(2,3));
+            let d = getNoteValue(strGroup.substring(4,5));
+          
+            if (messinNotation == true){
+                if(a < b && b < c && c > d){
+                    // removeButtons(2); // non c'è nessuna seconda opzione
+                }else{
+                    menuGroup4Remove();
+                }
+            }
+        }
+        else{
+            menuGroup4Remove();
+        }
+    }
+    function removeButtons(index){
+        let id = "btn"+(index)+"";
+        document.getElementById(id).remove();
+    }
+    function menuGroup4Remove(){
+        let group4 = $('#groupMenu4');
+        group4.remove();
+    }
+    function group4btn(shapeValue){
+        shapeGroupNote[groupLine][groupPos] = shapeValue;
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    //Da rimuovere nel caso in cui venga fixato il file printOldShape
+    // per gruppi da tre note di forma tipo aca
+    function group4btn3_2(){
+        shapeGroupNote[groupLine][groupPos] = [];
+        shapeSingleNote[groupLine][groupPos][0] = 1;
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    function group4btn2_1(shapeValue){
+        shapeGroupNote[groupLine][groupPos] = shapeValue;
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos][0] = 0;
+        connectGroupNote[groupLine][groupPos] = [];
+        containerNoteMenuRemove();
+        updateStaves();
+    }
+    function resetGroup(){
+        shapeGroupNote[groupLine][groupPos] = [];
+        shapeSingleNote[groupLine][groupPos] = [];
+        stemSingleNote[groupLine][groupPos] = [];
+        connectGroupNote[groupLine][groupPos] = [];
+        updateStaves();
+    }
+
+    function getNoteValue(n){
+        if(n == 'J') return 1;
+        if(n == 'A') return 2;
+        if(n == 'H') return 3;
+        if(n == 'B') return 3;
+        if(n == 'C') return 4;
+        if(n == 'D') return 5;
+        if(n == 'E') return 6;
+        if(n == 'F') return 7;
+        if(n == 'G') return 8;
+        if(n == 'a') return 9;
+        if(n == 'h') return 10;
+        if(n == 'b') return 10;
+        if(n == 'c') return 11;
+        if(n == 'd') return 12;
+        if(n == 'e') return 13;
+        if(n == 'f') return 14;
+        if(n == 'g') return 15;
+        if(n == 'u') return 16;
+        if(n == 'q') return 17;
+        if(n == 'p') return 17;
+        if(n == 'r') return 18;
+    }
+    
+    
+</script>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/png" href="../img/favicon/logo.png"/>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300;1,900&display=swap" rel="stylesheet">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      
+    <style>
+
+      body {
+        margin: 0;
+      }
+
+      h1, h3, p, ul, .withMargin {
+        font-family: Roboto;
+        color: #343148FF;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      h1, h3 {
+        font-weight: bold;
+        padding-top: 10px
+        margin-top: 0 !important;
+      }
+
+      p, li {
+        line-height: 1.7;
+      }
+      i {
+        font-weight: 700;
+      }
+
+      #title {
+        font-size: 30pt;
+        margin: 0;
+      }
+
+      .small-indent{
+        padding-left: 20px
+      }
+
+      .subHeadDiv {
+        margin-right: 10px;
+        padding: 10px 10px 10px 0px;
+      }
+
+      .subHeadDiv, #manualHeader {
+        background-color: #f3f0eb;
+      }
+      #footer {
+        bottom: 0 !important;
+        width: 100%
+      }
+
+      @media only screen and (min-width: 600px) {
+        #footer {
+          position:fixed;
+        }
+      }
+      
+      .shape-for-mei{
+        height: 100px;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 70px;
+      }
+      td {
+        border: 1px solid gray;
+        padding: 10px;
+      }
+      th {
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainWrapper">
+      <div id="manualHeader">
+        <a href="./../index.html"><img src="./../img/logo/m2.png" width="150px;" style="float:right; margin-right: 20px;margin-top: 15px;"/></a><br>
+        <br/><br/>
+        <p id="title">
+          MedMel and MEI 5.0
+        </p>
+        <p>
+        </p>
+        <br/>
+      </div>
+      
+      <p>
+      
+      MedMel can import and export XML/MEI Neume files in order to visualize, modify, store, or export them in other formats.<br/>
+      Because many features that can be specified with MedMel cannot be expressed by the current MEI Neume standard, MedMel uses an extended version of this standard.<br>
+      <br>
+      
+      The export MEI menu provides different options to generate MEI files optimized for different applications.<br>
+      If preserving the entirety of the encoded information is your priority, the default export is the best option.
+
+      <br>
+      <br>
+      <img width="70%" src="../img/images/exportMei.png">
+      <br>
+      <br>
+  </p>
+
+  <p>
+    Please be aware that the document will include four attributes that are <u>not</u> in the MEI.Neume scheme:
+</p>
+<ul>
+    <li><code>@stem.pos</code> and <code>@stem.dir</code> within <code>&lt;nc&gt;</code></li>
+    <li><code>@start</code> and <code>@end</code> within <code>&lt;divLine&gt;</code></li>
+</ul>
+
+<p>
+    To allow XML validation of the document, the attributes have been added to our version of the MEI.Neumes 5.0 schema. You will notice that the URL of the rng file used for validation refers to this modified version, stored on our server. You can opt to include the official rng file instead (see below).
+</p>
+
+<p>
+    <code>@stem.pos</code> and <code>@stem.dir</code> are necessary to describe the exact position of stems — or 'tails', as some prefer to refer to them (both terms are only partly accurate and partly anachronistic). If you are interested in knowing why we do not use <code>@tilt</code> for stems, click <span onclick="toggleDiv('whyIdontUseTilt')" style="cursor:pointer"><u>here</u></span>.
+</p>
+
+<div id="whyIdontUseTilt" style="display: none; border: 1px solid gray; background-color: #F4F4F4; border-radius: 10px; margin: 20px;">
+    <p>
+        The <code>@tilt</code> attribute is described by the <a href="https://music-encoding.org/guidelines/dev/attribute-classes/att.ncForm.html">MEI guidelines</a> as the "direction of the pen stroke" and it was created for adiastematic notation. It was never meant to describe stems. Some projects, including Neon, use <code>@tilt</code> for stems, indicating <code>@tilt="s"</code> (as in "south", cf. <a href="https://music-encoding.org/guidelines/dev/data-types/data.COMPASSDIRECTION.html">data.COMPASSDIRECTION</a>) for a downward stem and <code>@tilt="n"</code> (as in "north") for an upward stem.<br>
+    </p>
+    <p>
+        This practical approach has some shortcomings: from a theoretical perspective, it infers the direction of the movement of the scribe's pen on the surface instead of describing the objective visual status of the glyph. Furthermore, it should be noted that Neon also rightfully uses <code>@tilt="se"</code> (as in "south-east") to describe a <em>punctum inclinatum</em>, so that despite being always contained by an <code>&lt;nc&gt;</code> the attribute sometimes defines the property of the notehead and in other instances describes the stem.<br>
+    </p>
+    <p>
+        Ultimately, from a practical usage standpoint, <code>@tilt</code> does not allow for the description of all possible stem configurations with respect to the neume component. For example, the typical stem of a <em>virga</em> (placed downward and on the right side with respect to the "notehead") is described with <code>@tilt="s"</code> according to the criterion that the first part of the note (the notehead) is higher than the second (the stem). In the case of a stem positioned upwards and on the left side of the notehead (a neume shape that can even be found in non-mensural sources), we must also consider it as the result of the scribe's pen moving downwards. Thus, this completely different shape should be described in the exact same way as the preceding case,   <code>@tilt="s"</code>, generating an ambiguity that is at odds with both computational handling and the goal of MEI to provide an accurate and rigorous model for music description.
+    </p>
+    <p>
+        Since <code>@stem.pos</code> and <code>@stem.dir</code> are part of MEI.shared as attributes of <code>&lt;note&gt;</code>, we believe they would be an extremely useful addition in MEI.Neumes as attributes of <code>&lt;nc&gt;</code>. Indeed, originally, the element <code>&lt;note&gt;</code> was supposed to be a child of <code>&lt;nc&gt;</code> and carry the pitch. A welcomed simplification made <code>&lt;nc&gt;</code> the pitch-carrier element but, sadly, <code>@stem.pos</code> and <code>@stem.dir</code> were left behind.
+    </p>
+</div>
+
+<p>
+    <code>@start</code> and <code>@end</code> within <code>&lt;divLine&gt;</code> are necessary to define precisely the length and position of a <em>divisio</em>, which in MedMel can be defined with great precision (up to a tenth of a space between two staff lines). MEI.Neumes only allows <code>@form="[caesura | finalis | maior | maxima | minima | virgula]"</code>, which does guarantee for the same level of granularity nor use a terminology applicable to the notation of vernacular medieval songbooks in non-mensural notation.<br>
+    Values for <code>@start</code> and <code>@end</code> refer to the rules of MEI's Staff location (<a href="https://music-encoding.org/guidelines/dev/data-types/data.STAFFLOC.html">data.STAFFLOC</a>).
+</p>
+
+<p>
+    By checking the <i>Include the neume type</i> option, it is possible to add an additional attribute <code>@type</code> in the <code>&lt;neume&gt;</code> element, indicating the name of the neume (e.g., virga, climacus, etc.). This information is not strictly necessary, but can make the document more human readable (especially when @class is disabled, see below).
+</p>
+
+<p>
+    The actual information about the group shape is stored in the <code>@class</code> attribute. This is a valid MEI.Neume attribute, the flexiblity of which is exploited to define group shapes according to a MedMel specific vocabulary. The MedMel import tool relies on these values to correctly display the exact shape of some neumes. However, by checking the <i>Do not include neume classes</i> checkbox, it is possible to exclude these classes from the XML/MEI output.<br>
+    In MEI, classes refer to taxonomy terms declared in the <code>&lt;meiHeader&gt;</code>, and namely in the element <code>&lt;classDecls&gt;</code>. By checking the checkbox <i>Include taxonomy descriptions of MedMel classes</i>, the full description of the available classes will be included in the file.
+</p>
+
+<p>
+    By checking the <i>Minimal notation</i> checkbox, it is possible to export an MEI file without details pertaining to the shapes of the neumes. Only pitch, text, and, if present, clefs and line breaks will be encoded. This is the optimal option for editions in which only the modern notation has been transcribed or in any other application not requiring palaeographic details.<br>
+    Since in this case none of the MedMel-specific attributes are necessary, the processing instructions will point to the official MEI.Neumes schema.
+</p>
+
+<p>
+    By checking the <i>Strictly comply to MEI 5.0 standard</i> checkbox, a valid MEI.Neumes file will be generated and the processing instructions will point to the official MEI.Neumes schema.<br>
+    Some details of the transcription might be lost, but everything that can be expressed abiding by the current schema will be preserved. MedMel will still use <code>@class</code> to specify some of the note shapes (to disable this feature, see above).<br>
+    <em>Divisiones</em> will be approximated to comply with the available values of <code>@form</code>, combined with <code>@pos</code>.
+</p>
+<p>
+    The user can decide whether to export the file with an <i>.xml or an .mei</i> extension. This has no bearing on the content of the file, but only on the file's name. Files with an .xml extension have the advantage of being immediately recognized as XML files by softwares, while .mei file might require an extra step to be recognized as such.
+</p>
+
+<p>
+    The XML/MEI file can be downloaded on your computer (by clicking on <i>Download MEI file</i>) or visualized and edited directly in the browser (by clicking <i>Generate MEI File</i>).
+</p>
+      <br/>
+
+      <br/>
+      </p>
+      
+  
+      <p><strong>TABLE OF NEUMES EXPORTED FROM MEDMEL TO MEI</strong></p>
+      <table id="table">
+        <th colspan="2">Pes</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table1_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+        &lt;neume type="pes" class="#pes.1"&gt;
+          &lt;nc pname="a" oct="3"/&gt;
+          &lt;nc pname="b" oct="3"/&gt;
+        &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table1_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="pes" class="#pes.2"&gt;
+    &lt;nc pname="g" oct="3"/&gt;
+    &lt;nc pname="a" oct="3"/&gt;
+  &lt;/neume&gt;
+        </code>
+            </pre>
+          </td>
+        </tr>
+
+        <th colspan="2">Clivis</th>
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table2_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="clivis" class="#clivis.1"&gt;
+    &lt;nc pname="a" oct="3" ligated="true" stem.dir="down" stem.pos="left"/&gt;
+    &lt;nc pname="g" oct="3" ligated="true"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table2_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="clivis" class="#clivis.2"&gt;
+    &lt;nc pname="a" oct="3" stem.dir="down"    
+        stem.pos="left"/&gt;
+    &lt;nc pname="g" oct="3"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+
+        <th colspan="2">Porrectus</th>
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table3_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="porrectus" class="#porrectus.1"&gt;
+    &lt;nc pname="a" oct="3" stem.dir="down" stem.pos="left"/&gt;
+    &lt;nc pname="g" oct="3"/&gt;
+    &lt;nc pname="a" oct="3"/&gt;
+  &lt;/neume&gt;
+            </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table3_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="porrectus" class="#porrectus.2"&gt;
+    &lt;nc pname="a" oct="3" stem.dir="down" stem.pos="left" ligated="true"/&gt;
+    &lt;nc pname="g" ligated="true" oct="3"/&gt;
+    &lt;nc pname="a" oct="3"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table3_case3.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="porrectus" class="#porrectus.3"&gt;
+    &lt;nc pname="a" oct="2" stem.dir="down" stem.pos="left"/&gt;
+  	&lt;nc pname="g" oct="2"/&gt;
+  	&lt;nc pname="a" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+
+        <th colspan="2">Torculus</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table4_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="torculus" class="#torculus.1"&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="g" oct="2" con="g"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table4_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="torculus" class="#torculus.2"&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+
+        <th colspan="2">Scandicus</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table5_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="scandicus" class="#c1"&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="b" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table5_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="scandicus" class="#c2"&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="b" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table5_case3.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="scandicus" class="c#3"&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="b" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+
+
+        <th colspan="2">Climacus</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table6_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="climacus" class="#climacus.1"&gt;
+    &lt;nc pname="b" oct="2" stem.pos="right" stem.dir="down"/&gt;
+    &lt;nc pname="a" oct="2" tilt="se" con="g"/&gt;
+    &lt;nc pname="g" oct="2" tilt="se" con="g"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table6_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="climacus" class="#climacus.2"&gt;
+    &lt;nc pname="b" oct="2" stem.pos="left" stem.dir="down""/&gt;
+    &lt;nc pname="a" oct="2"/&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table6_case3.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="climacus" class="#climacus.3"&gt;
+    &lt;nc pname="b" oct="2" ligated="true"/&gt;
+    &lt;nc pname="a" oct="2" ligated="true"/&gt;
+    &lt;nc pname="g" oct="2"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table6_case4.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="climacus" class="#climacus.4"&gt;
+    &lt;nc pname="b" oct="2"/&gt;
+    &lt;nc pname="a" oct="2" ligated="true"/&gt;
+    &lt;nc pname="g" oct="2" ligated="true"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+
+
+
+        <th colspan="2">Plica (liquescence)</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table7_case1.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="plica" class="#plica.1"&gt;
+    &lt;nc pname="a" oct="2" stem.pos="right" stem.dir="down” &gt; 
+       &lt;liquescent/&gt;     
+    &lt;/nc&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table7_case2.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="plica" class="#plica.2"&gt;
+    &lt;nc pname="a" oct="2" curve="c" stem.pos="right" stem.dir="down"/&gt;
+      &lt;liquescent/&gt;
+    &lt;/nc&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table7_case3.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="plica" class="#plica.3"&gt;
+    &lt;nc pname="a" oct="2" curve="c"  stem.pos="left" stem.dir="down"/&gt;
+      &lt;liquescent/&gt;
+    &lt;/nc&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table7_case4.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="plica" class="#plica.4"&gt;
+    	&lt;nc pname="a" oct="2" curve="c"&gt;
+       &lt;liquescent/&gt;
+     &lt;/nc&gt;
+  &lt;/neume&gt;        
+      </code>
+            </pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table7_case5.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume type="plica" class="#plica.5"&gt;
+    &lt;nc pname="a" oct="3" curve="a" stem.pos="right" stem.dir="up"&gt;
+      &lt;liquescent/&gt;
+    &lt;/nc&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+
+
+        <th colspan="2">Example of ligature including a pes</th>
+        
+        <tr>
+          <td>
+            <img class="shape-for-mei" src="../img/mei_images/Table8.png" alt="">
+          </td>
+          <td>
+            <pre>
+              <code>
+  &lt;neume&gt;
+    &lt;nc pname="a" oct="3"/&gt;
+    &lt;nc pname="b" oct="3" class="#align.vertical"/&gt;
+    &lt;nc pname="a" oct="3"/&gt;
+    &lt;nc pname="g" oct="3"/&gt;
+    &lt;nc pname="f" oct="3"/&gt;
+  &lt;/neume&gt;
+              </code>
+            </pre>
+          </td>
+        </tr>
+        
+      </Table>
+
+      <br>
+      <div id="footer" class="subHeadDiv">
+        <p>
+        
+        </p>
+      </div>
+    </div>
+  
+  </body>
+</html>
+<script>
+function toggleDiv(id) {
+  let div = document.getElementById(id);
+  if (div.style.display=="none") {
+    div.style.display = "block";
+  }else{
+    div.style.display = "none";
+  }
+}
+</script>

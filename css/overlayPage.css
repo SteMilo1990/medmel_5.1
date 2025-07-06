@@ -1,0 +1,202 @@
+/* ----Apply this style when width screen size is less then 769 */
+@media only screen and (max-width: 769px){
+    .logoPanel{
+        background-color: #f3f0eb;
+        height: 50%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-top-right-radius: 20px 20px;
+        border-right: 0px solid #2d3c43;
+    }
+    .logo{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        margin-right: 7%;
+    }
+    .logoImg {
+        width: 160%;
+    }
+    .containerInputBlank{
+        background-color: #f3f0eb;
+        height: 100%;
+        border-radius: 20px;
+        margin: 0px;
+        border-left: 0px solid #2d3c43;
+        display: block;
+        padding: 10px;
+        padding-right: 15px;
+        padding-left: 15px;
+
+    }
+
+    .containerInput{
+        background-color: #f3f0eb;
+        height: 100%;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin: 0px;
+        border-left: 0px solid #2d3c43;
+        display: block;
+        padding: 2%;
+
+    }
+    /*----Style Overlay Template -----*/
+    .containerOverlay{
+        width: 98%;
+        margin: auto;
+        height: 90%; /*500px;*/
+        position: absolute;
+        /* top: 25%;
+        left: 50%;
+        transform: translate(-50%,-25%); */
+        top: 10%;
+        left: 11%;
+        transform: translate(-10%,-10%);
+    }
+    .fadeInOverlay {
+        -webkit-animation: expand 0.5s;
+        display: relative;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-100%;}
+        100%{top:25%;}
+    }
+
+    .fadeOutOverlay {
+        -webkit-animation: close 0.5s;
+    }
+    @-webkit-keyframes close {
+        100%{
+            top:-100%;
+            display:none;
+        }
+        0%{
+            top:25%;
+        }
+    }
+    /*----End Style Overlay Template -----*/
+}
+/* ----Apply this style when width screen size is more then 767 */
+@media only screen and (min-width: 769px){
+    .logoPanel{
+        background-color: #f3f0eb;
+        height: 100%;
+        margin: 0px;
+        border-top-left-radius: 20px 20px;
+        border-bottom-left-radius: 20px 20px;
+        border-right: 1px solid #2d3c43;
+    }
+    .logo{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        margin-right: 7%;
+    }
+    .logoImg {
+        width: 160%;
+    }
+
+    .containerInputBlank{
+        background-color: #f3f0eb;
+        height: 100%;
+        border-radius: 20px;
+        margin: 0px;
+        border-left: 0px solid #2d3c43;
+        display: block;
+        padding: 10px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .containerInput{
+        background-color: #f3f0eb;
+        height: 100%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin: 0px;
+        border-left: 0px solid #2d3c43;
+        display: block;
+        padding: 2%;
+    }
+    /*----Style Overlay Template -----*/
+    .containerOverlay{
+      width: 98%;
+        margin: auto;
+        position: absolute;
+
+        /* height: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%); */
+        height: 98%%;
+        top: 10%;
+        left: 11%;
+        transform: translate(-10%,-9%);
+    }
+    .fadeInOverlay {
+        -webkit-animation: expand 0.5s;
+        display: relative;
+    }
+    @-webkit-keyframes expand{
+        0%{top:-90%;}
+        100%{top:10%;}
+    }
+
+    .fadeOutOverlay {
+        -webkit-animation: close 0.5s;
+    }
+    @-webkit-keyframes close {
+        100%{
+            top:-90%;
+            display:none;
+        }
+        0%{
+            top:10%;
+        }
+    }
+    /*----End Style Overlay Template -----*/
+}
+
+/*----------Login/Register form----------*/
+.divInputField{
+    width: 60%;
+    background-color: #fff;
+    border-radius: 6px 6px;
+    border: 1px solid #2d3c43;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    margin-left:  auto;
+    margin-right:  auto;
+}
+.divSearchField{
+
+    width: 100%;
+    background-color: #fff;
+    border-radius: 6px 6px;
+    border: 1px solid #2d3c43;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    margin-left:  auto;
+    margin-right:  auto;
+}
+.inputFields{
+    width: 100%;
+    border: 0px;
+}
+.inputFields:focus{
+    outline: none;
+
+}
+/*------End Login/Register form----------*/
